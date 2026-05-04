@@ -1,0 +1,222 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "main-page",
+      "settings": {
+        "show_title": true,
+        "show_content": true
+      }
+    },
+    "floating_video_page": {
+      "type": "floating-video-mini-player",
+      "blocks": {
+        "video_source_78fV8b": {
+          "type": "video_source",
+          "settings": {
+            "video_host": "mp4",
+            "video_id": "https://cdn.shopify.com/videos/c/o/v/2ed6e7c6e33446b2b0889a32717caecf.mp4",
+            "aspect_ratio": ""
+          }
+        },
+        "video_source_KpKVJg": {
+          "type": "video_source",
+          "settings": {
+            "video_host": "mp4",
+            "video_id": "https://cdn.shopify.com/videos/c/o/v/9c2386e8391840d3be7ed27f865c6e8b.mp4",
+            "aspect_ratio": ""
+          }
+        },
+        "video_source_qcjgw8": {
+          "type": "video_source",
+          "settings": {
+            "video_host": "mp4",
+            "video_id": "https://cdn.shopify.com/videos/c/o/v/d1b5b14e2e1841aea47625bd2ace711e.mp4",
+            "aspect_ratio": ""
+          }
+        },
+        "video_source_phtnKP": {
+          "type": "video_source",
+          "settings": {
+            "video_host": "mp4",
+            "video_id": "https://cdn.shopify.com/videos/c/o/v/3964a6a348724d27a5fb1c5afa90690a.mp4",
+            "aspect_ratio": ""
+          }
+        },
+        "video_source_ni784G": {
+          "type": "video_source",
+          "settings": {
+            "video_host": "mp4",
+            "video_id": "https://cdn.shopify.com/videos/c/o/v/078f68d80d5e4e9ba62f5296a026d5f6.mp4",
+            "aspect_ratio": ""
+          }
+        },
+        "video_source_dBP4Vt": {
+          "type": "video_source",
+          "settings": {
+            "video_host": "mp4",
+            "video_id": "https://cdn.shopify.com/videos/c/o/v/13ab2a04b0184430b26c2241eace3166.mp4",
+            "aspect_ratio": ""
+          }
+        },
+        "video_source_jNEhrJ": {
+          "type": "video_source",
+          "settings": {
+            "video_host": "mp4",
+            "video_id": "https://cdn.shopify.com/videos/c/o/v/ae0748dfa83c4303b209c94791d92c67.mp4",
+            "aspect_ratio": ""
+          }
+        },
+        "video_source_mweTN9": {
+          "type": "video_source",
+          "settings": {
+            "video_host": "mp4",
+            "video_id": "https://cdn.shopify.com/videos/c/o/v/7247d9c54a26419fb8ea1b326382490b.mp4",
+            "aspect_ratio": ""
+          }
+        },
+        "video_source_UUgQzk": {
+          "type": "video_source",
+          "settings": {
+            "video_host": "mp4",
+            "video_id": "https://cdn.shopify.com/videos/c/o/v/f7809d3892c34deda5bc4cc5f670f884.mp4",
+            "aspect_ratio": ""
+          }
+        },
+        "video_source_F78T3h": {
+          "type": "video_source",
+          "settings": {
+            "video_host": "mp4",
+            "video_id": "https://cdn.shopify.com/videos/c/o/v/1aa02225cdf24f5c981ef2f4ff7dd6e4.mp4",
+            "aspect_ratio": ""
+          }
+        },
+        "video_source_ATxeCa": {
+          "type": "video_source",
+          "settings": {
+            "video_host": "mp4",
+            "video_id": "https://cdn.shopify.com/videos/c/o/v/b23c04304c134cb29f2080423b0eab5c.mp4",
+            "aspect_ratio": ""
+          }
+        },
+        "video_source_iCfwQY": {
+          "type": "video_source",
+          "settings": {
+            "video_host": "mp4",
+            "video_id": "https://cdn.shopify.com/videos/c/o/v/28e65f99faeb4a74abad7c55c3ffc72a.mp4",
+            "aspect_ratio": ""
+          }
+        },
+        "video_source_LUnJ6A": {
+          "type": "video_source",
+          "settings": {
+            "video_host": "mp4",
+            "video_id": "https://cdn.shopify.com/videos/c/o/v/3a588fda04a64969b59234461655cd99.mp4",
+            "aspect_ratio": ""
+          }
+        },
+        "video_source_a63qwX": {
+          "type": "video_source",
+          "settings": {
+            "video_host": "mp4",
+            "video_id": "https://cdn.shopify.com/videos/c/o/v/e39e6f0e18f4458c90ee720280fff171.mp4",
+            "aspect_ratio": ""
+          }
+        },
+        "video_source_LPqN3M": {
+          "type": "video_source",
+          "settings": {
+            "video_host": "mp4",
+            "video_id": "https://cdn.shopify.com/videos/c/o/v/6c64be16823d4bbea2e52087af1d5c33.mp4",
+            "aspect_ratio": ""
+          }
+        },
+        "video_source_hpRhpe": {
+          "type": "video_source",
+          "settings": {
+            "video_host": "mp4",
+            "video_id": "https://cdn.shopify.com/videos/c/o/v/dc4e993612a34623b9b313143400b1e1.mp4",
+            "aspect_ratio": ""
+          }
+        },
+        "video_source_f7yzQ9": {
+          "type": "video_source",
+          "settings": {
+            "video_host": "mp4",
+            "video_id": "https://cdn.shopify.com/videos/c/o/v/1c71d5df613f4d09a01cdcc8a113bfdc.mp4",
+            "aspect_ratio": ""
+          }
+        },
+        "video_source_rMbaJe": {
+          "type": "video_source",
+          "settings": {
+            "video_host": "mp4",
+            "video_id": "https://cdn.shopify.com/videos/c/o/v/a7f6e38ec1014266b44d6fe2e362e5ee.mp4",
+            "aspect_ratio": ""
+          }
+        },
+        "video_source_7BChNg": {
+          "type": "video_source",
+          "settings": {
+            "video_host": "mp4",
+            "video_id": "https://cdn.shopify.com/videos/c/o/v/b2735f0e6b2b4951af23a131d2a7498b.mp4",
+            "aspect_ratio": ""
+          }
+        },
+        "video_source_g9GgUM": {
+          "type": "video_source",
+          "settings": {
+            "video_host": "mp4",
+            "video_id": "https://cdn.shopify.com/videos/c/o/v/fd92a0a6798e4aaf9a99a7ea25216439.mp4",
+            "aspect_ratio": ""
+          }
+        }
+      },
+      "block_order": [
+        "video_source_78fV8b",
+        "video_source_KpKVJg",
+        "video_source_qcjgw8",
+        "video_source_phtnKP",
+        "video_source_ni784G",
+        "video_source_dBP4Vt",
+        "video_source_jNEhrJ",
+        "video_source_mweTN9",
+        "video_source_UUgQzk",
+        "video_source_F78T3h",
+        "video_source_ATxeCa",
+        "video_source_iCfwQY",
+        "video_source_LUnJ6A",
+        "video_source_a63qwX",
+        "video_source_LPqN3M",
+        "video_source_hpRhpe",
+        "video_source_f7yzQ9",
+        "video_source_rMbaJe",
+        "video_source_7BChNg",
+        "video_source_g9GgUM"
+      ],
+      "settings": {
+        "enable": true,
+        "hide_on_mobile": false,
+        "anchor_selector": "[data-floating-video-anchor], main",
+        "use_resource_metafields": true,
+        "use_metafield_pool": false,
+        "video_host": "youtube",
+        "video_id": "",
+        "aspect_ratio": "",
+        "fallback_title": ""
+      }
+    }
+  },
+  "order": [
+    "main",
+    "floating_video_page"
+  ]
+}

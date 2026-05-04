@@ -1,0 +1,69 @@
+{% assign faq_json = product.metafields.ai_seo.faqs.value %}
+
+{% if faq_json and faq_json.faqs %}
+<style>
+  .faq-section {
+    max-width: 800px;
+    margin: 40px auto;
+    padding: 0 20px;
+  }
+  .faq-heading {
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin-bottom: 20px;
+    text-align: center;
+  }
+  .faq-item {
+    border-bottom: 1px solid #e5e5e5;
+  }
+  .faq-question {
+    width: 100%;
+    background: none;
+    border: none;
+    text-align: left;
+    padding: 18px 0;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: inherit;
+  }
+  .faq-question::after {
+    content: '+';
+    font-size: 1.25rem;
+    font-weight: 400;
+    transition: transform 0.2s;
+  }
+  .faq-item.active .faq-question::after {
+    content: '−';
+  }
+  .faq-answer {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease, padding 0.3s ease;
+    padding: 0 0;
+    line-height: 1.6;
+    color: #555;
+  }
+  .faq-item.active .faq-answer {
+    max-height: 500px;
+    padding-bottom: 18px;
+  }
+</style>
+
+<div class="faq-section">
+  <h2 class="faq-heading">Frequently Asked Questions</h2>
+  {% for faq in faq_json.faqs %}
+    <div class="faq-item">
+      <button class="faq-question" onclick="this.parentElement.classList.toggle('active')">
+        {{ faq.question }}
+      </button>
+      <div class="faq-answer">
+        {{ faq.answer }}
+      </div>
+    </div>
+  {% endfor %}
+</div>
+{% endif %}

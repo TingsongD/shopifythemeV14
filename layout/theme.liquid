@@ -1,0 +1,273 @@
+<!doctype html>
+<html class="no-js supports-no-cookies" lang="{{ shop.locale }}"{% if shop.locale == 'ar' or shop.locale == 'he' or settings.layout_enable_rtl %} dir="rtl"{% endif %}>
+
+<head>
+  <!-- DNS prefetch for external domains -->
+  <link rel="dns-prefetch" href="//fonts.googleapis.com">
+
+  <!-- Preconnect to external domains -->
+  <link rel="preconnect" href="https://cdn.shopify.com" crossorigin>
+  <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
+  <link rel="preconnect" href="https://checkout.shopify.com" crossorigin>
+
+  
+
+  <!-- Preload critical resources with high priority -->
+  {{ 'theme.js' | asset_url | preload_tag: as: 'script' }}
+  {{ 'theme-pt2.js' | asset_url | preload_tag: as: 'script' }}
+  
+  <!-- Optimized Critical inline CSS for above-the-fold content -->
+  <style>
+    :root{--base-family:"Basic Commercial",sans-serif;--theme:#17344A;--theme2:#ffffff;--theme-body:var(--theme2);--theme-c:#5D7180;--theme-primary:#5a31f4;--header-m-bg:#5a31f4}
+    body{font-family:var(--base-family);margin:0;background-color:var(--theme-body);color:var(--theme-c);font-display:swap}
+    .header{z-index:3;will-change:transform}
+    .header__content{background-color:var(--header-m-bg)}
+    .btn{display:inline-flex;justify-content:center;align-items:center;border-radius:14px!important;border:1px solid;min-height:50px;cursor:pointer}
+    .container{width:100%;padding:0 10px;margin:0 auto}
+    @media(min-width:1025px){.container{max-width:1200px;padding:0 15px}}
+    .d-none{display:none!important}
+    .preloader{position:absolute;width:100%;height:100%;top:0;left:0;opacity:0;z-index:1;display:flex;justify-content:center;align-items:center;transform:translateZ(0)}
+    /* Prevent layout shift */
+    img{max-width:100%;height:auto}
+    .loading{opacity:0;transition:opacity 0.3s ease}
+    .loaded{opacity:1}
+  </style>
+
+  <!-- Custom Header Styles (Moved from inline) -->
+  <link rel="stylesheet" href="{{ 'component-header-custom.css' | asset_url }}" media="print" onload="this.media='all'">
+  <noscript><link rel="stylesheet" href="{{ 'component-header-custom.css' | asset_url }}"></noscript>
+
+
+
+  <!-- Standard Shopify head content -->
+  {%- if tinyscript -%}{{ content_for_header }}{%- else -%}{% render 'tiny-script-control' %}{%- endif -%}
+
+  {% include 'head' %}
+
+  <meta name="google-site-verification" content="NeMJo4pLZqU6IJyez5HR1fHuZ08pEqb-_awCFv8PNvI" />
+
+  {%- comment -%} SEO-Tune-Up-2025: Global Social Platform IDs and Security Headers {%- endcomment -%}
+  <!-- Global Social Platform IDs -->
+  {% if settings.social_facebook_app_id != blank %}
+  <meta property="fb:app_id" content="{{ settings.social_facebook_app_id }}">
+  {% endif %}
+
+  <!-- Pinterest Domain Verification (if needed) -->
+  {% if settings.pinterest_verification != blank %}
+  <meta name="p:domain_verify" content="{{ settings.pinterest_verification }}">
+  {% endif %}
+
+  <!-- Security & Performance Headers -->
+  <meta http-equiv="X-Content-Type-Options" content="nosniff">
+  <meta name="referrer" content="origin-when-cross-origin">
+
+  <!-- Apple Mobile Web App -->
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <meta name="apple-mobile-web-app-title" content="{{ shop.name }}">
+
+  <!-- Default Robots Directive -->
+  <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+
+  <script>
+    // Non-critical redirect script - defer execution
+    // Security: Validates URL stays on same origin before redirecting
+    window.addEventListener('DOMContentLoaded', function() {
+      var currentUrl = window.location.href;
+      if (currentUrl.includes('-redit-')) {
+        var newUrl = currentUrl.replace(/-redit-\d+/, '');
+        if (newUrl !== currentUrl) {
+          try {
+            var parsedUrl = new URL(newUrl, window.location.origin);
+            // Only redirect if the full origin matches (protocol + hostname + port)
+            if (parsedUrl.origin === window.location.origin) {
+              window.location.href = parsedUrl.href;
+            }
+          } catch (e) {
+            // Invalid URL, do not redirect
+            console.warn('Invalid redirect URL blocked');
+          }
+        }
+      }
+    });
+  </script>
+
+  <!-- Animated Button CSS -->
+  <link rel="stylesheet" href="{{ 'animated-button.css' | asset_url }}">
+
+  {%- if template contains 'product' -%}
+    {%- include 'json-ld-product' -%}
+  {%- endif -%}
+
+  {%- comment -%} SEO-Tune-Up-2025: WebSite Schema for Site Search in Google {%- endcomment -%}
+  <!-- WebSite Schema for Site Search -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "name": {{ shop.name | json }},
+    "url": {{ shop.url | json }},
+    {% if routes.search_url %}
+    "potentialAction": {
+      "@type": "SearchAction",
+      "target": {
+        "@type": "EntryPoint",
+        "urlTemplate": "{{ shop.url }}{{ routes.search_url }}?q={search_term_string}"
+      },
+      "query-input": "required name=search_term_string"
+    }
+    {% endif %}
+  }
+  </script>
+    {% if template contains 'collection' %}
+          <link rel="canonical" href="{{ shop.url }}{{ collection.url }}" />
+            {% else %}
+                <link rel="canonical" href="{{ canonical_url }}" />
+                  {% endif %}
+
+    {%- if template == 'article' and article -%}
+      {%- assign geo_collection_handle = article.content | split: '<!-- geo-collection:' | last | split: '-->' | first | strip -%}
+      {%- if geo_collection_handle != blank -%}
+        <style>[data-section-type="sorting-collections"]{display:none !important;}</style>
+      {%- endif -%}
+    {%- endif -%}
+  </head>
+
+<body{% render 'layout-get-body-attributes' %} class="loading">
+  <!-- Skip to main content link for keyboard accessibility -->
+  <a href="#MainContent" class="skip-to-content">{{ 'general.accessibility.skip_to_content' | t | default: 'Skip to content' }}</a>
+
+  <!-- Performance marker -->
+  <script>window.performance && window.performance.mark && window.performance.mark('theme:body:start');</script>
+  
+  {% include 'layout-get-includes-start' %}
+  {%- if settings.product_show_custom_options and settings.product_enable_variants_section -%}
+    {% section 'product-variants' %}
+  {%- endif -%}
+  {% sections 'header-group' %}
+  <main id="MainContent">
+    {%- if request.page_type == 'page' or request.page_type == 'product' or request.page_type == 'cart' or request.page_type == 'list-collections' or request.page_type == 'article' or request.page_type == 'blog' -%}
+      {% include 'breadcrumbs' %}
+    {%- elsif request.page_type == 'collection' -%}
+      <div id="CollectionBreadcrumbs">
+        {% include 'breadcrumbs' %}
+      </div>
+    {%- endif -%}
+    {{ content_for_layout }}
+  </main>
+  {% sections 'footer-group' %}
+  {% include 'popups' %}
+  {% include 'footbar' %}
+
+  {%- if settings.presentation_enable or template == 'product' and settings.product_info_page_show_usage_info_sidebar -%}
+    {% include 'fixed-sidebar' %}
+  {%- endif -%}
+
+  {% include 'templates' %}
+  {% include 'layout-get-includes-end' %}
+
+  <!-- Performance marker -->
+  <script>window.performance && window.performance.mark && window.performance.mark('theme:DOM:loaded');</script>
+
+  <!-- Debug utility (inline for performance, must load before theme.js) -->
+  <script>
+    (function() {
+      'use strict';
+      window.ThemeDebug = {
+        enabled: false,
+        log: function() {
+          if (this.enabled && window.console && console.log) {
+            var args = Array.prototype.slice.call(arguments);
+            args.unshift('[Theme]');
+            console.log.apply(console, args);
+          }
+        },
+        warn: function() {
+          if (this.enabled && window.console && console.warn) {
+            var args = Array.prototype.slice.call(arguments);
+            args.unshift('[Theme]');
+            console.warn.apply(console, args);
+          }
+        },
+        error: function() {
+          if (window.console && console.error) {
+            var args = Array.prototype.slice.call(arguments);
+            args.unshift('[Theme Error]');
+            console.error.apply(console, args);
+          }
+        }
+      };
+      // Enable debug mode based on theme setting or URL parameter
+      if ({{ settings.enable_debug_mode | default: false }} || window.location.search.indexOf('debug=true') > -1) {
+        window.ThemeDebug.enabled = true;
+      }
+    })();
+  </script>
+
+  <!-- Error handler utility (must load before theme.js) -->
+  <script src="{{ 'module.error-handler.js' | asset_url }}" defer></script>
+  
+  <!-- Load main JavaScript with optimized loading -->
+  <!-- Unminified versions for debugging: theme.js, theme-pt2.js -->
+  <script src="{{ 'theme.s.min.js' | asset_url }}" defer></script>
+  <script src="{{ 'theme-pt2.s.min.js' | asset_url }}" defer></script>
+  <!-- <script src="{{ 'theme.js' | asset_url }}" defer></script> -->
+  <!-- <script src="{{ 'theme-pt2.js' | asset_url }}" defer></script> -->
+
+  <!-- Deferred app scripts -->
+  <script src="{{ 'tracking-sales-pitch.js' | asset_url }}" defer></script>
+  <script src="{{ 'menu-interactions.js' | asset_url }}" defer></script>
+
+  <!-- Remove loading class when page is ready -->
+  <script>
+    window.addEventListener('load', function() {
+      document.body.classList.remove('loading');
+      document.body.classList.add('loaded');
+      window.performance && window.performance.mark && window.performance.mark('theme:fully:loaded');
+    });
+  </script>
+
+  <!-- Klaviyo Debug Script -->
+
+
+  <!-- GA4 Checkout Tracking -->
+  {% comment %} <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      document.body.addEventListener('click', function(e) {
+        var target = e.target.closest('[name="checkout"]');
+        if (target) {
+          // Check if gtag exists
+          if (typeof gtag === 'function') {
+            gtag('event', 'begin_checkout', {
+              'event_category': 'ecommerce',
+              'event_label': 'Checkout Step 1',
+              'value': {{ cart.total_price | divided_by: 100.0 }},
+              'currency': '{{ shop.currency }}'
+            });
+          }
+          // Also push to dataLayer for GTM/Pixel
+          window.dataLayer = window.dataLayer || [];
+          window.dataLayer.push({
+            'event': 'begin_checkout',
+            'ecommerce': {
+              'currency': '{{ shop.currency }}',
+              'value': {{ cart.total_price | divided_by: 100.0 }},
+              'items': [
+                {% for item in cart.items %}
+                {
+                  'item_id': '{{ item.product_id }}',
+                  'item_name': '{{ item.product.title | escape }}',
+                  'price': {{ item.price | divided_by: 100.0 }},
+                  'quantity': {{ item.quantity }}
+                }{% unless forloop.last %},{% endunless %}
+                {% endfor %}
+              ]
+            }
+          });
+        }
+      });
+    });
+  </script> {% endcomment %}
+<script src="{{ 'tiny-img-link-preloader.js' | asset_url }}" defer></script>
+</body>
+</html>

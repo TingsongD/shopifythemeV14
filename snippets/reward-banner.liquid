@@ -1,0 +1,214 @@
+{% comment %}
+  Reward Banner - Visual Only
+  Style: Gold Jackpot Winner (No Timer)
+  Logic: Visible only when cart has items
+  Usage: {% render 'reward-banner' %}
+{% endcomment %}
+
+{% if cart.item_count > 0 %}
+  {% assign total_msrp = 0 %}
+  {% for item in cart.items %}
+      {% assign item_compare_price = item.variant.compare_at_price | default: item.original_price %}
+      {% if item.variant.compare_at_price > item.original_price %}
+          {% assign item_compare_price = item.variant.compare_at_price %}
+      {% endif %}
+      {% assign line_msrp = item_compare_price | times: item.quantity %}
+      {% assign total_msrp = total_msrp | plus: line_msrp %}
+  {% endfor %}
+  {% assign total_savings = total_msrp | minus: cart.total_price %}
+
+<style>
+  /* --- ANIMATIONS --- */
+  @keyframes reward-shimmer {
+    from { transform: translateX(-100%) skewX(-12deg); }
+    to { transform: translateX(100%) skewX(-12deg); }
+  }
+
+  @keyframes reward-spin {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+  }
+
+  @keyframes reward-pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.7; }
+  }
+
+  @keyframes aurora-rotate {
+    from { transform: translate(-50%, -50%) rotate(0deg); }
+    to { transform: translate(-50%, -50%) rotate(360deg); }
+  }
+
+  /* --- VARIABLES --- */
+  .casino-reward-banner {
+    /* GOLD THEME COLORS */
+    --reward-primary: #facc15;   /* Yellow-400 */
+    --reward-secondary: #fef08a; /* Yellow-200 */
+    --reward-border: #ca8a04;    /* Yellow-600 */
+    --reward-text: #854d0e;      /* Yellow-800 */
+    --reward-glow-1: #facc15;
+    --reward-glow-2: transparent;
+    
+    position: relative;
+    margin: 1rem 0;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    display: block; 
+  }
+
+  /* --- STRUCTURE --- */
+  .aurora-glow {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 200%;
+    height: 200%;
+    background: conic-gradient(from 0deg, var(--reward-glow-2) 0deg, var(--reward-glow-1) 90deg, var(--reward-glow-2) 180deg, var(--reward-glow-1) 270deg, var(--reward-glow-2) 360deg);
+    filter: blur(30px);
+    opacity: 0.6;
+    animation: aurora-rotate 4s linear infinite;
+    z-index: 0; 
+    pointer-events: none;
+  }
+
+  .reward-outer {
+    background: linear-gradient(to right, var(--reward-primary), var(--reward-secondary), var(--reward-primary));
+    border: 4px solid var(--reward-border);
+    border-radius: 0.75rem;
+    padding: 0.25rem;
+    box-shadow: 0 0 30px rgba(255, 255, 255, 0.2);
+    position: relative;
+    z-index: 1;
+    overflow: hidden; 
+  }
+
+  .reward-marquee {
+    position: absolute;
+    inset: 0;
+    border: 2px dashed rgba(255, 255, 255, 0.5);
+    border-radius: 0.5rem;
+    pointer-events: none;
+    opacity: 0.5;
+    animation: reward-spin 10s linear infinite;
+    z-index: 2;
+  }
+
+  .reward-inner {
+    background: rgba(0, 0, 0, 0.9);
+    backdrop-filter: blur(4px);
+    border-radius: 0.5rem;
+    padding: 0.5rem 1rem;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+    z-index: 3;
+  }
+
+  .reward-shimmer-effect {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to right, transparent, rgba(255, 255, 255, 0.1), transparent);
+    transform: skewX(-12deg) translateX(-100%);
+    animation: reward-shimmer 2s linear infinite;
+    pointer-events: none;
+    z-index: 4;
+  }
+
+  /* --- TEXT ELEMENTS --- */
+  .reward-jackpot-text {
+    color: var(--reward-primary);
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    font-size: 0.875rem;
+    margin-bottom: 0.25rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    animation: reward-pulse 2s ease-in-out infinite;
+    position: relative;
+    z-index: 5;
+  }
+
+  .reward-middle-row {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    margin: 0.125rem 0;
+    position: relative;
+    z-index: 5;
+  }
+
+  .reward-promo-text {
+    font-weight: 900;
+    font-size: 1.5rem;
+    color: transparent;
+    background: linear-gradient(to bottom right, var(--reward-secondary), var(--reward-primary), var(--reward-text));
+    -webkit-background-clip: text;
+    background-clip: text;
+    filter: drop-shadow(0 1px 1px rgba(0,0,0,0.5));
+    white-space: nowrap; 
+  }
+
+  .reward-subtext {
+    color: #FFFFFF;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    font-size: 0.8rem;
+    margin-top: 0.25rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    animation: reward-pulse 2s ease-in-out infinite;
+    position: relative;
+    z-index: 5;
+  }
+  
+  @media (min-width: 768px) {
+    .reward-promo-text { font-size: 1.3rem; }
+    .reward-subtext { font-size: 1rem; }
+  }
+</style>
+
+<div class="casino-reward-banner">
+  <div class="reward-outer">
+    <div class="aurora-glow"></div>
+    <div class="reward-marquee"></div>
+    
+    <div class="reward-inner">
+      <div class="reward-shimmer-effect"></div>
+      
+      {% if cart.item_count == 1 %}
+        <!-- UNLOCK STATE (Multi-line) -->
+        <div class="reward-jackpot-text">
+          <span>🔓 UNLOCK GOLD JACKPOT</span>
+        </div>
+        
+        <div class="reward-middle-row">
+          <div class="reward-promo-text">
+            ADD 1 MORE FOR 50% OFF
+          </div>
+        </div>
+        
+        <div class="reward-subtext">
+          Buy One Get One 50% Off Deal!
+        </div>
+        
+      {% else %}
+        <!-- SUCCESS STATE (Single-line) -->
+        <div class="reward-single-line-content" style="display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2px;">
+            <div style="font-size: 1.1rem; font-weight: 800; text-transform: uppercase; color: #22c55e; line-height: 1.1;">
+                🏆 CONGRATS! YOU HAVE SAVED {{ total_savings | money }}!
+            </div>
+            <div style="font-size: 0.85rem; font-weight: 600; color: #fff; text-transform: uppercase; letter-spacing: 0.05em;">
+                ADD MORE TO SAVE MORE!
+            </div>
+        </div>
+      {% endif %}
+    </div>
+  </div>
+</div>
+{% endif %}

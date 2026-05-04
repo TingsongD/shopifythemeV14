@@ -1,0 +1,654 @@
+    /* ========================================
+       APPLE-STYLE NAVIGATION MENU SYSTEM
+       ======================================== */
+
+    /* Header container - Purple theme with blur */
+    header{
+      overflow:visible!important;
+      background:#5a31f4!important;
+      -webkit-backdrop-filter:saturate(180%) blur(20px);
+      backdrop-filter:saturate(180%) blur(20px);
+    }
+    .header__content{
+      overflow:visible!important;
+      background:transparent!important;
+    }
+
+    /* Navigation bar styling */
+    .header__line-bottom--custom{
+      height:44px!important;
+      overflow:visible!important;
+      background:transparent!important;
+    }
+    .header__line-bottom--custom .container{
+      overflow:visible!important;
+    }
+    .header__nav{
+      overflow:visible!important;
+      background-color:transparent!important;
+      background:transparent!important;
+      margin:0!important;
+    }
+
+    /* Menu panel - Apple typography and spacing */
+    .menu--custom{
+      overflow:visible!important;
+      height:44px!important;
+      margin:0!important;
+    }
+    .menu--custom .menu__panel{
+      overflow:visible!important;
+      height:44px!important;
+      display:flex!important;
+      align-items:center!important;
+      justify-content:center!important;
+      gap:20px!important;
+      margin:0!important;
+      margin-top:0!important;
+      margin-bottom:0!important;
+      padding:0!important;
+    }
+
+    .menu__panel--custom{
+      margin:0!important;
+      margin-top:0!important;
+      margin-bottom:0!important;
+    }
+
+    .header__nav .menu__panel,
+    .d-lg-flex .menu__panel,
+    ul.menu__panel{
+      margin:0!important;
+      margin-top:0!important;
+      margin-bottom:0!important;
+    }
+
+    /* Menu items - Apple font and color system */
+    .menu__item{
+      list-style:none!important;
+      margin:0!important;
+      padding:0!important;
+    }
+
+    .menu--custom .menu__link{
+      font-family:Helvetica,Arial,sans-serif!important;
+      font-size:16px!important;
+      font-weight:400!important;
+      letter-spacing:-0.01em!important;
+      color:#f5f5f7!important;
+      padding:0 12px!important;
+      height:44px!important;
+      display:flex!important;
+      align-items:center!important;
+      transition:color 0.3s cubic-bezier(0.4,0,0.6,1),opacity 0.3s ease!important;
+      text-decoration:none!important;
+    }
+
+    /* Smaller font on desktop only */
+    @media (min-width:1024px){
+      .menu--custom .menu__link{
+        font-size:15px!important;
+      }
+
+      .menu--custom .menu__link span{
+        font-size:15px!important;
+      }
+    }
+
+    .menu--custom .menu__link:hover{
+      color:#ffffff!important;
+      opacity:1!important;
+    }
+
+    .menu--custom .menu__link span{
+      font-size:16px!important;
+      font-weight:400!important;
+      letter-spacing:-0.01em!important;
+      color:inherit!important;
+    }
+
+    /* Dropdown container - Apple glassmorphism */
+    .menu__item--has-dropdown{
+      position:relative!important;
+      z-index:9999!important;
+    }
+
+    .menu__dropdown,
+    ul.menu__dropdown[style],
+    .menu__item--has-dropdown .menu__dropdown[style]{
+      position:absolute!important;
+      top:100%!important;
+      left:50%!important;
+      transform:translateX(-50%) translateY(-10px)!important;
+      min-width:220px!important;
+      background:rgba(90,49,244,0.95)!important;
+      -webkit-backdrop-filter:saturate(180%) blur(20px)!important;
+      backdrop-filter:saturate(180%) blur(20px)!important;
+      border:1px solid rgba(255,255,255,0.2)!important;
+      border-radius:12px!important;
+      box-shadow:0 10px 40px rgba(0,0,0,0.6)!important;
+      padding:12px 0!important;
+      margin-top:0!important;
+      z-index:10000!important;
+      opacity:0!important;
+      visibility:hidden!important;
+      transition:opacity 0.4s cubic-bezier(0.28,0.11,0.32,1),transform 0.4s cubic-bezier(0.28,0.11,0.32,1),visibility 0.4s!important;
+      height:auto!important;
+      max-height:none!important;
+    }
+
+    .menu__item--has-dropdown:hover .menu__dropdown{
+      opacity:1!important;
+      visibility:visible!important;
+      transform:translateX(-50%) translateY(0)!important;
+      display:block!important;
+    }
+
+    /* Dropdown list items */
+    .menu__dropdown li{
+      display:block!important;
+      visibility:visible!important;
+      opacity:1!important;
+      height:auto!important;
+      border:none!important;
+      margin:0!important;
+      padding:0!important;
+    }
+
+    /* Dropdown links - Apple interactive styling */
+    .menu__dropdown a{
+      font-family:Helvetica,Arial,sans-serif!important;
+      font-size:15px!important;
+      font-weight:400!important;
+      letter-spacing:-0.01em!important;
+      color:#f5f5f7!important;
+      background:transparent!important;
+      display:block!important;
+      visibility:visible!important;
+      opacity:1!important;
+      text-indent:0!important;
+      padding:8px 20px!important;
+      text-decoration:none!important;
+      transition:color 0.2s ease,background-color 0.2s ease!important;
+      border-radius:6px!important;
+      margin:0 8px!important;
+    }
+
+    /* Override inline styles on dropdown links */
+    .menu__dropdown a[style],
+    .menu__dropdown a[style] span{
+      font-size:15px!important;
+    }
+
+    .menu__dropdown a:hover{
+      color:#ffffff!important;
+      background:rgba(255,255,255,0.08)!important;
+      opacity:1!important;
+    }
+
+    .menu__dropdown a span{
+      font-size:15px!important;
+      font-weight:400!important;
+      color:inherit!important;
+      display:inline!important;
+      visibility:visible!important;
+      opacity:1!important;
+      text-indent:0!important;
+      letter-spacing:-0.01em!important;
+    }
+
+    /* Fallback for browsers without backdrop-filter support */
+    @supports not (backdrop-filter:blur(20px)){
+      header{background:#5a31f4!important}
+      .menu__dropdown{background:#5a31f4!important}
+    }
+
+    /* ========================================
+       HEADER ICONS & ELEMENTS - APPLE STYLE
+       ======================================== */
+
+    /* Logo and brand styling */
+    .header__logo,
+    .header__logo a,
+    .header__logo img{
+      transition:opacity 0.3s ease!important;
+    }
+
+    .header__logo:hover{
+      opacity:0.8!important;
+    }
+
+    /* Search, cart, and utility icons */
+    .header__icon,
+    .header__search,
+    .header__cart,
+    .header__account{
+      transition:opacity 0.3s ease,background-color 0.2s ease!important;
+      border-radius:6px!important;
+    }
+
+    .header__icon:hover,
+    .header__search:hover,
+    .header__cart:hover,
+    .header__account:hover{
+      opacity:0.8!important;
+      background:rgba(255,255,255,0.05)!important;
+    }
+
+    /* Icon colors for dark theme */
+    .header__icon svg,
+    .header__search svg,
+    .header__cart svg,
+    .header__account svg{
+      fill:#f5f5f7!important;
+      transition:fill 0.3s ease!important;
+    }
+
+    .header__icon:hover svg,
+    .header__search:hover svg,
+    .header__cart:hover svg,
+    .header__account:hover svg{
+      fill:#ffffff!important;
+    }
+
+    /* Search bar Apple-style */
+    .header__search-input{
+      font-family:Helvetica,Arial,sans-serif!important;
+      background:rgba(255,255,255,0.1)!important;
+      border:1px solid rgba(255,255,255,0.2)!important;
+      color:#f5f5f7!important;
+      border-radius:8px!important;
+      padding:8px 16px!important;
+      font-size:14px!important;
+      letter-spacing:-0.01em!important;
+      transition:background-color 0.2s ease,border-color 0.2s ease!important;
+    }
+
+    .header__search-input:focus{
+      background:rgba(255,255,255,0.15)!important;
+      border-color:rgba(255,255,255,0.3)!important;
+      outline:none!important;
+    }
+
+    .header__search-input::placeholder{
+      color:rgba(245,245,247,0.6)!important;
+    }
+
+    /* Smooth scrolling effect (Apple uses this) */
+    html{
+      scroll-behavior:smooth;
+    }
+    /* ========================================
+       MOBILE MENU - APPLE STYLE
+       ======================================== */
+
+    @media(max-width:1024px){
+      /* Mobile menu container - tighter spacing */
+      .mobile-menu__item,
+      .mobile-menu__item--has-submenu{
+        margin:0!important;
+        padding:0!important;
+      }
+
+      /* Dark theme for mobile menu - tighter spacing */
+      .mobile-menu__link{
+        font-family:Helvetica,Arial,sans-serif!important;
+        color:#f5f5f7!important;
+        transition:opacity 0.2s ease,background-color 0.2s ease!important;
+        padding:8px 16px!important;
+        border-radius:8px!important;
+        margin:2px 0!important;
+      }
+
+      .mobile-menu__link:active{
+        opacity:0.7!important;
+        background:rgba(255,255,255,0.05)!important;
+      }
+
+      .mobile-menu__link span{
+        font-size:16px!important;
+        font-weight:400!important;
+        letter-spacing:-0.02em!important;
+        line-height:1.2!important;
+      }
+
+      /* Mobile submenu styling - tighter spacing */
+      .mobile-menu__submenu{
+        background:rgba(255,255,255,0.03)!important;
+        border-radius:8px!important;
+        margin-top:2px!important;
+        padding:4px 0!important;
+      }
+
+      .mobile-menu__submenu .mobile-menu__link{
+        font-size:13px!important;
+        padding:6px 16px 6px 32px!important;
+      }
+
+      /* Toggle button Apple-style */
+      .mobile-menu__toggle{
+        font-family:Helvetica,Arial,sans-serif!important;
+        font-size:20px!important;
+        color:#f5f5f7!important;
+        width:32px!important;
+        height:32px!important;
+        display:flex!important;
+        align-items:center!important;
+        justify-content:center!important;
+        transition:background-color 0.2s ease!important;
+        border-radius:6px!important;
+      }
+
+      .mobile-menu__toggle:active{
+        background:rgba(255,255,255,0.1)!important;
+      }
+
+      /* Mobile header purple theme */
+      .header--mobile{
+        background:#5a31f4!important;
+      }
+
+      /* Popup navigation black theme */
+      .popup-navigation{
+        background:#000000!important;
+      }
+
+      .popup-navigation__head,
+      .popup-navigation__menu{
+        background-color:#000000!important;
+      }
+
+      /* Remove padding from mobile menu parent items - higher specificity */
+      .mobile-menu__parent.py-15,
+      .mobile-menu__parent.pb-15,
+      div.mobile-menu__parent.py-15,
+      div.mobile-menu__parent.pb-15{
+        padding-bottom:0!important;
+      }
+
+      .mobile-menu__parent.py-15,
+      .mobile-menu__parent.pt-15,
+      div.mobile-menu__parent.py-15,
+      div.mobile-menu__parent.pt-15{
+        padding-top:0!important;
+      }
+
+      /* Also target any py-15, pt-15, pb-15 within mobile menu */
+      .popup-navigation .py-15,
+      .popup-navigation .pt-15{
+        padding-top:0!important;
+      }
+
+      .popup-navigation .py-15,
+      .popup-navigation .pb-15{
+        padding-bottom:0!important;
+      }
+
+      /* White close icon for mobile menu */
+      .popup-navigation .icon-theme-164,
+      .popup-navigation .icon-theme-164 path,
+      .popup-navigation .icon-theme-164 g,
+      .icon-theme-164{
+        fill:#ffffff!important;
+        stroke:#ffffff!important;
+        color:#ffffff!important;
+      }
+
+      /* Remove padding from search box */
+      .popup-navigation .pb-5,
+      .popup-navigation .py-5,
+      .popup-navigation .pb-lg-15{
+        padding-bottom:0!important;
+      }
+
+      /* ========================================
+         MOBILE CART POPUP - BIG CLOSE BUTTON
+         ======================================== */
+
+      /* Make cart close button bigger on mobile */
+      @media (max-width:1023px){
+        .popup-cart__close{
+          width:48px!important;
+          height:48px!important;
+          display:flex!important;
+          align-items:center!important;
+          justify-content:center!important;
+          background:#000000!important;
+          border-radius:50%!important;
+          transition:all 0.3s ease!important;
+        }
+
+        .popup-cart__close:hover{
+          background:#333333!important;
+          transform:scale(1.1)!important;
+        }
+
+        .popup-cart__close .icon-theme-164{
+          width:24px!important;
+          height:24px!important;
+        }
+
+        .popup-cart__close .icon-theme-164,
+        .popup-cart__close .icon-theme-164 path,
+        .popup-cart__close .icon-theme-164 g{
+          fill:#ffffff!important;
+          stroke:#ffffff!important;
+          color:#ffffff!important;
+          stroke-width:2!important;
+        }
+      }
+
+      /* ========================================
+         CENTER ADD TO CART BUTTON TEXT
+         ======================================== */
+
+      .btn--animated strong,
+      .btn--footbar strong,
+      .btn--status strong{
+        display:flex!important;
+        justify-content:center!important;
+        align-items:center!important;
+        width:100%!important;
+      }
+
+      .btn--animated .btn__text,
+      .btn--footbar .btn__text,
+      .btn--status .btn__text{
+        text-align:center!important;
+      }
+
+      /* ========================================
+         PADDING ADJUSTMENTS FOR DESKTOP HEADER
+         ======================================== */
+
+      @media (min-width:1025px){
+        .pt-lg-6, .py-lg-6{
+          padding-top:12px!important;
+        }
+
+        .pb-lg-6, .py-lg-6{
+          padding-bottom:6px!important;
+        }
+      }
+
+      /* ========================================
+         ANIMATED RETRO SEARCH BAR - MOBILE
+         ======================================== */
+
+      .popup-navigation input[type="search"],
+      .popup-navigation #Search{
+        background-color:#ffffff!important;
+        color:#3a2e20!important;
+        border:none!important;
+        width:100%!important;
+        max-width:301px!important;
+        height:56px!important;
+        border-radius:10px!important;
+        padding:0 59px!important;
+        font-size:18px!important;
+        font-family:"Courier New",Courier,monospace!important;
+        position:relative!important;
+        z-index:2!important;
+      }
+
+      .popup-navigation input[type="search"]::placeholder,
+      .popup-navigation #Search::placeholder{
+        color:#857754!important;
+      }
+
+      .popup-navigation input[type="search"]:focus,
+      .popup-navigation #Search:focus{
+        outline:none!important;
+        box-shadow:0 0 20px rgba(242,142,142,0.5)!important;
+      }
+
+      /* Search container styling */
+      .popup-navigation .position-relative.d-flex.align-items-center{
+        position:relative!important;
+        display:flex!important;
+        align-items:center!important;
+        justify-content:center!important;
+        padding:20px 0!important;
+        margin:0 auto!important;
+      }
+
+      /* Search icon styling */
+      .popup-navigation .search__button,
+      .popup-navigation button[type="submit"]{
+        position:absolute!important;
+        right:8px!important;
+        top:50%!important;
+        transform:translateY(-50%)!important;
+        display:flex!important;
+        align-items:center!important;
+        justify-content:center!important;
+        z-index:3!important;
+        max-height:40px!important;
+        max-width:38px!important;
+        height:40px!important;
+        width:38px!important;
+        border-radius:10px!important;
+        background:linear-gradient(180deg,#a57d52,#846846,#6b5342)!important;
+        border:1px solid transparent!important;
+        padding:0!important;
+        margin:0!important;
+      }
+
+      .popup-navigation .search__button svg,
+      .popup-navigation button[type="submit"] svg,
+      .popup-navigation .icon-theme-168{
+        fill:#c98f65!important;
+        width:20px!important;
+        height:20px!important;
+      }
+
+      /* Remove all glow effects from pseudo-elements */
+      .popup-navigation .position-relative.d-flex.align-items-center::before,
+      .popup-navigation .position-relative.d-flex.align-items-center::after,
+      .popup-navigation form::before,
+      .popup-navigation form::after{
+        content:none!important;
+        display:none!important;
+      }
+
+      /* Hide ALL outer sections - keep only search input */
+      .popup-navigation__search{
+        background:transparent!important;
+        padding:0!important;
+        margin:0!important;
+        position:relative!important;
+      }
+
+      /* Hide the entire container wrapper */
+      .popup-navigation__search > .container{
+        background:transparent!important;
+        padding:0!important;
+        margin:0!important;
+        max-width:100%!important;
+      }
+
+      /* Hide header with "WHAT ARE YOU LOOKING FOR?" */
+      .popup-navigation__search .d-none.d-lg-flex,
+      .popup-navigation__search .align-items-lg-center,
+      .popup-navigation__search .mb-5,
+      .popup-navigation__search .mb-lg-10,
+      .popup-navigation__search .container > p,
+      .popup-navigation__search .search__close{
+        display:none!important;
+        visibility:hidden!important;
+        height:0!important;
+        margin:0!important;
+        padding:0!important;
+      }
+
+      /* Remove all padding classes */
+      .popup-navigation__search .pt-lg-25,
+      .popup-navigation__search .pb-lg-35,
+      .popup-navigation__search .px-10,
+      .popup-navigation__search .px-lg-0{
+        padding:0!important;
+        margin:0!important;
+      }
+
+      /* Hide search results, empty state, and all extra content */
+      .popup-navigation__search .search__content,
+      .popup-navigation__search .search__result,
+      .popup-navigation__search .search__view-all,
+      .popup-navigation__search .search__empty,
+      .popup-navigation__search .predictive-search-status{
+        display:none!important;
+        visibility:hidden!important;
+        height:0!important;
+        overflow:hidden!important;
+      }
+
+      /* Hide reset button and hidden inputs */
+      .popup-navigation__search button[type="reset"],
+      .popup-navigation__search input[type="hidden"]{
+        display:none!important;
+      }
+
+      /* Make form isolated and centered - remove all wrappers visually */
+      .popup-navigation__search predictive-search{
+        position:relative!important;
+        display:block!important;
+        width:100%!important;
+        margin:0!important;
+        padding:20px 0!important;
+      }
+
+      .popup-navigation__search form{
+        position:relative!important;
+        width:100%!important;
+        max-width:320px!important;
+        margin:0 auto!important;
+        display:flex!important;
+        justify-content:center!important;
+        align-items:center!important;
+        padding:0!important;
+      }
+
+      /* Only show the input container */
+      .popup-navigation__search .position-relative.d-flex.align-items-center{
+        display:flex!important;
+        align-items:center!important;
+        justify-content:center!important;
+        position:relative!important;
+        width:100%!important;
+        max-width:314px!important;
+        margin:0 auto!important;
+        padding:0!important;
+      }
+
+      /* Border bottom removal */
+      .popup-navigation .border-bottom{
+        border-bottom:none!important;
+      }
+
+      /* Clean up any margins on wrapper elements */
+      .popup-navigation__search .mb-0{
+        margin-bottom:0!important;
+      }
+    }
+    /* Collection full-width on mobile */
+    @media(max-width:1024px){.collections__body.col-12{padding-left:0!important;padding-right:0!important;max-width:100%!important}}

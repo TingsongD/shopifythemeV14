@@ -1,0 +1,44 @@
+{% layout none %}
+{% include 'global-variables' %}
+{%- assign query_string = request.query_string | default: '' -%}
+{%- if query_string != blank -%}
+    {%- assign query_params = query_string | split: '&' -%}
+    {%- for query_param in query_params -%}
+        {%- assign parts = query_param | split: '=' -%}
+        {%- assign key = parts[0] -%}
+        {%- assign value = parts[1] | default: '' | url_decode | replace: '&#38;', '&' -%}
+        {%- case key -%}
+            {%- when 'max_count' -%}
+                {%- assign max_count = value -%}
+            {%- when 'size_of_columns' -%}
+                {%- assign size_of_columns = value -%}
+            {%- when 'async_ajax_loading' -%}
+                {%- assign async_ajax_loading = value -%}
+        {%- endcase -%}
+    {%- endfor -%}
+{%- endif -%}
+{%- assign async_ajax_loading = async_ajax_loading | default: 'false' -%}
+{%- assign max_count_int = max_count | default: 0 | plus: 0 -%}
+{%- assign size_of_columns_int = size_of_columns | default: 0 | plus: 0 -%}
+{%- if max_count_int == 0 -%}
+    {%- assign max_count_int = 6 -%}
+    {%- assign async_ajax_loading = 'false' -%}
+{%- endif -%}
+{%- if size_of_columns_int > 0 -%}
+    {%- assign limit = size_of_columns_int | at_most: max_count_int | plus: 1 -%}
+{%- else -%}
+    {%- assign limit = 6 -%}
+{%- endif -%}
+{%- for product in collections[collection.handle].products limit: max_count_int -%}
+    {%- if async_ajax_loading == 'false' or forloop.index0 < limit -%}
+        <div class="carousel__item col-auto" data-async="{{ async_ajax_loading }}">
+            {% include 'product-collection' with url_without_collection: true %}
+        </div>
+    {%- elsif async_ajax_loading == 'true' and forloop.index >= limit and forloop.last == true -%}
+        <div class="carousel__item col-auto" data-async="{{ async_ajax_loading }}">
+            {% include 'product-collection' with url_without_collection: true %}
+        </div>
+    {%- else -%}
+        <div class="carousel__item col-auto" data-handle="{{ product.handle }}"></div>
+    {%- endif -%}
+{%- endfor -%}

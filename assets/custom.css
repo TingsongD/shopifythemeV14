@@ -1,0 +1,190 @@
+/* Ensure product title uses theme variables without external overrides */
+.product-page-info__title>*,
+.one-product-info__title>* {
+  font-size: var(--product-page-title-size) !important;
+  line-height: var(--product-page-title-line-height) !important;
+  font-weight: var(--product-page-title-weight) !important;
+  font-family: var(--product-page-title-family) !important;
+  text-transform: var(--product-page-title-transform) !important;
+  color: var(--product-page-title-c) !important;
+}
+
+/* Cart popup sale price styling */
+.popup-cart__subtotal .price--sale>span:last-child,
+.product-cart__price .price--sale>span:last-child {
+  color: #5a31f4 !important;
+}
+
+/* Cart popup savings text styling */
+.popup-cart__savings-text {
+  color: #F54337 !important;
+  font-size: 17px;
+  font-weight: bold;
+  font-family: Helvetica, Arial, sans-serif;
+}
+
+/* Adjust Chat Widget position on mobile to avoid overlapping sticky CTA */
+@media (max-width: 768px) {
+
+  iframe#shopify-chat,
+  #shopify-chat-widget,
+  .shopify-chat-widget,
+  #dummy-chat-button-iframe,
+  #tidio-chat-iframe,
+  #gorgias-chat-container,
+  #sentient-chat-widget,
+  .sentient-widget,
+  iframe[id*="sentient"],
+  div[id*="sentient"] {
+    bottom: 90px !important;
+  }
+}
+
+/* Enable smooth scrolling for anchor links */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Popup Cart Container */
+.popup-cart {
+  border-radius: 5px !important;
+  background-color: #fff;
+}
+
+.popup-cart.popup-cart--side {
+  border-radius: 5px !important;
+  margin-right: 5px; /* Gap from screen edge to show right corners */
+  margin-bottom: 0 !important;
+  padding-top: 5px !important;
+  padding-bottom: 0 !important; /* Remove bottom padding so footer edges bottom */
+  display: flex !important;
+  flex-direction: column !important;
+}
+
+/* Ensure popup cart wrapper and inner elements have no bottom spacing */
+/* Override pb-25 utility class on main container and footer */
+.popup-cart.pb-25,
+.popup-cart.popup-cart--side.pb-25,
+.popup-cart--side.pb-25,
+div.popup-cart.popup-cart--side.pb-25,
+.popup-cart,
+.popup-cart.popup-cart--side,
+.popup-cart--side > *,
+.popup-cart--side form {
+  padding-bottom: 0 !important;
+}
+
+/* Override pb-25 on footer specifically */
+.popup-cart__footer.pb-25,
+div.popup-cart__footer.pb-25,
+.popup-cart .popup-cart__footer.pb-25 {
+  padding-bottom: 0 !important;
+}
+
+/* Blanket override for ALL pb-* utility classes inside popup cart */
+.popup-cart[class*="pb-"],
+.popup-cart [class*="pb-"],
+.popup-cart--side[class*="pb-"],
+.popup-cart--side [class*="pb-"] {
+  padding-bottom: 0 !important;
+}
+
+/* Popup Cart Footer - stick to bottom */
+.popup-cart__footer,
+.popup-cart__footer.pt-20,
+.popup-cart__footer.pb-25,
+.popup-cart .popup-cart__footer,
+div.popup-cart__footer.position-sticky.bottom-0.border-top.pt-20.pb-25 {
+  border-top: 0 !important;
+  padding-top: 0 !important;
+  padding-bottom: 0 !important;
+  margin-top: auto !important; /* Push footer to bottom */
+  margin-bottom: 0 !important;
+}
+
+/* Popup Cart - taller on desktop */
+@media (min-width: 1024px) {
+  .popup-cart.popup-cart--side {
+    min-height: 96vh !important;
+    max-height: 98vh !important;
+    height: 98vh !important;
+  }
+}
+
+/* Popup Cart - taller on tablet */
+@media (min-width: 768px) and (max-width: 1023px) {
+  .popup-cart.popup-cart--side {
+    min-height: 94vh !important;
+    max-height: 96vh !important;
+    height: 96vh !important;
+  }
+}
+
+/* Popup Cart Body/Items area - grow to fill space */
+.popup-cart__body,
+.popup-cart__items,
+.popup-cart__content {
+  flex: 1 1 auto !important;
+  overflow-y: auto !important;
+  min-height: 0 !important; /* Allow flex item to shrink below content size */
+}
+
+/* Reduce spacing in footer elements */
+.popup-cart__footer .mb-15 {
+  margin-bottom: 8px !important;
+}
+
+.popup-cart__footer .my-15 {
+  margin-top: 8px !important;
+  margin-bottom: 8px !important;
+}
+
+.popup-cart__footer .mt-15 {
+  margin-top: 8px !important;
+}
+
+.popup-cart__footer .mt-20 {
+  margin-top: 10px !important;
+}
+
+.popup-cart__payment-icons {
+  margin-top: 5px !important;
+  padding-top: 5px !important;
+  margin-bottom: 0 !important;
+  padding-bottom: 0 !important;
+}
+
+/* Remove all bottom spacing from popup cart elements */
+.popup-cart__buttons {
+  margin-bottom: 0 !important;
+  padding-bottom: 0 !important;
+}
+
+.popup-cart__footer > *:last-child,
+.popup-cart__buttons > *:last-child {
+  margin-bottom: 0 !important;
+  padding-bottom: 0 !important;
+}
+
+/* Ensure popup cart inner container has no bottom padding */
+.popup-cart__inner,
+.popup-cart > form,
+.popup-cart form > div {
+  padding-bottom: 0 !important;
+  margin-bottom: 0 !important;
+}
+
+/* Payment Icons in Popup Cart & Cart Page */
+.popup-cart__payment-icons .payment-icon,
+.cart__payment-icons span {
+  display: inline-flex;
+  align-items: center;
+}
+
+.popup-cart__payment-icons .payment-icon svg,
+.popup-cart__payment-icons .icon--wide,
+.cart__payment-icons svg,
+.cart__payment-icons .icon--wide {
+  width: 36px;
+  height: 22px;
+}

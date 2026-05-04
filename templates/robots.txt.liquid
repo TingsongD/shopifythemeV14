@@ -1,0 +1,173 @@
+# Optimized robots.txt for Shopify store msdressly.com
+# Last updated: April 2026
+# Purpose: Protect sensitive areas while allowing beneficial AI crawlers full public access
+
+# General rules for all crawlers (fallback)
+User-agent: *
+Disallow: /admin
+Disallow: /cart
+Disallow: /carts
+Disallow: /orders
+Disallow: /checkout
+Disallow: /*/checkouts
+Disallow: /*/orders
+Disallow: /account
+Disallow: /a/downloads/-/*
+Disallow: /*?pr_prod_strat=
+Disallow: /*?pr_rec_id=
+Disallow: /*?*pr_rec_pid=
+Disallow: /*?*pr_ref_pid=
+Disallow: /*?*pr_seq=
+Disallow: /*?*sort_by=*
+Disallow: /*&sort_by=*
+Disallow: /*?*preview_theme_id*
+Disallow: /*?*preview_script_id*
+Disallow: /*&preview_theme_id*
+Disallow: /*&preview_script_id*
+Disallow: /apple-app-site-association
+Disallow: /blogs/*+*
+Disallow: /blogs/*%2B*
+Disallow: /blogs/*%2b*
+Disallow: /*/blogs/*+*
+Disallow: /*/blogs/*%2B*
+Disallow: /*/blogs/*%2b*
+
+Allow: /policies/
+Allow: /search
+
+Sitemap: https://www.msdressly.com/sitemap.xml
+Sitemap: https://msdressly.com/apps/ugc-video/sitemap.xml
+
+# AI-specific crawlers: Explicit full access to public content
+# These sections override the general rules for the named bots
+
+User-agent: GPTBot
+Allow: /
+Disallow: /admin
+Disallow: /cart
+Disallow: /carts
+Disallow: /orders
+Disallow: /checkout
+Disallow: /*/checkouts
+Disallow: /*/orders
+Disallow: /account
+Crawl-delay: 2
+
+User-agent: PerplexityBot
+Allow: /
+Disallow: /admin
+Disallow: /cart
+Disallow: /carts
+Disallow: /orders
+Disallow: /checkout
+Disallow: /*/checkouts
+Disallow: /*/orders
+Disallow: /account
+Crawl-delay: 2
+
+User-agent: Google-Extended
+Allow: /
+Disallow: /admin
+Disallow: /cart
+Disallow: /carts
+Disallow: /orders
+Disallow: /checkout
+Disallow: /*/checkouts
+Disallow: /*/orders
+Disallow: /account
+Crawl-delay: 2
+
+# Additional common AI/search bots (recommended for consistency)
+User-agent: OAI-SearchBot
+Allow: /
+Disallow: /admin
+Disallow: /cart
+Disallow: /carts
+Disallow: /orders
+Disallow: /checkout
+Disallow: /*/checkouts
+Disallow: /*/orders
+Disallow: /account
+Crawl-delay: 2
+
+User-agent: ClaudeBot
+Allow: /
+Disallow: /admin
+Disallow: /cart
+Disallow: /carts
+Disallow: /orders
+Disallow: /checkout
+Disallow: /*/checkouts
+Disallow: /*/orders
+Disallow: /account
+Crawl-delay: 2
+
+User-agent: CCBot
+Allow: /
+Disallow: /admin
+Disallow: /cart
+Disallow: /carts
+Disallow: /orders
+Disallow: /checkout
+Disallow: /*/checkouts
+Disallow: /*/orders
+Disallow: /account
+Crawl-delay: 2
+
+# Maintain restrictions for non-AI bots where appropriate
+User-agent: adsbot-google
+Disallow: /checkout
+Disallow: /cart
+Disallow: /carts
+Disallow: /orders
+Disallow: /*/checkouts
+Disallow: /*/orders
+Disallow: /*?*sort_by=*
+Disallow: /*&sort_by=*
+
+User-agent: Nutch
+Disallow: /
+
+User-agent: AhrefsBot
+Crawl-delay: 10
+Disallow: /admin
+Disallow: /cart
+Disallow: /carts
+Disallow: /orders
+Disallow: /checkout
+Disallow: /*/checkouts
+Disallow: /*/orders
+Disallow: /account
+Disallow: /a/downloads/-/*
+Disallow: /*?*sort_by=*
+Disallow: /*&sort_by=*
+Disallow: /*?*preview_theme_id*
+Disallow: /*?*preview_script_id*
+Disallow: /apple-app-site-association
+Disallow: /policies/
+Disallow: /search
+
+User-agent: AhrefsSiteAudit
+Crawl-delay: 10
+Disallow: /admin
+Disallow: /cart
+Disallow: /carts
+Disallow: /orders
+Disallow: /checkout
+Disallow: /*/checkouts
+Disallow: /*/orders
+Disallow: /account
+Disallow: /a/downloads/-/*
+Disallow: /*?*sort_by=*
+Disallow: /*&sort_by=*
+Disallow: /*?*preview_theme_id*
+Disallow: /*?*preview_script_id*
+Disallow: /apple-app-site-association
+Disallow: /policies/
+Disallow: /search
+
+User-agent: MJ12bot
+Crawl-delay: 10
+
+User-agent: Pinterest
+Crawl-delay: 1

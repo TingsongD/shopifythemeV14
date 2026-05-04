@@ -1,0 +1,1195 @@
+{% include 'global-variables' %}
+{%- assign template_layout = settings.product_info_layout -%}
+{%- if product.tags contains 'gallery-layout-1' -%}
+    {%- assign template_layout = '1' -%}
+{%- elsif product.tags contains 'gallery-layout-2' -%}
+    {%- assign template_layout = '2' -%}
+{%- elsif product.tags contains 'gallery-layout-3' -%}
+    {%- assign template_layout = '3' -%}
+{%- elsif product.tags contains 'gallery-layout-4' -%}
+    {%- assign template_layout = '4' -%}
+{%- elsif product.tags contains 'gallery-layout-5' -%}
+    {%- assign template_layout = '5' -%}
+{%- endif -%}
+{%- assign sidebar = section.settings.sidebar -%}
+{%- if template_layout == '3' or template_layout == '4' -%}
+	{%- assign enable_sticky_sidebar = true -%}
+{%- else -%}
+	{%- assign enable_sticky_sidebar = section.settings.enable_sticky_sidebar -%}
+{%- endif -%}
+{% capture container_class %}{% if sidebar != 'off' %} product-page__container--with-sidebar{% endif %}{% if sidebar == 'left' %} order-xl-1{% endif %}{% endcapture %}
+{% capture sidebar_class %}{% if sidebar == 'left' %} product-page__sidebar--left pr-xl-30 mr-xl-30{% elsif sidebar == 'right' %} product-page__sidebar--right pl-xl-30 ml-xl-30{% endif %}{% endcapture %}
+{% capture sidebar_html %}
+	{%- if sidebar != 'off' -%}
+		<div class="product-page__sidebar{{ sidebar_class }}{% if enable_sticky_sidebar %} sticky-sidebar-xl js-sticky-sidebar{% endif %}" data-js-sticky-sidebar-media-xl>
+			{%- if enable_sticky_sidebar -%}
+				<div data-js-sticky-sidebar-body>
+			{%- endif -%}
+				<div data-js-position-desktop="sidebar">
+					{% include 'product-page-get-sidebar' %}
+				</div>
+			{%- if enable_sticky_sidebar -%}
+				</div>
+			{%- endif -%}
+			</div>
+	{%- endif -%}
+{% endcapture %}
+{% include 'product-res-variables' %}
+{% capture content_margins %}pt-{{ offset_product_page_content_margin_top_d }} pb-{{ offset_product_page_content_margin_bottom_d }}{% endcapture %}
+<div class="product-page {{ content_margins }}">
+	<div class="container{% if sidebar != 'off' %} d-xl-flex{% endif %}">
+		{%- if template_layout == '1' or template_layout == '5' -%}
+			<div class="product-page__container{{ container_class }}">
+				<div class="product-page__main">
+					{% include 'product-page-get-main' %}
+				</div>
+				{%- if section.settings.show_tabs -%}
+					<div class="product-page__tabs mt-30">
+						{% include 'product-page-get-tabs' %}
+					</div>
+				{%- endif -%}
+			</div>
+			{{ sidebar_html }}
+		{%- else -%}
+			<div class="product-page__container{{ container_class }}">
+				<div class="product-page__main">
+					{% include 'product-page-get-main' %}
+				</div>
+			</div>
+			{{ sidebar_html }}
+		{%- endif -%}
+	</div>
+</div>
+
+{%- if enable_sticky_sidebar -%}
+	<script>
+		theme.AssetsLoader.require('scripts', 'sticky_sidebar');
+	</script>
+{%- endif -%}
+<script>
+    theme.AssetsLoader.require('scripts', 'product_page');
+</script>
+{%- if section.settings.tabs_type == 'tabs' -%}
+	<script>
+		theme.AssetsLoader.onUserAction(function() {
+			theme.AssetsLoader.require('scripts', 'tabs');
+		});
+	</script>
+{%- endif -%}
+
+{%- if section.settings.enable_floating_video -%}
+	<div class="product-floating-video d-none{% if section.settings.floating_video_hide_on_mobile %} product-floating-video--hide-mobile{% endif %}" data-floating-video-container="{{ section.id }}">
+		<button type="button" class="product-floating-video__close" aria-label="Close floating video" data-floating-video-close>&times;</button>
+		<button type="button" class="product-floating-video__mute" aria-label="Toggle sound" aria-pressed="true" data-floating-video-mute>Unmute</button>
+		<div class="product-floating-video__inner" data-floating-video-slot></div>
+	</div>
+	<style>
+		.product-floating-video{position:fixed;top:50%;left:16px;width:320px;max-width:calc(100vw - 30px);max-height:70vh;z-index:9999;border-radius:12px;overflow:hidden;background:#000;box-shadow:0 20px 40px rgba(0,0,0,0.35);transition:opacity .2s ease,transform .2s ease;opacity:0;transform:translateY(calc(-50% + 12px));pointer-events:none}
+		.product-floating-video--visible{opacity:1;transform:translateY(-50%);pointer-events:auto}
+		.product-floating-video--portrait{width:240px;max-width:min(260px,40vw);max-height:80vh}
+		.product-floating-video--portrait .product-floating-video__inner{aspect-ratio:9/16}
+		.product-floating-video video,.product-floating-video iframe{width:100%;height:100%;display:block;border:0;background:#000}
+		.product-floating-video__inner{position:relative;aspect-ratio:16/9;background:#000}
+		.product-floating-video__close{position:absolute;top:6px;right:8px;width:32px;height:32px;border:0;border-radius:50%;background:rgba(0,0,0,0.6);color:#fff;cursor:pointer;font-size:20px;line-height:1;z-index:2;display:flex;align-items:center;justify-content:center;transition:background .2s ease,opacity .2s ease}
+		.product-floating-video__close:hover{background:rgba(0,0,0,0.75)}
+		.product-floating-video__mute{position:absolute;bottom:8px;left:8px;height:32px;min-width:70px;padding:0 12px;border:0;border-radius:16px;background:rgba(0,0,0,0.6);color:#fff;font-size:12px;line-height:1;cursor:pointer;z-index:2;display:flex;align-items:center;justify-content:center;transition:background .2s ease,opacity .2s ease}
+		.product-floating-video__mute:hover{background:rgba(0,0,0,0.75)}
+		.product-floating-video.d-none{display:none!important}
+		@media (max-width:767px){
+			.product-floating-video{width:260px;left:10px;top:50%;max-height:65vh;transform:translateY(calc(-50% + 12px))}
+			.product-floating-video--visible{transform:translateY(-50%)}
+			.product-floating-video--portrait{width:200px;max-width:70vw;max-height:75vh}
+			.product-floating-video--hide-mobile{display:none!important}
+		}
+	</style>
+	<script type="application/json" id="ProductFloatingVideoData-{{ section.id }}">
+	  {
+		"src": null,
+		"audio_src": {{ product.metafields.custom.audio_sales_pitch.value.url | json }},
+		"hide_on_mobile": {{ section.settings.floating_video_hide_on_mobile | default: false | json }}
+	  }
+	</script>
+	<script type="application/json" id="ProductFloatingVideoPool-{{ section.id }}">
+		{{ section.settings.video_pool_json | json }}
+	</script>
+	<script>
+	(function() {
+        // Safe debug logging - only logs when ThemeDebug exists and is enabled
+        var debugLog = (window.ThemeDebug && ThemeDebug.enabled)
+            ? function() { ThemeDebug.log.apply(ThemeDebug, arguments); }
+            : function() {};
+
+        debugLog("Floating Video Script Loaded");
+        var PRESERVED_AUDIO_SRC = null; // Robust capture variable
+		var dataEl = document.getElementById('ProductFloatingVideoData-{{ section.id }}');
+		var poolEl = document.getElementById('ProductFloatingVideoPool-{{ section.id }}');
+
+		if (!dataEl) return;
+		var data;
+		try { 
+            data = JSON.parse(dataEl.textContent); 
+            if (data && data.audio_src) {
+                PRESERVED_AUDIO_SRC = data.audio_src;
+            }
+        } catch (e) { return; }
+		
+		// Fallback to pool if no specific video is defined
+		if (!data || !data.src) {
+			if (poolEl) {
+				var poolData;
+				try { poolData = JSON.parse(poolEl.textContent); } catch (e) {}
+				
+				// Handle if the setting is a string containing JSON (textarea)
+				if (typeof poolData === 'string') {
+					try { poolData = JSON.parse(poolData); } catch (e) {}
+				}
+
+				if (Array.isArray(poolData) && poolData.length > 0) {
+					var validItems = poolData.filter(function(item) {
+						return item && (item.id || item.video_id || item.src);
+					});
+					
+					if (validItems.length > 0) {
+						var randomItem = validItems[Math.floor(Math.random() * validItems.length)];
+						var pHost = (randomItem.host || randomItem.video_host || 'youtube').toLowerCase();
+						var pId = randomItem.id || randomItem.video_id || randomItem.src;
+						var pPoster = randomItem.poster || randomItem.video_poster || '';
+						
+						// Basic MP4/Ext detection
+						var pType = (pHost === 'mp4') ? 'video' : 'external_video';
+						
+						data = {
+							type: pType,
+							host: pHost,
+							src: pId,
+							poster: pPoster,
+							aspect_ratio: randomItem.aspect_ratio || randomItem.ratio || ''
+						};
+					}
+				}
+			}
+		}
+
+		if (!data || !data.src) return;
+
+
+		var container = document.querySelector('[data-floating-video-container="{{ section.id }}"]');
+		var slot = container && container.querySelector('[data-floating-video-slot]');
+		var closeBtn = container && container.querySelector('[data-floating-video-close]');
+		var muteBtn = container && container.querySelector('[data-floating-video-mute]');
+		var gallery = document.querySelector('[data-js-product-gallery]');
+		if (!container || !slot || !gallery) return;
+
+		if (window.Shopify && Shopify.designMode) return;
+
+		var mql = window.matchMedia('(max-width: 767px)');
+		var hideOnMobile = {{ section.settings.floating_video_hide_on_mobile | json }};
+		var dismissed = false;
+		var observer;
+		var userScrolled = false;
+		var currentIframe = null;
+		var currentVideo = null;
+		var isMuted = true;
+		var posterOrientation = null;
+		var audioPlayer = null;
+
+		if (data.poster) {
+			var posterImg = new Image();
+			posterImg.onload = function() {
+				if (this.height > this.width) {
+					posterOrientation = 'portrait';
+					container.classList.add('product-floating-video--portrait');
+					slot.style.aspectRatio = 0.5625;
+				} else {
+					posterOrientation = 'landscape';
+				}
+			};
+			posterImg.src = data.poster;
+		}
+
+		function updateMuteLabel() {
+			if (!muteBtn) return;
+			muteBtn.textContent = isMuted ? 'Unmute' : 'Mute';
+		}
+
+		function clearPlayer() {
+			slot.innerHTML = '';
+			currentIframe = null;
+			currentVideo = null;
+			if (audioPlayer) {
+				audioPlayer.pause();
+			}
+		}
+
+		function buildPlayer() {
+			if (slot.childElementCount) return;
+			var ratio = parseFloat(data.aspect_ratio);
+			if (!ratio || isNaN(ratio)) {
+				ratio = 1.777;
+			}
+			if (posterOrientation === 'portrait') {
+				ratio = 9 / 16;
+			}
+			// Force portrait layout for YouTube Shorts-style vertical videos when width < height from poster or aspect hints
+			if (data.type === 'external_video' && (posterOrientation === 'portrait' || ratio < 1.1)) {
+				ratio = 9 / 16;
+			}
+			var isPortrait = ratio < 0.9 || posterOrientation === 'portrait';
+			if (isPortrait) {
+				container.classList.add('product-floating-video--portrait');
+			} else {
+				container.classList.remove('product-floating-video--portrait');
+			}
+			slot.style.aspectRatio = ratio;
+			if (data.poster) {
+				slot.style.backgroundImage = 'url(' + data.poster + ')';
+				slot.style.backgroundSize = 'cover';
+				slot.style.backgroundPosition = 'center';
+			}
+
+			if (data.type === 'video') {
+				var video = document.createElement('video');
+				video.src = data.src;
+				video.poster = data.poster;
+				video.muted = true;
+				video.playsInline = true;
+				video.loop = true;
+				video.autoplay = true; 
+				video.style.width = '100%';
+				video.style.height = '100%';
+				video.style.objectFit = 'cover';
+				
+				// Auto-detect aspect ratio for MP4s if no override is provided
+				video.addEventListener('loadedmetadata', function() {
+					if (!data.aspect_ratio && this.videoWidth && this.videoHeight) {
+						var vRatio = this.videoWidth / this.videoHeight;
+						slot.style.aspectRatio = vRatio;
+						if (vRatio < 0.9) {
+							container.classList.add('product-floating-video--portrait');
+						} else {
+							container.classList.remove('product-floating-video--portrait');
+						}
+					}
+				});
+
+				slot.appendChild(video);
+				currentVideo = video;
+				
+				// Attempt autoplay
+				var promise = video.play();
+				if (promise !== undefined) {
+					promise.catch(function(error) {
+						// Auto-play was prevented
+					});
+				}
+			} else {
+				var iframe = document.createElement('iframe');
+				var iframeSrc;
+				var host = (data.host || 'youtube').toLowerCase();
+				if (host === 'vimeo') {
+					iframeSrc = 'https://player.vimeo.com/video/' + data.src + '?autoplay=1&loop=1&muted=1&title=0&byline=0&controls=0';
+				} else { // Default to YouTube
+					iframeSrc = 'https://www.youtube.com/embed/' + data.src + '?autoplay=1&loop=1&mute=1&playlist=' + data.src + '&controls=0&modestbranding=1&showinfo=0&rel=0&playsinline=1&enablejsapi=1';
+				}
+				iframe.src = iframeSrc;
+				iframe.style.width = '100%';
+				iframe.style.height = '100%';
+				iframe.style.border = '0';
+				iframe.allow = "autoplay; encrypted-media; picture-in-picture";
+				iframe.loading = 'lazy';
+				
+				slot.appendChild(iframe);
+				currentIframe = iframe;
+			}
+			
+			updateMuteLabel();
+		}
+
+		function updateMuteLabel() {
+			if (muteBtn) {
+				var text = isMuted ? 'Unmute' : 'Mute';
+				// You can change icon/text here
+				muteBtn.textContent = text;
+                muteBtn.setAttribute('aria-pressed', isMuted);
+			}
+		}
+
+		function setMuteState(muted) {
+			isMuted = muted;
+			if (currentVideo) {
+				currentVideo.muted = muted;
+				if (!muted) {
+					currentVideo.play().catch(function(){});
+				}
+			}
+
+            // Audio Sales Pitch Logic
+            if (currentIframe && currentIframe.contentWindow) {
+				var cmd = muted ? 'mute' : 'unMute';
+				try {
+					currentIframe.contentWindow.postMessage(JSON.stringify({ event: 'command', func: cmd, args: [] }), '*');
+					if (data.host === 'vimeo') {
+						currentIframe.contentWindow.postMessage(JSON.stringify({ method: 'setVolume', value: muted ? 0 : 1 }), '*');
+					}
+					if (!muted && data.host === 'youtube') {
+						currentIframe.contentWindow.postMessage(JSON.stringify({ event: 'command', func: 'playVideo', args: [] }), '*');
+					}
+				} catch (e) {}
+			}
+
+            if (!muted && !audioPlayer && PRESERVED_AUDIO_SRC) {
+                try {
+                    var audioUrl = PRESERVED_AUDIO_SRC;
+                     // Ensure protocol if missing (common in Shopify files)
+                    if (audioUrl.indexOf('//') === 0) {
+                        audioUrl = 'https:' + audioUrl;
+                    }
+                    debugLog("Audio Sales Pitch: Initializing player with URL", audioUrl);
+                    
+                    audioPlayer = new Audio(audioUrl);
+                    audioPlayer.loop = true;
+                    
+                    // Add error listener
+                    audioPlayer.addEventListener('error', function(e) {
+                         console.error("Audio Player Error Event:", e);
+                    });
+                     
+                } catch (e) {
+                    console.error("Audio Sales Pitch: Error initializing player", e);
+                }
+            } else {
+                 debugLog("Audio Sales Pitch: Skipping initialization. Reason:",
+                    muted ? "Muted" : (audioPlayer ? "Player Exists" : "No Audio Src"));
+            }
+
+            if (audioPlayer) {
+				if (muted) {
+					audioPlayer.pause();
+				} else {
+debugLog("Audio Sales Pitch: Attempting to play...");
+				var playPromise = audioPlayer.play();
+                    if (playPromise !== undefined) {
+                        playPromise.then(function() {
+                            debugLog("Audio playback started successfully");
+                        }).catch(function(error) {
+                            console.error("Audio playback failed:", error);
+                        });
+                    }
+				}
+			}
+			updateMuteLabel();
+		}
+
+		function pausePlayer() {
+			var media = slot.firstElementChild;
+			if (media) {
+				if (media.tagName === 'VIDEO') {
+					media.pause();
+				} else if (media.tagName === 'IFRAME') {
+					media.removeAttribute('src');
+				}
+			}
+			clearPlayer();
+		}
+
+		function showPlayer() {
+			if (dismissed) return;
+			if (hideOnMobile && mql.matches) {
+				hidePlayer();
+				return;
+			}
+			buildPlayer();
+			container.classList.remove('d-none');
+			
+			// For MP4s, only show when playback actually starts to avoid black screen 
+			if (currentVideo && currentVideo.tagName === 'VIDEO') {
+				currentVideo.addEventListener('playing', function() {
+					container.classList.add('product-floating-video--visible');
+				}, { once: true });
+			} else {
+				requestAnimationFrame(function() {
+					container.classList.add('product-floating-video--visible');
+				});
+			}
+		}
+
+		function hidePlayer(permanent) {
+			container.classList.remove('product-floating-video--visible');
+			if (permanent) {
+				dismissed = true;
+			}
+			pausePlayer();
+			if (permanent) {
+				container.classList.add('d-none');
+			}
+		}
+
+		observer = new IntersectionObserver(function(entries) {
+			entries.forEach(function(entry) {
+				if (entry.isIntersecting) {
+					if (!userScrolled) {
+						hidePlayer();
+					}
+				} else {
+					showPlayer();
+				}
+			});
+		}, { threshold: 0.35 });
+
+		observer.observe(gallery);
+
+		function handleFirstScroll() {
+			userScrolled = true;
+			showPlayer();
+			window.removeEventListener('scroll', handleFirstScroll);
+		}
+
+		window.addEventListener('scroll', handleFirstScroll, { passive: true });
+
+		if (closeBtn) {
+			closeBtn.addEventListener('click', function() {
+				hidePlayer(true);
+				if (observer) {
+					observer.disconnect();
+				}
+			});
+		}
+
+		if (muteBtn) {
+            debugLog("Attaching click listener to muteBtn");
+			muteBtn.addEventListener('click', function() {
+                debugLog("Mute button clicked");
+				setMuteState(!isMuted);
+			});
+		}
+
+		if (hideOnMobile) {
+			mql.addEventListener('change', function() {
+				if (mql.matches) {
+					hidePlayer();
+				}
+			});
+		}
+	})();
+	</script>
+{%- endif -%}
+
+{% comment %}UTM Variant Handler - Dynamic badge/banner based on ?utm_variant parameter{% endcomment %}
+{% render 'utm-variant-handler' %}
+
+{% schema %}
+{
+    "name": "t:sections.product_page.name",
+    "settings": [
+        {
+            "type": "header",
+            "content": "t:sections.product_page.settings.header__1.content"
+        },
+        {
+            "type": "select",
+            "id": "gallery_size",
+            "label": "t:sections.product_page.settings.gallery_size.label",
+            "default": "6",
+            "options": [
+                {
+                    "value": "4",
+                    "label": "t:sections.product_page.settings.gallery_size.option__1.label"
+                },
+                {
+                    "value": "5",
+                    "label": "t:sections.product_page.settings.gallery_size.option__2.label"
+                },
+                {
+                    "value": "6",
+                    "label": "t:sections.product_page.settings.gallery_size.option__3.label"
+                },
+                {
+                    "value": "7",
+                    "label": "t:sections.product_page.settings.gallery_size.option__4.label"
+                },
+                {
+                    "value": "8",
+                    "label": "t:sections.product_page.settings.gallery_size.option__5.label"
+                }
+            ]
+        },
+        {
+            "type": "select",
+            "id": "sidebar",
+            "label": "t:sections.product_page.settings.sidebar.label",
+            "info": "t:sections.product_page.settings.sidebar.info",
+            "default": "off",
+            "options": [
+                {
+                    "value": "off",
+                    "label": "t:sections.product_page.settings.sidebar.option__1.label"
+                },
+                {
+                    "value": "left",
+                    "label": "t:sections.product_page.settings.sidebar.option__2.label"
+                },
+                {
+                    "value": "right",
+                    "label": "t:sections.product_page.settings.sidebar.option__3.label"
+                }
+            ]
+        },
+        {
+            "type": "checkbox",
+            "id": "enable_sticky_sidebar",
+            "label": "t:sections.product_page.settings.enable_sticky_sidebar.label",
+            "default": true
+        },
+        {
+            "type": "header",
+            "content": "t:sections.product_page.settings.header__2.content"
+        },
+        {
+            "type": "checkbox",
+            "id": "show_tabs",
+            "label": "t:sections.product_page.settings.show_tabs.label",
+            "default": true
+        },
+        {
+            "type": "checkbox",
+            "id": "show_tab_description",
+            "label": "t:sections.product_page.settings.show_tab_description.label",
+            "default": true
+        },
+        {
+            "type": "checkbox",
+            "id": "show_tab_reviews",
+            "label": "t:sections.product_page.settings.show_tab_reviews.label",
+            "info": "t:sections.product_page.settings.show_tab_reviews.info",
+            "default": true
+        },
+        {
+            "type": "checkbox",
+            "id": "scrolling_to_opened_tab",
+            "label": "t:sections.product_page.settings.scrolling_to_opened_tab.label",
+            "info": "t:sections.product_page.settings.scrolling_to_opened_tab.info",
+            "default": false
+        },
+        {
+            "type": "select",
+            "id": "tabs_type",
+            "label": "t:sections.product_page.settings.tabs_type.label",
+            "default": "tabs",
+            "info": "t:sections.product_page.settings.tabs_type.info",
+            "options": [
+                {
+                    "value": "tabs",
+                    "label": "t:sections.product_page.settings.tabs_type.option__1.label"
+                },
+                {
+                    "value": "sheet",
+                    "label": "t:sections.product_page.settings.tabs_type.option__2.label"
+                }
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": "t:sections.product_page.settings.paragraph__1.content"
+        },
+        {
+            "type": "header",
+            "content": "Floating video mini-player"
+        },
+        {
+            "type": "checkbox",
+            "id": "enable_floating_video",
+            			"label": "Enable floating video mini-player",
+			"default": false
+		},
+		{
+			"type": "textarea",
+			"id": "video_pool_json",
+			"label": "Global Video Pool (JSON Fallback)",
+			"info": "Paste the JSON array of video objects here. Used if no specific video is found."
+		},
+		{
+			"type": "checkbox",
+			"id": "floating_video_hide_on_mobile",
+            "label": "Hide floating video on mobile",
+            "default": true
+        },
+        {
+            "type": "header",
+            "content": "t:sections.product_page.settings.header__3.content"
+        },
+        {
+            "type": "paragraph",
+            "content": "t:sections.product_page.settings.paragraph__2.content"
+        }
+    ],
+    "blocks": [
+        {
+            "type": "collections",
+            "name": "t:sections.product_page.blocks.collections.name",
+            "limit": 1,
+            "settings": []
+        },
+        {
+            "type": "title",
+            "name": "t:sections.product_page.blocks.title.name",
+            "limit": 1,
+            "settings": []
+        },
+        {
+            "type": "reviews",
+            "name": "t:sections.product_page.blocks.reviews.name",
+            "limit": 1,
+            "settings": [
+                {
+                    "type": "paragraph",
+                    "content": "t:sections.product_page.blocks.reviews.settings.paragraph__1.content"
+                }
+            ]
+        },
+        {
+            "type": "details",
+            "name": "t:sections.product_page.blocks.details.name",
+            "limit": 1,
+            "settings": [
+                {
+                    "type": "paragraph",
+                    "content": "t:sections.product_page.blocks.details.settings.paragraph__1.content"
+                }
+            ]
+        },
+        {
+            "type": "price",
+            "name": "t:sections.product_page.blocks.price.name",
+            "limit": 1,
+            "settings": [
+                {
+                    "type": "paragraph",
+                    "content": "t:sections.product_page.blocks.price.settings.paragraph__1.content"
+                }
+            ]
+        },
+        {
+            "type": "icon_with_text",
+            "name": "t:sections.product_page.blocks.icon_with_text.name",
+            "settings": [
+                {
+                    "type": "select",
+                    "id": "style",
+                    "label": "t:sections.product_page.blocks.icon_with_text.settings.style.label",
+                    "default": "inline",
+                    "options": [
+                        {
+                            "value": "inline",
+                            "label": "t:sections.product_page.blocks.icon_with_text.settings.style.option__1.label"
+                        },
+                        {
+                            "value": "tile",
+                            "label": "t:sections.product_page.blocks.icon_with_text.settings.style.option__2.label"
+                        }
+                    ]
+                },
+                {
+                    "type": "header",
+                    "content": "t:sections.product_page.blocks.icon_with_text.settings.header__1.content"
+                },
+                {
+                    "type": "text",
+                    "id": "icon_svg_1",
+                    "default": "theme-127",
+                    "label": "t:sections.product_page.blocks.icon_with_text.settings.icon_svg_1.label"
+                },
+                {
+                    "type": "image_picker",
+                    "id": "icon_image_1",
+                    "label": "t:sections.product_page.blocks.icon_with_text.settings.icon_image_1.label"
+                },
+                {
+                    "type": "richtext",
+                    "id": "text_1",
+                    "default": "<p>Warrenty. No code needed, just head for checkout!</p>",
+                    "label": "t:sections.product_page.blocks.icon_with_text.settings.text_1.label"
+                },
+                {
+                    "type": "header",
+                    "content": "t:sections.product_page.blocks.icon_with_text.settings.header__2.content"
+                },
+                {
+                    "type": "text",
+                    "id": "icon_svg_2",
+                    "default": "theme-142",
+                    "label": "t:sections.product_page.blocks.icon_with_text.settings.icon_svg_2.label"
+                },
+                {
+                    "type": "image_picker",
+                    "id": "icon_image_2",
+                    "label": "t:sections.product_page.blocks.icon_with_text.settings.icon_image_2.label"
+                },
+                {
+                    "type": "richtext",
+                    "id": "text_2",
+                    "default": "<p>Free shipping. All orders are dispatched the next business day!</p>",
+                    "label": "t:sections.product_page.blocks.icon_with_text.settings.text_2.label"
+                },
+                {
+                    "type": "header",
+                    "content": "t:sections.product_page.blocks.icon_with_text.settings.header__3.content"
+                },
+                {
+                    "type": "text",
+                    "id": "icon_svg_3",
+                    "default": "theme-144",
+                    "label": "t:sections.product_page.blocks.icon_with_text.settings.icon_svg_3.label"
+                },
+                {
+                    "type": "image_picker",
+                    "id": "icon_image_3",
+                    "label": "t:sections.product_page.blocks.icon_with_text.settings.icon_image_3.label"
+                },
+                {
+                    "type": "richtext",
+                    "id": "text_3",
+                    "default": "<p>We will beat any price. We back all products with a 14 days guarantee.</p>",
+                    "label": "t:sections.product_page.blocks.icon_with_text.settings.text_3.label"
+                },
+                {
+                    "type": "header",
+                    "content": "t:sections.product_page.blocks.icon_with_text.settings.header__4.content"
+                },
+                {
+                    "type": "text",
+                    "id": "icon_svg_4",
+                    "label": "t:sections.product_page.blocks.icon_with_text.settings.icon_svg_4.label"
+                },
+                {
+                    "type": "image_picker",
+                    "id": "icon_image_4",
+                    "label": "t:sections.product_page.blocks.icon_with_text.settings.icon_image_4.label"
+                },
+                {
+                    "type": "richtext",
+                    "id": "text_4",
+                    "label": "t:sections.product_page.blocks.icon_with_text.settings.text_4.label"
+                },
+                {
+                    "type": "header",
+                    "content": "t:sections.product_page.blocks.icon_with_text.settings.header__5.content"
+                },
+                {
+                    "type": "text",
+                    "id": "icon_svg_5",
+                    "label": "t:sections.product_page.blocks.icon_with_text.settings.icon_svg_5.label"
+                },
+                {
+                    "type": "image_picker",
+                    "id": "icon_image_5",
+                    "label": "t:sections.product_page.blocks.icon_with_text.settings.icon_image_5.label"
+                },
+                {
+                    "type": "richtext",
+                    "id": "text_5",
+                    "label": "t:sections.product_page.blocks.icon_with_text.settings.text_5.label"
+                },
+                {
+                    "type": "header",
+                    "content": "t:sections.product_page.blocks.icon_with_text.settings.header__6.content"
+                },
+                {
+                    "type": "text",
+                    "id": "icon_svg_6",
+                    "label": "t:sections.product_page.blocks.icon_with_text.settings.icon_svg_6.label"
+                },
+                {
+                    "type": "image_picker",
+                    "id": "icon_image_6",
+                    "label": "t:sections.product_page.blocks.icon_with_text.settings.icon_image_6.label"
+                },
+                {
+                    "type": "richtext",
+                    "id": "text_6",
+                    "label": "t:sections.product_page.blocks.icon_with_text.settings.text_6.label"
+                }
+            ]
+        },
+        {
+            "type": "description",
+            "name": "t:sections.product_page.blocks.description.name",
+            "settings": [
+                {
+                    "type": "text",
+                    "id": "title",
+                    "label": "t:sections.product_page.blocks.description.settings.title.label"
+                },
+                {
+                    "type": "richtext",
+                    "id": "content",
+                    "label": "t:sections.product_page.blocks.description.settings.content.label",
+                    "info": "t:sections.product_page.blocks.description.settings.content.info"
+                }
+            ]
+        },
+        {
+            "type": "text",
+            "name": "t:sections.product_page.blocks.text.name",
+            "settings": [
+                {
+                    "type": "richtext",
+                    "id": "content",
+                    "label": "t:sections.product_page.blocks.text.settings.content.label"
+                }
+            ]
+        },
+        {
+            "type": "countdown",
+            "name": "t:sections.product_page.blocks.countdown.name",
+            "limit": 1,
+            "settings": []
+        },
+        {
+            "type": "stock_countdown",
+            "name": "t:sections.product_page.blocks.stock_countdown.name",
+            "limit": 1,
+            "settings": [
+                {
+                    "type": "paragraph",
+                    "content": "t:sections.product_page.blocks.stock_countdown.settings.paragraph__1.content"
+                }
+            ]
+        },
+        {
+            "type": "delivery_countdown",
+            "name": "t:sections.product_page.blocks.delivery_countdown.name",
+            "limit": 1,
+            "settings": [
+                {
+                    "type": "paragraph",
+                    "content": "t:sections.product_page.blocks.delivery_countdown.settings.paragraph__1.content"
+                }
+            ]
+        },
+        {
+            "type": "visitors",
+            "name": "t:sections.product_page.blocks.visitors.name",
+            "limit": 1,
+            "settings": [
+                {
+                    "type": "paragraph",
+                    "content": "t:sections.product_page.blocks.visitors.settings.paragraph__1.content"
+                }
+            ]
+        },
+        {
+            "type": "border",
+            "name": "t:sections.product_page.blocks.border.name",
+            "settings": []
+        },
+        {
+            "type": "options",
+            "name": "t:sections.product_page.blocks.options.name",
+            "limit": 1,
+            "settings": [
+                {
+                    "type": "paragraph",
+                    "content": "t:sections.product_page.blocks.options.settings.paragraph__1.content"
+                }
+            ]
+        },
+        {
+            "type": "popups",
+            "name": "t:sections.product_page.blocks.popups.name",
+            "limit": 1,
+            "settings": [
+                {
+                    "type": "paragraph",
+                    "content": "t:sections.product_page.blocks.popups.settings.paragraph__1.content"
+                }
+            ]
+        },
+        {
+            "type": "notes",
+            "name": "t:sections.product_page.blocks.notes.name",
+            "limit": 1,
+            "settings": []
+        },
+        {
+            "type": "buttons_quantity",
+            "name": "t:sections.product_page.blocks.buttons_quantity.name",
+            "limit": 1,
+            "settings": [
+                {
+                    "type": "paragraph",
+                    "content": "t:sections.product_page.blocks.buttons_quantity.settings.paragraph__1.content"
+                }
+            ]
+        },
+        {
+            "type": "free_shipping",
+            "name": "t:sections.product_page.blocks.free_shipping.name",
+            "limit": 1,
+            "settings": [
+                {
+                    "type": "paragraph",
+                    "content": "t:sections.product_page.blocks.free_shipping.settings.paragraph__1.content"
+                }
+            ]
+        },
+        {
+            "type": "pickup_availability",
+            "name": "t:sections.product_page.blocks.pickup_availability.name",
+            "limit": 1,
+            "settings": [
+                {
+                    "type": "paragraph",
+                    "content": "t:sections.product_page.blocks.pickup_availability.settings.paragraph__1.content"
+                }
+            ]
+        },
+        {
+            "type": "complementary_products",
+            "name": "t:sections.product_page.blocks.complementary_products.name",
+            "limit": 1,
+            "settings": [
+                {
+                    "type": "paragraph",
+                    "content": "t:sections.product_page.blocks.complementary_products.settings.paragraph__1.content"
+                }
+            ]
+        },
+        {
+            "type": "payments",
+            "name": "t:sections.product_page.blocks.payments.name",
+            "limit": 1,
+            "settings": []
+        },
+        {
+            "type": "social_share_buttons",
+            "name": "t:sections.product_page.blocks.social_share_buttons.name",
+            "limit": 1,
+            "settings": [
+                {
+                    "type": "paragraph",
+                    "content": "t:sections.product_page.blocks.social_share_buttons.settings.paragraph__1.content"
+                }
+            ]
+        },
+        {
+            "type": "klarna_app",
+            "name": "t:sections.product_page.blocks.klarna_app.name",
+            "limit": 1,
+            "settings": [
+                {
+                    "type": "paragraph",
+                    "content": "t:sections.product_page.blocks.klarna_app.settings.paragraph__1.content"
+                },
+                {
+                    "type": "text",
+                    "id": "class_name",
+                    "label": "t:sections.product_page.blocks.klarna_app.settings.class_name.label",
+                    "default": "klarna-message-info"
+                }
+            ]
+        },
+        {
+            "type": "tab_custom",
+            "name": "t:sections.product_page.blocks.tab_custom.name",
+            "settings": [
+                {
+                    "type": "text",
+                    "id": "title",
+                    "label": "t:sections.product_page.blocks.tab_custom.settings.title.label",
+                    "default": "Custom tab"
+                },
+                {
+                    "type": "richtext",
+                    "id": "content",
+                    "label": "t:sections.product_page.blocks.tab_custom.settings.content.label",
+                    "default": "<p>Text content of Tab goes here!</p><p>You can make&nbsp;text <strong>bold</strong>, <em>italic</em> or add <a href=\"/blogs/news\" title=\"News\">link</a> using rich text editor.</p><p></p>"
+                },
+                {
+                    "type": "paragraph",
+                    "content": "t:sections.product_page.blocks.tab_custom.settings.paragraph__1.content"
+                },
+                {
+                    "type": "page",
+                    "id": "page_content",
+                    "label": "t:sections.product_page.blocks.tab_custom.settings.page_content.label",
+                    "info": "t:sections.product_page.blocks.tab_custom.settings.page_content.info"
+                }
+            ]
+        },
+        {
+            "type": "tab_custom_liquid",
+            "name": "t:sections.product_page.blocks.tab_custom_liquid.name",
+            "settings": [
+                {
+                    "type": "text",
+                    "id": "title",
+                    "label": "t:sections.product_page.blocks.tab_custom_liquid.settings.title.label",
+                    "default": "Custom Liquid"
+                },
+                {
+                    "type": "liquid",
+                    "id": "custom_liquid",
+                    "label": "t:sections.product_page.blocks.tab_custom_liquid.settings.custom_liquid.label"
+                }
+            ]
+        },
+        {
+            "type": "tab_klarna_app",
+            "name": "t:sections.product_page.blocks.tab_klarna_app.name",
+            "limit": 1,
+            "settings": [
+                {
+                    "type": "paragraph",
+                    "content": "t:sections.product_page.blocks.tab_klarna_app.settings.paragraph__1.content"
+                },
+                {
+                    "type": "text",
+                    "id": "class_name",
+                    "label": "t:sections.product_page.blocks.tab_klarna_app.settings.class_name.label",
+                    "default": "klarna-message-tab"
+                }
+            ]
+        },
+        {
+            "type": "sidebar_custom_html",
+            "name": "t:sections.product_page.blocks.sidebar_custom_html.name",
+            "settings": [
+                {
+                    "type": "page",
+                    "id": "page_content",
+                    "label": "t:sections.product_page.blocks.sidebar_custom_html.settings.page_content.label",
+                    "info": "t:sections.product_page.blocks.sidebar_custom_html.settings.page_content.info"
+                }
+            ]
+        },
+        {
+            "type": "sidebar_products",
+            "name": "t:sections.product_page.blocks.sidebar_products.name",
+            "settings": [
+                {
+                    "type": "text",
+                    "id": "title",
+                    "label": "t:sections.product_page.blocks.sidebar_products.settings.title.label",
+                    "default": "FEATURED PRODUCTS"
+                },
+                {
+                    "type": "collection",
+                    "id": "collection",
+                    "label": "t:sections.product_page.blocks.sidebar_products.settings.collection.label"
+                },
+                {
+                    "type": "range",
+                    "id": "max_count",
+                    "min": 0,
+                    "max": 10,
+                    "step": 1,
+                    "unit": "pds",
+                    "label": "t:sections.product_page.blocks.sidebar_products.settings.max_count.label",
+                    "info": "t:sections.product_page.blocks.sidebar_products.settings.max_count.info",
+                    "default": 3
+                },
+                {
+                    "type": "select",
+                    "id": "product_type",
+                    "label": "t:sections.product_page.blocks.sidebar_products.settings.product_type.label",
+                    "default": "short",
+                    "options": [
+                        {
+                            "value": "short",
+                            "label": "t:sections.product_page.blocks.sidebar_products.settings.product_type.option__1.label"
+                        },
+                        {
+                            "value": "full",
+                            "label": "t:sections.product_page.blocks.sidebar_products.settings.product_type.option__2.label"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "type": "custom_liquid",
+            "name": "t:sections.product_page.blocks.custom_liquid.name",
+            "settings": [
+                {
+                    "type": "liquid",
+                    "id": "custom_liquid",
+                    "label": "t:sections.product_page.blocks.custom_liquid.settings.custom_liquid.label",
+                    "info": "t:sections.product_page.blocks.custom_liquid.settings.custom_liquid.info"
+                }
+            ]
+        },
+        {
+            "type": "@app"
+        }
+    ],
+    "default": {
+        "blocks": [
+            {
+                "type": "collections"
+            },
+            {
+                "type": "title"
+            },
+            {
+                "type": "reviews"
+            },
+            {
+                "type": "details"
+            },
+            {
+                "type": "price"
+            },
+            {
+                "type": "icon_with_text"
+            },
+            {
+                "type": "description"
+            },
+            {
+                "type": "countdown"
+            },
+            {
+                "type": "stock_countdown"
+            },
+            {
+                "type": "delivery_countdown"
+            },
+            {
+                "type": "visitors"
+            },
+            {
+                "type": "border"
+            },
+            {
+                "type": "options"
+            },
+            {
+                "type": "popups"
+            },
+            {
+                "type": "notes"
+            },
+            {
+                "type": "buttons_quantity"
+            },
+            {
+                "type": "free_shipping"
+            },
+            {
+                "type": "pickup_availability"
+            },
+            {
+                "type": "complementary_products"
+            },
+            {
+                "type": "payments"
+            },
+            {
+                "type": "social_share_buttons"
+            }
+        ]
+    }
+}
+{% endschema %}
+
+

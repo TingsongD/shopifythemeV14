@@ -1,0 +1,166 @@
+<div class="popup-cart popup-cart--{{ settings.cart_popup_type }} pt-25 {% if settings.cart_popup_type == 'center' %}px-20 px-lg-30 pb-25{% else %}px-20{% endif %} js-popup-cart-ajax" data-popup-content>
+    <div class="popup-cart__head d-flex align-items-center{% if settings.cart_popup_type == 'center' %} position-relative justify-content-center text-center{% endif %}">
+        <h5 class="m-0">{{ 'general.popups.cart.title' | t }} <span>{{ 'general.popups.cart.count' | t: count: cart.item_count }}</span></h5>
+        <i class="popup-cart__close ml-auto cursor-pointer{% if settings.cart_popup_type == 'center' %} position-absolute right-0{% endif %}" data-js-popup-close>{%- render 'icon-theme-164' -%}</i>
+    </div>
+    {%- if cart.items.size > 0 -%}
+        <div class="popup-cart__content">
+            <form action="{{ routes.cart_url }}" method="post" novalidate>
+            {% render 'reward-banner' %}
+                <div class="popup-cart__items mt-15">
+                    {%- for item in cart.items -%}
+                        {% render 'product-cart', item: item, item_index: forloop.index, disable_lazyload: disable_lazyload %}
+                    {%- endfor -%}
+                </div>
+                <div class="popup-cart__footer position-sticky bottom-0 border-top pt-20">
+
+                    {%- if settings.cart_popup_type == 'center' -%}
+                        <div class="row">
+                            <div class="col-12 col-md-6">
+                    {%- endif -%}
+
+                            {%- if cart.cart_level_discount_applications.size > 0 -%}
+                                <div class="popup-cart__discounts">
+                                    {%- for discount_application in cart.cart_level_discount_applications -%}
+                                        <div class="popup-cart__discount h6 d-flex align-items-center mb-5">
+                                            <span class="d-flex align-items-center mr-10">
+                                                <i class="mt-2 mr-6">{%- render 'icon-theme-137' -%}</i> <span>{{ discount_application.title | upcase }}</span>
+                                            </span>
+                                            <span class="h5 d-flex align-items-center mb-0 ml-auto">
+                                                <span class="mb-2">-</span><span>{% render 'product-get-price', price: discount_application.total_allocated_amount %}</span>
+                                            </span>
+                                        </div>
+                                    {%- endfor -%}
+                                </div>
+                            {%- endif -%}
+
+                            {%- if settings.cart_popup_show_notes -%}
+                                <div class="border-bottom border--dashed mb-15">
+                                    <p class="field mb-15">
+                                        <label for="MiniCartSpecialInstructions" class="mb-0">{{ 'cart.general.notes_title' | t }}</label>
+                                        <span class="d-block mt-8 mb-0">{{ 'cart.general.notes_paragraph' | t }}</span>
+                                    </p>
+                                    <textarea name="note" id="MiniCartSpecialInstructions" rows="4">{{ cart.note }}</textarea>
+                                </div>
+                            {%- endif -%}
+
+                            {%- if cart.total_discounts > 0 and cart.cart_level_discount_applications.size > 1 -%}
+                                <div class="popup-cart__discounts">
+                                    <div class="popup-cart__discount h6 d-flex align-items-center mb-5">
+                                        <span class="d-flex align-items-center mr-10">
+                                            {{ 'cart.general.savings' | t }}
+                                        </span>
+                                        <span class="h5 d-flex align-items-center mb-0 ml-auto">
+                                            {% render 'product-get-price', price: cart.total_discounts %}
+                                        </span>
+                                    </div>
+                                </div>
+                            {%- endif -%}
+
+                            <div class="mb-15">
+                                {% assign total_msrp = 0 %}
+                                {% for item in cart.items %}
+                                    {% assign item_compare_price = item.variant.compare_at_price | default: item.original_price %}
+                                    {% if item.variant.compare_at_price > item.original_price %}
+                                        {% assign item_compare_price = item.variant.compare_at_price %}
+                                    {% endif %}
+                                    {% assign line_msrp = item_compare_price | times: item.quantity %}
+                                    {% assign total_msrp = total_msrp | plus: line_msrp %}
+                                {% endfor %}
+                                {% assign total_savings = total_msrp | minus: cart.total_price %}
+
+                                <div class="popup-cart__subtotal h3 d-flex align-items-center mb-0">
+                                    <p class="m-0">{{ 'general.popups.cart.subtotal' | t }}: 
+                                    {%- if total_savings > 0 -%}
+                                        {% render 'product-get-price', price: cart.total_price, compare_at_price: total_msrp %}
+                                    {%- else -%}
+                                        {% render 'product-get-price', price: cart.total_price %}
+                                    {%- endif -%}
+                                    </p>
+                                </div>
+
+                                {% if total_savings > 0 %}
+                                    <div class="popup-cart__savings mt-5">
+                                        <p class="m-0 popup-cart__savings-text" style="color: #22c55e; font-weight: bold;">You have saved {{ total_savings | money }}</p>
+                                    </div>
+                                {% endif %}
+                                {%- if settings.cart_popup_show_taxes_and_shipping_information -%}
+                                    {% capture taxes_and_shipping_information %}{{ 'general.popups.cart.taxes_and_shipping_information' | t }}{% endcapture %}
+                                    {%- if taxes_and_shipping_information != blank -%}
+                                        <div class="popup-cart__taxes_and_shipping mt-5">
+                                            <p>{{ taxes_and_shipping_information }}</p>
+                                        </div>
+                                    {%- endif -%}
+                                {%- endif -%}
+                            </div>
+                            {%- if settings.cart_show_free_shipping -%}
+                                <div class="popup-cart__free-shipping my-15">
+                                    {% render 'free-shipping' %}
+                                </div>
+                            {%- endif -%}
+
+                    {%- if settings.cart_popup_type == 'center' -%}
+                        </div>
+                        <div class="col-12 col-md-6">
+                    {%- endif -%}
+
+                            <div class="popup-cart__buttons d-flex flex-column {% if settings.cart_popup_type == 'side' %}mt-15{% endif %}">
+                                <div>
+                                    {%- if settings.cart_popup_show_checkout_confirmation_checkbox -%}
+                                        <input id="Popup-Cart-checkbox" type="checkbox" class="d-none input-checkbox-disable-trigger" name="dynamic_checkout">
+                                        <label for="Popup-Cart-checkbox" class="popup-cart__checkbox input-checkbox input-checkbox--input-out position-relative d-inline-flex align-items-start mb-10 cursor-pointer">
+                                            <span class="position-relative d-block mt-0 mr-10 border"><i class="d-none">{% render 'icon-theme-146' %}</i></span>
+                                            <span>{{ 'general.popups.cart.checkbox_html' | t }}</span>
+                                        </label>
+                                    {%- endif -%}
+                                    <button type="submit" class="btn btn--full btn--secondary btn--animated input-checkbox-disable-body" name="checkout">
+                                        <div id="container-stars">
+                                            <div id="stars"></div>
+                                        </div>
+                                        <div id="glow">
+                                            <div class="circle"></div>
+                                            <div class="circle"></div>
+                                        </div>
+                                        <strong>{{ 'general.popups.cart.button_to_checkout' | t }}</strong>
+                                    </button>
+
+                                </div>
+                                <div class="d-flex flex-column flex-lg-row align-items-center mt-20 w-100">
+                                    <a href="#" class="{% if settings.cart_popup_type == 'side' %}mr-lg-auto{% else %}mr-md-auto{% endif %}" data-js-popup-close="">
+                                        <div class="btn-link">CONTINUE SHOPPING</div>
+                                    </a>
+                                    <a href="{{ routes.cart_url }}" class="mt-15 mt-lg-0 {% if settings.cart_popup_type == 'side' %}ml-lg-auto{% else %}ml-md-auto{% endif %}">
+                                        <div class="btn-link">{{ 'general.popups.cart.button_to_cart' | t }}</div>
+                                    </a>
+                                </div>
+                                
+                                <!-- Payment Icons - Trust Signals -->
+                                <div class="popup-cart__payment-icons text-center" style="margin-top: 8px; padding-top: 8px; border-top: 1px solid #eee; margin-bottom: 0; padding-bottom: 0;">
+                                    <p style="font-size: 11px; color: #888; margin: 0 0 2px 0;">🔒 Secure Checkout — We Accept</p>
+                                    <div class="d-flex justify-content-center align-items-center" style="gap: 4px; margin-bottom: 0;">
+                                        <span class="payment-icon" style="width: 36px; height: 22px;">{%- render 'icon-payment-visa' -%}</span>
+                                        <span class="payment-icon" style="width: 36px; height: 22px;">{%- render 'icon-payment-master' -%}</span>
+                                        <span class="payment-icon" style="width: 36px; height: 22px;">{%- render 'icon-payment-american-express' -%}</span>
+                                        <span class="payment-icon" style="width: 36px; height: 22px;">{%- render 'icon-payment-paypal' -%}</span>
+                                        <span class="payment-icon" style="width: 36px; height: 22px;">{%- render 'icon-payment-apple-pay' -%}</span>
+                                        <span class="payment-icon" style="width: 36px; height: 22px;">{%- render 'icon-payment-google-pay' -%}</span>
+                                    </div>
+                                    <div class="d-flex justify-content-center align-items-center" style="gap: 6px; margin-top: 6px;">
+                                        <img src="https://cdn.shopify.com/s/files/1/0792/3613/7216/files/Trustpilot_Reviews_MsDressly.png?v=1769828791" alt="Trustpilot Reviews" width="120" height="32" style="height: 32px; width: auto;">
+                                        <img src="https://cdn.shopify.com/s/files/1/0792/3613/7216/files/Google_Reviews_MsDressly.png?v=1769828792" alt="Google Reviews" width="120" height="32" style="height: 32px; width: auto;">
+                                    </div>
+                                </div>
+                            </div>
+
+                    {%- if settings.cart_popup_type == 'center' -%}
+                            </div>
+                        </div>
+                    {%- endif -%}
+
+                </div>
+            </form>
+        </div>
+    {%- else -%}
+        <div class="popup-cart__empty mt-20">{{ 'general.popups.cart.empty' | t }}</div>
+    {%- endif -%}
+</div>
