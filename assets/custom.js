@@ -88,8 +88,8 @@ document.addEventListener('DOMContentLoaded', function() {
       var reviewsHeader = document.querySelector('.kl_reviews__carousel__header');
       if (reviewsHeader) {
         reviewsHeader.scrollIntoView({ behavior: 'smooth' });
-      } else {
-         console.warn('.kl_reviews__carousel__header element not found.');
+      } else if (window.ThemeDebug && ThemeDebug.enabled) {
+         ThemeDebug.warn('.kl_reviews__carousel__header element not found.');
       }
     }
   });

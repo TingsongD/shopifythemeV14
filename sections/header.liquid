@@ -1012,11 +1012,14 @@
         {%- for block in selected_blocks_tape -%}
             <div class="d-none js-header-tape" data-js-show-once="{{ header_tape_show_once }}" data-js-delay="{{ block.settings.delay }}" data-js-cookies-life="{{ header_tape_cookies_life }}">
                 <div class="header__tape header__tape--style-{{ block.settings.style }} d-flex py-5">
-                    <div class="container d-flex flex-center">
-                        <div class="position-relative d-flex align-items-center px-35">
-                            <p class="m-0 px-30 px-lg-0 text-center">{{ block.settings.content }}</p>
-                            <i class="header__tape-close position-absolute right-0 cursor-pointer" data-js-action="close">{% render 'icon-theme-190' %}</i>
+                    <div class="msd-announcement-ticker w-100" role="region" aria-label="Store announcements">
+                        <div class="msd-announcement-ticker__viewport" aria-live="polite">
+                            <div class="msd-announcement-ticker__track">
+                                <div class="msd-announcement-ticker__group">{{ block.settings.content }}</div>
+                                <div class="msd-announcement-ticker__group" aria-hidden="true">{{ block.settings.content }}</div>
+                            </div>
                         </div>
+                        <i class="header__tape-close msd-announcement-ticker__close cursor-pointer" data-js-action="close">{% render 'icon-theme-190' %}</i>
                     </div>
                 </div>
             </div>
@@ -2816,7 +2819,7 @@
                     "type": "html",
                     "id": "content",
                     "label": "t:sections.header.blocks.tape.settings.content.label",
-                    "default": "FINAL CLEARANCE: Take 20% Off ‘Sale Must-Haves'"
+                    "default": "<span class=\"msd-ticker__item\">FREE SHIPPING ON ORDERS OVER $80</span><span class=\"msd-ticker__item\">NEW ARRIVALS EVERY FRIDAY</span><span class=\"msd-ticker__item\">45-DAY FREE RETURNS</span><span class=\"msd-ticker__item\">SUBSCRIBE & SAVE 30%</span><span class=\"msd-ticker__item\">3.2 MILLION+ HAPPY CUSTOMERS</span>"
                 }
             ]
         },

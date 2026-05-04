@@ -74,8 +74,8 @@
       font-family:Helvetica,Arial,sans-serif!important;
       font-size:16px!important;
       font-weight:400!important;
-      letter-spacing:-0.01em!important;
-      color:#f5f5f7!important;
+      letter-spacing:0!important;
+      color:#6f6a64!important;
       padding:0 12px!important;
       height:44px!important;
       display:flex!important;
@@ -96,18 +96,18 @@
     }
 
     .menu--custom .menu__link:hover{
-      color:#ffffff!important;
+      color:#0a0a0a!important;
       opacity:1!important;
     }
 
     .menu--custom .menu__link span{
       font-size:16px!important;
       font-weight:400!important;
-      letter-spacing:-0.01em!important;
+      letter-spacing:0!important;
       color:inherit!important;
     }
 
-    /* Dropdown container - Apple glassmorphism */
+    /* Dropdown container */
     .menu__item--has-dropdown{
       position:relative!important;
       z-index:9999!important;
@@ -121,12 +121,12 @@
       left:50%!important;
       transform:translateX(-50%) translateY(-10px)!important;
       min-width:220px!important;
-      background:rgba(90,49,244,0.95)!important;
-      -webkit-backdrop-filter:saturate(180%) blur(20px)!important;
-      backdrop-filter:saturate(180%) blur(20px)!important;
-      border:1px solid rgba(255,255,255,0.2)!important;
+      background:#ffffff!important;
+      -webkit-backdrop-filter:none!important;
+      backdrop-filter:none!important;
+      border:1px solid rgba(10,10,10,0.16)!important;
       border-radius:12px!important;
-      box-shadow:0 10px 40px rgba(0,0,0,0.6)!important;
+      box-shadow:0 18px 44px rgba(10,10,10,0.18)!important;
       padding:12px 0!important;
       margin-top:0!important;
       z-index:10000!important;
@@ -155,13 +155,13 @@
       padding:0!important;
     }
 
-    /* Dropdown links - Apple interactive styling */
+    /* Dropdown links */
     .menu__dropdown a{
       font-family:Helvetica,Arial,sans-serif!important;
       font-size:15px!important;
       font-weight:400!important;
-      letter-spacing:-0.01em!important;
-      color:#f5f5f7!important;
+      letter-spacing:0!important;
+      color:#0a0a0a!important;
       background:transparent!important;
       display:block!important;
       visibility:visible!important;
@@ -178,12 +178,18 @@
     .menu__dropdown a[style],
     .menu__dropdown a[style] span{
       font-size:15px!important;
+      color:#0a0a0a!important;
+      opacity:1!important;
     }
 
     .menu__dropdown a:hover{
       color:#ffffff!important;
-      background:rgba(255,255,255,0.08)!important;
+      background:#0a0a0a!important;
       opacity:1!important;
+    }
+
+    .menu__dropdown a:hover span{
+      color:#ffffff!important;
     }
 
     .menu__dropdown a span{
@@ -194,13 +200,13 @@
       visibility:visible!important;
       opacity:1!important;
       text-indent:0!important;
-      letter-spacing:-0.01em!important;
+      letter-spacing:0!important;
     }
 
     /* Fallback for browsers without backdrop-filter support */
     @supports not (backdrop-filter:blur(20px)){
       header{background:#5a31f4!important}
-      .menu__dropdown{background:#5a31f4!important}
+      .menu__dropdown{background:#ffffff!important}
     }
 
     /* ========================================

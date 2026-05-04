@@ -1,4 +1,15 @@
 <script>
+    window.msdresslyRequireProductPageAssets = window.msdresslyRequireProductPageAssets || function() {
+        if (window.msdresslyProductPageAssetsRequested || !window.theme || !theme.AssetsLoader) return;
+
+        window.msdresslyProductPageAssetsRequested = true;
+
+        theme.AssetsLoader.onPageLoaded(function() {
+            theme.AssetsLoader.require('styles', 'plugin_slick');
+            theme.AssetsLoader.require('scripts', 'product_page');
+        });
+    };
+
     {%- comment -%}
       Core theme bundles are loaded once from layout/theme.liquid with defer.
       Do not request them through AssetsLoader here, or cart/product handlers can bind twice.
@@ -9,9 +20,7 @@
           when there is a single media item, which can throw "slick is not a function"
           if the script was skipped.
         {%- endcomment -%}
-        theme.AssetsLoader.require('styles', 'plugin_slick');
-        theme.AssetsLoader.require('scripts', 'plugin_slick');
-        theme.AssetsLoader.require('scripts', 'product_page');
+        window.msdresslyRequireProductPageAssets();
     {%- endif -%}
     {%- if settings.show_multiple_currencies -%}
         theme.AssetsLoader.require('scripts', 'currency_rates');

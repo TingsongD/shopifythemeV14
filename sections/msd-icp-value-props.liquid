@@ -1,15 +1,15 @@
 <section id="MSDValueProps-{{ section.id }}" class="msd-value-props msd-value-props--{{ section.settings.tone }}" style="--msd-vp-bg: {{ section.settings.bg_color }}; --msd-vp-ink: {{ section.settings.text_color }}; --msd-vp-muted: {{ section.settings.muted_color }}; --msd-vp-accent: {{ section.settings.accent_color }};">
   <style>
     .msd-value-props{background:var(--msd-vp-bg);color:var(--msd-vp-ink)}
-    .msd-value-props__inner{padding:44px 0}
-    .msd-value-props__layout{display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.25fr);gap:28px;align-items:start}
-    .msd-value-props__eyebrow{margin:0 0 10px;font-size:12px;line-height:1.3;text-transform:uppercase;letter-spacing:0;font-weight:700;color:var(--msd-vp-accent)}
-    .msd-value-props__heading{margin:0;font-size:clamp(28px,3.4vw,46px);line-height:1.08;letter-spacing:0;color:var(--msd-vp-ink)}
+    .msd-value-props__inner{padding:38px 0}
+    .msd-value-props__layout{display:grid;grid-template-columns:minmax(0,.72fr) minmax(0,1.45fr);gap:28px;align-items:start}
+    .msd-value-props__eyebrow{margin:0 0 10px;font-size:11px;line-height:1.3;text-transform:uppercase;letter-spacing:.14em;font-weight:700;color:var(--msd-vp-accent)}
+    .msd-value-props__heading{margin:0;font-family:'Bebas Neue',Helvetica,sans-serif;font-size:clamp(34px,4vw,56px);line-height:.94;letter-spacing:0;text-transform:uppercase;color:var(--msd-vp-ink)}
     .msd-value-props__body{margin-top:14px;color:var(--msd-vp-muted);font-size:16px;line-height:1.6}
-    .msd-value-props__grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
-    .msd-value-props__item{border:1px solid rgba(24,32,29,.12);border-radius:8px;background:rgba(255,255,255,.72);padding:18px;min-height:164px}
-    .msd-value-props__label{margin:0 0 8px;font-size:11px;line-height:1.3;text-transform:uppercase;letter-spacing:0;font-weight:700;color:var(--msd-vp-accent)}
-    .msd-value-props__title{margin:0 0 8px;font-size:18px;line-height:1.25;color:var(--msd-vp-ink)}
+    .msd-value-props__grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:1px}
+    .msd-value-props__item{border:1px solid rgba(10,10,10,.12);border-radius:0;background:rgba(255,255,255,.92);padding:18px;min-height:150px}
+    .msd-value-props__label{margin:0 0 8px;font-size:10px;line-height:1.3;text-transform:uppercase;letter-spacing:.14em;font-weight:700;color:var(--msd-vp-accent)}
+    .msd-value-props__title{margin:0 0 8px;font-family:'Bebas Neue',Helvetica,sans-serif;font-size:24px;line-height:1;text-transform:uppercase;color:var(--msd-vp-ink)}
     .msd-value-props__text{margin:0;color:var(--msd-vp-muted);font-size:14px;line-height:1.55}
     .msd-value-props__actions{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-top:22px}
     .msd-value-props__link{font-weight:700;color:var(--msd-vp-ink);text-decoration:underline;text-underline-offset:3px}
@@ -18,6 +18,9 @@
     .msd-value-props--compact .msd-value-props__item{min-height:136px}
     @media (max-width:990px){
       .msd-value-props__layout,.msd-value-props--compact .msd-value-props__layout{grid-template-columns:1fr}
+      .msd-value-props__grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+    }
+    @media (max-width:540px){
       .msd-value-props__grid{grid-template-columns:1fr}
     }
   </style>
@@ -105,13 +108,13 @@
       "type": "text",
       "id": "heading",
       "label": "Heading",
-      "default": "Polished style, easier decisions."
+      "default": "Premium style, clear value."
     },
     {
       "type": "richtext",
       "id": "body",
       "label": "Body",
-      "default": "<p>Made for women who want pieces that look considered, feel comfortable, and arrive with the practical reassurance needed to try a new store.</p>"
+      "default": "<p>Enjoy $80 free shipping progress, 45-day returns, secure checkout, and the $49/month refresh box designed to keep your wardrobe ready.</p>"
     },
     {
       "type": "text",
@@ -139,25 +142,25 @@
       "type": "color",
       "id": "bg_color",
       "label": "Background",
-      "default": "#fbfaf7"
+      "default": "#ffffff"
     },
     {
       "type": "color",
       "id": "text_color",
       "label": "Text",
-      "default": "#18201d"
+      "default": "#0a0a0a"
     },
     {
       "type": "color",
       "id": "muted_color",
       "label": "Muted text",
-      "default": "#5d6863"
+      "default": "#6f6a64"
     },
     {
       "type": "color",
       "id": "accent_color",
       "label": "Accent",
-      "default": "#8a3f33"
+      "default": "#5a31f4"
     }
   ],
   "blocks": [
@@ -178,25 +181,33 @@
         {
           "type": "point",
           "settings": {
-            "label": "Fit",
-            "title": "Fit confidence first",
-            "text": "Clear silhouettes, practical sizing, and easy styling notes help reduce second-guessing."
+            "label": "Shipping",
+            "title": "Free over $80",
+            "text": "Priority shipping is unlocked once your order crosses the $80 threshold."
           }
         },
         {
           "type": "point",
           "settings": {
-            "label": "Value",
-            "title": "Elevated without overpaying",
-            "text": "Boutique-inspired pieces with free priority shipping on orders over $80."
+            "label": "Returns",
+            "title": "45-day returns",
+            "text": "Eligible items are backed by a longer at-home try-on window."
           }
         },
         {
           "type": "point",
           "settings": {
-            "label": "Trust",
-            "title": "Low-risk first order",
-            "text": "Secure checkout and 45-day returns on eligible items make trying a new style simpler."
+            "label": "Quality",
+            "title": "Polished details",
+            "text": "Curated silhouettes, practical sizing notes, and secure checkout support confident orders."
+          }
+        },
+        {
+          "type": "point",
+          "settings": {
+            "label": "Subscribe",
+            "title": "Save on essentials",
+            "text": "Start the $49/month refresh box when you want monthly backup pairs handled."
           }
         }
       ]

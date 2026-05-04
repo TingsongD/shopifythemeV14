@@ -958,13 +958,13 @@ theme.AssetsLoader.onPageLoaded(function () {
             if (!customElements.get('search-form')) {
                 customElements.define('search-form', SearchForm);
             }
-        } catch (e) { console.warn('[CustomElements] search-form define error:', e); }
+        } catch (e) { if (window.ThemeDebug && ThemeDebug.enabled) ThemeDebug.warn('[CustomElements] search-form define error:', e); }
 
         try {
             if (!customElements.get('predictive-search')) {
                 customElements.define('predictive-search', PredictiveSearch);
             }
-        } catch (e) { console.warn('[CustomElements] predictive-search define error:', e); }
+        } catch (e) { if (window.ThemeDebug && ThemeDebug.enabled) ThemeDebug.warn('[CustomElements] predictive-search define error:', e); }
     });
     class ProductPrice {
         constructor() {

@@ -67,7 +67,14 @@
 	</script>
 {%- endif -%}
 <script>
-    theme.AssetsLoader.require('scripts', 'product_page');
+    if (window.msdresslyRequireProductPageAssets) {
+        window.msdresslyRequireProductPageAssets();
+    } else {
+        theme.AssetsLoader.onPageLoaded(function() {
+            theme.AssetsLoader.require('styles', 'plugin_slick');
+            theme.AssetsLoader.require('scripts', 'product_page');
+        });
+    }
 </script>
 {%- if section.settings.tabs_type == 'tabs' -%}
 	<script>

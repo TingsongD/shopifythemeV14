@@ -37,7 +37,7 @@
             "block_type": "сreate_new",
             "brand_name": "Abo Shella",
             "image": "shopify://shop_images/Abo_Shella.jpg",
-            "link": "https://msdressly.myshopify.com/collections/vendors?q=Calvin%20Klein"
+            "link": "/collections/vendors?q=Calvin%20Klein"
           }
         },
         "fe7bb1b4-331b-4c90-b5cc-aaa77fc13e65": {
@@ -46,7 +46,7 @@
             "block_type": "сreate_new",
             "brand_name": "Ahella",
             "image": "shopify://shop_images/Ahella.jpg",
-            "link": "https://msdressly.myshopify.com/collections/vendors?q=Chanel"
+            "link": "/collections/vendors?q=Chanel"
           }
         },
         "6122f2e4-a66c-43ee-8c45-3da0d0b5a239": {
@@ -55,7 +55,7 @@
             "block_type": "сreate_new",
             "brand_name": "Beautiful Shellawat",
             "image": "shopify://shop_images/Beautiful_Shellawat.jpg",
-            "link": "https://msdressly.myshopify.com/collections/vendors?q=Dior"
+            "link": "/collections/vendors?q=Dior"
           }
         },
         "cd8d4945-b350-4134-800c-0ec1d230ae98": {
@@ -64,7 +64,7 @@
             "block_type": "сreate_new",
             "brand_name": "Best Shellagua",
             "image": "shopify://shop_images/Best_Shellagua.jpg",
-            "link": "https://msdressly.myshopify.com/collections/vendors?q=Giorgio%20Armani"
+            "link": "/collections/vendors?q=Giorgio%20Armani"
           }
         },
         "c3f69bc3-17fe-4994-9a10-99941fc9b84e": {
@@ -73,7 +73,7 @@
             "block_type": "сreate_new",
             "brand_name": "Bi Shella",
             "image": "shopify://shop_images/Bi_Shella.jpg",
-            "link": "https://msdressly.myshopify.com/collections/vendors?q=Lacoste"
+            "link": "/collections/vendors?q=Lacoste"
           }
         },
         "a58f419f-68a3-4088-9a98-f69b68274581": {
@@ -82,7 +82,7 @@
             "block_type": "сreate_new",
             "brand_name": "BST SHLL",
             "image": "shopify://shop_images/BST_SHLL.jpg",
-            "link": "https://msdressly.myshopify.com/collections/vendors?q=Levi%27s"
+            "link": "/collections/vendors?q=Levi%27s"
           }
         },
         "2de7e34c-0814-4893-ba4b-cb80c5be2de3": {
@@ -91,7 +91,7 @@
             "block_type": "сreate_new",
             "brand_name": "Ca Shella",
             "image": "shopify://shop_images/Ca_Shella.jpg",
-            "link": "https://msdressly.myshopify.com/collections/vendors?q=Versace"
+            "link": "/collections/vendors?q=Versace"
           }
         },
         "9b580938-c191-4317-accb-db5a73369da1": {
@@ -100,7 +100,7 @@
             "block_type": "сreate_new",
             "brand_name": "De Shella",
             "image": "shopify://shop_images/De_Shella.jpg",
-            "link": "https://msdressly.myshopify.com/collections/vendors?q=Zara"
+            "link": "/collections/vendors?q=Zara"
           }
         },
         "dfe98e60-bcf0-4c6a-8345-7ed3f54671b3": {
@@ -109,7 +109,7 @@
             "block_type": "сreate_new",
             "brand_name": "Duet Shella",
             "image": "shopify://shop_images/Duet_Shella.jpg",
-            "link": "https://msdressly.myshopify.com/collections/vendors?q=Zara"
+            "link": "/collections/vendors?q=Zara"
           }
         },
         "541717ff-1e71-4939-8543-c7cfc10c6a86": {
@@ -118,7 +118,7 @@
             "block_type": "сreate_new",
             "brand_name": "Fashiohella",
             "image": "shopify://shop_images/Fashiohella.jpg",
-            "link": "https://msdressly.myshopify.com/collections/vendors?q=Prada"
+            "link": "/collections/vendors?q=Prada"
           }
         },
         "458b5ee9-da84-41d9-b3cb-cfd8490d6230": {
@@ -127,7 +127,7 @@
             "block_type": "сreate_new",
             "brand_name": "Fashion Shellakan",
             "image": "shopify://shop_images/Fashion_Shellakan.jpg",
-            "link": "https://msdressly.myshopify.com/collections/vendors?q=Prada"
+            "link": "/collections/vendors?q=Prada"
           }
         },
         "adf6bc32-1a1a-40b9-b0d2-ccf257dee515": {
@@ -136,7 +136,7 @@
             "block_type": "сreate_new",
             "brand_name": "Foo Shella",
             "image": "shopify://shop_images/Foo_Shella.jpg",
-            "link": "https://msdressly.myshopify.com/collections/vendors?q=Prada"
+            "link": "/collections/vendors?q=Prada"
           }
         },
         "2cb8ee07-0c4f-477a-9fa0-657cd5ebaf18": {
@@ -145,7 +145,7 @@
             "block_type": "сreate_new",
             "brand_name": "FSHN-SHLL",
             "image": "shopify://shop_images/FSHN-SHLL.jpg",
-            "link": "https://msdressly.myshopify.com/collections/vendors?q=Prada"
+            "link": "/collections/vendors?q=Prada"
           }
         },
         "e6e27d33-4ba6-4333-ba99-3b08375bbc0b": {
@@ -154,7 +154,7 @@
             "block_type": "сreate_new",
             "brand_name": "Future Shella Inc",
             "image": "shopify://shop_images/Future_Shella_Inc.jpg",
-            "link": "https://msdressly.myshopify.com/collections/vendors?q=Prada"
+            "link": "/collections/vendors?q=Prada"
           }
         },
         "f96aaa98-a93e-4cb9-97ec-6b37e8dd197c": {
@@ -163,7 +163,7 @@
             "block_type": "сhange_existing",
             "brand_name": "Zara",
             "image": "shopify://shop_images/Idea_Shella.jpg",
-            "link": "https://msdressly.myshopify.com/collections/vendors?q=Zara"
+            "link": "/collections/vendors?q=Zara"
           }
         }
       },

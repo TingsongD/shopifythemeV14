@@ -501,9 +501,31 @@
                     styles: {}
                 };
                 this.progress = {};
+                this.coreReady = false;
+                this.coreDeferredScripts = [];
+                this.pendingScriptDependencies = {};
+                this.scriptDependencyMap = {
+                    product_page: ['plugin_slick'],
+                    article_page: ['plugin_slick'],
+                    carousel_articles: ['plugin_slick'],
+                    carousel_brands: ['plugin_slick'],
+                    carousel_products: ['plugin_slick'],
+                    carousel_reviews: ['plugin_slick']
+                };
+                this.coreIndependentScripts = [
+                    'theme',
+                    'theme_pt2',
+                    'shopify_common',
+                    'currency_rates',
+                    'handlebars',
+                    'countries',
+                    'qrcode'
+                ];
 
                 document.addEventListener('DOMContentLoaded', () => {
                     this.DOMContentLoaded = true;
+                    this.coreReady = true;
+                    this.flushCoreReadyScripts();
                     window.dispatchEvent(new Event('theme.assetsLoader::theme.DOMContentLoaded'));
                     // Fire theme.assetsLoader::loaded:scripts:theme event immediately on DOMContentLoaded
                     // This ensures app scripts (like Klaviyo) that were modified to wait for this event fire early
@@ -576,8 +598,66 @@
                     return;
                 }
 
+                if(namespace === 'scripts') {
+                    if(this.shouldDeferScriptUntilCore(name)) {
+                        this.deferScriptUntilCoreReady(name);
+                        return;
+                    }
+
+                    if(this.waitForScriptDependencies(name)) {
+                        return;
+                    }
+                }
+
                 this.requirementList[namespace].push(name);
                 this.startQueue(namespace);
+            }
+
+            shouldDeferScriptUntilCore(name) {
+                return !this.coreReady && this.coreIndependentScripts.indexOf(name) === -1;
+            }
+
+            deferScriptUntilCoreReady(name) {
+                if(this.coreDeferredScripts.indexOf(name) === -1) {
+                    this.coreDeferredScripts.push(name);
+                }
+            }
+
+            flushCoreReadyScripts() {
+                const scripts = this.coreDeferredScripts.slice();
+                this.coreDeferredScripts = [];
+
+                scripts.forEach(name => {
+                    this.require('scripts', name);
+                });
+            }
+
+            waitForScriptDependencies(name) {
+                const dependencies = this.scriptDependencyMap[name];
+
+                if(!dependencies || !dependencies.length) {
+                    return false;
+                }
+
+                const missingDependencies = dependencies.filter(dependency => {
+                    return this.getDeepProperty(this.progress, ['scripts', dependency]) !== 'finished';
+                });
+
+                if(!missingDependencies.length) {
+                    return false;
+                }
+
+                if(this.pendingScriptDependencies[name]) {
+                    return true;
+                }
+
+                this.pendingScriptDependencies[name] = true;
+                this.loadManually(missingDependencies.map(dependency => ['scripts', dependency]), () => {
+                    delete this.pendingScriptDependencies[name];
+                    this.require('scripts', name);
+                });
+
+                return true;
             }
 
             loadManually(requires, callback) {

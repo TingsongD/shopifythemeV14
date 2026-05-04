@@ -12,14 +12,15 @@
 
 <div id="{{ widget_id }}" class="msd-selling-plan product-page-info__field mb-20{% if centered %} product-page-info__section--max-width mx-md-auto{% endif %}" data-msd-selling-plan-selector>
   <style>
-    #{{ widget_id }} .msd-selling-plan__title{font-weight:600;margin-bottom:.5rem}
-    #{{ widget_id }} .msd-selling-plan__group{border:1px solid rgba(0,0,0,.12);border-radius:6px;overflow:hidden}
-    #{{ widget_id }} .msd-selling-plan__option{display:flex;gap:.75rem;align-items:flex-start;margin:0;padding:.85rem 1rem;border-bottom:1px solid rgba(0,0,0,.08);cursor:pointer}
+    #{{ widget_id }} .msd-selling-plan__title{font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;margin-bottom:.5rem;color:#0a0a0a}
+    #{{ widget_id }} .msd-selling-plan__group{border:1px solid #0a0a0a;border-radius:0;overflow:hidden;background:#fff}
+    #{{ widget_id }} .msd-selling-plan__option{display:flex;gap:.75rem;align-items:flex-start;margin:0;padding:.9rem 1rem;border-bottom:1px solid rgba(10,10,10,.10);cursor:pointer}
     #{{ widget_id }} .msd-selling-plan__option:last-child{border-bottom:0}
     #{{ widget_id }} .msd-selling-plan__option input{margin-top:.2rem}
-    #{{ widget_id }} .msd-selling-plan__option-main{display:flex;justify-content:space-between;gap:1rem;width:100%;font-weight:600}
-    #{{ widget_id }} .msd-selling-plan__copy{font-size:.875rem;line-height:1.35;margin-top:.25rem;opacity:.78}
+    #{{ widget_id }} .msd-selling-plan__option-main{display:flex;justify-content:space-between;gap:1rem;width:100%;font-weight:700;color:#0a0a0a}
+    #{{ widget_id }} .msd-selling-plan__copy{font-size:.875rem;line-height:1.35;margin-top:.25rem;color:#6f6a64}
     #{{ widget_id }} .msd-selling-plan__policy{font-size:.82rem;margin-top:.65rem}
+    #{{ widget_id }} .msd-selling-plan__policy a{color:#0a0a0a;text-underline-offset:4px}
   </style>
 
   <p class="msd-selling-plan__title">Delivery option</p>

@@ -18,3 +18,4 @@ n8n-workflow-*.json
 
 # Scratch / local
 tmp/
+.playwright-mcp/

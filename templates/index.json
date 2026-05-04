@@ -10,72 +10,26 @@
 {
   "sections": {
     "88140d03-ae09-46a4-aea0-a933fa487cd4": {
-      "type": "home-builder",
-      "blocks": {
-        "8f430030-1385-4cab-a2e6-02e862bb4b7a": {
-          "type": "promobox",
-          "settings": {
-            "url": "shopify://collections/all",
-            "image": "shopify://shop_images/polka-dot-print-round-neck-casual-dress-43393189413184.png",
-            "image_size": 1400,
-            "image_mobile": "shopify://shop_images/polka-dot-print-round-neck-casual-dress-43393189413184_b5800336-8f89-40a5-84fd-b7519fa2faff.png",
-            "image_mobile_size": 900,
-            "image_position_x": 50,
-            "color_image_mask": "#ffffff",
-            "image_mask_opacity": 0.24,
-            "text_line_1": "Style that looks composed, not overdone",
-            "text_line_2": "Polished dresses, soft layers, and everyday essentials chosen for comfort, confidence, and real schedules.",
-            "text_line_3": "Free Priority Shipping over $80. 45-day returns.",
-            "style": "1",
-            "button_1": "Shop New Arrivals",
-            "button_1_url": "shopify://collections/new-in",
-            "color_button_type_1": "secondary",
-            "button_2": "Shop Customer Favorites",
-            "button_2_url": "shopify://collections/picked-for-you",
-            "color_button_type_2": "default",
-            "list_1": "",
-            "custom_html": "",
-            "video_external_url": "",
-            "video_mp4_url": "",
-            "video_autoplay": true,
-            "video_controls": false,
-            "type": "type-1",
-            "content_position": "center_left",
-            "content_align": "left",
-            "add_container": true,
-            "content_width": 58,
-            "text_width": 0,
-            "height": "auto",
-            "min_height": 0,
-            "size_of_column": "auto",
-            "visible": "desktop_mobile",
-            "parallax": "disable",
-            "animation_to": "none",
-            "animation_from": "none",
-            "animation_opacity": "none",
-            "animation_text": "none",
-            "color_text_1": "#18201d",
-            "color_text_2": "#18201d",
-            "color_text_3": "#5d6863",
-            "color_text_bg": "",
-            "color_curtain_bg": "",
-            "customization_class": ""
-          }
-        }
-      },
-      "block_order": [
-        "8f430030-1385-4cab-a2e6-02e862bb4b7a"
-      ],
+      "type": "msd-luxury-hero",
       "settings": {
-        "title": "",
-        "container": "fullwidth",
-        "size_of_columns": "1",
-        "size_of_columns_mobile": "1",
-        "margins_for_columns": "preset_3",
-        "align_of_columns": "top_center",
-        "disable_column_paddings": false,
-        "precedence": "",
-        "customization_class": ""
+        "image": "shopify://shop_images/polka-dot-print-round-neck-casual-dress-43393189413184.png",
+        "mobile_image": "shopify://shop_images/polka-dot-print-round-neck-casual-dress-43393189413184_b5800336-8f89-40a5-84fd-b7519fa2faff.png",
+        "eyebrow": "New Season Edit",
+        "heading": "Dressed to own it.",
+        "body": "Curated pieces for women who move with intention. New arrivals, every Friday.",
+        "primary_label": "Shop now",
+        "primary_link": "shopify://collections/new-in",
+        "secondary_label": "Shop customer favorites",
+        "secondary_link": "shopify://collections/picked-for-you",
+        "stat_1_value": "3.2 million+",
+        "stat_1_label": "Happy customers",
+        "stat_2_value": "Loved by",
+        "stat_2_label": "MsDressly customers",
+        "stat_3_value": "45-day",
+        "stat_3_label": "Returns",
+        "background_color": "#f7f5f2",
+        "text_color": "#0a0a0a",
+        "muted_color": "#6f6a64"
       }
     },
     "fresh_underwear_box": {
@@ -674,7 +628,7 @@
             "button_1": "Shop Dresses",
             "button_1_url": "shopify://collections/dresses",
             "color_button_type_1": "secondary",
-            "button_2": "Button #2 text",
+            "button_2": "",
             "button_2_url": "",
             "color_button_type_2": "default-transparent",
             "list_1": "",
@@ -724,7 +678,7 @@
             "button_1": "Shop Sweaters",
             "button_1_url": "shopify://collections/cardigans-sweaters",
             "color_button_type_1": "secondary",
-            "button_2": "Button #2 text",
+            "button_2": "",
             "button_2_url": "",
             "color_button_type_2": "default-transparent",
             "list_1": "",
@@ -1198,50 +1152,59 @@
     "home_value_props": {
       "type": "msd-icp-value-props",
       "blocks": {
-        "fit": {
+        "shipping": {
           "type": "point",
           "settings": {
-            "label": "Fit",
-            "title": "Fit confidence first",
-            "text": "Clear silhouettes, practical sizing, and styling notes help you order without second-guessing."
+            "label": "Shipping",
+            "title": "Free over $80",
+            "text": "Priority shipping is unlocked once your order crosses the $80 threshold."
           }
         },
-        "value": {
+        "returns": {
           "type": "point",
           "settings": {
-            "label": "Value",
-            "title": "Elevated without overpaying",
-            "text": "Boutique-inspired pieces with free Priority Shipping on orders over $80."
+            "label": "Returns",
+            "title": "45-day returns",
+            "text": "Eligible items are backed by a longer at-home try-on window."
           }
         },
-        "trust": {
+        "quality": {
           "type": "point",
           "settings": {
-            "label": "Trust",
-            "title": "Low-risk first order",
-            "text": "Secure checkout and 45-day returns on eligible items make trying a new style simpler."
+            "label": "Quality",
+            "title": "Polished details",
+            "text": "Curated silhouettes, practical sizing notes, and secure checkout support confident orders."
+          }
+        },
+        "subscription": {
+          "type": "point",
+          "settings": {
+            "label": "Subscribe",
+            "title": "Save on essentials",
+            "text": "Start the $49/month refresh box when you want monthly backup pairs handled."
           }
         }
       },
       "block_order": [
-        "fit",
-        "value",
-        "trust"
+        "shipping",
+        "returns",
+        "quality",
+        "subscription"
       ],
       "settings": {
         "container": "boxed",
-        "tone": "standard",
-        "eyebrow": "First-order confidence",
-        "heading": "Easy polish for women who know what works.",
-        "body": "<p>For the first order, the details matter: a flattering silhouette, a useful layer, clear value, and a return policy that lets you try the look at home.</p>",
+        "tone": "compact",
+        "eyebrow": "Built for confident checkout",
+        "heading": "Premium style, clear value.",
+        "body": "<p>Enjoy $80 free shipping progress, 45-day returns, secure checkout, and the $49/month refresh box designed to keep your wardrobe ready.</p>",
         "primary_label": "Shop customer favorites",
         "primary_link": "shopify://collections/picked-for-you",
         "secondary_label": "Explore new arrivals",
         "secondary_link": "shopify://collections/new-in",
-        "bg_color": "#fbfaf7",
-        "text_color": "#18201d",
-        "muted_color": "#5d6863",
-        "accent_color": "#8a3f33"
+        "bg_color": "#ffffff",
+        "text_color": "#0a0a0a",
+        "muted_color": "#6f6a64",
+        "accent_color": "#5a31f4"
       }
     }
   },

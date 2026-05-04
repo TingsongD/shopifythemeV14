@@ -17,7 +17,7 @@
 {%- assign free_shipping_range_procent = cart.total_price | divided_by: free_shipping_range_quotient | at_most: 100 -%}
 {%- assign free_shipping_spend = cart_free_shipping_value | minus: cart.total_price | at_least: 0 -%}
 <div class="free-shipping position-relative px-6 pt-3 pb-0{% if mobile_centered %} text-center{% endif %}{% if centered != true %} text-md-left{% endif %} js-free-shipping" data-value="{{ cart_free_shipping_value }}">
-    <div class="free-shipping__progress position-absolute top-0 left-0 h-100{% if free_shipping_spend == 0 %} is-complete{% endif %}" data-js-progress style="width: {{ free_shipping_range_procent }}%; background-color: {% if free_shipping_spend == 0 %}#5A31F4{% else %}#F8BD19{% endif %};"></div>
+    <div class="free-shipping__progress position-absolute top-0 left-0 h-100{% if free_shipping_spend == 0 %} is-complete{% endif %}" data-js-progress style="width: {{ free_shipping_range_procent }}%; background-color: {% if free_shipping_spend == 0 %}#5a31f4{% else %}#0a0a0a{% endif %};"></div>
     <div class="free-shipping__text position-relative{% if free_shipping_spend == 0 %} is-complete{% endif %}" style="{% if free_shipping_spend == 0 %}color: #ffffff;{% endif %}">
         {% if free_shipping_spend > 0 %}
             {% capture free_shipping_spend_html %}{{ free_shipping_spend | money }}{% endcapture %}
