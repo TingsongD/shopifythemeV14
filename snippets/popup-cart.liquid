@@ -1,7 +1,7 @@
 <div class="popup-cart popup-cart--{{ settings.cart_popup_type }} pt-25 {% if settings.cart_popup_type == 'center' %}px-20 px-lg-30 pb-25{% else %}px-20{% endif %} js-popup-cart-ajax" data-popup-content>
     <div class="popup-cart__head d-flex align-items-center{% if settings.cart_popup_type == 'center' %} position-relative justify-content-center text-center{% endif %}">
         <h5 class="m-0">{{ 'general.popups.cart.title' | t }} <span>{{ 'general.popups.cart.count' | t: count: cart.item_count }}</span></h5>
-        <i class="popup-cart__close ml-auto cursor-pointer{% if settings.cart_popup_type == 'center' %} position-absolute right-0{% endif %}" data-js-popup-close>{%- render 'icon-theme-164' -%}</i>
+        <button type="button" class="popup-cart__close ml-auto cursor-pointer{% if settings.cart_popup_type == 'center' %} position-absolute right-0{% endif %}" data-js-popup-close aria-label="{{ 'general.accessibility.close' | t | default: 'Close' }}">{%- render 'icon-theme-164' -%}</button>
     </div>
     {%- if cart.items.size > 0 -%}
         <div class="popup-cart__content">

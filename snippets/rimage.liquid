@@ -1,3 +1,4 @@
+{%- comment -%} img_url: retained for data-master {width} placeholder; theme.LazyImage.buildSrcset in assets/theme-pt2.js requires `_{width}x` in CDN URLs. {%- endcomment -%}
 {%- if disable_lazyload != blank -%}
     {%- assign disable_lazyload = disable_lazyload | default: false -%}
 {%- else -%}
@@ -77,7 +78,7 @@
         {% if scale_perspective %}data-scale-perspective="{{ scale_perspective }}"{% endif %}
         {% if is_parallax %}data-parallax-image{% endif %}
         {% if attr %}{{ attr }}{% endif %}
-        {% if image != blank %}alt="{{ image.alt | default: alt | escape }}"{% endif %}
+        alt="{{ image.alt | default: alt | default: '' | escape }}"
         >
     {%- endunless -%}
 </div>

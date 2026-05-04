@@ -267,11 +267,11 @@
           "settings": {
             "style": "inline",
             "icon_svg_1": "theme-127",
-            "text_1": "<p>Warrenty. No code needed, just head for checkout!</p>",
+            "text_1": "<p>Secure checkout. Customer support is available for order questions.</p>",
             "icon_svg_2": "theme-142",
-            "text_2": "<p>Free shipping. All orders are dispatched the next business day!</p>",
+            "text_2": "<p>Free shipping on orders over $80. Orders are processed in 1-3 business days.</p>",
             "icon_svg_3": "theme-144",
-            "text_3": "<p>We will beat any price. We back all products with a 14 days guarantee.</p>",
+            "text_3": "<p>45-day returns apply to eligible items under the store return policy.</p>",
             "icon_svg_4": "",
             "text_4": "",
             "icon_svg_5": "",
@@ -299,7 +299,6 @@
         },
         "72d08ef7-bfb9-4c2a-b18a-951575e7ce50": {
           "type": "complementary_products",
-          "disabled": true,
           "settings": {}
         },
         "07c447a5-98d7-4315-9048-ac172d3673dc": {
@@ -353,8 +352,8 @@
         "6d2130b9-35eb-4ec7-9832-b3555f913259",
         "548e2413-180e-4825-aba6-4f46e5ef4317",
         "b033f3a3-2862-435c-8579-29bede720233",
-        "72d08ef7-bfb9-4c2a-b18a-951575e7ce50",
         "07c447a5-98d7-4315-9048-ac172d3673dc",
+        "72d08ef7-bfb9-4c2a-b18a-951575e7ce50",
         "d318ee16-4ffe-4001-8845-ecbed8fa0d1b",
         "e63a4691-7127-45d6-a8d8-191fe152dad6",
         "fe7b0507-5483-4956-ab0f-ea3a90f57b1f",
@@ -403,16 +402,6 @@
     "1764439152f4487fb8": {
       "type": "apps",
       "blocks": {
-        "aiseo_v3_ai_seo_faq_QEfxEJ": {
-          "type": "shopify://apps/aiseo-v3/blocks/ai_seo_faq/019b0630-5f36-73a2-9a36-e85147686644",
-          "settings": {
-            "heading": "Frequently Asked Questions",
-            "heading_size": 18,
-            "content_size": 16,
-            "text_color": "#000000",
-            "border_color": "#e5e5e5"
-          }
-        },
         "recommended_product_salesup_autoketing_recommended_Hmhjzw": {
           "type": "shopify://apps/recommended-product-salesup/blocks/autoketing-recommended/28c5212f-728d-4d10-a8b6-81dc32610afb",
           "settings": {}
@@ -423,7 +412,6 @@
         }
       },
       "block_order": [
-        "aiseo_v3_ai_seo_faq_QEfxEJ",
         "recommended_product_salesup_autoketing_recommended_Hmhjzw",
         "klaviyo_reviews_featured_reviews_carousel_gNQxWf"
       ],
@@ -434,6 +422,13 @@
         "margin_top_mobile": 0,
         "margin_bottom_mobile": 0,
         "show_separator": false
+      }
+    },
+    "faq_accordion": {
+      "type": "faq-accordion",
+      "settings": {
+        "heading": "Frequently Asked Questions",
+        "output_schema": true
       }
     },
     "sorting_collections_YqAxyT": {
@@ -553,18 +548,14 @@
         "arrows": true,
         "bullets": true
       }
-    },
-    "faq_accordion_96746299": {
-      "type": "faq-accordion",
-      "settings": {}
     }
   },
   "order": [
     "af984214-713c-4cea-9b87-dcd09aa3a842",
     "73c80781-cd2d-4761-9943-a386ad927e09",
     "main",
-    "faq_accordion_96746299",
     "sorting_collections_GB7Fz3",
+    "faq_accordion",
     "1764439152f4487fb8",
     "sorting_collections_YqAxyT",
     "spacer_DeUxr4",

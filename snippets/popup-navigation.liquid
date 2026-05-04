@@ -21,11 +21,12 @@
                 {%- endif -%}
                     <form action="{{ routes.search_url }}" method="get" role="search" class="m-0">
                         <div class="position-relative d-flex align-items-center pb-5 pb-lg-15 mb-0 border-bottom">
-                            <input type="search" 
-                                class="border-0 p-0 mb-0" 
-                                name="q" 
-                                id="Search" 
-                                value="{{ search.terms | escape }}" 
+                            <label for="PopupNavigationSearch" class="label-hidden">{{ 'general.search.placeholder' | t }}</label>
+                            <input type="search"
+                                class="border-0 p-0 mb-0"
+                                name="q"
+                                id="PopupNavigationSearch"
+                                value="{{ search.terms | escape }}"
                                 placeholder="{{ 'general.search.placeholder' | t }}"
                                 {%- if settings.search_predictive_enabled -%}
                                 role="combobox"
@@ -64,30 +65,31 @@
         </div>
     {%- endif -%}
     {%- comment -%} Custom barebone mobile menu {%- endcomment -%}
+    {%- capture localized_root -%}{{ routes.root_url }}{% if routes.root_url != '/' %}/{% endif %}{%- endcapture -%}
     <div class="popup-navigation__menu popup-navigation__menu--custom d-lg-none{% if settings.search_show %} pt-25{% endif %} pb-25 px-10">
         <div class="container">
             <nav class="mobile-menu" aria-label="Mobile navigation">
                 <ul class="mobile-menu__list list-unstyled m-0">
                     <li class="mobile-menu__item mobile-menu__item--has-submenu border-bottom">
                         <div class="mobile-menu__parent d-flex align-items-center justify-content-between py-15" style="cursor: pointer;">
-                            <a href="/collections/new-arrivals" class="mobile-menu__link" style="text-decoration: none; flex: 1;">
+                            <a href="{{ localized_root }}collections/new-arrivals" class="mobile-menu__link" style="text-decoration: none; flex: 1;">
                                 <span>New Arrivals</span>
                             </a>
                             <span class="mobile-menu__toggle" style="padding: 0 15px; font-size: 20px;">+</span>
                         </div>
                         <ul class="mobile-menu__submenu list-unstyled m-0" style="display: none; background: #f9f9f9; padding-left: 20px;">
                             <li class="border-bottom">
-                                <a href="/collections/new-arrivals" class="mobile-menu__link d-block py-12" style="text-decoration: none;">
+                                <a href="{{ localized_root }}collections/new-arrivals" class="mobile-menu__link d-block py-12" style="text-decoration: none;">
                                     <span style="font-size: 14px;">Browse All Products</span>
                                 </a>
                             </li>
                             <li class="border-bottom">
-                                <a href="/collections/this-weeks-highlights" class="mobile-menu__link d-block py-12" style="text-decoration: none;">
+                                <a href="{{ localized_root }}collections/this-weeks-highlights" class="mobile-menu__link d-block py-12" style="text-decoration: none;">
                                     <span style="font-size: 14px;">This Week's Highlights</span>
                                 </a>
                             </li>
                             <li class="border-bottom">
-                                <a href="/collections/editors-picks" class="mobile-menu__link d-block py-12" style="text-decoration: none;">
+                                <a href="{{ localized_root }}collections/editors-picks" class="mobile-menu__link d-block py-12" style="text-decoration: none;">
                                     <span style="font-size: 14px;">Editor's Picks</span>
                                 </a>
                             </li>
@@ -95,29 +97,29 @@
                     </li>
                     <li class="mobile-menu__item mobile-menu__item--has-submenu border-bottom">
                         <div class="mobile-menu__parent d-flex align-items-center justify-content-between py-15" style="cursor: pointer;">
-                            <a href="/collections/elegant-dresses-gowns" class="mobile-menu__link" style="text-decoration: none; flex: 1;">
+                            <a href="{{ localized_root }}collections/elegant-dresses-gowns" class="mobile-menu__link" style="text-decoration: none; flex: 1;">
                                 <span>Elegant Dresses & Gowns</span>
                             </a>
                             <span class="mobile-menu__toggle" style="padding: 0 15px; font-size: 20px;">+</span>
                         </div>
                         <ul class="mobile-menu__submenu list-unstyled m-0" style="display: none; background: #f9f9f9; padding-left: 20px;">
                             <li class="border-bottom">
-                                <a href="/collections/evening-cocktail-dresses" class="mobile-menu__link d-block py-12" style="text-decoration: none;">
+                                <a href="{{ localized_root }}collections/evening-cocktail-dresses" class="mobile-menu__link d-block py-12" style="text-decoration: none;">
                                     <span style="font-size: 14px;">Evening & Cocktail Dresses</span>
                                 </a>
                             </li>
                             <li class="border-bottom">
-                                <a href="/collections/day-midi-dresses" class="mobile-menu__link d-block py-12" style="text-decoration: none;">
+                                <a href="{{ localized_root }}collections/day-midi-dresses" class="mobile-menu__link d-block py-12" style="text-decoration: none;">
                                     <span style="font-size: 14px;">Day & Midi Dresses</span>
                                 </a>
                             </li>
                             <li class="border-bottom">
-                                <a href="/collections/maxi-dresses" class="mobile-menu__link d-block py-12" style="text-decoration: none;">
+                                <a href="{{ localized_root }}collections/maxi-dresses" class="mobile-menu__link d-block py-12" style="text-decoration: none;">
                                     <span style="font-size: 14px;">Maxi Dresses</span>
                                 </a>
                             </li>
                             <li class="border-bottom">
-                                <a href="/collections/formal-gowns" class="mobile-menu__link d-block py-12" style="text-decoration: none;">
+                                <a href="{{ localized_root }}collections/formal-gowns" class="mobile-menu__link d-block py-12" style="text-decoration: none;">
                                     <span style="font-size: 14px;">Formal Gowns</span>
                                 </a>
                             </li>
@@ -125,24 +127,24 @@
                     </li>
                     <li class="mobile-menu__item mobile-menu__item--has-submenu border-bottom">
                         <div class="mobile-menu__parent d-flex align-items-center justify-content-between py-15" style="cursor: pointer;">
-                            <a href="/collections/chic-tops-blouses" class="mobile-menu__link" style="text-decoration: none; flex: 1;">
+                            <a href="{{ localized_root }}collections/chic-tops-blouses" class="mobile-menu__link" style="text-decoration: none; flex: 1;">
                                 <span>Chic Tops & Blouses</span>
                             </a>
                             <span class="mobile-menu__toggle" style="padding: 0 15px; font-size: 20px;">+</span>
                         </div>
                         <ul class="mobile-menu__submenu list-unstyled m-0" style="display: none; background: #f9f9f9; padding-left: 20px;">
                             <li class="border-bottom">
-                                <a href="/collections/silk-satin-blouses" class="mobile-menu__link d-block py-12" style="text-decoration: none;">
+                                <a href="{{ localized_root }}collections/silk-satin-blouses" class="mobile-menu__link d-block py-12" style="text-decoration: none;">
                                     <span style="font-size: 14px;">Silk & Satin Blouses</span>
                                 </a>
                             </li>
                             <li class="border-bottom">
-                                <a href="/collections/classic-button-downs" class="mobile-menu__link d-block py-12" style="text-decoration: none;">
+                                <a href="{{ localized_root }}collections/classic-button-downs" class="mobile-menu__link d-block py-12" style="text-decoration: none;">
                                     <span style="font-size: 14px;">Classic Button-Downs</span>
                                 </a>
                             </li>
                             <li class="border-bottom">
-                                <a href="/collections/casual-knit-tops" class="mobile-menu__link d-block py-12" style="text-decoration: none;">
+                                <a href="{{ localized_root }}collections/casual-knit-tops" class="mobile-menu__link d-block py-12" style="text-decoration: none;">
                                     <span style="font-size: 14px;">Casual Knit Tops</span>
                                 </a>
                             </li>
@@ -150,34 +152,34 @@
                     </li>
                     <li class="mobile-menu__item mobile-menu__item--has-submenu border-bottom">
                         <div class="mobile-menu__parent d-flex align-items-center justify-content-between py-15" style="cursor: pointer;">
-                            <a href="/collections/luxury-outerwear-jackets" class="mobile-menu__link" style="text-decoration: none; flex: 1;">
+                            <a href="{{ localized_root }}collections/luxury-outerwear-jackets" class="mobile-menu__link" style="text-decoration: none; flex: 1;">
                                 <span>Luxury Outerwear & Jackets</span>
                             </a>
                             <span class="mobile-menu__toggle" style="padding: 0 15px; font-size: 20px;">+</span>
                         </div>
                         <ul class="mobile-menu__submenu list-unstyled m-0" style="display: none; background: #f9f9f9; padding-left: 20px;">
                             <li class="border-bottom">
-                                <a href="/collections/wool-cashmere-coats" class="mobile-menu__link d-block py-12" style="text-decoration: none;">
+                                <a href="{{ localized_root }}collections/wool-cashmere-coats" class="mobile-menu__link d-block py-12" style="text-decoration: none;">
                                     <span style="font-size: 14px;">Wool & Cashmere Coats</span>
                                 </a>
                             </li>
                             <li class="border-bottom">
-                                <a href="/collections/tailored-blazers" class="mobile-menu__link d-block py-12" style="text-decoration: none;">
+                                <a href="{{ localized_root }}collections/tailored-blazers" class="mobile-menu__link d-block py-12" style="text-decoration: none;">
                                     <span style="font-size: 14px;">Tailored Blazers</span>
                                 </a>
                             </li>
                             <li class="border-bottom">
-                                <a href="/collections/denim-casual-jackets" class="mobile-menu__link d-block py-12" style="text-decoration: none;">
+                                <a href="{{ localized_root }}collections/denim-casual-jackets" class="mobile-menu__link d-block py-12" style="text-decoration: none;">
                                     <span style="font-size: 14px;">Denim & Casual Jackets</span>
                                 </a>
                             </li>
                             <li class="border-bottom">
-                                <a href="/collections/chic-vests-gilets" class="mobile-menu__link d-block py-12" style="text-decoration: none;">
+                                <a href="{{ localized_root }}collections/chic-vests-gilets" class="mobile-menu__link d-block py-12" style="text-decoration: none;">
                                     <span style="font-size: 14px;">Chic Vests & Gilets</span>
                                 </a>
                             </li>
                             <li class="border-bottom">
-                                <a href="/collections/statement-jackets" class="mobile-menu__link d-block py-12" style="text-decoration: none;">
+                                <a href="{{ localized_root }}collections/statement-jackets" class="mobile-menu__link d-block py-12" style="text-decoration: none;">
                                     <span style="font-size: 14px;">Statement Jackets</span>
                                 </a>
                             </li>
@@ -185,46 +187,46 @@
                     </li>
                     <li class="mobile-menu__item mobile-menu__item--has-submenu border-bottom">
                         <div class="mobile-menu__parent d-flex align-items-center justify-content-between py-15" style="cursor: pointer;">
-                            <a href="/collections/stylish-pants-skirts" class="mobile-menu__link" style="text-decoration: none; flex: 1;">
+                            <a href="{{ localized_root }}collections/stylish-pants-skirts" class="mobile-menu__link" style="text-decoration: none; flex: 1;">
                                 <span>Stylish Pants & Skirts</span>
                             </a>
                             <span class="mobile-menu__toggle" style="padding: 0 15px; font-size: 20px;">+</span>
                         </div>
                         <ul class="mobile-menu__submenu list-unstyled m-0" style="display: none; background: #f9f9f9; padding-left: 20px;">
                             <li class="border-bottom">
-                                <a href="/collections/tailored-pants" class="mobile-menu__link d-block py-12" style="text-decoration: none;">
+                                <a href="{{ localized_root }}collections/tailored-pants" class="mobile-menu__link d-block py-12" style="text-decoration: none;">
                                     <span style="font-size: 14px;">Tailored Pants</span>
                                 </a>
                             </li>
                             <li class="border-bottom">
-                                <a href="/collections/denim-casual-pants" class="mobile-menu__link d-block py-12" style="text-decoration: none;">
+                                <a href="{{ localized_root }}collections/denim-casual-pants" class="mobile-menu__link d-block py-12" style="text-decoration: none;">
                                     <span style="font-size: 14px;">Denim & Casual Pants</span>
                                 </a>
                             </li>
                             <li class="border-bottom">
-                                <a href="/collections/midi-maxi-skirts" class="mobile-menu__link d-block py-12" style="text-decoration: none;">
+                                <a href="{{ localized_root }}collections/midi-maxi-skirts" class="mobile-menu__link d-block py-12" style="text-decoration: none;">
                                     <span style="font-size: 14px;">Midi & Maxi Skirts</span>
                                 </a>
                             </li>
                         </ul>
                     </li>
                     <li class="mobile-menu__item border-bottom">
-                        <a href="/pages/contact" class="mobile-menu__link d-block py-15" style="text-decoration: none;">
+                        <a href="{{ localized_root }}pages/contact" class="mobile-menu__link d-block py-15" style="text-decoration: none;">
                             <span>Contact</span>
                         </a>
                     </li>
                     <li class="mobile-menu__item border-bottom">
-                        <a href="https://www.msdressly.com/blogs/products" class="mobile-menu__link d-block py-15" style="text-decoration: none;">
+                        <a href="{{ localized_root }}blogs/products" class="mobile-menu__link d-block py-15" style="text-decoration: none;">
                             <span>Style Journal</span>
                         </a>
                     </li>
                     <li class="mobile-menu__item border-bottom">
-                        <a href="/account" class="mobile-menu__link d-block py-15" style="text-decoration: none;">
+                        <a href="{{ routes.account_url }}" class="mobile-menu__link d-block py-15" style="text-decoration: none;">
                             <span>My Account</span>
                         </a>
                     </li>
                     <li class="mobile-menu__item border-bottom">
-                        <a href="/cart" class="mobile-menu__link d-block py-15" style="text-decoration: none;">
+                        <a href="{{ routes.cart_url }}" class="mobile-menu__link d-block py-15" style="text-decoration: none;">
                             <span>View My Cart</span>
                         </a>
                     </li>

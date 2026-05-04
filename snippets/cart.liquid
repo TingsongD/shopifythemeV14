@@ -3,6 +3,10 @@
 {%- else -%}
     {%- assign image_format = null -%}
 {%- endif -%}
+{%- assign continue_shopping_url = routes.all_products_collection_url -%}
+{%- if continue_shopping_url == blank -%}
+    {%- assign continue_shopping_url = routes.collections_url | append: '/all' -%}
+{%- endif -%}
 <div>
     <div class="js-page-cart-ajax">
     {%- if cart.item_count > 0 -%}
@@ -10,7 +14,7 @@
         <div class="cart pb-60 pb-lg-70">
             <div class="container">
                 {%- if cart.item_count > 0 -%}
-                    <form action="/cart" method="post" novalidate>
+                    <form action="{{ routes.cart_url }}" method="post" novalidate>
                     {% render 'reward-banner' %}
                         <div class="row">
                             <div class="col-lg-8 col-xl-9">
@@ -31,7 +35,7 @@
                                         <div class="py-20 border-bottom" data-js-product data-product-cart-line="{{ forloop.index }}">
                                             <div class="row d-flex align-items-center flex-column flex-sm-row">
                                                 <div class="col-sm-5 col-lg-4 col-xl-6 d-flex align-items-center mb-20 mb-sm-0">
-                                                    <a href="/cart/change?line={{ forloop.index }}&amp;quantity=0" class="mr-20 js-product-button-remove-from-cart">
+                                                    <a href="{{ routes.cart_change_url }}?line={{ forloop.index }}&amp;quantity=0" class="mr-20 js-product-button-remove-from-cart">
                                                         <i>{% render 'icon-theme-165' %}</i>
                                                     </a>
                                                     <div class="d-flex align-items-center align-items-sm-start align-items-xl-center flex-sm-column flex-xl-row w-100">
@@ -45,6 +49,11 @@
                                                             {%- unless item.product.has_only_default_variant -%}
                                                             <p class="mb-0">{{ item.variant.title }}</p>
                                                             {%- endunless -%}
+                                                            {%- if item.selling_plan_allocation != nil -%}
+                                                                <p class="mt-10 mb-0">
+                                                                    <span>Subscription: </span>{{ item.selling_plan_allocation.selling_plan.name }}
+                                                                </p>
+                                                            {%- endif -%}
                                                             {%- if settings.cart_show_vendor -%}
                                                                 <p class="mt-10 mb-0">
                                                                     | 
@@ -99,7 +108,7 @@
                                     </div>
                                 {%- endif -%}
                                 <div class="d-flex pt-25">
-                                    <a href="/collections/all" class="btn btn--text text-left">
+                                    <a href="{{ continue_shopping_url }}" class="btn btn--text text-left">
                                         <i class="mb-4 mr-4">{% render 'icon-theme-012' %}</i>{{ 'cart.general.continue_shopping' | t }}
                                     </a>
                                     <button type="submit" class="btn btn--text text-left ml-auto" name="update">
@@ -248,7 +257,7 @@
         <div class="cart d-flex flex-column align-items-center py-40 py-md-100 my-100">
             <h1 class="h3">{{ 'cart.general.empty_title' | t }}</h1>
             <p>{{ 'cart.general.empty_paragraph' | t }}</p>
-            <a href="/collections/all" class="cart__btn-empty empty-btn btn mt-20">{{ 'cart.general.empty_button' | t }}</a>
+            <a href="{{ continue_shopping_url }}" class="cart__btn-empty empty-btn btn mt-20">{{ 'cart.general.empty_button' | t }}</a>
         </div>
     {%- endif -%}
     </div>

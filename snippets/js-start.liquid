@@ -1,5 +1,8 @@
 <script>
-    theme.AssetsLoader.require('scripts', 'theme');
+    {%- comment -%}
+      Core theme bundles are loaded once from layout/theme.liquid with defer.
+      Do not request them through AssetsLoader here, or cart/product handlers can bind twice.
+    {%- endcomment -%}
     {%- if template.name == 'product'-%}
         {%- comment -%}
           Always load Slick on product pages. Some layouts invoke the slider even
@@ -10,9 +13,6 @@
         theme.AssetsLoader.require('scripts', 'plugin_slick');
         theme.AssetsLoader.require('scripts', 'product_page');
     {%- endif -%}
-    theme.AssetsLoader.onUserAction(function() {
-        theme.AssetsLoader.require('scripts', 'theme_pt2');
-    });
     {%- if settings.show_multiple_currencies -%}
         theme.AssetsLoader.require('scripts', 'currency_rates');
         theme.AssetsLoader.require('scripts', 'currency');

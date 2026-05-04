@@ -10,7 +10,8 @@
         <div class="d-none d-lg-block d-xl-none" style="padding-top: {{ responsive_height_arr[1] }};"></div>
         <div class="d-none d-xl-block" style="padding-top: {{ responsive_height_arr[0] }};"></div>
     {%- endif -%}
-    <video class="rvideo__video" preload="none" muted playsinline{% if autoplay != true or controls %} controls{% endif %}{% if autoplay %} autoplay loop{% endif %}{% if poster != blank %} {% if lazyload %}data-{% endif %}poster="{{ poster | img_url: poster_size }}"{% endif %}>
+    {%- assign _rvid_poster_w = poster_size | default: '800x' | split: 'x' | first | plus: 0 -%}
+    <video class="rvideo__video" preload="none" muted playsinline{% if autoplay != true or controls %} controls{% endif %}{% if autoplay %} autoplay loop{% endif %}{% if poster != blank %} {% if lazyload %}data-{% endif %}poster="{{ poster | image_url: width: _rvid_poster_w }}"{% endif %}>
         <source {% if lazyload %}src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACwAAAAAAQABAAACAkQBADs=" data-{% endif %}src="{{ video.url | default: video }}" type="video/mp4">
         Your browser does not support the video tag.
     </video>

@@ -3,6 +3,16 @@
         <div class="menu__panel{% if header_menu_list_on_a_par %} menu__panel--on-a-par{% endif %} menu__list menu__level-01 d-flex flex-column flex-lg-row flex-lg-wrap{% if centered %} justify-content-lg-center{% endif %}">
             <div class="menu__curtain d-none position-lg-absolute"></div>
             {%- assign menu = linklists[section.settings.menu] -%}
+            {%- capture localized_root -%}{{ routes.root_url }}{% if routes.root_url != '/' %}/{% endif %}{%- endcapture -%}
+            {%- assign menu_handles = '' -%}
+            {%- for link in menu.links -%}
+                {%- capture menu_handles -%}{{ menu_handles }}|||{{ link.handle }}|||{%- endcapture -%}
+            {%- endfor -%}
+            {%- unless menu_handles contains '|||fresh-underwear-box|||' -%}
+                <div class="menu__item">
+                    <a href="{{ localized_root }}pages/fresh-underwear-box" class="d-flex align-items-center{% if section.settings.show_menu_hover_underline %} text-underline-hover{% endif %}"><span>Fresh Underwear Box</span></a>
+                </div>
+            {%- endunless -%}
             {%- assign megamenu_index = 0 -%}
             {%- for link in menu.links -%}
                 {%- capture childrens -%}

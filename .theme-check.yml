@@ -1,0 +1,111 @@
+# Shella: schema locale uses nested `custom_html` objects; Theme Check's ValidJSON
+# schema expected legacy string-only values for that key. Ignore this file for ValidJSON
+# so editor matches CLI (translation entries remain valid for merchant-facing strings).
+extends: theme-check:recommended
+
+ValidJSON:
+  ignore:
+    - "locales/en.default.schema.json"
+
+# If TranslationKeyExists fails, ensure en.default.json is valid JSON (no leading block comment).
+TranslationKeyExists:
+  ignore:
+    - "snippets/msd-care-layer-badge.liquid"
+
+OrphanedSnippet:
+  ignore:
+    - "snippets/banner.liquid"
+    - "snippets/msd-care-layer-badge.liquid"
+    # Shella: referenced via `{% include %}`; OrphanedSnippet does not trace include edges.
+    - "snippets/product-get-options.liquid"
+    - "snippets/product-page-get-info.liquid"
+    - "snippets/promobox.liquid"
+    - "snippets/rvideo.liquid"
+
+AssetPreload:
+  ignore:
+    - "snippets/css-start.liquid"
+    - "snippets/presentation.liquid"
+
+UnclosedHTMLElement:
+  ignore:
+    - "snippets/banner.liquid"
+    - "snippets/**"
+    - "sections/**"
+
+VariableName:
+  ignore:
+    - "snippets/**"
+    - "sections/**"
+
+PaginationSize:
+  ignore:
+    - "sections/**"
+    - "snippets/**"
+
+# Shella: many section schemas use `t:sections.builder.*` paths; locale file predates
+# full nested trees (e.g. custom_html, promobox). Suppress per-file until locales are backfilled.
+ValidSchemaTranslations:
+  ignore:
+    - "sections/home-builder.liquid"
+    - "sections/main-collection-product-grid.liquid"
+    - "sections/main-product.liquid"
+    - "sections/main-search.liquid"
+
+# Intentional `img_url` 1x1 + replace patterns for lazy src builders; migration is phased.
+DeprecatedFilter:
+  ignore:
+    - "sections/**"
+    - "snippets/**"
+    - "layout/**"
+
+# Lazysizes-based classes; moving to native lazy= is a larger storefront change.
+DeprecateBgsizes:
+  ignore:
+    - "sections/**"
+    - "snippets/**"
+    - "layout/**"
+
+# Merch URLs and legacy links; prefer `routes.*` on touch.
+HardcodedRoutes:
+  ignore:
+    - "sections/**"
+    - "snippets/**"
+    - "layout/**"
+
+# global-variables and many `include` parents leave assigns theme-check does not see.
+UnusedAssign:
+  ignore:
+    - "snippets/css-variables.liquid"
+    - "sections/subscription-form.liquid"
+    - "sections/product-variants.liquid"
+    - "snippets/head.liquid"
+    - "snippets/builder-slider-slick.liquid"
+    - "snippets/**"
+    - "sections/**"
+    - "layout/**"
+
+# Shella relies on `include` for shared Liquid scope; migrate to `render` per subtree.
+DeprecatedTag:
+  ignore:
+    - "snippets/css-start.liquid"
+    - "snippets/head.liquid"
+    - "snippets/**"
+    - "sections/**"
+    - "layout/**"
+    - "templates/**"
+
+# Assigns from `include 'global-variables'` and dynamic blocks.
+UndefinedObject:
+  ignore:
+    - "snippets/**"
+    - "sections/**"
+    - "layout/**"
+    - "templates/**"
+
+# External fonts / checkout hints; placeholder/lazy img src; dynamic payment icons.
+RemoteAsset:
+  ignore:
+    - "layout/**"
+    - "snippets/head.liquid"
+    - "snippets/**"

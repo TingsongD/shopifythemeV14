@@ -8,8 +8,7 @@
                     {%- if page_name_handle == blank or page_name_handle == page.handle -%}
                         <div class="col-sm-{{ block.settings.grid }} px-5 mb-10">
                             <div class="gallery__item position-relative cursor-pointer" data-index="{{ forloop.index0 }}">
-                                {% capture image_size %}{{ block.settings.image_size }}x{% endcapture %}
-                                {% render 'rimage' with image: block.settings.image size: image_size format: 'pjpg' image_class: 'w-100' %}
+                                {% render 'rimage', image: block.settings.image, size: block.settings.image_size | append: 'x', format: 'pjpg', image_class: 'w-100' %}
                                 <div class="gallery__item-layer absolute-stretch d-flex flex-center">
                                     <div class="gallery__item-bg absolute-stretch"></div>
                                     <div class="gallery__item-text position-relative text-center">
@@ -31,7 +30,7 @@
                 {%- for block in section.blocks -%}
                     {%- assign page_name_handle = block.settings.page_name | handleize -%}
                     {%- if page_name_handle == blank or page_name_handle == page.handle -%}
-                        <div class="d-flex flex-column flex-center h-100" data-thumb="{{ block.settings.image | img_url: 'medium', format: 'pjpg' }}">
+                        <div class="d-flex flex-column flex-center h-100" data-thumb="{{ block.settings.image | image_url: width: 240, format: 'pjpg' }}">
                             <div class="gallery__item-text w-100 pb-35 text-center">
                                 {%- if block.settings.text_line_01 != blank -%}
                                     <h3 class="h6 mb-0 font-italic">{{ block.settings.text_line_01 }}</h3>
@@ -40,7 +39,7 @@
                                     <h4 class="mb-0{% if block.settings.text_line_01 != blank %} mt-10{% endif %}">{{ block.settings.text_line_02 }}</h4>
                                 {%- endif -%}
                             </div>
-                            <img src="{{ block.settings.image | img_url: '1000x', format: 'pjpg' }}" width="1000" height="1000" alt="{{ block.settings.text_line_02 | default: block.settings.text_line_01 | default: 'Gallery image' }}">
+                            <img src="{{ block.settings.image | image_url: width: 1000, height: 1000, format: 'pjpg' }}" width="1000" height="1000" alt="{{ block.settings.text_line_02 | default: block.settings.text_line_01 | default: 'Gallery image' }}">
                         </div>
                     {%- endif -%}
                 {%- endfor -%}

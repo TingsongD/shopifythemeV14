@@ -42,7 +42,7 @@
                     <div class="position-relative">
                         <p class="mb-0">{{ 'general.notifications.cookies.text' | t }}</p>
                         <div class="d-flex align-items-center justify-content-center justify-content-sm-end mt-15">
-                            <a href="{{ settings.notification_cookies_button_information_link | default: '/pages/cookie-policy' }}" target="_blank" class="notification-cookies__button-info btn-link py-10 py-sm-0 mr-20">{{ 'general.notifications.cookies.button_information' | t }}</a>
+                            <a href="{{ settings.notification_cookies_button_information_link | default: '/pages/cookie-policy' }}" target="_blank" rel="noopener noreferrer" class="notification-cookies__button-info btn-link py-10 py-sm-0 mr-20">{{ 'general.notifications.cookies.button_information' | t }}</a>
                             <div class="notification-cookies__button-close btn-link py-10 py-sm-0 d-flex align-items-center" data-js-action="close">{{ 'general.notifications.cookies.button_close' | t }}<i>{% render 'icon-theme-146' %}</i></div>
                         </div>
                     </div>
@@ -146,7 +146,7 @@
                                             <strong class="d-flex flex-center" data-button-content="select"><span class="btn__text">{{ 'products.product.add_to_cart.select_options' | t }}</span></strong>
                                         {%- endif -%}
                                         <strong class="d-flex flex-center text-nowrap" data-button-content="sold-out"><span class="btn__text">{{ 'products.product.add_to_cart.sold_out' | t }}</span></strong>
-                                        <strong class="d-flex flex-center" data-button-content="pre-order"><i class="btn__icon mr-5 mb-4">{% include cart_icon_name %}</i><span class="btn__text">{{ 'products.product.add_to_cart.pre_order' | t }}</span></strong>
+                                        <strong class="d-flex flex-center" data-button-content="pre-order"><i class="btn__icon mr-5 mb-4">{% render 'theme-icon', name: cart_icon_name %}</i><span class="btn__text">{{ 'products.product.add_to_cart.pre_order' | t }}</span></strong>
                                     </button>
                                 </div>
                             {%- endif -%}

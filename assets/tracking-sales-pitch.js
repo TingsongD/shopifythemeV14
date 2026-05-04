@@ -12,6 +12,21 @@
     var ATTRIBUTE_KEY = 'Sales_Pitch_Unmuted';
     var ATTRIBUTE_VALUE = 'Yes';
 
+    function getCartUrl(suffix) {
+        var cartUrl = (window.theme && theme.routes && theme.routes.cart_url) || '/cart';
+        return cartUrl.replace(/\/$/, '') + suffix;
+    }
+
+    function isCartAttributeEndpoint(url) {
+        if (!url || typeof url !== 'string') return false;
+        try {
+            var pathname = new URL(url, window.location.origin).pathname;
+            return /\/cart\/(add|update)(\.js)?$/.test(pathname);
+        } catch (e) {
+            return url.indexOf('/cart/add') !== -1 || url.indexOf('/cart/update') !== -1;
+        }
+    }
+
     // Safe debug logging - only logs when ThemeDebug exists and is enabled
     var debugLog = (window.ThemeDebug && ThemeDebug.enabled)
         ? function() { ThemeDebug.log.apply(ThemeDebug, arguments); }
@@ -31,8 +46,9 @@
 
     // 2. Inject Hidden Input (For Standard Forms)
     function injectFormAttribute() {
-        var forms = document.querySelectorAll('form[action="/cart/add"], form[action^="/cart/add"]');
+        var forms = document.querySelectorAll('form[action]');
         forms.forEach(function (form) {
+            if (!isCartAttributeEndpoint(form.getAttribute('action'))) return;
             if (!form.querySelector('input[name="' + ATTRIBUTE_NAME + '"]')) {
                 var input = document.createElement('input');
                 input.type = 'hidden';
@@ -45,7 +61,7 @@
 
     // 3. Save Attribute via AJAX immediately (Persists if cart exists)
     function saveAttributeToCart() {
-        fetch('/cart/update.js', {
+        fetch(getCartUrl('/update.js'), {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ attributes: { [ATTRIBUTE_KEY]: ATTRIBUTE_VALUE } })
@@ -64,7 +80,7 @@
                 url = input.url;
             }
 
-            if (url && typeof url === 'string' && (url.includes('/cart/add') || url.includes('/cart/update'))) {
+            if (isCartAttributeEndpoint(url)) {
                 try {
                     // Clone init or create it
                     init = init || {};
@@ -110,7 +126,7 @@
     };
 
     XMLHttpRequest.prototype.send = function (body) {
-        if (sessionStorage.getItem(SESSION_KEY) === 'true' && this._url && (this._url.includes('/cart/add') || this._url.includes('/cart/update'))) {
+        if (sessionStorage.getItem(SESSION_KEY) === 'true' && isCartAttributeEndpoint(this._url)) {
             try {
                 if (typeof body === 'string') {
                     try {

@@ -1,0 +1,120 @@
+/*
+ * Disposable Underwear Box product template. Assign to product handle "disposable-underwear-box".
+ */
+{
+  "sections": {
+    "main": {
+      "type": "main-product",
+      "blocks": {
+        "title": {
+          "type": "title",
+          "settings": {}
+        },
+        "price": {
+          "type": "price",
+          "settings": {}
+        },
+        "intro": {
+          "type": "text",
+          "settings": {
+            "content": "<p><strong>30 Fresh Pairs delivered monthly.</strong> Each pair is individually sealed for a clean reset at work, after the gym, while traveling, or anytime the day runs long.</p>"
+          }
+        },
+        "options": {
+          "type": "options",
+          "settings": {}
+        },
+        "buttons": {
+          "type": "buttons_quantity",
+          "settings": {}
+        },
+        "description": {
+          "type": "description",
+          "settings": {
+            "title": "What arrives",
+            "content": "<p>A monthly disposable underwear refresh box with 30 individually sealed pairs, EO sterilized handling, biodegradable materials, hospital-grade hygiene, and free shipping.</p>"
+          }
+        },
+        "payments": {
+          "type": "payments",
+          "settings": {}
+        }
+      },
+      "block_order": [
+        "title",
+        "price",
+        "intro",
+        "options",
+        "buttons",
+        "description",
+        "payments"
+      ],
+      "settings": {
+        "gallery_size": "6",
+        "sidebar": "off",
+        "enable_sticky_sidebar": true,
+        "show_tabs": true,
+        "show_tab_description": true,
+        "show_tab_reviews": true,
+        "scrolling_to_opened_tab": false,
+        "tabs_type": "tabs",
+        "enable_floating_video": false,
+        "video_pool_json": "",
+        "floating_video_hide_on_mobile": false
+      }
+    },
+    "subscription_benefits": {
+      "type": "msd-subscription-benefits",
+      "blocks": {
+        "monthly": {
+          "type": "benefit",
+          "settings": {
+            "title": "Monthly delivery",
+            "text": "Your box is built around 30 sealed pairs for a simple monthly cadence."
+          }
+        },
+        "clear_terms": {
+          "type": "benefit",
+          "settings": {
+            "title": "Subscription-first",
+            "text": "Choose the available selling plan before adding the product to cart."
+          }
+        },
+        "portable": {
+          "type": "benefit",
+          "settings": {
+            "title": "Always have backup",
+            "text": "Stock your bag, drawer, locker, and travel kit with individually sealed pairs."
+          }
+        }
+      },
+      "block_order": [
+        "monthly",
+        "clear_terms",
+        "portable"
+      ],
+      "settings": {
+        "container": "boxed",
+        "heading": "Built for a monthly refresh",
+        "body": "<p>When selling plans are configured for this product, the product form shows the recurring delivery choice before checkout.</p>",
+        "primary_label": "View the landing page",
+        "primary_link": "/pages/fresh-underwear-box",
+        "secondary_label": "",
+        "secondary_link": "",
+        "show_policy_link": true
+      }
+    },
+    "faq_accordion": {
+      "type": "faq-accordion",
+      "settings": {
+        "heading": "Frequently Asked Questions",
+        "output_schema": true
+      }
+    }
+  },
+  "order": [
+    "main",
+    "subscription_benefits",
+    "faq_accordion"
+  ]
+}

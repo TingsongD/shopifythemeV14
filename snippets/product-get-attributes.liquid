@@ -2,7 +2,7 @@
 {%- if build_variant == 'all' or build_variant == 'json' -%}
     {%- capture json_images -%}
         {%- for image in product.images -%}
-            {"id":"{{ image.id }}","src":"{{ image.src | img_url: 'master' }}"}{% if forloop.last != true %},{% endif %}
+            {"id":"{{ image.id }}","src":"{{ image | image_url: width: 2048, height: 2048 }}"}{% if forloop.last != true %},{% endif %}
         {%- endfor -%}
     {%- endcapture -%}
     {%- capture json_media -%}
@@ -73,7 +73,7 @@
 {%- if build_variant == 'json' -%}
     {% capture product_attrs %}{{ json_product }}{% endcapture %}
 {%- else -%}
-    {% capture product_attrs %} data-js-product data-form-id="{{ product_form_id }}"{% if product_ajax_preload_json %} data-js-product-json-preload{% endif %} data-product-handle="{{ product.handle }}" data-product-variant-id="{{ current_variant_id }}"{% if json_product and show_options or show_images_navigation %} data-json-product='{{ json_product }}'{% endif %}{% endcapture %}
+    {% capture product_attrs %} data-js-product data-form-id="{{ product_form_id }}"{% if product_ajax_preload_json %} data-js-product-json-preload{% endif %} data-product-handle="{{ product.handle }}" data-product-variant-id="{{ current_variant_id }}"{% if json_product and show_options or show_images_navigation %} data-json-product='{{ json_product | escape }}'{% endif %}{% endcapture %}
 {%- endif -%}
 {{ product_attrs }}
 {%- assign build_variant = null -%}

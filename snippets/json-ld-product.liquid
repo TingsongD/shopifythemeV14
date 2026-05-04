@@ -1,18 +1,26 @@
-{%- comment -%}
-================================================================================
-Product Schema - JSON-LD Structured Data
-================================================================================
-Outputs Product structured data for Google Rich Results and Merchant Listings.
-This is the theme's default Product schema markup.
-================================================================================
-{%- endcomment -%}
+{% doc %}
+Outputs Product JSON-LD for purchasable product pages.
+Offer-level shipping and return policy claims must match storefront policy text.
+@example
+{% render 'json-ld-product' %}
+{% enddoc %}
 {%- assign offer_currency = localization.country.currency.iso_code | default: shop.currency -%}
-{%- assign rating_value = product.metafields.reviews.rating.value | default: product.metafields.reviews.rating -%}
+{%- assign rating_value = blank -%}
+{%- assign reviews_rating_value = product.metafields.reviews.rating.value -%}
+{%- if reviews_rating_value != blank -%}
+  {%- assign rating_value = reviews_rating_value.rating -%}
+{%- endif -%}
 {%- assign rating_count = product.metafields.reviews.rating_count.value | default: product.metafields.reviews.rating_count -%}
 {%- if rating_value == blank or rating_count == blank -%}
-  {%- assign rating_value = product.metafields.judgeme.rating -%}
-  {%- assign rating_count = product.metafields.judgeme.review_count -%}
+  {%- assign rating_value = product.metafields.judgeme.rating.value | default: product.metafields.judgeme.rating -%}
+  {%- assign rating_count = product.metafields.judgeme.review_count.value | default: product.metafields.judgeme.review_count -%}
 {%- endif -%}
+{%- if rating_value == blank or rating_count == blank -%}
+  {%- assign rating_value = product.metafields.loox.avg_rating.value | default: product.metafields.loox.avg_rating -%}
+  {%- assign rating_count = product.metafields.loox.num_reviews.value | default: product.metafields.loox.num_reviews -%}
+{%- endif -%}
+{%- assign rating_value_number = rating_value | plus: 0 -%}
+{%- assign rating_count_number = rating_count | plus: 0 -%}
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -25,7 +33,7 @@ This is the theme's default Product schema markup.
     {%- for media in product.media -%}
       {%- if media.preview_image -%}
         {%- if image_output -%},{%- endif -%}
-        {{ media.preview_image | img_url: 'master' | prepend: 'https:' | json }}
+        {{ media.preview_image | image_url: width: 2000, height: 2000 | prepend: 'https:' | json }}
         {%- assign image_output = true -%}
       {%- endif -%}
     {%- endfor -%}
@@ -58,7 +66,7 @@ This is the theme's default Product schema markup.
         "@type": "OfferShippingDetails",
         "shippingRate": {
           "@type": "MonetaryAmount",
-          "value": {% assign threshold = settings.cart_free_shipping_value | plus: 0 %}{% if settings.cart_show_free_shipping and variant.price >= threshold %}0{% else %}7.95{% endif %},
+          "value": {% assign threshold = settings.cart_free_shipping_value | plus: 0 %}{% if settings.cart_show_free_shipping and variant.price >= threshold %}0{% else %}8.98{% endif %},
           "currency": {{ offer_currency | json }}
         },
         "shippingDestination": {
@@ -87,15 +95,15 @@ This is the theme's default Product schema markup.
         "returnPolicyCategory": "https://schema.org/MerchantReturnFiniteReturnWindow",
         "merchantReturnDays": 45,
         "returnMethod": "https://schema.org/ReturnByMail",
-        "returnFees": "https://schema.org/FreeReturn"
+        "returnFees": "https://schema.org/ReturnFeesCustomerResponsibility"
       }
     }{% unless forloop.last %},{% endunless %}
     {%- endfor -%}
-  ]{%- if rating_value != blank and rating_count != blank and rating_count != 0 -%},
+  ]{%- if rating_value_number > 0 and rating_count_number > 0 -%},
   "aggregateRating": {
     "@type": "AggregateRating",
-    "ratingValue": {{ rating_value | json }},
-    "reviewCount": {{ rating_count | json }}
+    "ratingValue": {{ rating_value_number | json }},
+    "reviewCount": {{ rating_count_number | json }}
   }
   {%- endif -%}
 }

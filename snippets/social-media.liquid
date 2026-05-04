@@ -16,7 +16,7 @@
 <div class="social-media d-flex flex-wrap{% if type == 'column' %} flex-lg-column align-items-lg-start{% endif %} justify-content-center justify-content-lg-start">
     {% capture link_class %}mb-6 mx-10 mx-sm-15 mx-lg-0 mr-lg-{% if size == 'large' %}15{% elsif size == 'large-2' %}30{% elsif size == 'middle' %}15{% else %}10{% endif %}{% endcapture %}
     {%- if block.settings.show_facebook != false and settings.social_facebook != blank -%}
-        <a href="{{ settings.social_facebook }}" target="_blank" class="social-media__facebook d-flex align-items-center {{ link_class }}"
+        <a href="{{ settings.social_facebook }}" target="_blank" rel="noopener noreferrer" class="social-media__facebook d-flex align-items-center {{ link_class }}" aria-label="{{ 'general.social.names.facebook' | t }}"
             {% if social_enable_tooltip and type == 'row' %}
                 data-js-tooltip
                 data-tippy-content="{{ 'general.social.names.facebook' | t }}"
@@ -28,7 +28,7 @@
         </a>
     {%- endif -%}
     {%- if block.settings.show_twitter != false and settings.social_twitter != blank -%}
-        <a href="{{ settings.social_twitter }}" target="_blank" class="social-media__twitter d-flex align-items-center {{ link_class }}"
+        <a href="{{ settings.social_twitter }}" target="_blank" rel="noopener noreferrer" class="social-media__twitter d-flex align-items-center {{ link_class }}" aria-label="{{ 'general.social.names.twitter' | t }}"
             {% if social_enable_tooltip and type == 'row' %}
                 data-js-tooltip
                 data-tippy-content="{{ 'general.social.names.twitter' | t }}"
@@ -40,7 +40,7 @@
         </a>
     {%- endif -%}
     {%- if block.settings.show_instagram != false and settings.social_instagram != blank -%}
-        <a href="{{ settings.social_instagram }}" target="_blank" class="social-media__instagram d-flex align-items-center {{ link_class }}"
+        <a href="{{ settings.social_instagram }}" target="_blank" rel="noopener noreferrer" class="social-media__instagram d-flex align-items-center {{ link_class }}" aria-label="{{ 'general.social.names.instagram' | t }}"
             {% if social_enable_tooltip and type == 'row' %}
                 data-js-tooltip
                 data-tippy-content="{{ 'general.social.names.instagram' | t }}"
@@ -52,7 +52,7 @@
         </a>
     {%- endif -%}
     {%- if block.settings.show_pinterest != false and settings.social_pinterest != blank -%}
-        <a href="{{ settings.social_pinterest }}" target="_blank" class="social-media__pinterest d-flex align-items-center {{ link_class }}"
+        <a href="{{ settings.social_pinterest }}" target="_blank" rel="noopener noreferrer" class="social-media__pinterest d-flex align-items-center {{ link_class }}" aria-label="{{ 'general.social.names.pinterest' | t }}"
             {% if social_enable_tooltip and type == 'row' %}
                 data-js-tooltip
                 data-tippy-content="{{ 'general.social.names.pinterest' | t }}"
@@ -64,7 +64,7 @@
         </a>
     {%- endif -%}
     {%- if block.settings.show_youtube != false and settings.social_youtube != blank -%}
-        <a href="{{ settings.social_youtube }}" target="_blank" class="social-media__youtube d-flex align-items-center {{ link_class }}"
+        <a href="{{ settings.social_youtube }}" target="_blank" rel="noopener noreferrer" class="social-media__youtube d-flex align-items-center {{ link_class }}" aria-label="{{ 'general.social.names.youtube' | t }}"
             {% if social_enable_tooltip and type == 'row' %}
                 data-js-tooltip
                 data-tippy-content="{{ 'general.social.names.youtube' | t }}"
@@ -76,7 +76,7 @@
         </a>
     {%- endif -%}
     {%- if block.settings.show_behance != false and settings.social_behance != blank -%}
-        <a href="{{ settings.social_behance }}" target="_blank" class="social-media__behance d-flex align-items-center {{ link_class }}"
+        <a href="{{ settings.social_behance }}" target="_blank" rel="noopener noreferrer" class="social-media__behance d-flex align-items-center {{ link_class }}" aria-label="{{ 'general.social.names.behance' | t }}"
             {%- if social_enable_tooltip and type == 'row' %}
                 data-js-tooltip
                 data-tippy-content="{{ 'general.social.names.behance' | t }}"
@@ -88,7 +88,7 @@
         </a>
     {%- endif -%}
     {%- if block.settings.show_skype != false and settings.social_skype != blank -%}
-        <a href="{{ settings.social_skype }}" target="_blank" class="social-media__skype d-flex align-items-center {{ link_class }}"
+        <a href="{{ settings.social_skype }}" target="_blank" rel="noopener noreferrer" class="social-media__skype d-flex align-items-center {{ link_class }}" aria-label="{{ 'general.social.names.skype' | t }}"
             {% if social_enable_tooltip and type == 'row' %}
                 data-js-tooltip
                 data-tippy-content="{{ 'general.social.names.skype' | t }}"
@@ -100,7 +100,7 @@
         </a>
     {%- endif -%}
     {%- if block.settings.show_tiktok != false and settings.social_tiktok != blank -%}
-        <a href="{{ settings.social_tiktok }}" target="_blank" class="social-media__tiktok d-flex align-items-center {{ link_class }}"
+        <a href="{{ settings.social_tiktok }}" target="_blank" rel="noopener noreferrer" class="social-media__tiktok d-flex align-items-center {{ link_class }}" aria-label="{{ 'general.social.names.tiktok' | t }}"
             {% if social_enable_tooltip and type == 'row' %}
                 data-js-tooltip
                 data-tippy-content="{{ 'general.social.names.tiktok' | t }}"

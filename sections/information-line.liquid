@@ -1,3 +1,4 @@
+{%- # theme-check-disable UndefinedObject, DeprecatedTag -%}
 {% capture style_base_html %}
     <style>
         :root {
@@ -105,7 +106,7 @@
     {%- if request.design_mode -%}
         {{ style_base_html }}
     {%- else -%}
-        <template class="js-loader-inline-style" data-key="{{ style_base_html | hmac_sha1: 'secret_key' }}">{{ style_base_html }}</template>
+        <template class="js-loader-inline-style" data-key="{{ style_base_html | hmac_sha1: 'inline-style-cache-salt' }}">{{ style_base_html }}</template>
     {%- endif -%}
 {%- endif -%}
 {%- if section.blocks.size > 0 -%}
@@ -125,7 +126,7 @@
                         {% endif %}
                             {%- if section.settings.type == '1' -%}
                                 <div class="d-flex align-items-center justify-content-start justify-content-lg-start py-10">
-                                    <i class="mr-15">{% include 'load-icon' with name: block.settings.icon %}</i>
+                                    <i class="mr-15">{% render 'load-icon', name: block.settings.icon %}</i>
                                     <div>
                                         {%- if block.settings.title != blank -%}
                                             <h6 class="information-line__title d-inline">{{ block.settings.title }} </h6>
@@ -137,7 +138,7 @@
                                 </div>
                             {%- else -%}
                                 <div class="d-flex align-items-start justify-content-start py-10">
-                                    <i class="mr-15">{% include 'load-icon' with name: block.settings.icon %}</i>
+                                    <i class="mr-15">{% render 'load-icon', name: block.settings.icon %}</i>
                                     <div>
                                         {%- if block.settings.title != blank -%}
                                             <h6 class="information-line__title mb-0">{{ block.settings.title }} </h6>
@@ -163,7 +164,8 @@
 {%- endif -%}
 
 
-{% schema %}{
+{% schema %}
+{
     "name": "t:sections.information_line.name",
     "settings": [
         {
@@ -292,4 +294,5 @@
             ]
         }
     ]
-}{% endschema %}
+}
+{% endschema %}

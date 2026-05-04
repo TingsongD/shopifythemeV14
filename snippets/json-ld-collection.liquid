@@ -1,107 +1,39 @@
-{%- comment -%}
-================================================================================
-Collection Schema - JSON-LD Structured Data
-================================================================================
-Outputs CollectionPage and ItemList structured data for Google Rich Results.
-This enables product carousel rich results in search for collection pages.
-================================================================================
-{%- endcomment -%}
-{%- assign collection_currency = localization.country.currency.iso_code | default: shop.currency -%}
+{% doc %}
+Outputs lightweight CollectionPage and ItemList JSON-LD for collection pages.
+Product offer markup is intentionally kept on product pages to avoid category pages competing with purchasable Product schema.
+@example
+{% render 'json-ld-collection' %}
+{% enddoc %}
+{%- if collection -%}
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
   "@type": "CollectionPage",
-  "name": {{ collection.title | json }},
+  "name": {{ collection.title | strip | json }},
   "url": {{ shop.url | append: collection.url | json }},
-  {% if collection.description != blank %}
-  "description": {{ collection.description | strip_html | strip | truncate: 200 | json }},
-  {% endif %}
-  {% if collection.image %}
-  "image": {{ collection.image | image_url: width: 1200 | json }},
-  {% endif %}
+  {%- if collection.description != blank %}
+  "description": {{ collection.description | strip_html | strip | truncate: 240 | json }},
+  {%- endif -%}
+  {%- if collection.image %}
+  "image": {{ collection.image | image_url: width: 1200 | prepend: 'https:' | json }},
+  {%- endif -%}
   "mainEntity": {
     "@type": "ItemList",
-    "numberOfItems": {{ collection.products_count }},
+    "numberOfItems": {{ collection.products_count | default: 0 | json }},
     "itemListElement": [
-      {%- assign max_products = 20 -%}
-      {%- assign product_count = 0 -%}
-      {%- for product in collection.products limit: max_products -%}
-        {%- assign product_count = product_count | plus: 1 -%}
-        {%- assign rating_value = product.metafields.reviews.rating.value | default: product.metafields.reviews.rating -%}
-        {%- assign rating_count = product.metafields.reviews.rating_count.value | default: product.metafields.reviews.rating_count -%}
-        {%- if rating_value == blank or rating_count == blank -%}
-          {%- assign rating_value = product.metafields.judgeme.rating -%}
-          {%- assign rating_count = product.metafields.judgeme.review_count -%}
-        {%- endif -%}
+      {%- for product in collection.products limit: 20 -%}
         {
           "@type": "ListItem",
-          "position": {{ product_count }},
+          "position": {{ forloop.index | json }},
           "url": {{ shop.url | append: product.url | json }},
-          "item": {
-            "@type": "Product",
-            {%- if rating_value != blank and rating_count != blank and rating_count != 0 -%}
-              "aggregateRating": {
-                "@type": "AggregateRating",
-                "ratingValue": {{ rating_value | json }},
-                "reviewCount": {{ rating_count | json }}
-              },
-            {%- endif -%}
-            "name": {{ product.title | json }},
-            "url": {{ shop.url | append: product.url | json }},
-            {% if product.featured_image %}
-            "image": {{ product.featured_image | image_url: width: 600 | json }},
-            {% endif %}
-            "brand": {
-              "@type": "Brand",
-              "name": {{ product.vendor | default: shop.name | json }}
-            },
-            "offers": {
-              "@type": "AggregateOffer",
-              "priceCurrency": {{ collection_currency | json }},
-              "lowPrice": {{ product.price_min | divided_by: 100.0 | json }},
-              "highPrice": {{ product.price_max | divided_by: 100.0 | json }},
-              "offerCount": {{ product.variants.size }},
-              "availability": "https://schema.org/{% if product.available %}InStock{% else %}OutOfStock{% endif %}",
-              "shippingDetails": {
-                "@type": "OfferShippingDetails",
-                "shippingRate": {
-                  "@type": "MonetaryAmount",
-                  "value": {% assign threshold = settings.cart_free_shipping_value | plus: 0 %}{% if settings.cart_show_free_shipping and product.price_min >= threshold %}0{% else %}7.95{% endif %},
-                  "currency": {{ collection_currency | json }}
-                },
-                "shippingDestination": {
-                  "@type": "DefinedRegion",
-                  "addressCountry": "US"
-                },
-                "deliveryTime": {
-                  "@type": "ShippingDeliveryTime",
-                  "handlingTime": {
-                    "@type": "QuantitativeValue",
-                    "minValue": 1,
-                    "maxValue": 2,
-                    "unitCode": "DAY"
-                  },
-                  "transitTime": {
-                    "@type": "QuantitativeValue",
-                    "minValue": 3,
-                    "maxValue": 7,
-                    "unitCode": "DAY"
-                  }
-                }
-              },
-              "hasMerchantReturnPolicy": {
-                "@type": "MerchantReturnPolicy",
-                "applicableCountry": "US",
-                "returnPolicyCategory": "https://schema.org/MerchantReturnFiniteReturnWindow",
-                "merchantReturnDays": 45,
-                "returnMethod": "https://schema.org/ReturnByMail",
-                "returnFees": "https://schema.org/FreeReturn"
-              }
-            }
-          }
-        }{% unless forloop.last %},{% endunless %}
+          "name": {{ product.title | strip | json }}
+          {%- if product.featured_image -%},
+          "image": {{ product.featured_image | image_url: width: 800 | prepend: 'https:' | json }}
+          {%- endif -%}
+        }{%- unless forloop.last -%},{%- endunless -%}
       {%- endfor -%}
     ]
   }
 }
 </script>
+{%- endif -%}

@@ -217,7 +217,7 @@
             padding-right: {{ button_padding_horizontal_d }}px;
         }
         .preloader--page {
-            cursor: {% if layout_preloader_cursor != blank %}url('{{ layout_preloader_cursor | img_url }}'),{% endif %} default !important;
+            cursor: {% if layout_preloader_cursor != blank %}url('{{ layout_preloader_cursor | image_url: width: 32, height: 32 }}'),{% endif %} default !important;
         }
     }
     @media (max-width: 1024px) {
@@ -403,7 +403,7 @@
 {%- endif -%}
 {%- if settings.dev_enable_custom_css == true -%}
     <script>theme.AssetsLoader.onLoadTag('styles', 'custom')</script>
-    <link rel="preload" href="{{ 'custom.s.min.css' | asset_url }}" as="style" onload="window.theme.AssetsLoader.onLoadStyleLinkPreload(this, 'custom')">
+    <link rel="preload" href="{{ 'custom.css' | asset_url }}" as="style" onload="window.theme.AssetsLoader.onLoadStyleLinkPreload(this, 'custom')">
 {%- endif -%}
 
 <script>

@@ -371,10 +371,10 @@
     {%- endif -%}
 {%- else -%}
     {%- if styles_responsive_html != blank -%}
-        <template class="js-loader-inline-style" data-key="{{ styles_responsive_html | hmac_sha1: 'secret_key' }}">{{ styles_responsive_html }}</template>
+        <template class="js-loader-inline-style" data-key="{{ styles_responsive_html | hmac_sha1: 'inline-style-cache-salt' }}">{{ styles_responsive_html }}</template>
     {%- endif -%}
     {%- if styles_html != blank -%}
-        <template class="js-loader-inline-style" data-key="{{ styles_html | hmac_sha1: 'secret_key' }}">{{ styles_html }}</template>
+        <template class="js-loader-inline-style" data-key="{{ styles_html | hmac_sha1: 'inline-style-cache-salt' }}">{{ styles_html }}</template>
     {%- endif -%}
 {%- endif -%}
 <product-gallery class="product-gallery{% unless is_quick_view %} product-gallery--autoinit{% endunless %} product-gallery--layout-{{ template_layout }}{% if product.media.size == 1 and template_layout != '3' %} product-gallery--single{% endif %}{% if template_layout == '2' and sidebar == 'off' %} product-gallery--container{% endif %} d-block pb-20 mx-auto" data-js-product-gallery data-product-gallery-id="{{ gallery_id }}">
@@ -658,7 +658,7 @@
       "type": {{ floating_video_type | json }},
       "host": {{ floating_video_host | json }},
       "src": {{ floating_video_src | json }},
-      "poster": {{ floating_video_poster | img_url: '600x' | json }},
+      "poster": {{ floating_video_poster | image_url: width: 600 | json }},
       "aspect_ratio": {{ floating_video_aspect_ratio | json }},
       "title": {{ product.title | json }},
       "audio_src": {{ product.metafields.custom.audio_sales_pitch.value.url | json }}

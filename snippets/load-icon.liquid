@@ -1,7 +1,6 @@
 {%- if name != blank -%}
-    {% assign snippet_name = "icon-" | append: name %}
     {% capture icon_html %}
-        {% include snippet_name %}
+        {% render 'theme-icon', name: name %}
     {% endcapture %}
     {%- unless icon_html contains "Liquid error" -%}
         {%- if attr != blank -%}

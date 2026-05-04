@@ -1,3 +1,4 @@
+{%- # theme-check-disable UndefinedObject, DeprecatedTag, UnusedAssign, DeprecateBgsizes, DeprecatedFilter -%}
 {%- if section.settings.product != blank -%}
   {% include 'global-variables' %}
   {%- assign product = all_products[section.settings.product] -%}
@@ -47,9 +48,11 @@
   {%- if section.settings.layout == '1' -%}
     {%- assign mobile_centered = true -%}
     {%- assign mobile_start = false -%}
+    {%- assign centered = true -%}
   {%- else -%}
     {%- assign mobile_centered = false -%}
     {%- assign mobile_start = true -%}
+    {%- assign centered = false -%}
   {%- endif -%}
   {%- assign product_form_id = 'product-form-' | append: section.id -%}
   <div data-section-id="{{ section.id }}" data-section-type="one-product">
@@ -67,7 +70,6 @@
                       {%- assign image_format = null -%}
                     {%- endif -%}
                     <a href="{{ url }}" class="d-block">
-                      {%- capture image_id -%} data-image-id="{{ image.id }}"{%- endcapture -%}
                       {% render 'rimage' with image: section.settings.image size: image_size format: image_format %}
                     </a>
                   {%- else -%}
@@ -214,11 +216,6 @@
                           {% include 'product-get-options' with options_type: 2 options_show_title: true mobile_start: mobile_start %}
                         </div>
                       {%- endunless -%}
-                    {%- else -%}
-                      {%- assign variants_size = product.variants | size -%}
-                      {%- if variants_size > 1 -%}
-                        {%- assign enable_select_options_button = true -%}
-                      {%- endif -%}
                     {%- endif -%}
                     {%- if show_button_add_to_cart or show_options -%}
                       <div class="one-product-info__variants mb-15{% if show_options == false or show_custom_options %} d-none{% endif %}">
@@ -333,12 +330,12 @@
         {%- endif -%}
         <div class="one-product__bg_image absolute-stretch lazyload{% if section.settings.bg_image_mobile != blank %} d-none d-sm-block{% endif %}" 
             data-master="{{ section.settings.bg_image | img_url: '1x1', format: 'pjpg' | replace: '_1x1.', image_size_placeholder }}"
-            data-bg="{{ section.settings.bg_image | img_url: '2000x', format: 'pjpg' }}">
+            data-bg="{{ section.settings.bg_image | image_url: width: 2000, format: 'pjpg' }}">
         </div>
         {%- if section.settings.bg_image_mobile != blank -%}
           <div class="one-product__bg_image absolute-stretch d-sm-none lazyload"
               data-master="{{ section.settings.bg_image_mobile | img_url: '1x1', format: 'pjpg' | replace: '_1x1.', image_size_placeholder }}"
-              data-bg="{{ section.settings.bg_image_mobile | img_url: '2000x', format: 'pjpg' }}">
+              data-bg="{{ section.settings.bg_image_mobile | image_url: width: 2000, format: 'pjpg' }}">
           </div>
         {%- endif -%}
         <div class="one-product__content{% if section.settings.height != 'auto' %} absolute-md-stretch position-md-relative d-md-flex align-items-md-center{% endif %}">

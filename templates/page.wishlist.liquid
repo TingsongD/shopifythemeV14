@@ -4,7 +4,7 @@
         {% include 'wishlist' %}
     {%- else -%}
         <script>
-            window.location.href = '/account/login';
+            window.location.href = {{ routes.account_login_url | json }};
         </script>
     {%- endif -%}
 </div>

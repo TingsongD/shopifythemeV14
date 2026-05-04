@@ -78,6 +78,30 @@
         "customization_class": ""
       }
     },
+    "fresh_underwear_box": {
+      "type": "msd-fresh-underwear-box",
+      "settings": {
+        "display_mode": "feature",
+        "product": "disposable-underwear-box",
+        "eyebrow": "Monthly disposable underwear refresh box",
+        "heading": "The second pair of the day.",
+        "subheading": "30 Fresh Pairs delivered monthly for a clean midday reset: EO sterilized, biodegradable, and ready to carry.",
+        "cta_label": "Subscribe Now - $49/Month",
+        "cta_link": "/products/disposable-underwear-box"
+      }
+    },
+    "d4e5f6a7-b8c9-4123-c4d5-678901234567": {
+      "type": "spacer",
+      "settings": {
+        "margin_top": 20,
+        "margin_bottom": 10,
+        "margin_top_mobile": 10,
+        "margin_bottom_mobile": 10,
+        "container": "boxed",
+        "show_separator": false,
+        "title": ""
+      }
+    },
     "552f8dfe-f3b6-4e55-8753-3da9a77c6611": {
       "type": "sorting-collections",
       "blocks": {
@@ -1186,6 +1210,8 @@
   },
   "order": [
     "88140d03-ae09-46a4-aea0-a933fa487cd4",
+    "fresh_underwear_box",
+    "d4e5f6a7-b8c9-4123-c4d5-678901234567",
     "552f8dfe-f3b6-4e55-8753-3da9a77c6611",
     "4aa75084-79ab-48e0-84f5-fa47f5082b5e",
     "c8ff5934-698a-4018-82a8-854d42a73e94",

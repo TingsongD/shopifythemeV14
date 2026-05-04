@@ -42,7 +42,7 @@
   {%- if poster_string contains '//' or poster_string contains 'cdn.shopify.com' -%}
     {%- assign final_poster_url = poster_string -%}
   {%- else -%}
-    {%- assign final_poster_url = final_poster | img_url: '600x' -%}
+    {%- assign final_poster_url = final_poster | image_url: width: 600 -%}
   {%- endif -%}
 {%- endif -%}
 {%- assign final_type = 'external_video' -%}
@@ -78,7 +78,7 @@
         {%- if poster_string contains '//' or poster_string contains 'cdn.shopify.com' -%}
           {%- assign block_poster_url = poster_string -%}
         {%- else -%}
-          {%- assign block_poster_url = block_poster | img_url: '600x' -%}
+          {%- assign block_poster_url = block_poster | image_url: width: 600 -%}
         {%- endif -%}
       {%- endif -%}
       {%- if block_id != blank -%}

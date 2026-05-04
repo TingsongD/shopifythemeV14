@@ -7,7 +7,7 @@
                 <form id="CollectionFiltersForm" class="collection-filters__form mb-0">
                     <div id="FacetsWrapperDesktop" class="collection-filters__form-wrapper">
                         <div class="d-none js-filter" data-index="0" id="Details-SortBy-{{ section.id }}">
-                            <select name="sort_by" id="SortBy">
+                            <select name="sort_by" id="SortBy" aria-label="{{ 'collection_template.sort_by_label' | t }}">
                                 {%- for option in main_object.sort_options -%}
                                     <option value="{{ option.value | escape }}"{% if option.value == sort_by %} selected="selected"{% endif %}>{{ option.name | escape }}</option>
                                 {%- endfor -%}
@@ -119,7 +119,7 @@
                     <form id="CollectionFiltersForm" class="collection-filters__form mb-0">
                         <div id="FacetsWrapperDesktop" class="collection-filters__form-wrapper">
                             <div class="d-none js-filter" data-index="0"id="Details-SortBy-{{ section.id }}">
-                                <select name="sort_by" id="SortBy">
+                                <select name="sort_by" id="SortBy" aria-label="{{ 'collection_template.sort_by_label' | t }}">
                                     {%- for option in main_object.sort_options -%}
                                         <option value="{{ option.value | escape }}"{% if option.value == sort_by %} selected="selected"{% endif %}>{{ option.name | escape }}</option>
                                     {%- endfor -%}
@@ -263,6 +263,7 @@
                                                                     <input class="mb-0 text-right"
                                                                         name="{{ filter.min_value.param_name }}"
                                                                         id="Filter-{{ filter.label | escape }}-GTE"
+                                                                        aria-label="{{ 'collection_template.from' | t }} {{ filter.label | escape }}"
                                                                         {%- if filter.min_value.value -%}
                                                                         {%- if uses_comma_decimals -%}value="{{ filter.min_value.value | money_without_currency | replace: '.', '' | replace: ',', '.' }}"{%- else -%}value="{{ filter.min_value.value | money_without_currency | replace: ',', '' }}"{% endif %}
                                                                         {%- endif -%}
@@ -281,6 +282,7 @@
                                                                     <input class="mb-0 text-right"
                                                                         name="{{ filter.max_value.param_name }}"
                                                                         id="Filter-{{ filter.label | escape }}-LTE"
+                                                                        aria-label="{{ 'collection_template.to' | t }} {{ filter.label | escape }}"
                                                                         {%- if filter.max_value.value -%}{%- if uses_comma_decimals -%}value="{{ filter.max_value.value | money_without_currency | replace: '.', '' | replace: ',', '.' }}"{%- else -%}value="{{ filter.max_value.value | money_without_currency | replace: ',', '' }}"{% endif %}
                                                                         {%- endif -%}
                                                                         type="number"
@@ -479,12 +481,14 @@
                             {% form 'customer', id: null, class: 'subscription-form form-group--type-inline form-input-button form-input-button--type-02 d-flex flex-column flex-lg-row mb-15' %}
                                 {% render 'form-get-check-error-popup' %}
                                 <input type="hidden" name="contact[tags]" value="newsletter">
-                                <input type="email" name="contact[email]" class="mb-0 mr-lg-10{% if form.errors %} input--error{% endif %}" placeholder="{{ block.settings.placeholder }}" required="required">
+                                <label for="CollectionSidebarEmail-{{ block.id }}" class="label-hidden">{{ block.settings.placeholder | default: 'Email' }}</label>
+                                <input type="email" name="contact[email]" id="CollectionSidebarEmail-{{ block.id }}" class="mb-0 mr-lg-10{% if form.errors %} input--error{% endif %}" placeholder="{{ block.settings.placeholder }}" required="required">
                                 <input type="submit" class="input-checkbox-disable-body btn mt-10 mt-lg-0" name="commit" value="{{ block.settings.button_text }}">
                             {% endform %}
                         {%- elsif settings.subscription_method == 'mailchimp' -%}
-                            <form action="{{ settings.subscription_mailchimp_form_action }}" method="post" class="subscription-form form-group--type-inline form-input-button form-input-button--type-02 d-flex flex-column flex-lg-row mb-15" target="_blank">
-                                <input type="email" name="EMAIL" class="mb-0 mr-lg-10" placeholder="{{ block.settings.placeholder }}" required="required">
+                            <form action="{{ settings.subscription_mailchimp_form_action }}" method="post" class="subscription-form form-group--type-inline form-input-button form-input-button--type-02 d-flex flex-column flex-lg-row mb-15" target="_blank" rel="noopener noreferrer">
+                                <label for="CollectionSidebarMailchimpEmail-{{ block.id }}" class="label-hidden">{{ block.settings.placeholder | default: 'Email' }}</label>
+                                <input type="email" name="EMAIL" id="CollectionSidebarMailchimpEmail-{{ block.id }}" class="mb-0 mr-lg-10" placeholder="{{ block.settings.placeholder }}" required="required">
                                 <input type="submit" class="input-checkbox-disable-body btn mt-10 mt-lg-0" value="{{ block.settings.button_text }}">
                             </form>
                         {%- endif -%}

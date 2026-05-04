@@ -2,7 +2,7 @@
 {%- assign loc-message-text = set-message-text | default: default-message-text -%}
 {%- if form.errors -%}
     {%- assign res-error-fields = null -%}
-    <div class="note note--error">
+    <div class="note note--error" role="alert" aria-live="assertive">
         <ul>
             {%- for field in form.errors -%}
                 {%- if forloop.first != true -%}
@@ -22,5 +22,5 @@
 {%- endif -%}
 {%- assign res-error-fields = res-error-fields | split: '|' -%}
 {%- if form.posted_successfully? -%}
-    <div class="note note--success mt-20" id="ResetSuccess">{{ loc-message-text }}</div>
+    <div class="note note--success mt-20" id="ResetSuccess" role="status" aria-live="polite">{{ loc-message-text }}</div>
 {%- endif -%}

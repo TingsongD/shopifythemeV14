@@ -1,7 +1,4 @@
 {%- if section.blocks.size > 0 -%}
-    {%- if settings.layout_images_lazyload == false -%}
-        {%- assign disable_lazyload = true -%}
-    {%- endif -%}
     {% capture styles_tags %}
         <style>
             {%- for block in section.blocks -%}
@@ -36,9 +33,9 @@
                         {
                             {%- if block.settings.image != blank -%}
                                 {%- if settings.product_format_pjpg -%}
-                                    background-image: url({{ block.settings.image | img_url: '92x', format: 'pjpg' }}) !important;
+                                    background-image: url({{ block.settings.image | image_url: width: 92, format: 'pjpg' }}) !important;
                                 {%- else -%}
-                                    background-image: url({{ block.settings.image | img_url: '92x' }}) !important;
+                                    background-image: url({{ block.settings.image | image_url: width: 92 }}) !important;
                                 {%- endif -%}
                             {%- elsif block.settings.disable_default_image -%}
                                 background-image: none !important;
@@ -59,9 +56,9 @@
                             {%- endif -%}
                                 {
                                     {%- if settings.product_format_pjpg -%}
-                                        background-image: url({{ image | img_url: '92x', format: 'pjpg' }}) !important;
+                                        background-image: url({{ image | image_url: width: 92, format: 'pjpg' }}) !important;
                                     {%- else -%}
-                                        background-image: url({{ image | img_url: '92x' }}) !important;
+                                        background-image: url({{ image | image_url: width: 92 }}) !important;
                                     {%- endif -%}
                                 }
                         {%- else -%}
@@ -95,7 +92,7 @@
     {%- if request.design_mode -%}
         {{ styles_tags }}
     {%- else -%}
-        <template class="js-loader-inline-style" data-key="{{ styles_tags | hmac_sha1: 'secret_key' }}">{{ styles_tags }}</template>
+        <template class="js-loader-inline-style" data-key="{{ styles_tags | hmac_sha1: 'inline-style-cache-salt' }}">{{ styles_tags }}</template>
         <script>
             theme.AssetsLoader.loadInlineStyles();
         </script>
@@ -103,7 +100,8 @@
 {%- endif -%}
 
 
-{% schema %}{
+{% schema %}
+{
     "name": "t:sections.product_variants.name",
     "settings": [
         {
@@ -411,4 +409,5 @@
             ]
         }
     ]
-}{% endschema %}
+}
+{% endschema %}

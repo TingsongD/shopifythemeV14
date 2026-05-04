@@ -10,8 +10,10 @@
             {% case section.settings.type %}
             {% when '1' %}
                 <form action="{{ routes.search_url }}" method="get" role="search" class="mb-0">
+                    <label for="SearchFormInput-{{ section.id }}" class="label-hidden">{{ section.settings.placeholder | default: 'Search' }}</label>
                     <label class="position-relative d-flex align-items-center mr-0">
                         <input type="search"
+                               id="SearchFormInput-{{ section.id }}"
                                class="pl-20 pr-40 mb-0"
                                name="q"
                                value="{{ search.terms | escape }}"
@@ -25,7 +27,9 @@
             {% when '2' %}
                 <form action="{{ routes.search_url }}" method="get" role="search" class="mb-0">
                     <div class="d-flex">
+                        <label for="SearchFormInput-{{ section.id }}" class="label-hidden">{{ section.settings.placeholder | default: 'Search' }}</label>
                         <input type="search"
+                               id="SearchFormInput-{{ section.id }}"
                                class="mb-0 mr-15"
                                name="q"
                                value="{{ search.terms | escape }}"

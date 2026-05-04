@@ -1,6 +1,7 @@
 {%- case type -%}
     {%- when 'btn-text' -%}
         <a href="{{ url }}" class="btn btn--text pt-2 px-lg-6 js-popup-button"
+            aria-label="{{ 'products.product.tooltip.quick_view' | t }}"
             data-js-popup-button="quick-view"
             {%- if settings.tooltips_enable and product_enable_tooltips %}
                 data-js-tooltip
@@ -13,6 +14,7 @@
         </a>
     {%- else -%}
         <a href="{{ url }}" class="button-quick-view d-flex flex-center rounded-circle js-popup-button"
+            aria-label="{{ 'products.product.tooltip.quick_view' | t }}"
             data-js-popup-button="quick-view"
             {%- if settings.tooltips_enable and product_enable_tooltips %}
                 data-js-tooltip

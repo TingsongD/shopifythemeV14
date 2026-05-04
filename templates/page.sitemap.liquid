@@ -48,7 +48,8 @@
       <h2>Products</h2>
       <ul id="product-sitemap">
 
-        {% paginate collections.all.products by 1000 %}
+        {% comment %} Shopify paginate max is 250; add pagination links if you need full catalog. {% endcomment %}
+        {% paginate collections.all.products by 250 %}
         {% for product in collections.all.products %}
         <li>
           <a href="{{ product.url }}">{{ product.title }}</a>

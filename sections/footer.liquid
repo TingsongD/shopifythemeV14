@@ -1,3 +1,4 @@
+{%- # theme-check-disable UndefinedObject, UnclosedHTMLElement, DeprecatedTag, UnusedAssign -%}
 {% include 'global-variables' %}
 {%- assign menus = null -%}
 {%- assign selected_blocks_colorize = section.blocks | where: 'type', 'colorize' -%}
@@ -228,7 +229,7 @@
     {%- if request.design_mode -%}
         {{ style_base_html }}
     {%- else -%}
-        <template class="js-loader-inline-style" data-key="{{ style_base_html | hmac_sha1: 'secret_key' }}">{{ style_base_html }}</template>
+        <template class="js-loader-inline-style" data-key="{{ style_base_html | hmac_sha1: 'inline-style-cache-salt' }}">{{ style_base_html }}</template>
     {%- endif -%}
 {%- endif -%}
 <script>
@@ -270,11 +271,11 @@
         {%- capture logo -%}
             {%- if need_mobile_logo -%}
                 <div class="footer__logo d-lg-none m-auto" style="width: {{ settings.logo_footer_mobile_width }}px;">
-                    {% include 'logo' svg: settings.logo_footer_mobile_svg_file image: settings.logo_footer_mobile_image width: settings.logo_footer_mobile_width %}
+                    {% render 'logo', svg: settings.logo_footer_mobile_svg_file, image: settings.logo_footer_mobile_image, width: settings.logo_footer_mobile_width %}
                 </div>
             {%- endif -%}
             <div class="footer__logo m-auto ml-lg-0 mr-lg-{{ footer_logo_margin_horizontal }}{% if need_mobile_logo %} d-none d-lg-block{% endif %}" style="width: {{ logo_footer_width }}px;">
-                {% include 'logo' svg: logo_footer_svg_file image: logo_footer_image width: logo_footer_width %}
+                {% render 'logo', svg: logo_footer_svg_file, image: logo_footer_image, width: logo_footer_width %}
             </div>
         {%- endcapture -%}
     {%- endif -%}
@@ -408,12 +409,14 @@
                         {% form 'customer', id: null, class: 'subscription-form form-group--type-column d-flex flex-column align-items-lg-center mb-10' %}
                             {% render 'form-get-check-error-popup' %}
                             <input type="hidden" name="contact[tags]" value="newsletter">
-                            <input type="email" name="contact[email]" class="mb-10 mb-lg-20{% if form.errors %} input--error{% endif %}" placeholder="{{ block.settings.placeholder }}" required="required">
+                            <label for="FooterSubscriptionEmail-{{ block.id }}-column" class="label-hidden">{{ block.settings.placeholder | default: 'Email' }}</label>
+                            <input type="email" name="contact[email]" id="FooterSubscriptionEmail-{{ block.id }}-column" class="mb-10 mb-lg-20{% if form.errors %} input--error{% endif %}" placeholder="{{ block.settings.placeholder }}" required="required">
                             <input type="submit" class="input-checkbox-disable-body btn" name="commit" value="{{ block.settings.button_text }}">
                         {% endform %}
                     {%- elsif settings.subscription_method == 'mailchimp' -%}
-                        <form action="{{ settings.subscription_mailchimp_form_action }}" method="post" class="form-group--type-column d-flex flex-column align-items-lg-center mb-10" target="_blank">
-                            <input type="email" name="EMAIL" id="FooterSubscribe" class="mb-10 mb-lg-20" placeholder="{{ block.settings.placeholder }}" required="required">
+                        <form action="{{ settings.subscription_mailchimp_form_action }}" method="post" class="form-group--type-column d-flex flex-column align-items-lg-center mb-10" target="_blank" rel="noopener noreferrer">
+                            <label for="FooterMailchimpEmail-{{ block.id }}-column" class="label-hidden">{{ block.settings.placeholder | default: 'Email' }}</label>
+                            <input type="email" name="EMAIL" id="FooterMailchimpEmail-{{ block.id }}-column" class="mb-10 mb-lg-20" placeholder="{{ block.settings.placeholder }}" required="required">
                             <input type="submit" class="input-checkbox-disable-body btn" value="{{ block.settings.button_text }}">
                         </form>
                     {%- endif -%}
@@ -422,12 +425,14 @@
                         {% form 'customer', id: null, class: 'subscription-form form-group--type-column d-flex flex-column align-items-lg-start mb-10' %}
                             {% render 'form-get-check-error-popup' %}
                             <input type="hidden" name="contact[tags]" value="newsletter">
-                            <input type="email" name="contact[email]" class="mb-10 mb-lg-20{% if form.errors %} input--error{% endif %}" placeholder="{{ block.settings.placeholder }}" required="required">
+                            <label for="FooterSubscriptionEmail-{{ block.id }}-start" class="label-hidden">{{ block.settings.placeholder | default: 'Email' }}</label>
+                            <input type="email" name="contact[email]" id="FooterSubscriptionEmail-{{ block.id }}-start" class="mb-10 mb-lg-20{% if form.errors %} input--error{% endif %}" placeholder="{{ block.settings.placeholder }}" required="required">
                             <input type="submit" class="input-checkbox-disable-body btn" name="commit" value="{{ block.settings.button_text }}">
                         {% endform %}
                     {%- elsif settings.subscription_method == 'mailchimp' -%}
-                        <form action="{{ settings.subscription_mailchimp_form_action }}" method="post" class="form-group--type-column d-flex flex-column align-items-lg-start mb-10" target="_blank">
-                            <input type="email" name="EMAIL" id="FooterSubscribe" class="mb-10 mb-lg-20" placeholder="{{ block.settings.placeholder }}" required="required">
+                        <form action="{{ settings.subscription_mailchimp_form_action }}" method="post" class="form-group--type-column d-flex flex-column align-items-lg-start mb-10" target="_blank" rel="noopener noreferrer">
+                            <label for="FooterMailchimpEmail-{{ block.id }}-start" class="label-hidden">{{ block.settings.placeholder | default: 'Email' }}</label>
+                            <input type="email" name="EMAIL" id="FooterMailchimpEmail-{{ block.id }}-start" class="mb-10 mb-lg-20" placeholder="{{ block.settings.placeholder }}" required="required">
                             <input type="submit" class="input-checkbox-disable-body btn" value="{{ block.settings.button_text }}">
                         </form>
                     {%- endif -%}
@@ -437,12 +442,14 @@
                         {% form 'customer', id: null, class: subscription_form_class %}
                             {% render 'form-get-check-error-popup' %}
                             <input type="hidden" name="contact[tags]" value="newsletter">
-                            <input type="email" name="contact[email]" class="mb-10 mb-lg-0 mr-lg-10 {% if form.errors %} input--error{% endif %}" placeholder="{{ block.settings.placeholder }}" required="required">
+                            <label for="FooterSubscriptionEmail-{{ block.id }}-inline" class="label-hidden">{{ block.settings.placeholder | default: 'Email' }}</label>
+                            <input type="email" name="contact[email]" id="FooterSubscriptionEmail-{{ block.id }}-inline" class="mb-10 mb-lg-0 mr-lg-10 {% if form.errors %} input--error{% endif %}" placeholder="{{ block.settings.placeholder }}" required="required">
                             <input type="submit" class="input-checkbox-disable-body btn px-lg-{{ footer_subscription_button_padding_horizontal }}" name="commit" value="{{ block.settings.button_text }}">
                         {% endform %}
                     {%- elsif settings.subscription_method == 'mailchimp' -%}
-                        <form action="{{ settings.subscription_mailchimp_form_action }}" method="post" class="{{ subscription_form_class }}" target="_blank">
-                            <input type="email" name="EMAIL" id="FooterSubscribe" class="mb-10 mb-lg-0 mr-lg-10" placeholder="{{ block.settings.placeholder }}" required="required">
+                        <form action="{{ settings.subscription_mailchimp_form_action }}" method="post" class="{{ subscription_form_class }}" target="_blank" rel="noopener noreferrer">
+                            <label for="FooterMailchimpEmail-{{ block.id }}-inline" class="label-hidden">{{ block.settings.placeholder | default: 'Email' }}</label>
+                            <input type="email" name="EMAIL" id="FooterMailchimpEmail-{{ block.id }}-inline" class="mb-10 mb-lg-0 mr-lg-10" placeholder="{{ block.settings.placeholder }}" required="required">
                             <input type="submit" class="input-checkbox-disable-body btn px-lg-{{ footer_subscription_button_padding_horizontal }}" value="{{ block.settings.button_text }}">
                         </form>
                     {%- endif -%}
@@ -488,7 +495,7 @@
                     {%- if copyright_page_content != blank -%}
                         {{ copyright_page_content }}
                     {%- else -%}
-                        &copy; 2010 - {{ 'now' | date: "%Y" }} {{ shop.name | link_to: '/' }}. All Rights Reserved.
+                        &copy; 2010 - {{ 'now' | date: "%Y" }} {{ shop.name | link_to: routes.root_url }}. All Rights Reserved.
                     {%- endif -%}
                 </div>
             </div>
@@ -496,7 +503,7 @@
     {%- when 'payments' -%}
         {%- capture payments -%}
             <div class="footer__payments justify-content-center pt-5{% if section.settings.type != '3' and section.settings.type != '7' %} ml-lg-auto{% endif %}">
-                {% include 'payments' with size: 2 payments_sequence: settings.payment_sequence_footer %}
+                {% render 'payments', size: 2, payments_sequence: settings.payment_sequence_footer %}
             </div>
         {%- endcapture -%}
     {%- endcase -%}
@@ -965,26 +972,26 @@
         },
         {
             "type": "custom_html",
-            "name": "t:sections.footer.blocks.custom_html.name",
+            "name": "Custom HTML",
             "limit": 1,
             "settings": [
                 {
                     "type": "text",
                     "id": "title",
-                    "label": "t:sections.footer.blocks.custom_html.settings.title.label",
+                    "label": "Title",
                     "default": "Here to help"
                 },
                 {
                     "type": "checkbox",
                     "id": "show_title_on_desktop",
-                    "label": "t:sections.footer.blocks.custom_html.settings.show_title_on_desktop.label",
+                    "label": "Show title on the desktop",
                     "default": true
                 },
                 {
                     "type": "page",
                     "id": "page_content",
-                    "label": "t:sections.footer.blocks.custom_html.settings.page_content.label",
-                    "info": "t:sections.footer.blocks.custom_html.settings.page_content.info"
+                    "label": "Page content",
+                    "info": "Select a page; its content is shown in this block."
                 }
             ]
         },

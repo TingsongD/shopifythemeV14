@@ -8,6 +8,21 @@
     "theme_support_url": "https://mpithemes.ticksy.com"
   },
   {
+    "name": "MSD / SEO",
+    "settings": [
+      {
+        "type": "header",
+        "content": "Search & verification"
+      },
+      {
+        "type": "text",
+        "id": "seo_google_site_verification",
+        "label": "Google Search Console verification content",
+        "info": "Paste the content value from Google Search Console (the meta content attribute only). Leave blank to disable the verification tag."
+      }
+    ]
+  },
+  {
     "name": "t:settings_schema.quick_start.name",
     "settings": [
       {

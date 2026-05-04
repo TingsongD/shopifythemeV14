@@ -44,12 +44,12 @@
                         {% form 'customer', id: null, class: 'subscription-form form-group--type-inline d-flex d-flex flex-column flex-lg-row' %}
                             {% render 'form-get-check-error-popup' %}
                             <input type="hidden" name="contact[tags]" value="newsletter">
-                            <input type="email" name="contact[email]" class="mb-10 mb-lg-0 mr-lg-10 {% if form.errors %} input--error{% endif %}" placeholder="{{ settings.subscription_popup_text_input_placeholder }}" required="required">
+                            <input type="email" name="contact[email]" class="mb-10 mb-lg-0 mr-lg-10 {% if form.errors %} input--error{% endif %}" aria-label="{{ settings.subscription_popup_text_input_placeholder | default: 'Email' }}" placeholder="{{ settings.subscription_popup_text_input_placeholder }}" required="required">
                             <input type="submit" class="input-checkbox-disable-body btn btn--secondary" name="commit" value="{{ settings.subscription_popup_text_submit_button_text }}">
                         {% endform %}
                     {%- elsif settings.subscription_method == 'mailchimp' -%}
-                        <form action="{{ settings.subscription_mailchimp_form_action }}" method="post" class="subscription-form form-group--type-inline d-flex d-flex flex-column flex-lg-row" target="_blank">
-                            <input type="email" name="EMAIL" id="PopupSubscribe" class="mb-10 mb-lg-0 mr-lg-10" placeholder="{{ settings.subscription_popup_text_input_placeholder }}" required="required">
+                        <form action="{{ settings.subscription_mailchimp_form_action }}" method="post" class="subscription-form form-group--type-inline d-flex d-flex flex-column flex-lg-row" target="_blank" rel="noopener noreferrer">
+                            <input type="email" name="EMAIL" id="PopupSubscribe" class="mb-10 mb-lg-0 mr-lg-10" aria-label="{{ settings.subscription_popup_text_input_placeholder | default: 'Email' }}" placeholder="{{ settings.subscription_popup_text_input_placeholder }}" required="required">
                             <input type="submit" class="input-checkbox-disable-body btn" value="{{ settings.subscription_popup_text_submit_button_text }}">
                         </form>
                     {%- endif -%}

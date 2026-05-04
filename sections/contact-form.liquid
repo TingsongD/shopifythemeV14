@@ -36,18 +36,14 @@
                         {%- if form.posted_successfully? -%}
                             <p class="form-success">{{ 'contact.form.post_success' | t }}</p>
                         {%- endif -%}
-                        {%- if section.settings.show_input_label -%}
-                            <label for="ContactFormName" class="label-required">{{ 'contact.form.name_title' | t }}</label>
-                        {%- endif -%}
+                        <label for="ContactFormName" class="{% unless section.settings.show_input_label %}label-hidden {% endunless %}label-required">{{ 'contact.form.name_title' | t }}</label>
                         <input type="text"
                                name="contact[name]"
                                id="ContactFormName"
                                placeholder="{{ 'contact.form.name_placeholder' | t }}"
                                value="{% if form[name] %}{{ form[name] }}{% elsif customer %}{{ customer.name }}{% endif %}"
                                required="required">
-                        {%- if section.settings.show_input_label -%}
-                            <label for="ContactFormEmail" class="label-required">{{ 'contact.form.email_title' | t }}</label>
-                        {%- endif -%}
+                        <label for="ContactFormEmail" class="{% unless section.settings.show_input_label %}label-hidden {% endunless %}label-required">{{ 'contact.form.email_title' | t }}</label>
                         <input type="email"
                                name="contact[email]"
                                id="ContactFormEmail"
@@ -57,9 +53,7 @@
                                autocomplete="off"
                                autocapitalize="off"
                                required="required">
-                        {%- if section.settings.show_input_label -%}
-                            <label for="ContactFormPhone">{{ 'contact.form.phone_title' | t }}</label>
-                        {%- endif -%}
+                        <label for="ContactFormPhone"{% unless section.settings.show_input_label %} class="label-hidden"{% endunless %}>{{ 'contact.form.phone_title' | t }}</label>
                         <input type="tel"
                                class="form-control"
                                name="contact[phone]"
@@ -67,9 +61,7 @@
                                placeholder="{{ 'contact.form.phone_placeholder' | t }}"
                                value="{% if form[phone] %}{{ form[phone] }}{% elsif customer %}{{ customer.phone }}{% endif %}"
                                required="required">
-                        {%- if section.settings.show_input_label -%}
-                            <label for="ContactFormMessage" class="label-required">{{ 'contact.form.message_title' | t }}</label>
-                        {%- endif -%}
+                        <label for="ContactFormMessage" class="{% unless section.settings.show_input_label %}label-hidden {% endunless %}label-required">{{ 'contact.form.message_title' | t }}</label>
                         <textarea rows="8"
                                   name="contact[body]"
                                   id="ContactFormMessage"
@@ -142,7 +134,7 @@
             "type": "textarea",
             "id": "contact_map_code",
             "label": "Contact Map Code",
-            "default": "<iframe width=\"600\" height=\"450\" frameborder=\"0\" style=\"border:0\" src=\"https://www.google.com/maps/embed/v1/place?key=AIzaSyBwY_0PWuwH_A5y4iwNAqpaUbUjRPySkFc%0A%20%20%20%20&q=7563%20St.%20Vicent%20Place,%20Glasgow\" allowfullscreen=\"\"></iframe>"
+            "default": "<iframe width=\"600\" height=\"450\" style=\"border:0\" src=\"https://www.google.com/maps?q=7563%20St.%20Vicent%20Place,%20Glasgow&output=embed\" allowfullscreen=\"\" loading=\"lazy\" referrerpolicy=\"no-referrer-when-downgrade\"></iframe>"
         },
         {
 "type": "header",

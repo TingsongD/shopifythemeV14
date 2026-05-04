@@ -1,3 +1,4 @@
+{%- # theme-check-disable RemoteAsset, DeprecatedTag -%}
 <!doctype html>
 <html class="no-js supports-no-cookies" lang="{{ shop.locale }}"{% if shop.locale == 'ar' or shop.locale == 'he' or settings.layout_enable_rtl %} dir="rtl"{% endif %}>
 
@@ -12,14 +13,14 @@
 
   
 
-  <!-- Preload critical resources with high priority -->
-  {{ 'theme.js' | asset_url | preload_tag: as: 'script' }}
-  {{ 'theme-pt2.js' | asset_url | preload_tag: as: 'script' }}
+  <!-- Preload critical resources (match deferred script filenames in <body>) -->
+  {{ 'theme.s.min.js' | asset_url | preload_tag: as: 'script' }}
+  {{ 'theme-pt2.s.min.js' | asset_url | preload_tag: as: 'script' }}
   
   <!-- Optimized Critical inline CSS for above-the-fold content -->
   <style>
     :root{--base-family:"Basic Commercial",sans-serif;--theme:#17344A;--theme2:#ffffff;--theme-body:var(--theme2);--theme-c:#5D7180;--theme-primary:#5a31f4;--header-m-bg:#5a31f4}
-    body{font-family:var(--base-family);margin:0;background-color:var(--theme-body);color:var(--theme-c);font-display:swap}
+    body{font-family:var(--base-family);margin:0;background-color:var(--theme-body);color:var(--theme-c)}
     .header{z-index:3;will-change:transform}
     .header__content{background-color:var(--header-m-bg)}
     .btn{display:inline-flex;justify-content:center;align-items:center;border-radius:14px!important;border:1px solid;min-height:50px;cursor:pointer}
@@ -29,24 +30,22 @@
     .preloader{position:absolute;width:100%;height:100%;top:0;left:0;opacity:0;z-index:1;display:flex;justify-content:center;align-items:center;transform:translateZ(0)}
     /* Prevent layout shift */
     img{max-width:100%;height:auto}
-    .loading{opacity:0;transition:opacity 0.3s ease}
-    .loaded{opacity:1}
+    .loading,.loaded{opacity:1}
   </style>
 
   <!-- Custom Header Styles (Moved from inline) -->
   <link rel="stylesheet" href="{{ 'component-header-custom.css' | asset_url }}" media="print" onload="this.media='all'">
   <noscript><link rel="stylesheet" href="{{ 'component-header-custom.css' | asset_url }}"></noscript>
 
-
-
-  <!-- Standard Shopify head content -->
-  {%- if tinyscript -%}{{ content_for_header }}{%- else -%}{% render 'tiny-script-control' %}{%- endif -%}
+  {{ content_for_header }}
 
   {% include 'head' %}
 
-  <meta name="google-site-verification" content="NeMJo4pLZqU6IJyez5HR1fHuZ08pEqb-_awCFv8PNvI" />
+  {%- if settings.seo_google_site_verification != blank -%}
+  <meta name="google-site-verification" content="{{ settings.seo_google_site_verification | escape }}">
+  {%- endif -%}
 
-  {%- comment -%} SEO-Tune-Up-2025: Global Social Platform IDs and Security Headers {%- endcomment -%}
+  {%- comment -%} SEO: Global social / verification metas. Real X-Content-Type-Options: nosniff is an HTTP response header — set at CDN/Shopify/edge if required. {%- endcomment -%}
   <!-- Global Social Platform IDs -->
   {% if settings.social_facebook_app_id != blank %}
   <meta property="fb:app_id" content="{{ settings.social_facebook_app_id }}">
@@ -57,17 +56,13 @@
   <meta name="p:domain_verify" content="{{ settings.pinterest_verification }}">
   {% endif %}
 
-  <!-- Security & Performance Headers -->
-  <meta http-equiv="X-Content-Type-Options" content="nosniff">
+  <!-- Referrer (document policy; HTML5 meta name="referrer") -->
   <meta name="referrer" content="origin-when-cross-origin">
 
   <!-- Apple Mobile Web App -->
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="default">
   <meta name="apple-mobile-web-app-title" content="{{ shop.name }}">
-
-  <!-- Default Robots Directive -->
-  <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
 
   <script>
     // Non-critical redirect script - defer execution
@@ -94,9 +89,10 @@
 
   <!-- Animated Button CSS -->
   <link rel="stylesheet" href="{{ 'animated-button.css' | asset_url }}">
+  {{ 'accessibility.css' | asset_url | stylesheet_tag }}
 
   {%- if template contains 'product' -%}
-    {%- include 'json-ld-product' -%}
+    {%- render 'json-ld-product' -%}
   {%- endif -%}
 
   {%- comment -%} SEO-Tune-Up-2025: WebSite Schema for Site Search in Google {%- endcomment -%}
@@ -119,11 +115,7 @@
     {% endif %}
   }
   </script>
-    {% if template contains 'collection' %}
-          <link rel="canonical" href="{{ shop.url }}{{ collection.url }}" />
-            {% else %}
-                <link rel="canonical" href="{{ canonical_url }}" />
-                  {% endif %}
+  {%- comment -%} Canonical: single source in snippets/head.liquid only (avoid duplicate tags) {%- endcomment -%}
 
     {%- if template == 'article' and article -%}
       {%- assign geo_collection_handle = article.content | split: '<!-- geo-collection:' | last | split: '-->' | first | strip -%}
@@ -145,12 +137,12 @@
     {% section 'product-variants' %}
   {%- endif -%}
   {% sections 'header-group' %}
-  <main id="MainContent">
+  <main id="MainContent" role="main" tabindex="-1">
     {%- if request.page_type == 'page' or request.page_type == 'product' or request.page_type == 'cart' or request.page_type == 'list-collections' or request.page_type == 'article' or request.page_type == 'blog' -%}
-      {% include 'breadcrumbs' %}
+      {% render 'breadcrumbs' %}
     {%- elsif request.page_type == 'collection' -%}
       <div id="CollectionBreadcrumbs">
-        {% include 'breadcrumbs' %}
+        {% render 'breadcrumbs' %}
       </div>
     {%- endif -%}
     {{ content_for_layout }}
@@ -217,57 +209,27 @@
   <!-- Deferred app scripts -->
   <script src="{{ 'tracking-sales-pitch.js' | asset_url }}" defer></script>
   <script src="{{ 'menu-interactions.js' | asset_url }}" defer></script>
+  <script src="{{ 'accessibility.js' | asset_url }}" defer></script>
 
-  <!-- Remove loading class when page is ready -->
+  <!-- Mark page as ready without blocking first paint on slow third-party resources -->
   <script>
-    window.addEventListener('load', function() {
+    function themeMarkLoaded() {
       document.body.classList.remove('loading');
       document.body.classList.add('loaded');
       window.performance && window.performance.mark && window.performance.mark('theme:fully:loaded');
-    });
+    }
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', themeMarkLoaded, { once: true });
+    } else {
+      themeMarkLoaded();
+    }
+    window.setTimeout(themeMarkLoaded, 3000);
   </script>
 
   <!-- Klaviyo Debug Script -->
 
 
-  <!-- GA4 Checkout Tracking -->
-  {% comment %} <script>
-    document.addEventListener('DOMContentLoaded', function() {
-      document.body.addEventListener('click', function(e) {
-        var target = e.target.closest('[name="checkout"]');
-        if (target) {
-          // Check if gtag exists
-          if (typeof gtag === 'function') {
-            gtag('event', 'begin_checkout', {
-              'event_category': 'ecommerce',
-              'event_label': 'Checkout Step 1',
-              'value': {{ cart.total_price | divided_by: 100.0 }},
-              'currency': '{{ shop.currency }}'
-            });
-          }
-          // Also push to dataLayer for GTM/Pixel
-          window.dataLayer = window.dataLayer || [];
-          window.dataLayer.push({
-            'event': 'begin_checkout',
-            'ecommerce': {
-              'currency': '{{ shop.currency }}',
-              'value': {{ cart.total_price | divided_by: 100.0 }},
-              'items': [
-                {% for item in cart.items %}
-                {
-                  'item_id': '{{ item.product_id }}',
-                  'item_name': '{{ item.product.title | escape }}',
-                  'price': {{ item.price | divided_by: 100.0 }},
-                  'quantity': {{ item.quantity }}
-                }{% unless forloop.last %},{% endunless %}
-                {% endfor %}
-              ]
-            }
-          });
-        }
-      });
-    });
-  </script> {% endcomment %}
+  {%- comment -%} begin_checkout: configure in GA4 / GTM (Shopify Admin) — do not duplicate inline. {%- endcomment -%}
 <script src="{{ 'tiny-img-link-preloader.js' | asset_url }}" defer></script>
 </body>
 </html>

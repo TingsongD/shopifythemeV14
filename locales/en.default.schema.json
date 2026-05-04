@@ -2908,7 +2908,7 @@
             }
           }
         },
-        "custom_html": "Custom html",
+        "custom_html": "Custom HTML",
         "social_media": {
           "name": "Social media",
           "settings": {
@@ -3781,7 +3781,10 @@
               "label": "List",
               "info": "Select page with list"
             },
-            "custom_html": "Custom HTML",
+            "custom_html_page": {
+              "label": "Custom HTML page",
+              "info": "Optional page whose content appears in this promo block"
+            },
             "header__7": {
               "content": "Layout"
             },

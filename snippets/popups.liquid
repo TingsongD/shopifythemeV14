@@ -135,7 +135,7 @@
     {%- if request.design_mode -%}
         {{ popups_style_base_html }}
     {%- else -%}
-        <template class="js-loader-inline-style" data-key="{{ popups_style_base_html | hmac_sha1: 'secret_key' }}">{{ popups_style_base_html }}</template>
+        <template class="js-loader-inline-style" data-key="{{ popups_style_base_html | hmac_sha1: 'inline-style-cache-salt' }}">{{ popups_style_base_html }}</template>
     {%- endif -%}
 {%- endif -%}
 <script>

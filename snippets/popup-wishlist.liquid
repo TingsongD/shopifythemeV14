@@ -6,7 +6,7 @@
     <div class="popup-wishlist__content d-none-important">
         <div class="popup-wishlist__items mt-15 border-bottom"></div>
         <div class="popup-wishlist__buttons mt-5">
-            <a href="/wishlist" class="btn btn--full mt-20 js-popup-button" data-js-popup-button="wishlist-full">{{ 'general.popups.wishlist.button_to_wishlist' | t }}</a>
+            <a href="{{ routes.root_url }}{% if routes.root_url != '/' %}/{% endif %}wishlist" class="btn btn--full mt-20 js-popup-button" data-js-popup-button="wishlist-full">{{ 'general.popups.wishlist.button_to_wishlist' | t }}</a>
         </div>
     </div>
     <div class="popup-wishlist__empty mt-15 d-none-important">{{ 'general.popups.wishlist.empty' | t }}</div>

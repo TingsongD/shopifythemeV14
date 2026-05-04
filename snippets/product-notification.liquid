@@ -6,7 +6,7 @@
 <div class="product-notification d-flex position-relative" data-js-product data-product-handle="{{ product.handle }}">
     <div class="product-notification__button-close position-absolute top-0 right-0 cursor-pointer" data-js-action="close"><i>{% render 'icon-theme-164' %}</i></div>
     <div class="product-notification__image d-flex align-items-center mr-20 mr-sm-10">
-        <a href="{{ url }}" class="d-block w-100" target="_blank">
+        <a href="{{ url }}" class="d-block w-100" target="_blank" rel="noopener noreferrer">
             {%- if settings.product_format_pjpg -%}
                 {%- assign image_format = 'pjpg' -%}
             {%- else -%}
@@ -20,7 +20,7 @@
         {%- if show_title -%}
             <div class="product-notification__title mb-3">
                 <h3 class="h5 m-0">
-                    <a href="{{ url }}" target="_blank">{{ title }}</a>
+                    <a href="{{ url }}" target="_blank" rel="noopener noreferrer">{{ title }}</a>
                 </h3>
             </div>
         {%- endif -%}

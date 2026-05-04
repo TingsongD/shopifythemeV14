@@ -1,69 +1,175 @@
-{% assign faq_json = product.metafields.ai_seo.faqs.value %}
+{%- liquid
+  assign faq_data = product.metafields.ai_seo.faqs.value
+  assign faq_items = faq_data.faqs
 
-{% if faq_json and faq_json.faqs %}
-<style>
-  .faq-section {
-    max-width: 800px;
-    margin: 40px auto;
-    padding: 0 20px;
-  }
-  .faq-heading {
-    font-size: 1.5rem;
-    font-weight: 600;
-    margin-bottom: 20px;
-    text-align: center;
-  }
-  .faq-item {
-    border-bottom: 1px solid #e5e5e5;
-  }
-  .faq-question {
-    width: 100%;
-    background: none;
-    border: none;
-    text-align: left;
-    padding: 18px 0;
-    font-size: 1rem;
-    font-weight: 600;
-    cursor: pointer;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    color: inherit;
-  }
-  .faq-question::after {
-    content: '+';
-    font-size: 1.25rem;
-    font-weight: 400;
-    transition: transform 0.2s;
-  }
-  .faq-item.active .faq-question::after {
-    content: '−';
-  }
-  .faq-answer {
-    max-height: 0;
-    overflow: hidden;
-    transition: max-height 0.3s ease, padding 0.3s ease;
-    padding: 0 0;
-    line-height: 1.6;
-    color: #555;
-  }
-  .faq-item.active .faq-answer {
-    max-height: 500px;
-    padding-bottom: 18px;
-  }
-</style>
+  if faq_items == blank
+    assign faq_items = faq_data
+  endif
+-%}
 
-<div class="faq-section">
-  <h2 class="faq-heading">Frequently Asked Questions</h2>
-  {% for faq in faq_json.faqs %}
-    <div class="faq-item">
-      <button class="faq-question" onclick="this.parentElement.classList.toggle('active')">
-        {{ faq.question }}
-      </button>
-      <div class="faq-answer">
-        {{ faq.answer }}
+{%- if request.page_type == 'product' and faq_items != blank -%}
+  <section id="FAQAccordion-{{ section.id }}" class="faq-accordion-section">
+    <div class="container">
+      <div class="faq-accordion">
+        {%- if section.settings.heading != blank -%}
+          <h2 class="faq-accordion__heading">{{ section.settings.heading }}</h2>
+        {%- endif -%}
+
+        {%- for faq in faq_items -%}
+          {%- assign question = faq.question | strip -%}
+          {%- assign answer = faq.answer -%}
+
+          {%- if question != blank and answer != blank -%}
+            <div class="faq-accordion__item">
+              <button
+                type="button"
+                class="faq-accordion__question"
+                aria-expanded="false"
+                aria-controls="FAQAccordionPanel-{{ section.id }}-{{ forloop.index }}"
+                data-faq-toggle
+              >
+                <span>{{ question }}</span>
+              </button>
+              <div
+                id="FAQAccordionPanel-{{ section.id }}-{{ forloop.index }}"
+                class="faq-accordion__answer"
+                hidden
+              >
+                <div class="faq-accordion__answer-inner">
+                  {{ answer }}
+                </div>
+              </div>
+            </div>
+          {%- endif -%}
+        {%- endfor -%}
       </div>
     </div>
-  {% endfor %}
-</div>
-{% endif %}
+  </section>
+
+  {%- if section.settings.output_schema -%}
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {%- for faq in faq_items -%}
+          {
+            "@type": "Question",
+            "name": {{ faq.question | strip_html | strip | json }},
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": {{ faq.answer | strip_html | strip | json }}
+            }
+          }{%- unless forloop.last -%},{%- endunless -%}
+        {%- endfor -%}
+      ]
+    }
+    </script>
+  {%- endif -%}
+
+  <style>
+    #FAQAccordion-{{ section.id }} {
+      margin: 40px 0;
+    }
+
+    #FAQAccordion-{{ section.id }} .faq-accordion {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    #FAQAccordion-{{ section.id }} .faq-accordion__heading {
+      margin: 0 0 20px;
+      font-size: 1.5rem;
+      font-weight: 600;
+      text-align: center;
+    }
+
+    #FAQAccordion-{{ section.id }} .faq-accordion__item {
+      border-bottom: 1px solid #e5e5e5;
+    }
+
+    #FAQAccordion-{{ section.id }} .faq-accordion__question {
+      width: 100%;
+      min-height: 0;
+      padding: 18px 0;
+      border: 0;
+      background: none;
+      color: inherit;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      text-align: left;
+      font-size: 1rem;
+      font-weight: 600;
+      line-height: 1.4;
+    }
+
+    #FAQAccordion-{{ section.id }} .faq-accordion__question::after {
+      content: '+';
+      flex: 0 0 auto;
+      font-size: 1.25rem;
+      font-weight: 400;
+      line-height: 1;
+    }
+
+    #FAQAccordion-{{ section.id }} .faq-accordion__question[aria-expanded='true']::after {
+      content: '-';
+    }
+
+    #FAQAccordion-{{ section.id }} .faq-accordion__answer {
+      color: #555;
+      line-height: 1.6;
+    }
+
+    #FAQAccordion-{{ section.id }} .faq-accordion__answer-inner {
+      padding-bottom: 18px;
+    }
+  </style>
+
+  <script>
+    (function() {
+      var section = document.getElementById('FAQAccordion-{{ section.id }}');
+      if (!section) return;
+
+      section.addEventListener('click', function(event) {
+        var button = event.target.closest('[data-faq-toggle]');
+        if (!button || !section.contains(button)) return;
+
+        var expanded = button.getAttribute('aria-expanded') === 'true';
+        var panel = document.getElementById(button.getAttribute('aria-controls'));
+
+        button.setAttribute('aria-expanded', expanded ? 'false' : 'true');
+        if (panel) panel.hidden = expanded;
+      });
+    })();
+  </script>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "FAQ accordion",
+  "tag": "section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Frequently Asked Questions"
+    },
+    {
+      "type": "checkbox",
+      "id": "output_schema",
+      "label": "Output FAQPage schema",
+      "default": true
+    }
+  ],
+  "presets": [
+    {
+      "name": "FAQ accordion"
+    }
+  ]
+}
+{% endschema %}

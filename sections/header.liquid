@@ -1,3 +1,4 @@
+{%- # theme-check-disable UndefinedObject, UnusedAssign, DeprecatedTag -%}
 {% include 'global-variables' %}
 {%- if section.settings.menu != blank or section.settings.vertical_menu != blank -%}
     {%- if request.design_mode or canonical_url contains 'challenge' -%}
@@ -5,9 +6,9 @@
     {%- endif -%}
     
     {%- if settings.presentation_enable and request.host contains 'shella-' -%}
-        {% include 'header-res-link-substitution' %}
+        {% render 'header-res-link-substitution' %}
         {%- if is_design_mode != true -%}
-            {% include 'header-res-preview-images' %}
+            {% render 'header-res-preview-images' %}
         {%- endif -%}
     {%- endif -%}
     
@@ -71,7 +72,7 @@
                     {%- endif -%}
                     {% capture icons_html %}
                         {{ icons_html }}|||{% if block.settings.for_vertical %}vertical-{% endif %}{{ block.settings[prop_for_item_name] | handleize }}|||
-                        <i class="menu__item_icon mr-10">{% include block.settings[prop_icon_name] %}</i>
+                        <i class="menu__item_icon mr-10">{% render 'theme-icon', name: block.settings[prop_icon_name] %}</i>
                     {% endcapture %}
                 {%- endfor -%}
         {%- endcase -%}
@@ -997,7 +998,7 @@
     {%- if request.design_mode -%}
         {{ style_base_html }}
     {%- else -%}
-        <template class="js-loader-inline-style" data-key="{{ style_base_html | hmac_sha1: 'secret_key' }}">{{ style_base_html }}</template>
+        <template class="js-loader-inline-style" data-key="{{ style_base_html | hmac_sha1: 'inline-style-cache-salt' }}">{{ style_base_html }}</template>
     {%- endif -%}
 {%- endif -%}
 <script>
@@ -1057,7 +1058,7 @@
         {%- capture logo_html -%}
             {%- if need_mobile_logo -%}
                 <div class="header__logo header__logo--mobile d-flex d-lg-none align-items-center" style="width: {{ settings.logo_mobile_width }}px;">
-                    {% include 'logo' svg: settings.logo_mobile_svg_file image: settings.logo_mobile_image width: settings.logo_mobile_width %}
+                    {% render 'logo', svg: settings.logo_mobile_svg_file, image: settings.logo_mobile_image, width: settings.logo_mobile_width %}
                 </div>
             {%- endif -%}
             <div class="header__logo align-items-center {% if need_mobile_logo %}d-none d-lg-flex{% else %}d-flex{% endif %}{% if section.settings.type == '3' %} mr-lg-25{% elsif section.settings.type == '2' %} header__logo--center mx-lg-auto{% elsif section.settings.type == '4' %} header__logo--center position-lg-absolute h-100 top-lg-0{% endif %}{% if need_sticky_logo or need_sticky_logo_type_3_4 %} header__logo--sticky-hidden{% else %}{% endif %}" style="width: {{ settings.logo_width }}px;"{% if section.settings.type == '4' %} data-js-header-width-limit-edge="nav"{% endif %}>
@@ -1065,25 +1066,25 @@
                     {%- assign main_logo_tag = 'h1' -%}
                 {%- endif -%}
                 {%- if template contains 'index' and section.settings.transparent_bg contains 'transparent' or header_enable_transparent -%}
-              		{%- if settings.logo_transparent_svg_file != blank or settings.logo_transparent_image != blank -%}
-              			{% include 'logo' svg: settings.logo_transparent_svg_file image: settings.logo_transparent_image width: settings.logo_transparent_width tag: main_logo_tag %}
+                {%- if settings.logo_transparent_svg_file != blank or settings.logo_transparent_image != blank -%}
+                    {% render 'logo', svg: settings.logo_transparent_svg_file, image: settings.logo_transparent_image, width: settings.logo_transparent_width, tag: main_logo_tag %}
                         {%- assign added_transparent_header_logo = true -%}
-                  	{%- endif -%}
                 {%- endif -%}
-              	{%- if added_transparent_header_logo == blank -%}
-              		{% include 'logo' svg: settings.logo_svg_file image: settings.logo_image width: settings.logo_width tag: main_logo_tag %}
-              	{%- endif -%}
+                {%- endif -%}
+                {%- if added_transparent_header_logo == blank -%}
+                    {% render 'logo', svg: settings.logo_svg_file, image: settings.logo_image, width: settings.logo_width, tag: main_logo_tag %}
+                {%- endif -%}
             </div>
             {%- if need_sticky_logo_type_3_4 -%}
                 <div class="header__sticky-logo-replace align-items-center d-none{% if section.settings.type == '3' %} mr-lg-25{% elsif section.settings.type == '4' %} header__logo--center position-lg-absolute h-100 top-lg-0{% endif %}" style="width: {{ settings.logo_sticky_width }}px;">
-                    {% include 'logo' svg: settings.logo_sticky_svg_file image: settings.logo_sticky_image width: settings.logo_sticky_width %}
+                    {% render 'logo', svg: settings.logo_sticky_svg_file, image: settings.logo_sticky_image, width: settings.logo_sticky_width %}
                 </div>
             {%- endif -%}
         {%- endcapture -%}
         {%- if need_sticky_logo -%}
             {%- capture sticky_logo_html -%}
                 <div class="header__sticky-logo d-none align-items-lg-center h-100{% if section.settings.type == '3' %} header__sticky-logo--containerized mr-25{% else %} header__sticky-logo--displaced position-absolute top-0 left-0 py-6 ml-15{% endif %}" style="width: {{ settings.logo_sticky_width }}px;">
-                    {% include 'logo' svg: settings.logo_sticky_svg_file image: settings.logo_sticky_image width: settings.logo_sticky_width %}
+                    {% render 'logo', svg: settings.logo_sticky_svg_file, image: settings.logo_sticky_image, width: settings.logo_sticky_width %}
                 </div>
             {%- endcapture -%}
         {%- endif -%}
@@ -1168,9 +1169,9 @@
         {%- capture btn_cart_html -%}
             {%- if settings.cart_show_header_button -%}
                 <div class="ml-25 ml-lg-15">
-                    <a href="/cart" class="header__btn-cart position-relative d-flex align-items-center text-nowrap js-popup-button" data-js-popup-button="cart"{% if need_sticky_sidebar %} data-js-sticky-replace-element="cart"{% endif %}>
+                    <a href="{{ routes.cart_url }}" class="header__btn-cart position-relative d-flex align-items-center text-nowrap js-popup-button" data-js-popup-button="cart"{% if need_sticky_sidebar %} data-js-sticky-replace-element="cart"{% endif %}>
                         {% capture cart_icon_name %}{{ settings.cart_icon | default: 'icon-theme-109' }}{% endcapture %}
-                        <i class="mr-lg-7">{% include cart_icon_name %}</i>
+                        <i class="mr-lg-7">{% render 'theme-icon', name: cart_icon_name %}</i>
                         <span class="d-none d-lg-inline mt-lg-4" data-js-cart-count-desktop="{{ cart.item_count }}" aria-live="polite" aria-atomic="true">{{ 'layout.header.cart_count' | t: count: cart.item_count }}</span>
                         <span class="header__counter d-lg-none" data-js-cart-count-mobile="{{ cart.item_count }}" aria-live="polite" aria-atomic="true">{{ cart.item_count }}</span>
                     </a>
@@ -1326,6 +1327,7 @@
         {%- capture btn_search_html -%}
             {%- if settings.search_show and section.settings.type != '5' and section.settings.type != '6' and section.settings.type != '7' -%}
                 <a href="{{ routes.search_url }}" class="header__btn-search d-none d-lg-flex align-items-lg-center{% if section.settings.type == '1' %} ml-lg-auto{% else %} ml-25 ml-lg-15{% endif %} js-popup-button"
+                   aria-label="{{ 'layout.header.tooltip.search' | t }}"
                    data-js-popup-button="navigation"
                     {%- if settings.tooltips_enable and header_enable_tooltips and section.settings.type != '1' %}
                        data-js-tooltip
@@ -1349,12 +1351,13 @@
                 {%- if section.settings.type != '5' and section.settings.type != '7' -%}
                     {%- assign is_main_menu = true -%}
                 {%- endif -%}
-                {% include 'header-get-menu' with is_main_menu: is_main_menu centered: menu_centered %}
+                {% render 'header-get-menu', is_main_menu: is_main_menu, centered: menu_centered %}
             </div>
         {%- endcapture -%}
         {%- capture services_html -%}
             {%- if settings.services_show_header_button -%}
-                <a href="/pages/customer-service" class="header__btn-services position-relative d-flex{% if section.settings.type == '5' or section.settings.type == '6' or section.settings.type == '7' %} d-lg-none{% endif %} align-items-center ml-25 ml-lg-15 js-popup-button"
+                <a href="{{ routes.root_url }}{% if routes.root_url != '/' %}/{% endif %}pages/customer-service" class="header__btn-services position-relative d-flex{% if section.settings.type == '5' or section.settings.type == '6' or section.settings.type == '7' %} d-lg-none{% endif %} align-items-center ml-25 ml-lg-15 js-popup-button"
+                   aria-label="{{ 'layout.header.tooltip.services' | t }}"
                    data-js-popup-button="services"
                    {%- if settings.tooltips_enable and header_enable_tooltips %}
                        data-js-tooltip
@@ -1602,10 +1605,10 @@
                                     <search-form class="search-modal__form">
                                 {%- endif -%}
                                     <form action="{{ routes.search_url }}" method="get" role="search" class="mb-0">
-                                        <label for="Search" class="label-hidden">{{ 'general.search.placeholder' | t }}</label>
+                                        <label for="HeaderSearchTop-{{ section.id }}" class="label-hidden">{{ 'general.search.placeholder' | t }}</label>
                                         <div class="d-flex align-items-lg-center">
                                             <label class="d-flex align-items-center w-100 position-relative mr-15 mb-0">
-                                                <input type="search" class="pl-35 pr-15 mb-0" name="q" value="{{ search.terms | escape }}" placeholder="{{ 'general.search.placeholder' | t }}">
+                                                <input type="search" id="HeaderSearchTop-{{ section.id }}" class="pl-35 pr-15 mb-0" name="q" value="{{ search.terms | escape }}" placeholder="{{ 'general.search.placeholder' | t }}">
                                                 <input type="hidden" name="options[prefix]" value="last"/>
                                                 <button type="reset" class="d-none" aria-label="{{ 'general.search.reset' | t }}">{{ 'general.search.reset' | t }}</button>
                                                 <i class="position-absolute left-0 ml-10">{% render 'icon-theme-168' %}</i>
@@ -1747,10 +1750,10 @@
                                     <search-form class="search-modal__form">
                                 {%- endif -%}
                                     <form action="{{ routes.search_url }}" method="get" role="search" class="mb-0">
-                                        <label for="Search" class="label-hidden">{{ 'general.search.placeholder' | t }}</label>
+                                        <label for="HeaderSearchCompact-{{ section.id }}" class="label-hidden">{{ 'general.search.placeholder' | t }}</label>
                                         <div class="d-flex align-items-lg-center">
                                             <label class="d-flex align-items-center w-100 position-relative mr-15 mb-0">
-                                                <input type="search" class="pl-35 pr-15 mb-0" name="q" value="{{ search.terms | escape }}" placeholder="{{ 'general.search.placeholder' | t }}">
+                                                <input type="search" id="HeaderSearchCompact-{{ section.id }}" class="pl-35 pr-15 mb-0" name="q" value="{{ search.terms | escape }}" placeholder="{{ 'general.search.placeholder' | t }}">
                                                 <input type="hidden" name="options[prefix]" value="last"/>
                                                 <button type="reset" class="d-none" aria-label="{{ 'general.search.reset' | t }}">{{ 'general.search.reset' | t }}</button>
                                                 <i class="position-absolute left-0 ml-10">{% render 'icon-theme-168' %}</i>
@@ -1858,7 +1861,7 @@
                                                     {%- if customer -%}
                                                         <a href="{%- if customer -%}{{ routes.account_url }}{%- else -%}{{ routes.account_login_url }}{%- endif -%}" class="header__line-additional_button header__line-additional_button--login js-popup-button" data-js-popup-button="account">{{ 'layout.header.account' | t: name: customer.first_name }}</a> {{ 'layout.header.register_and_account_separator' | t }} <a href="{{ routes.account_logout_url }}" class="header__line-additional_button header__line-additional_button--login js-popup-button" data-js-popup-button="account">{{ 'layout.header.sign_out' | t }}</a>
                                                     {%- else -%}
-                                                        <a href="{%- if customer -%}{{ routes.account_url }}{%- else -%}{{ routes.account_login_url }}{%- endif -%}" class="header__line-additional_button header__line-additional_button--register js-popup-button" data-js-trigger="popup-button-sign-up" data-js-popup-button="account">{{ 'layout.header.register' | t }}</a> {{ 'layout.header.register_and_account_separator' | t }} <a href="/{%- if customer -%}{{ routes.account_url }}{%- else -%}{{ routes.account_login_url }}{%- endif -%}" class="header__line-additional_button header__line-additional_button--login js-popup-button" data-js-popup-button="account">{{ 'layout.header.login' | t }}</a>
+                                                        <a href="{{ routes.account_login_url }}" class="header__line-additional_button header__line-additional_button--register js-popup-button" data-js-trigger="popup-button-sign-up" data-js-popup-button="account">{{ 'layout.header.register' | t }}</a> {{ 'layout.header.register_and_account_separator' | t }} <a href="{{ routes.account_login_url }}" class="header__line-additional_button header__line-additional_button--login js-popup-button" data-js-popup-button="account">{{ 'layout.header.login' | t }}</a>
                                                     {%- endif -%}
                                                 </span>
                                         {%- endif -%}
@@ -1893,10 +1896,10 @@
                                         <search-form class="search-modal__form">
                                     {%- endif -%}
                                         <form action="{{ routes.search_url }}" method="get" role="search" class="mb-0">
-                                            <label for="Search" class="label-hidden">{{ 'general.search.placeholder' | t }}</label>
+                                            <label for="HeaderSearchInline-{{ section.id }}" class="label-hidden">{{ 'general.search.placeholder' | t }}</label>
                                             <div class="d-flex align-items-lg-center">
                                                 <label class="d-flex align-items-center w-100 position-relative mr-15 mb-0">
-                                                    <input type="search" class="pl-35 pr-15 mb-0" name="q" value="{{ search.terms | escape }}" placeholder="{{ 'general.search.placeholder' | t }}">
+                                                    <input type="search" id="HeaderSearchInline-{{ section.id }}" class="pl-35 pr-15 mb-0" name="q" value="{{ search.terms | escape }}" placeholder="{{ 'general.search.placeholder' | t }}">
                                                     <input type="hidden" name="options[prefix]" value="last"/>
                                                     <button type="reset" class="d-none" aria-label="{{ 'general.search.reset' | t }}">{{ 'general.search.reset' | t }}</button>
                                                     <i class="position-absolute left-0 ml-10">{% render 'icon-theme-168' %}</i>
@@ -3266,8 +3269,8 @@
                 {
                     "type": "page",
                     "id": "custom_html",
-                    "label": "t:sections.header.blocks.megamenu_promobox.settings.custom_html.label",
-                    "info": "t:sections.header.blocks.megamenu_promobox.settings.custom_html.info"
+                    "label": "t:sections.header.blocks.megamenu_promobox.settings.custom_html_page.label",
+                    "info": "t:sections.header.blocks.megamenu_promobox.settings.custom_html_page.info"
                 },
                 {
                     "type": "header",
@@ -4014,26 +4017,26 @@
         },
         {
             "type": "megamenu_custom_html",
-            "name": "t:sections.header.blocks.megamenu_custom_html.name",
+            "name": "Mega -> Custom HTML",
             "settings": [
                 {
                     "type": "text",
                     "id": "title",
-                    "label": "t:sections.header.blocks.megamenu_custom_html.settings.title.label"
+                    "label": "Title"
                 },
                 {
                     "type": "url",
                     "id": "url",
-                    "label": "t:sections.header.blocks.megamenu_custom_html.settings.url.label"
+                    "label": "URL"
                 },
                 {
                     "type": "header",
-                    "content": "t:sections.header.blocks.megamenu_custom_html.settings.header__1.content"
+                    "content": "Page"
                 },
                 {
                     "type": "page",
                     "id": "page_content",
-                    "label": "t:sections.header.blocks.megamenu_custom_html.settings.page_content.label"
+                    "label": "Page content"
                 }
             ]
         },

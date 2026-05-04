@@ -1,0 +1,129 @@
+{%- comment -%}
+  MSDressly subscription selector.
+  Renders inside the product form so the selected selling_plan is submitted with add-to-cart.
+{%- endcomment -%}
+{%- assign current_variant = current_variant | default: product.selected_or_first_available_variant -%}
+{%- assign selected_allocation = current_variant.selected_selling_plan_allocation -%}
+{%- if selected_allocation == nil and current_variant.selling_plan_allocations.size > 0 -%}
+  {%- assign selected_allocation = current_variant.selling_plan_allocations | first -%}
+{%- endif -%}
+{%- assign selected_selling_plan_id = selected_allocation.selling_plan.id | default: '' -%}
+{%- assign widget_id = 'msd-selling-plan-' | append: section.id | append: '-' | append: product.id -%}
+
+<div id="{{ widget_id }}" class="msd-selling-plan product-page-info__field mb-20{% if centered %} product-page-info__section--max-width mx-md-auto{% endif %}" data-msd-selling-plan-selector>
+  <style>
+    #{{ widget_id }} .msd-selling-plan__title{font-weight:600;margin-bottom:.5rem}
+    #{{ widget_id }} .msd-selling-plan__group{border:1px solid rgba(0,0,0,.12);border-radius:6px;overflow:hidden}
+    #{{ widget_id }} .msd-selling-plan__option{display:flex;gap:.75rem;align-items:flex-start;margin:0;padding:.85rem 1rem;border-bottom:1px solid rgba(0,0,0,.08);cursor:pointer}
+    #{{ widget_id }} .msd-selling-plan__option:last-child{border-bottom:0}
+    #{{ widget_id }} .msd-selling-plan__option input{margin-top:.2rem}
+    #{{ widget_id }} .msd-selling-plan__option-main{display:flex;justify-content:space-between;gap:1rem;width:100%;font-weight:600}
+    #{{ widget_id }} .msd-selling-plan__copy{font-size:.875rem;line-height:1.35;margin-top:.25rem;opacity:.78}
+    #{{ widget_id }} .msd-selling-plan__policy{font-size:.82rem;margin-top:.65rem}
+  </style>
+
+  <p class="msd-selling-plan__title">Delivery option</p>
+  <div class="msd-selling-plan__group">
+    {%- for variant in product.variants -%}
+      {%- if variant.selling_plan_allocations.size > 0 -%}
+        <div data-msd-selling-plan-variant="{{ variant.id }}"{% unless variant.id == current_variant.id %} class="d-none"{% endunless %}>
+          {%- for allocation in variant.selling_plan_allocations -%}
+            {%- assign allocation_id = allocation.selling_plan.id -%}
+            <label class="msd-selling-plan__option">
+              <input type="radio"
+                name="purchase_option_{{ section.id }}_{{ variant.id }}"
+                value="{{ allocation_id }}"
+                data-msd-selling-plan-radio
+                {% if variant.id == current_variant.id and selected_selling_plan_id == allocation_id %}checked{% elsif variant.id != current_variant.id and forloop.first %}checked{% endif %}>
+              <span class="w-100">
+                <span class="msd-selling-plan__option-main">
+                  <span>{{ allocation.selling_plan.name | escape }}</span>
+                  <span>{{ allocation.price | money }}</span>
+                </span>
+                {%- if allocation.selling_plan.description != blank -%}
+                  <span class="msd-selling-plan__copy">{{ allocation.selling_plan.description | escape }}</span>
+                {%- else -%}
+                  <span class="msd-selling-plan__copy">Recurring delivery. Review, edit, or cancel according to the subscription policy.</span>
+                {%- endif -%}
+              </span>
+            </label>
+          {%- endfor -%}
+          {%- unless product.requires_selling_plan -%}
+            <label class="msd-selling-plan__option">
+              <input type="radio"
+                name="purchase_option_{{ section.id }}_{{ variant.id }}"
+                value=""
+                data-msd-selling-plan-radio
+                {% if selected_selling_plan_id == blank and variant.id == current_variant.id %}checked{% endif %}>
+              <span class="w-100">
+                <span class="msd-selling-plan__option-main">
+                  <span>One-time purchase</span>
+                  <span>{{ variant.price | money }}</span>
+                </span>
+                <span class="msd-selling-plan__copy">Buy once without recurring delivery.</span>
+              </span>
+            </label>
+          {%- endunless -%}
+        </div>
+      {%- endif -%}
+    {%- endfor -%}
+  </div>
+  <input type="hidden" name="selling_plan" value="{{ selected_selling_plan_id }}" data-msd-selling-plan-input>
+  {%- if shop.subscription_policy != blank -%}
+    <p class="msd-selling-plan__policy mb-0">
+      <a href="{{ shop.subscription_policy.url }}">View subscription policy</a>
+    </p>
+  {%- endif -%}
+</div>
+
+<script>
+  (function() {
+    var widget = document.getElementById({{ widget_id | json }});
+    if (!widget || widget.dataset.msdReady === 'true') return;
+    widget.dataset.msdReady = 'true';
+
+    var form = widget.closest('form');
+    var hiddenInput = widget.querySelector('[data-msd-selling-plan-input]');
+    var groups = widget.querySelectorAll('[data-msd-selling-plan-variant]');
+
+    function getVariantInput() {
+      if (!form) return null;
+      var formId = form.getAttribute('id');
+      return form.querySelector('[name="id"]') ||
+        (formId ? document.querySelector('[name="id"][form="' + formId + '"]') : null);
+    }
+
+    function syncSelectedPlan(group) {
+      var checked = group && group.querySelector('[data-msd-selling-plan-radio]:checked');
+      hiddenInput.value = checked ? checked.value : '';
+    }
+
+    function showVariantGroup(variantId) {
+      var activeGroup = null;
+      groups.forEach(function(group) {
+        var isActive = group.getAttribute('data-msd-selling-plan-variant') === String(variantId);
+        group.classList.toggle('d-none', !isActive);
+        if (isActive) activeGroup = group;
+      });
+      if (activeGroup) {
+        syncSelectedPlan(activeGroup);
+      } else {
+        hiddenInput.value = '';
+      }
+    }
+
+    widget.addEventListener('change', function(event) {
+      if (event.target.matches('[data-msd-selling-plan-radio]')) {
+        hiddenInput.value = event.target.value;
+      }
+    });
+
+    var variantInput = getVariantInput();
+    if (variantInput) {
+      variantInput.addEventListener('change', function() {
+        showVariantGroup(variantInput.value);
+      });
+      showVariantGroup(variantInput.value);
+    }
+  })();
+</script>

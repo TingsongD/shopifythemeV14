@@ -501,7 +501,7 @@
 {%- if request.design_mode -%}
     {{ styles_tags }}
 {%- else -%}
-    <template class="js-loader-inline-style" data-key="{{ styles_tags | hmac_sha1: 'secret_key' }}">{{ styles_tags }}</template>
+    <template class="js-loader-inline-style" data-key="{{ styles_tags | hmac_sha1: 'inline-style-cache-salt' }}">{{ styles_tags }}</template>
     <script>
         theme.AssetsLoader.loadInlineStyles();
     </script>

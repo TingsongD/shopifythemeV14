@@ -8,7 +8,7 @@
     <div class="row">
         {%- if settings.social_share_enable_facebook -%}
             <div class="social-share__col {{ grid }} px-5 mb-10">
-                <a href="//www.facebook.com/sharer.php?u={{ shop.url | append: share_permalink }}" target="_blank" class="social-share__item social-share__item--facebook position-relative d-block">
+                <a href="//www.facebook.com/sharer.php?u={{ shop.url | append: share_permalink }}" target="_blank" rel="noopener noreferrer" class="social-share__item social-share__item--facebook position-relative d-block">
                     <div class="social-share__item_bg absolute-stretch"></div>
                     <div class="social-share__item_content position-relative d-flex flex-center">
                         <i>{% render 'icon-social-facebook' %}</i>
@@ -21,7 +21,7 @@
         {%- endif -%}
         {%- if settings.social_share_enable_twitter -%}
             <div class="social-share__col {{ grid }} px-5 mb-10">
-                <a href="//twitter.com/share?text={{ share_title | url_param_escape }}&amp;url={{ shop.url | append: share_permalink }}" target="_blank" class="social-share__item social-share__item--twitter position-relative d-block">
+                <a href="//twitter.com/share?text={{ share_title | url_param_escape }}&amp;url={{ shop.url | append: share_permalink }}" target="_blank" rel="noopener noreferrer" class="social-share__item social-share__item--twitter position-relative d-block">
                     <div class="social-share__item_bg absolute-stretch"></div>
                     <div class="social-share__item_content position-relative d-flex flex-center">
                         <i>{% render 'icon-social-twitter' %}</i>
@@ -34,7 +34,7 @@
         {%- endif -%}
         {%- if settings.social_share_enable_pinterest -%}
             <div class="social-share__col {{ grid }} px-5 mb-10">
-                <a href="//pinterest.com/pin/create/button/?url={{ shop.url | append: share_permalink }}&amp;media={{ share_image | img_url: '1024x1024' }}&amp;description={{ share_title | url_param_escape }}" target="_blank" class="social-share__item social-share__item--pinterest position-relative d-block">
+                <a href="//pinterest.com/pin/create/button/?url={{ shop.url | append: share_permalink }}&amp;media={{ share_image | image_url: width: 1024, height: 1024 }}&amp;description={{ share_title | url_param_escape }}" target="_blank" rel="noopener noreferrer" class="social-share__item social-share__item--pinterest position-relative d-block">
                     <div class="social-share__item_bg absolute-stretch"></div>
                     <div class="social-share__item_content position-relative d-flex flex-center">
                         <i>{% render 'icon-social-pinterest-2' %}</i>
@@ -47,7 +47,7 @@
         {%- endif -%}
         {%- if settings.social_share_enable_linkedin -%}
             <div class="social-share__col {{ grid }} px-5 mb-10">
-                <a href="//www.linkedin.com/shareArticle?mini=true&url={{ shop.url | append: share_permalink }}&title={{ share_title | url_param_escape }}&summary=&source=" target="_blank" class="social-share__item social-share__item--linkedin position-relative d-block">
+                <a href="//www.linkedin.com/shareArticle?mini=true&url={{ shop.url | append: share_permalink }}&title={{ share_title | url_param_escape }}&summary=&source=" target="_blank" rel="noopener noreferrer" class="social-share__item social-share__item--linkedin position-relative d-block">
                     <div class="social-share__item_bg absolute-stretch"></div>
                     <div class="social-share__item_content position-relative d-flex flex-center">
                         <i>{% render 'icon-social-linkedin' %}</i>
@@ -60,7 +60,7 @@
         {%- endif -%}
         {%- if settings.social_share_enable_buffer -%}
             <div class="social-share__col {{ grid }} px-5 mb-10">
-                <a href="//buffer.com/add?text={{ share_title | url_param_escape }}&url={{ shop.url | append: share_permalink }}" target="_blank" class="social-share__item social-share__item--buffer position-relative d-block">
+                <a href="//buffer.com/add?text={{ share_title | url_param_escape }}&url={{ shop.url | append: share_permalink }}" target="_blank" rel="noopener noreferrer" class="social-share__item social-share__item--buffer position-relative d-block">
                     <div class="social-share__item_bg absolute-stretch"></div>
                     <div class="social-share__item_content position-relative d-flex flex-center">
                         <i>{% render 'icon-social-buffer' %}</i>
@@ -73,7 +73,7 @@
         {%- endif -%}
         {%- if settings.social_share_enable_reddit -%}
             <div class="social-share__col {{ grid }} px-5 mb-10">
-                <a href="//www.reddit.com/submit?title={{ share_title | url_param_escape }}&url={{ shop.url | append: share_permalink }}" target="_blank" class="social-share__item social-share__item--reddit position-relative d-block">
+                <a href="//www.reddit.com/submit?title={{ share_title | url_param_escape }}&url={{ shop.url | append: share_permalink }}" target="_blank" rel="noopener noreferrer" class="social-share__item social-share__item--reddit position-relative d-block">
                     <div class="social-share__item_bg absolute-stretch"></div>
                     <div class="social-share__item_content position-relative d-flex flex-center">
                         <i>{% render 'icon-social-reddit' %}</i>
@@ -112,7 +112,7 @@
         {% endcomment %}
         {%- if settings.social_share_enable_line -%}
             <div class="social-share__col {{ grid }} px-5 mb-10">
-                <a href="//social-plugins.line.me/lineit/share?url={{ shop.url | append: share_permalink }}&text={{ share_title | url_param_escape }}" target="_blank" class="social-share__item social-share__item--line position-relative d-block">
+                <a href="//social-plugins.line.me/lineit/share?url={{ shop.url | append: share_permalink }}&text={{ share_title | url_param_escape }}" target="_blank" rel="noopener noreferrer" class="social-share__item social-share__item--line position-relative d-block">
                     <div class="social-share__item_bg absolute-stretch"></div>
                     <div class="social-share__item_content position-relative d-flex flex-center">
                         <i>{% render 'icon-social-line' %}</i>
@@ -126,7 +126,7 @@
 
         {%- if settings.social_share_enable_hatena -%}
             <div class="social-share__col {{ grid }} px-5 mb-10">
-                <a href="//b.hatena.ne.jp/add?mode=confirm&amp;url={{ share_title | url_param_escape }}&url={{ shop.url | append: share_permalink }}" target="_blank" class="social-share__item social-share__item--hatena position-relative d-block">
+                <a href="//b.hatena.ne.jp/add?mode=confirm&amp;title={{ share_title | url_param_escape }}&amp;url={{ shop.url | append: share_permalink }}" target="_blank" rel="noopener noreferrer" class="social-share__item social-share__item--hatena position-relative d-block">
                     <div class="social-share__item_bg absolute-stretch"></div>
                     <div class="social-share__item_content position-relative d-flex flex-center">
                         <i>{% render 'icon-social-hatena' %}</i>
@@ -140,7 +140,7 @@
 
         {%- if settings.social_share_enable_pocket -%}
             <div class="social-share__col {{ grid }} px-5 mb-10">
-                <a href="//getpocket.com/edit?url={{ share_title | url_param_escape }}&url={{ shop.url | append: share_permalink }}" target="_blank" class="social-share__item social-share__item--pocket position-relative d-block">
+                <a href="//getpocket.com/edit?title={{ share_title | url_param_escape }}&amp;url={{ shop.url | append: share_permalink }}" target="_blank" rel="noopener noreferrer" class="social-share__item social-share__item--pocket position-relative d-block">
                     <div class="social-share__item_bg absolute-stretch"></div>
                     <div class="social-share__item_content position-relative d-flex flex-center">
                         <i>{% render 'icon-social-pocket' %}</i>

@@ -27,11 +27,11 @@
         <div class="popup-account__authorized">
             <div class="popup-account__head d-flex align-items-center mb-15">
                 <h5 class="m-0">{{ 'general.popups.account.authorized.title' | t: name: customer.first_name }}</h5>
-                <i class="popup-account__close ml-auto cursor-pointer" data-js-popup-close>{% render 'icon-theme-164' %}</i>
+                <button type="button" class="popup-account__close ml-auto cursor-pointer" data-js-popup-close aria-label="{{ 'general.accessibility.close' | t | default: 'Close' }}">{% render 'icon-theme-164' %}</button>
             </div>
-            <a href="/account" class="popup-account__btn-account btn btn--full mb-10">{{ "general.popups.account.authorized.account" | t }}</a>
+            <a href="{{ routes.account_url }}" class="popup-account__btn-account btn btn--full mb-10">{{ "general.popups.account.authorized.account" | t }}</a>
             <a href="{{ routes.root_url }}{% if routes.root_url != '/' %}/{% endif %}checkout" class="popup-account__btn-checkout btn btn--full mb-20">{{ "general.popups.account.authorized.checkout" | t }}</a>
-            <a href="/account/logout" class="btn-link">{{ "general.popups.account.authorized.log_out" | t }}</a>
+            <a href="{{ routes.account_logout_url }}" class="btn-link">{{ "general.popups.account.authorized.log_out" | t }}</a>
             {%- if settings.account_popup_show_subscription -%}
                 <hr class="my-15"/>
                 <div class="popup-account__head d-flex align-items-center mb-10">
@@ -65,7 +65,7 @@
                             </div>
                         {% endform %}
                     {%- elsif settings.subscription_method == 'mailchimp' -%}
-                        <form action="{{ settings.subscription_mailchimp_form_action }}" method="post" target="_blank" class="subscription-form ">
+                        <form action="{{ settings.subscription_mailchimp_form_action }}" method="post" target="_blank" rel="noopener noreferrer" class="subscription-form ">
                             <div>
                                 <label for="PopupAccountSubscribe" class="label-required">{{ 'general.popups.account.newsletter.email.title' | t }}</label>
                                 <input type="email" name="EMAIL" id="PopupAccountSubscribe" placeholder="{{ 'general.popups.account.newsletter.email.placeholder' | t }}" required="required">
@@ -80,7 +80,7 @@
         <div class="popup-account__login">
             <div class="popup-account__head d-flex align-items-center mb-10">
                 <h5 class="m-0">{{ 'general.popups.account.login.title' | t }}</h5>
-                <i class="popup-account__close ml-auto cursor-pointer" data-js-popup-close>{% render 'icon-theme-164' %}</i>
+                <button type="button" class="popup-account__close ml-auto cursor-pointer" data-js-popup-close aria-label="{{ 'general.accessibility.close' | t | default: 'Close' }}">{% render 'icon-theme-164' %}</button>
             </div>
             {% form 'customer_login', id: 'popup_customer_login', class: 'form-group--type-inline mb-15' %}
                 <div>
@@ -100,7 +100,7 @@
                 </div>
                 <div class="mb-10">
                     {%- if form.password_needed -%}
-                        <a href="/account/login/#recover" class="btn-link js-button-block-visibility" data-block-link="#recover" data-action="open" data-action-close-popup="account">{{ 'general.popups.account.login.forgot_password' | t }}</a>
+                        <a href="{{ routes.account_login_url }}#recover" class="btn-link js-button-block-visibility" data-block-link="#recover" data-action="open" data-action-close-popup="account">{{ 'general.popups.account.login.forgot_password' | t }}</a>
                     {%- endif -%}
                 </div>
             {% endform %}
@@ -111,7 +111,7 @@
             <div>
                 {% include 'parse-page-html-content' with default_page: 'include-popup-account' page_content: settings.account_popup_sign_up_info_page_content %}
             </div>
-            <a href="/account/register" class="popup-account__btn-register btn btn--full mb-20 js-popup-account-show-sign-up" data-js-trigger-id="popup-button-sign-up">{{ 'general.popups.account.sign-up.button' | t }}</a>
+            <a href="{{ routes.account_register_url }}" class="popup-account__btn-register btn btn--full mb-20 js-popup-account-show-sign-up" data-js-trigger-id="popup-button-sign-up">{{ 'general.popups.account.sign-up.button' | t }}</a>
         </div>
         <div class="popup-account__sign-up d-none-important">
             <div class="popup-account__head d-flex align-items-center mb-10">
@@ -121,15 +121,15 @@
             {% form 'create_customer', id: 'popup_create_customer' %}
                 {{ form.errors | default_errors }}
                 <div>
-                    <label for="PopupCustomerEmail" class="label-required">{{ 'general.popups.account.sign-up.first_name.title' | t }}</label>
+                    <label for="PopupFirstName" class="label-required">{{ 'general.popups.account.sign-up.first_name.title' | t }}</label>
                     <input type="text" name="customer[first_name]" id="PopupFirstName" placeholder="{{ 'general.popups.account.sign-up.first_name.placeholder' | t }}"{% if form.first_name %} value="{{ form.first_name }}"{% endif %} required="required">
                 </div>
                 <div>
-                    <label for="PopupCustomerEmail" class="label-required">{{ 'general.popups.account.sign-up.last_name.title' | t }}</label>
+                    <label for="PopupLastName" class="label-required">{{ 'general.popups.account.sign-up.last_name.title' | t }}</label>
                     <input type="text" name="customer[last_name]" id="PopupLastName" placeholder="{{ 'general.popups.account.sign-up.last_name.placeholder' | t }}"{% if form.last_name %} value="{{ form.last_name }}"{% endif %} required="required">
                 </div>
                 <div>
-                    <label for="PopupCustomerEmail" class="label-required">{{ 'general.popups.account.sign-up.email.title' | t }}</label>
+                    <label for="PopupEmail" class="label-required">{{ 'general.popups.account.sign-up.email.title' | t }}</label>
                     <input type="email" name="customer[email]" id="PopupEmail" class="{% if form.errors contains 'email' %}input-error{% endif %}" placeholder="{{ 'general.popups.account.sign-up.email.placeholder' | t }}" value="{% if form.email %}{{ form.email }}{% endif %}" spellcheck="false" autocomplete="off" autocapitalize="off" required="required">
                 </div>
                 <div>

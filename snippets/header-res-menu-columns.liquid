@@ -74,12 +74,12 @@
                     {% form 'customer', id: null, class: 'subscription-form d-flex mb-20' %}
                         {% render 'form-get-check-error-popup' %}
                         <input type="hidden" name="contact[tags]" value="newsletter">
-                        <input type="email" name="contact[email]" class="mb-0 mr-10{% if form.errors %} input--error{% endif %}" placeholder="{{ block.settings.placeholder }}" required="required">
+                        <input type="email" name="contact[email]" class="mb-0 mr-10{% if form.errors %} input--error{% endif %}" aria-label="{{ block.settings.placeholder | default: 'Email' }}" placeholder="{{ block.settings.placeholder }}" required="required">
                         <input type="submit" class="input-checkbox-disable-body btn btn--secondary" name="commit" value="{{ block.settings.button_text }}">
                     {% endform %}
                 {%- elsif settings.subscription_method == 'mailchimp' -%}
-                    <form action="{{ settings.subscription_mailchimp_form_action }}" method="post" class="subscription-form d-flex mb-20" target="_blank">
-                        <input type="email" name="EMAIL" class="mb-0 mr-10" placeholder="{{ block.settings.placeholder }}" required="required">
+                    <form action="{{ settings.subscription_mailchimp_form_action }}" method="post" class="subscription-form d-flex mb-20" target="_blank" rel="noopener noreferrer">
+                        <input type="email" name="EMAIL" class="mb-0 mr-10" aria-label="{{ block.settings.placeholder | default: 'Email' }}" placeholder="{{ block.settings.placeholder }}" required="required">
                         <input type="submit" class="input-checkbox-disable-body btn btn--secondary" value="{{ block.settings.button_text }}">
                     </form>
                 {%- endif -%}

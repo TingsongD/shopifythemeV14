@@ -233,8 +233,8 @@
       ],
       "settings": {
         "position": "products_grid_width",
-        "default_desktop_title": "title",
-        "default_mobile_title": "title",
+        "default_desktop_title": "title_with_description",
+        "default_mobile_title": "title_with_description",
         "margins_for_columns": "none",
         "disable_column_paddings": false
       }

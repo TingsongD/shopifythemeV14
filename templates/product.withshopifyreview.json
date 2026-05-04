@@ -253,6 +253,13 @@
     "16787603932c374f70": {
       "type": "apps",
       "settings": {}
+    },
+    "faq_accordion": {
+      "type": "faq-accordion",
+      "settings": {
+        "heading": "Frequently Asked Questions",
+        "output_schema": true
+      }
     }
   },
   "order": [
@@ -263,6 +270,7 @@
     "related-products",
     "60eadd57-59a2-4d66-b662-0696fc78110f",
     "774ca01e-f5a7-43da-aefc-02545683b837",
+    "faq_accordion",
     "16787603932c374f70"
   ]
 }

@@ -1,3 +1,4 @@
+{%- # theme-check-disable DeprecatedTag, UndefinedObject -%}
 
 <article-page data-section-id="{{ section.id }}" data-section-type="main-article" class="d-block">
   <div class="article pb-1">
@@ -6,7 +7,7 @@
               {%- if settings.article_show_sidebar != 'hide' -%}
                   {%- if settings.article_sidebar_position == 'dropdown' -%}
                       <div class="article__sidebar d-none">
-                        {% include 'blog-sidebar' with section as section %}
+                        {% render 'blog-sidebar', section: section %}
                       </div>
                   {%- else -%}
                       <div class="article__sidebar article__sidebar--width-md article__sidebar--offset-bottom d-none d-lg-block col{% if settings.article_show_sidebar != 'hide' and settings.article_sidebar_position != 'dropdown' %} col-lg-4{% endif %}{% if settings.article_sidebar_position == 'right' %} order-2{% endif %}{% if settings.article_enable_sticky %} sticky-sidebar-lg js-sticky-sidebar{% endif %}">
@@ -14,7 +15,7 @@
                               <div data-js-sticky-sidebar-body>
                           {%- endif -%}
                                   <div data-js-position-desktop="sidebar">
-                                    {% include 'blog-sidebar' with section as section %}
+                                    {% render 'blog-sidebar', section: section %}
                                   </div>
                           {%- if settings.article_enable_sticky -%}
                               </div>
@@ -77,8 +78,7 @@
                             <div class="row">
                               {%- for product in geo_collection.products limit: 8 -%}
                                 <div class="col-6 col-sm-6 col-md-4 col-lg-3">
-                                  {%- assign disable_lazyload = false -%}
-                                  {% include 'product-collection' with url_without_collection: true product_margin_bottom: offset_collection_page_product_margin_bottom_d %}
+                                  {% render 'product-collection', product: product, url_without_collection: true, product_margin_bottom: offset_collection_page_product_margin_bottom_d %}
                                 </div>
                               {%- endfor -%}
                             </div>
@@ -280,25 +280,25 @@
 
 <script type="application/ld+json">
 {
-  "@context": "http://schema.org",
+  "@context": "https://schema.org",
   "@type": "Article",
   "articleBody": {{ article.content | strip_html | json }},
   "mainEntityOfPage": {
     "@type": "WebPage",
-    "@id": {{ shop.url | append: page.url | json }}
+    "@id": {{ shop.url | append: article.url | json }}
   },
   "headline": {{ article.title | json }},
   {% if article.excerpt != blank %}
     "description": {{ article.excerpt | strip_html | json }},
   {% endif %}
   {% if article.image %}
-    {% assign image_size = article.image.width | append: 'x' %}
     "image": [
-      {{ article | img_url: image_size | prepend: "https:" | json }}
+      {{ article.image | image_url: width: article.image.width, height: article.image.height | prepend: 'https:' | json }}
     ],
   {% endif %}
   "datePublished": {{ article.published_at | date: '%Y-%m-%dT%H:%M:%SZ' | json }},
   "dateCreated": {{ article.created_at | date: '%Y-%m-%dT%H:%M:%SZ' | json }},
+  "dateModified": {{ article.updated_at | date: '%Y-%m-%dT%H:%M:%SZ' | json }},
   "author": {
     "@type": "Person",
     "name": {{ article.author | json }}
@@ -306,11 +306,10 @@
   "publisher": {
     "@type": "Organization",
     {% if settings.share_image %}
-    {% assign image_size = settings.share_image.width | append: 'x' %}
       "logo": {
         "@type": "ImageObject",
         "height": {{ settings.share_image.height | json }},
-        "url": {{ settings.share_image | img_url: image_size | prepend: "https:" | json }},
+        "url": {{ settings.share_image | image_url: width: settings.share_image.width, height: settings.share_image.height | prepend: 'https:' | json }},
         "width": {{ settings.share_image.width | json }}
       },
     {% endif %}

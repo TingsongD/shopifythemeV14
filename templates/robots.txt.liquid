@@ -1,8 +1,7 @@
-# Optimized robots.txt for Shopify store msdressly.com
-# Last updated: April 2026
-# Purpose: Protect sensitive areas while allowing beneficial AI crawlers full public access
+# Optimized robots.txt for {{ shop.domain }}
+# Last updated: {{ 'now' | date: "%B %Y" }}
+# Policy: keep public shopping/search content crawlable, protect private flows, allow AI search, opt out of separable AI training crawlers.
 
-# General rules for all crawlers (fallback)
 User-agent: *
 Disallow: /admin
 Disallow: /cart
@@ -31,17 +30,11 @@ Disallow: /blogs/*%2b*
 Disallow: /*/blogs/*+*
 Disallow: /*/blogs/*%2B*
 Disallow: /*/blogs/*%2b*
-
 Allow: /policies/
 Allow: /search
 
-Sitemap: https://www.msdressly.com/sitemap.xml
-Sitemap: https://msdressly.com/apps/ugc-video/sitemap.xml
-
-# AI-specific crawlers: Explicit full access to public content
-# These sections override the general rules for the named bots
-
-User-agent: GPTBot
+# Mainstream search and shopping crawlers.
+User-agent: Googlebot
 Allow: /
 Disallow: /admin
 Disallow: /cart
@@ -51,7 +44,43 @@ Disallow: /checkout
 Disallow: /*/checkouts
 Disallow: /*/orders
 Disallow: /account
-Crawl-delay: 2
+Disallow: /a/downloads/-/*
+Disallow: /*?*sort_by=*
+Disallow: /*&sort_by=*
+
+User-agent: Storebot-Google
+Allow: /
+Disallow: /admin
+Disallow: /cart
+Disallow: /carts
+Disallow: /orders
+Disallow: /checkout
+Disallow: /*/checkouts
+Disallow: /*/orders
+Disallow: /account
+
+# AI search and user-triggered retrieval. These are allowed for answer engines and citation discovery.
+User-agent: OAI-SearchBot
+Allow: /
+Disallow: /admin
+Disallow: /cart
+Disallow: /carts
+Disallow: /orders
+Disallow: /checkout
+Disallow: /*/checkouts
+Disallow: /*/orders
+Disallow: /account
+
+User-agent: ChatGPT-User
+Allow: /
+Disallow: /admin
+Disallow: /cart
+Disallow: /carts
+Disallow: /orders
+Disallow: /checkout
+Disallow: /*/checkouts
+Disallow: /*/orders
+Disallow: /account
 
 User-agent: PerplexityBot
 Allow: /
@@ -63,65 +92,55 @@ Disallow: /checkout
 Disallow: /*/checkouts
 Disallow: /*/orders
 Disallow: /account
-Crawl-delay: 2
+
+User-agent: Claude-SearchBot
+Allow: /
+Disallow: /admin
+Disallow: /cart
+Disallow: /carts
+Disallow: /orders
+Disallow: /checkout
+Disallow: /*/checkouts
+Disallow: /*/orders
+Disallow: /account
+
+User-agent: Claude-User
+Allow: /
+Disallow: /admin
+Disallow: /cart
+Disallow: /carts
+Disallow: /orders
+Disallow: /checkout
+Disallow: /*/checkouts
+Disallow: /*/orders
+Disallow: /account
+
+# Separable training/control tokens are opted out by default.
+User-agent: GPTBot
+Disallow: /
 
 User-agent: Google-Extended
-Allow: /
-Disallow: /admin
-Disallow: /cart
-Disallow: /carts
-Disallow: /orders
-Disallow: /checkout
-Disallow: /*/checkouts
-Disallow: /*/orders
-Disallow: /account
-Crawl-delay: 2
-
-# Additional common AI/search bots (recommended for consistency)
-User-agent: OAI-SearchBot
-Allow: /
-Disallow: /admin
-Disallow: /cart
-Disallow: /carts
-Disallow: /orders
-Disallow: /checkout
-Disallow: /*/checkouts
-Disallow: /*/orders
-Disallow: /account
-Crawl-delay: 2
-
-User-agent: ClaudeBot
-Allow: /
-Disallow: /admin
-Disallow: /cart
-Disallow: /carts
-Disallow: /orders
-Disallow: /checkout
-Disallow: /*/checkouts
-Disallow: /*/orders
-Disallow: /account
-Crawl-delay: 2
+Disallow: /
 
 User-agent: CCBot
+Disallow: /
+
+User-agent: ClaudeBot
+Disallow: /
+
+User-agent: anthropic-ai
+Disallow: /
+
+# Keep ad quality checks available while protecting checkout/account flows.
+User-agent: AdsBot-Google
 Allow: /
-Disallow: /admin
+Disallow: /checkout
 Disallow: /cart
 Disallow: /carts
 Disallow: /orders
-Disallow: /checkout
 Disallow: /*/checkouts
 Disallow: /*/orders
 Disallow: /account
-Crawl-delay: 2
-
-# Maintain restrictions for non-AI bots where appropriate
-User-agent: adsbot-google
-Disallow: /checkout
-Disallow: /cart
-Disallow: /carts
-Disallow: /orders
-Disallow: /*/checkouts
-Disallow: /*/orders
 Disallow: /*?*sort_by=*
 Disallow: /*&sort_by=*
 
@@ -171,3 +190,6 @@ Crawl-delay: 10
 
 User-agent: Pinterest
 Crawl-delay: 1
+
+Sitemap: https://www.msdressly.com/sitemap.xml
+Sitemap: https://www.msdressly.com/apps/ugc-video/sitemap.xml

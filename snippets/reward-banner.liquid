@@ -101,6 +101,7 @@
     position: relative;
     overflow: hidden;
     z-index: 3;
+    width: 100%;
   }
 
   .reward-shimmer-effect {
@@ -128,6 +129,7 @@
     animation: reward-pulse 2s ease-in-out infinite;
     position: relative;
     z-index: 5;
+    min-width: 0;
   }
 
   .reward-middle-row {
@@ -138,17 +140,23 @@
     margin: 0.125rem 0;
     position: relative;
     z-index: 5;
+    min-width: 0;
+    width: 100%;
   }
 
   .reward-promo-text {
     font-weight: 900;
-    font-size: 1.5rem;
+    font-size: clamp(1rem, 4.2vw, 1.25rem);
+    line-height: 1.2;
     color: transparent;
     background: linear-gradient(to bottom right, var(--reward-secondary), var(--reward-primary), var(--reward-text));
     -webkit-background-clip: text;
     background-clip: text;
     filter: drop-shadow(0 1px 1px rgba(0,0,0,0.5));
-    white-space: nowrap; 
+    max-width: 100%;
+    min-width: 0;
+    white-space: normal;
+    overflow-wrap: anywhere;
   }
 
   .reward-subtext {
@@ -156,7 +164,8 @@
     font-weight: bold;
     text-transform: uppercase;
     letter-spacing: 0.05em;
-    font-size: 0.8rem;
+    font-size: clamp(0.72rem, 3.2vw, 0.85rem);
+    line-height: 1.25;
     margin-top: 0.25rem;
     display: flex;
     align-items: center;
@@ -165,6 +174,20 @@
     animation: reward-pulse 2s ease-in-out infinite;
     position: relative;
     z-index: 5;
+    max-width: 100%;
+    min-width: 0;
+    overflow-wrap: anywhere;
+  }
+
+  .reward-single-line-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 2px;
+    max-width: 100%;
+    min-width: 0;
+    overflow-wrap: anywhere;
   }
   
   @media (min-width: 768px) {
@@ -182,29 +205,27 @@
       <div class="reward-shimmer-effect"></div>
       
       {% if cart.item_count == 1 %}
-        <!-- UNLOCK STATE (Multi-line) -->
         <div class="reward-jackpot-text">
-          <span>🔓 UNLOCK GOLD JACKPOT</span>
+          <span>OUTFIT DEAL</span>
         </div>
         
         <div class="reward-middle-row">
           <div class="reward-promo-text">
-            ADD 1 MORE FOR 50% OFF
+            Add 1 more style for 50% off your second item
           </div>
         </div>
         
         <div class="reward-subtext">
-          Buy One Get One 50% Off Deal!
+          Build your look with one more style
         </div>
         
       {% else %}
-        <!-- SUCCESS STATE (Single-line) -->
-        <div class="reward-single-line-content" style="display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2px;">
+        <div class="reward-single-line-content">
             <div style="font-size: 1.1rem; font-weight: 800; text-transform: uppercase; color: #22c55e; line-height: 1.1;">
-                🏆 CONGRATS! YOU HAVE SAVED {{ total_savings | money }}!
+                You unlocked the outfit deal
             </div>
             <div style="font-size: 0.85rem; font-weight: 600; color: #fff; text-transform: uppercase; letter-spacing: 0.05em;">
-                ADD MORE TO SAVE MORE!
+                Add one more style to build your look.
             </div>
         </div>
       {% endif %}

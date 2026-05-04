@@ -20,10 +20,16 @@
         {%- endif -%}
         <a href="#" class="product-compare__image product-image product-image--hover-{{ settings.product_hover_animation_type }} position-relative w-100 js-product-images-navigation js-product-images-hovered-end">
             {%- assign image_dimensions = image_size | split: 'x' -%}
-            <img src="{{ image | img_url: image_size }}"
+            {%- assign image_height = image_dimensions[1] | default: image_dimensions[0] -%}
+            {%- if image != blank -%}
+                {%- assign image_src = image | image_url: width: image_dimensions[0] -%}
+            {%- else -%}
+                {%- assign image_src = 'data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACwAAAAAAQABAAACAkQBADs=' -%}
+            {%- endif -%}
+            <img src="{{ image_src }}"
                  alt="{{ title | escape }}"
                  width="{{ image_dimensions[0] }}"
-                 height="{{ image_dimensions[1] | default: image_dimensions[0] }}">
+                 height="{{ image_height }}">
         </a>
         <div class="product-compare__content d-flex flex-column align-items-start mt-15">
             {%- if show_title -%}

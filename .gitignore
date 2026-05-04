@@ -1,0 +1,20 @@
+# Python / local envs
+.venv/
+.venv-*/
+**/__pycache__/
+*.py[cod]
+
+# OAuth / secrets — never commit (public repo)
+*client_secret*.json
+*apps.googleusercontent.com.json
+n8n-workflow-*.json
+.env
+.env.*
+
+# Editor & OS
+.cursor/
+.vscode/
+.DS_Store
+
+# Scratch / local
+tmp/

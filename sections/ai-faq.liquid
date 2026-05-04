@@ -7,7 +7,6 @@
   assign faqs = product.metafields.ai_seo.faqs.value
   assign highlights = product.metafields.ai_seo.highlights.value
   assign eeat = product.metafields.ai_seo.eeat.value
-  assign json_ld = product.metafields.ai_seo.json_ld.value
 -%}
 
 {%- if faqs and faqs.size > 0 -%}
@@ -42,7 +41,22 @@
   </div>
 
   <script type="application/ld+json">
-    {{ json_ld | json }}
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {%- for faq in faqs -%}
+        {
+          "@type": "Question",
+          "name": {{ faq.question | strip_html | strip | json }},
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": {{ faq.answer | strip_html | strip | json }}
+          }
+        }{%- unless forloop.last -%},{%- endunless -%}
+      {%- endfor -%}
+    ]
+  }
   </script>
 
   <style>

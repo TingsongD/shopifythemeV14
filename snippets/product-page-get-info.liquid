@@ -52,7 +52,6 @@
                 {%- else -%}
                     <h1 class="m-0">{{ title }}</h1>
                 {%- endif -%}
-
                 {%- comment -%}UTM Variant Badge - Machine-readable only, nearly invisible to humans{%- endcomment -%}
                 <div class="utm-variant-badge" style="display: none; opacity: 0.01; font-size: 1px; color: rgba(0,0,0,0.02); line-height: 1; margin: 0; padding: 0; height: 1px; overflow: hidden;"></div>
             </div>
@@ -501,9 +500,11 @@
                     {%- assign icon = blank -%}
                     {%- if block.settings[icon_image_property] != blank -%}
                         {% capture img_size %}{% if block.settings.style == 'inline' %}24x{% else %}40x{% endif %}{% endcapture %}
+                        {%- assign icon_img_w = img_size | split: 'x' | first | plus: 0 -%}
+                        {%- assign icon_img_w_2x = icon_img_w | times: 2 -%}
                         {% capture icon %}
-                            <img srcset="{{ block.settings[icon_image_property] | img_url: img_size }} 1x, {{ block.settings[icon_image_property] | img_url: img_size, scale: 2 }} 2x"
-                                src="{{ block.settings[icon_image_property] | img_url: img_size }}"
+                            <img srcset="{{ block.settings[icon_image_property] | image_url: width: icon_img_w, height: icon_img_w }} 1x, {{ block.settings[icon_image_property] | image_url: width: icon_img_w_2x, height: icon_img_w_2x }} 2x"
+                                src="{{ block.settings[icon_image_property] | image_url: width: icon_img_w, height: icon_img_w }}"
                                 loading="lazy"
                                 alt="{{ block.settings[icon_image_property].alt | default: shop.name | escape }}"
                                 style="object-position: {{ block.settings[icon_image_property].presentation.focal_point }};"
@@ -687,20 +688,6 @@
                     {% render 'product-get-quantity' with quantity_show_title: true quantity_connect: quantity_connect, product_form_id: product_form_id %}
                 </div>
             {%- endif -%}
-            {%- assign has_selling_plan = false -%}
-            {% capture selling_plan_html %}
-                {% for variant in product.variants %}
-                    <optgroup label="{{ variant.title }}">
-                        {% for allocation in variant.selling_plan_allocations %}
-                            {%- assign has_selling_plan = true -%}
-                            <option value="{{ allocation.selling_plan.id }}">
-                                {{ allocation.selling_plan.name }}
-                            </option>
-                        {% endfor %}
-                    </optgroup>
-                {% endfor %}
-            {% endcapture %}
-            <select name="selling_plan"{% unless settings.product_info_show_selling_plan and has_selling_plan %} class="d-none"{% endunless %}>{{ selling_plan_html }}</select>
             {% include 'product-page-get-buttons' with product_form_id: product_form_id %}
             {% render 'product-trust-badges' %}
             {%- when 'free_shipping' -%}
@@ -717,7 +704,7 @@
               document.addEventListener('DOMContentLoaded', function() {
                 function updateRewardBanner() {
                     setTimeout(function() {
-                        fetch('/?section_id=reward-banner-ajax&_=' + new Date().getTime())
+                        fetch('{{ routes.root_url }}{% if routes.root_url != '/' %}/{% endif %}?section_id=reward-banner-ajax&_=' + new Date().getTime())
                         .then(response => response.text())
                         .then(text => {
                             var parser = new DOMParser();

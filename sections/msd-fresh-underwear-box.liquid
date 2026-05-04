@@ -1,0 +1,313 @@
+{%- assign cta_url = section.settings.cta_link | default: '/products/disposable-underwear-box' -%}
+{%- assign cta_label = section.settings.cta_label | default: 'Subscribe Now - $49/Month' -%}
+{%- assign box_product = section.settings.product -%}
+{%- if box_product == blank -%}
+  {%- assign box_product = all_products['disposable-underwear-box'] -%}
+{%- endif -%}
+
+<section id="MSDFreshUnderwearBox-{{ section.id }}" class="msd-fresh msd-fresh--{{ section.settings.display_mode }}">
+  <style>
+    #MSDFreshUnderwearBox-{{ section.id }}{--fresh-ink:#18201d;--fresh-muted:#5d6863;--fresh-paper:#fbfaf7;--fresh-mint:#e8f2ee;--fresh-blue:#eaf3f7;--fresh-coral:#b84f3f;--fresh-sage:#536f5d;color:var(--fresh-ink);background:var(--fresh-paper)}
+    #MSDFreshUnderwearBox-{{ section.id }} .msd-fresh__container{max-width:1180px;margin:0 auto;padding:0 20px}
+    #MSDFreshUnderwearBox-{{ section.id }} .msd-fresh__hero{position:relative;overflow:hidden;min-height:620px;display:flex;align-items:center;background:var(--fresh-paper)}
+    #MSDFreshUnderwearBox-{{ section.id }} .msd-fresh__hero-media{position:absolute;inset:0 0 0 auto;width:58%;display:flex;align-items:center;justify-content:center;pointer-events:none}
+    #MSDFreshUnderwearBox-{{ section.id }} .msd-fresh__hero-image{max-width:min(620px,92%);max-height:520px;object-fit:contain}
+    #MSDFreshUnderwearBox-{{ section.id }} .msd-fresh__pack{width:min(520px,82%);aspect-ratio:1.05;background:#fff;border:1px solid rgba(24,32,29,.12);border-radius:8px;box-shadow:0 24px 70px rgba(24,32,29,.16);padding:34px;display:flex;flex-direction:column;justify-content:space-between}
+    #MSDFreshUnderwearBox-{{ section.id }} .msd-fresh__pack-top{display:flex;justify-content:space-between;gap:18px;border-bottom:1px solid rgba(24,32,29,.12);padding-bottom:20px}
+    #MSDFreshUnderwearBox-{{ section.id }} .msd-fresh__pack-title{font-size:clamp(42px,6vw,74px);line-height:.95;font-weight:700;margin:0}
+    #MSDFreshUnderwearBox-{{ section.id }} .msd-fresh__pack-label{font-size:13px;text-transform:uppercase;letter-spacing:0;color:var(--fresh-coral);font-weight:700}
+    #MSDFreshUnderwearBox-{{ section.id }} .msd-fresh__sealed-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:8px;margin-top:28px}
+    #MSDFreshUnderwearBox-{{ section.id }} .msd-fresh__sealed-grid span{aspect-ratio:1;border-radius:5px;background:var(--fresh-mint);border:1px solid rgba(83,111,93,.2)}
+    #MSDFreshUnderwearBox-{{ section.id }} .msd-fresh__hero-copy{position:relative;z-index:1;width:min(560px,100%);padding:88px 0}
+    #MSDFreshUnderwearBox-{{ section.id }} .msd-fresh__eyebrow{margin:0 0 16px;font-size:13px;line-height:1.4;text-transform:uppercase;letter-spacing:0;font-weight:700;color:var(--fresh-coral)}
+    #MSDFreshUnderwearBox-{{ section.id }} .msd-fresh__hero h1{font-size:clamp(48px,7vw,92px);line-height:.95;margin:0 0 22px;letter-spacing:0}
+    #MSDFreshUnderwearBox-{{ section.id }} .msd-fresh__lead{font-size:clamp(18px,2vw,22px);line-height:1.45;color:var(--fresh-muted);margin:0 0 28px;max-width:520px}
+    #MSDFreshUnderwearBox-{{ section.id }} .msd-fresh__hero-points{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin:0 0 30px;max-width:520px}
+    #MSDFreshUnderwearBox-{{ section.id }} .msd-fresh__hero-point{background:#fff;border:1px solid rgba(24,32,29,.12);border-radius:6px;padding:12px 14px;font-size:14px;line-height:1.3}
+    #MSDFreshUnderwearBox-{{ section.id }} .msd-fresh__price-line{display:flex;align-items:baseline;gap:12px;flex-wrap:wrap;margin-bottom:28px}
+    #MSDFreshUnderwearBox-{{ section.id }} .msd-fresh__price{font-size:34px;line-height:1;font-weight:700}
+    #MSDFreshUnderwearBox-{{ section.id }} .msd-fresh__value{color:var(--fresh-muted)}
+    #MSDFreshUnderwearBox-{{ section.id }} .msd-fresh__cta{display:inline-flex;align-items:center;justify-content:center;min-height:50px;padding:0 24px;border-radius:4px;background:var(--fresh-ink);color:#fff;text-decoration:none;font-weight:700}
+    #MSDFreshUnderwearBox-{{ section.id }} .msd-fresh__cta:hover{color:#fff;background:var(--fresh-coral)}
+    #MSDFreshUnderwearBox-{{ section.id }} .msd-fresh__section{padding:72px 0}
+    #MSDFreshUnderwearBox-{{ section.id }} .msd-fresh__section--tint{background:var(--fresh-mint)}
+    #MSDFreshUnderwearBox-{{ section.id }} .msd-fresh__section-head{max-width:720px;margin:0 0 30px}
+    #MSDFreshUnderwearBox-{{ section.id }} .msd-fresh__section h2{font-size:clamp(32px,4vw,52px);line-height:1.04;margin:0 0 14px;letter-spacing:0}
+    #MSDFreshUnderwearBox-{{ section.id }} .msd-fresh__section-head p{font-size:18px;line-height:1.55;color:var(--fresh-muted);margin:0}
+    #MSDFreshUnderwearBox-{{ section.id }} .msd-fresh__compare{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+    #MSDFreshUnderwearBox-{{ section.id }} .msd-fresh__panel{background:#fff;border:1px solid rgba(24,32,29,.1);border-radius:8px;padding:24px}
+    #MSDFreshUnderwearBox-{{ section.id }} .msd-fresh__panel h3{font-size:22px;margin:0 0 10px}
+    #MSDFreshUnderwearBox-{{ section.id }} .msd-fresh__panel p{margin:0;color:var(--fresh-muted);line-height:1.55}
+    #MSDFreshUnderwearBox-{{ section.id }} .msd-fresh__grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
+    #MSDFreshUnderwearBox-{{ section.id }} .msd-fresh__card{background:#fff;border:1px solid rgba(24,32,29,.1);border-radius:8px;padding:22px;min-height:150px}
+    #MSDFreshUnderwearBox-{{ section.id }} .msd-fresh__card strong{display:block;font-size:20px;margin-bottom:8px}
+    #MSDFreshUnderwearBox-{{ section.id }} .msd-fresh__card span{display:block;color:var(--fresh-muted);line-height:1.5}
+    #MSDFreshUnderwearBox-{{ section.id }} .msd-fresh__uses{display:flex;flex-wrap:wrap;gap:10px}
+    #MSDFreshUnderwearBox-{{ section.id }} .msd-fresh__use{border:1px solid rgba(24,32,29,.16);border-radius:999px;padding:10px 15px;background:#fff;font-weight:600}
+    #MSDFreshUnderwearBox-{{ section.id }} .msd-fresh__steps{counter-reset:fresh-step;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
+    #MSDFreshUnderwearBox-{{ section.id }} .msd-fresh__step{position:relative;background:#fff;border:1px solid rgba(24,32,29,.1);border-radius:8px;padding:24px 22px}
+    #MSDFreshUnderwearBox-{{ section.id }} .msd-fresh__step:before{counter-increment:fresh-step;content:counter(fresh-step);display:flex;align-items:center;justify-content:center;width:32px;height:32px;border-radius:50%;background:var(--fresh-coral);color:#fff;font-weight:700;margin-bottom:16px}
+    #MSDFreshUnderwearBox-{{ section.id }} .msd-fresh__step h3{font-size:21px;margin:0 0 8px}
+    #MSDFreshUnderwearBox-{{ section.id }} .msd-fresh__step p{margin:0;color:var(--fresh-muted);line-height:1.5}
+    #MSDFreshUnderwearBox-{{ section.id }} .msd-fresh__reviews{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
+    #MSDFreshUnderwearBox-{{ section.id }} .msd-fresh__quote{background:#fff;border:1px solid rgba(24,32,29,.1);border-radius:8px;padding:22px}
+    #MSDFreshUnderwearBox-{{ section.id }} .msd-fresh__quote p{font-size:16px;line-height:1.55;margin:0 0 14px;color:var(--fresh-ink)}
+    #MSDFreshUnderwearBox-{{ section.id }} .msd-fresh__quote span{color:var(--fresh-muted);font-weight:700}
+    #MSDFreshUnderwearBox-{{ section.id }} .msd-fresh__pricing{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(260px,.85fr);gap:22px;align-items:stretch}
+    #MSDFreshUnderwearBox-{{ section.id }} .msd-fresh__price-card{background:#fff;border:1px solid rgba(24,32,29,.12);border-radius:8px;padding:30px}
+    #MSDFreshUnderwearBox-{{ section.id }} .msd-fresh__price-card .msd-fresh__price{font-size:52px}
+    #MSDFreshUnderwearBox-{{ section.id }} .msd-fresh__savings{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:20px}
+    #MSDFreshUnderwearBox-{{ section.id }} .msd-fresh__saving{background:var(--fresh-blue);border-radius:6px;padding:16px}
+    #MSDFreshUnderwearBox-{{ section.id }} .msd-fresh__saving strong{display:block;font-size:24px}
+    #MSDFreshUnderwearBox-{{ section.id }} .msd-fresh__faq details{background:#fff;border:1px solid rgba(24,32,29,.1);border-radius:8px;padding:18px 20px;margin-bottom:10px}
+    #MSDFreshUnderwearBox-{{ section.id }} .msd-fresh__faq summary{cursor:pointer;font-weight:700}
+    #MSDFreshUnderwearBox-{{ section.id }} .msd-fresh__faq p{color:var(--fresh-muted);line-height:1.55;margin:12px 0 0}
+    #MSDFreshUnderwearBox-{{ section.id }} .msd-fresh__final{text-align:center;background:var(--fresh-ink);color:#fff;padding:72px 20px}
+    #MSDFreshUnderwearBox-{{ section.id }} .msd-fresh__final h2{font-size:clamp(34px,5vw,64px);line-height:1;margin:0 0 16px;color:#fff}
+    #MSDFreshUnderwearBox-{{ section.id }} .msd-fresh__final p{margin:0 auto 26px;max-width:620px;color:rgba(255,255,255,.75);font-size:18px;line-height:1.5}
+    #MSDFreshUnderwearBox-{{ section.id }} .msd-fresh__final .msd-fresh__cta{background:#fff;color:var(--fresh-ink)}
+    #MSDFreshUnderwearBox-{{ section.id }} .msd-fresh__final .msd-fresh__cta:hover{background:var(--fresh-mint);color:var(--fresh-ink)}
+    #MSDFreshUnderwearBox-{{ section.id }}.msd-fresh--feature .msd-fresh__hero{min-height:520px}
+    #MSDFreshUnderwearBox-{{ section.id }}.msd-fresh--feature .msd-fresh__hero-copy{padding:70px 0}
+    #MSDFreshUnderwearBox-{{ section.id }}.msd-fresh--feature .msd-fresh__section,#MSDFreshUnderwearBox-{{ section.id }}.msd-fresh--feature .msd-fresh__final{display:none}
+    @media (max-width:990px){
+      #MSDFreshUnderwearBox-{{ section.id }} .msd-fresh__hero{min-height:auto}
+      #MSDFreshUnderwearBox-{{ section.id }} .msd-fresh__hero-media{position:relative;width:100%;inset:auto;padding:0 20px 40px}
+      #MSDFreshUnderwearBox-{{ section.id }} .msd-fresh__hero .msd-fresh__container{display:flex;flex-direction:column}
+      #MSDFreshUnderwearBox-{{ section.id }} .msd-fresh__hero-copy{padding:56px 0 28px}
+      #MSDFreshUnderwearBox-{{ section.id }} .msd-fresh__hero-points,#MSDFreshUnderwearBox-{{ section.id }} .msd-fresh__compare,#MSDFreshUnderwearBox-{{ section.id }} .msd-fresh__grid,#MSDFreshUnderwearBox-{{ section.id }} .msd-fresh__steps,#MSDFreshUnderwearBox-{{ section.id }} .msd-fresh__reviews,#MSDFreshUnderwearBox-{{ section.id }} .msd-fresh__pricing{grid-template-columns:1fr}
+      #MSDFreshUnderwearBox-{{ section.id }} .msd-fresh__section{padding:52px 0}
+    }
+    @media (max-width:540px){
+      #MSDFreshUnderwearBox-{{ section.id }} .msd-fresh__container{padding:0 16px}
+      #MSDFreshUnderwearBox-{{ section.id }} .msd-fresh__pack{width:100%;padding:22px}
+      #MSDFreshUnderwearBox-{{ section.id }} .msd-fresh__sealed-grid{grid-template-columns:repeat(4,1fr)}
+      #MSDFreshUnderwearBox-{{ section.id }} .msd-fresh__savings{grid-template-columns:1fr}
+      #MSDFreshUnderwearBox-{{ section.id }} .msd-fresh__cta{width:100%}
+    }
+  </style>
+
+  <div class="msd-fresh__hero">
+    <div class="msd-fresh__hero-media" aria-hidden="true">
+      {%- if box_product.featured_image != blank -%}
+        {% render 'rimage' with image: box_product.featured_image size: '720x' image_class: 'msd-fresh__hero-image' %}
+      {%- else -%}
+        <div class="msd-fresh__pack">
+          <div class="msd-fresh__pack-top">
+            <p class="msd-fresh__pack-title">30</p>
+            <p class="msd-fresh__pack-label">Fresh Pairs<br>Monthly Box</p>
+          </div>
+          <div>
+            <div class="msd-fresh__sealed-grid">
+              {%- for i in (1..20) -%}<span></span>{%- endfor -%}
+            </div>
+          </div>
+          <p class="mb-0">Individually sealed. EO sterilized. Biodegradable.</p>
+        </div>
+      {%- endif -%}
+    </div>
+    <div class="msd-fresh__container">
+      <div class="msd-fresh__hero-copy">
+        <p class="msd-fresh__eyebrow">{{ section.settings.eyebrow | escape }}</p>
+        <h1>{{ section.settings.heading | escape }}</h1>
+        <p class="msd-fresh__lead">{{ section.settings.subheading | escape }}</p>
+        <div class="msd-fresh__hero-points">
+          <div class="msd-fresh__hero-point">30 Fresh Pairs</div>
+          <div class="msd-fresh__hero-point">EO sterilized</div>
+          <div class="msd-fresh__hero-point">Free shipping</div>
+        </div>
+        <div class="msd-fresh__price-line">
+          <span class="msd-fresh__price">$49/month</span>
+          <span class="msd-fresh__value">$89+ retail value</span>
+        </div>
+        <a href="{{ cta_url }}" class="msd-fresh__cta">{{ cta_label | escape }}</a>
+      </div>
+    </div>
+  </div>
+
+  {%- if section.settings.display_mode == 'full' -%}
+    <div class="msd-fresh__section">
+      <div class="msd-fresh__container">
+        <div class="msd-fresh__section-head">
+          <h2>Mornings start clean. Midday asks for backup.</h2>
+          <p>Your first pair does its job. Commutes, workouts, long shifts, humidity, travel, and body changes can make the rest of the day feel different.</p>
+        </div>
+        <div class="msd-fresh__compare">
+          <div class="msd-fresh__panel">
+            <h3>The morning pair</h3>
+            <p>Fresh out the door, before sweat, spills, delays, or a packed schedule show up.</p>
+          </div>
+          <div class="msd-fresh__panel">
+            <h3>The second pair of the day</h3>
+            <p>A sealed, disposable reset you can keep in your bag, desk, luggage, locker, or bathroom cabinet.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="msd-fresh__section msd-fresh__section--tint">
+      <div class="msd-fresh__container">
+        <div class="msd-fresh__section-head">
+          <h2>What is in the box</h2>
+          <p>A monthly refresh supply built for clean storage, easy carrying, and hospital-grade hygiene.</p>
+        </div>
+        <div class="msd-fresh__grid">
+          <div class="msd-fresh__card"><strong>30 Fresh Pairs</strong><span>One sealed pair for every day, with extras for busy moments.</span></div>
+          <div class="msd-fresh__card"><strong>Individually sealed</strong><span>Each pair stays clean until the moment you need it.</span></div>
+          <div class="msd-fresh__card"><strong>EO sterilized</strong><span>Packaged for confidence with EO sterilized handling.</span></div>
+          <div class="msd-fresh__card"><strong>Biodegradable</strong><span>Designed as a single-use refresh with lower-waste materials.</span></div>
+          <div class="msd-fresh__card"><strong>Free shipping</strong><span>Your monthly box arrives without extra shipping at checkout.</span></div>
+          <div class="msd-fresh__card"><strong>Hospital-grade hygiene</strong><span>Clean, portable backup for moments when ordinary underwear is not enough.</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="msd-fresh__section">
+      <div class="msd-fresh__container">
+        <div class="msd-fresh__section-head">
+          <h2>Made for real-life refresh moments</h2>
+          <p>Keep a sealed pair anywhere you already keep backup makeup, wipes, or a phone charger.</p>
+        </div>
+        <div class="msd-fresh__uses">
+          <span class="msd-fresh__use">Gym</span>
+          <span class="msd-fresh__use">Period</span>
+          <span class="msd-fresh__use">Travel</span>
+          <span class="msd-fresh__use">Humidity</span>
+          <span class="msd-fresh__use">Camping</span>
+          <span class="msd-fresh__use">Spa</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="msd-fresh__section msd-fresh__section--tint">
+      <div class="msd-fresh__container">
+        <div class="msd-fresh__section-head">
+          <h2>How it works</h2>
+          <p>A simple subscription for a product you do not want to run out of.</p>
+        </div>
+        <div class="msd-fresh__steps">
+          <div class="msd-fresh__step"><h3>Subscribe</h3><p>Start your monthly 30-pair refresh box for $49/month.</p></div>
+          <div class="msd-fresh__step"><h3>Receive your box</h3><p>Each delivery arrives with individually sealed pairs ready to store or carry.</p></div>
+          <div class="msd-fresh__step"><h3>Refresh anytime</h3><p>Use a clean backup at work, after the gym, while traveling, or whenever your day changes.</p></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="msd-fresh__section">
+      <div class="msd-fresh__container">
+        <div class="msd-fresh__section-head">
+          <h2>Refresh notes</h2>
+          <p>Short, practical reasons customers keep a sealed pair nearby.</p>
+        </div>
+        <div class="msd-fresh__reviews">
+          <div class="msd-fresh__quote"><p>"I keep one in my gym bag and one in my work tote. It is the backup I actually use."</p><span>Gym days</span></div>
+          <div class="msd-fresh__quote"><p>"The sealed packaging makes it easy to pack for trips without overthinking laundry."</p><span>Travel kit</span></div>
+          <div class="msd-fresh__quote"><p>"Humidity days feel less stressful when I know I have a clean reset with me."</p><span>Warm weather</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="msd-fresh__section msd-fresh__section--tint">
+      <div class="msd-fresh__container">
+        <div class="msd-fresh__pricing">
+          <div class="msd-fresh__section-head mb-0">
+            <h2>30 Fresh Pairs for $49/month</h2>
+            <p>Get a month of sealed refresh pairs for less than restocking one-off travel packs.</p>
+          </div>
+          <div class="msd-fresh__price-card">
+            <div class="msd-fresh__price">$49/month</div>
+            <p class="mt-10 mb-0">Includes 30 individually sealed pairs and free shipping.</p>
+            <div class="msd-fresh__savings">
+              <div class="msd-fresh__saving"><strong>$89+</strong><span>Retail value</span></div>
+              <div class="msd-fresh__saving"><strong>$40+</strong><span>Savings</span></div>
+            </div>
+            <div class="mt-25">
+              <a href="{{ cta_url }}" class="msd-fresh__cta">{{ cta_label | escape }}</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="msd-fresh__section">
+      <div class="msd-fresh__container">
+        <div class="msd-fresh__section-head">
+          <h2>FAQ</h2>
+          <p>Details to review before starting your monthly box.</p>
+        </div>
+        <div class="msd-fresh__faq">
+          <details open><summary>What comes in each box?</summary><p>Each monthly box includes 30 individually sealed disposable underwear pairs.</p></details>
+          <details><summary>How often does it ship?</summary><p>The box is positioned as a monthly subscription. The available selling plan in checkout controls the exact billing and delivery cadence.</p></details>
+          <details><summary>Are the pairs EO sterilized?</summary><p>Yes. The box is described as EO sterilized and designed for clean storage until each sealed pair is opened.</p></details>
+          <details><summary>Are they biodegradable?</summary><p>Yes. The pairs are positioned as biodegradable disposable underwear; follow local disposal guidance after use.</p></details>
+          <details><summary>Where should I keep them?</summary><p>Keep sealed pairs in a gym bag, purse, travel bag, desk drawer, locker, bathroom cabinet, or emergency kit.</p></details>
+        </div>
+      </div>
+    </div>
+
+    <div class="msd-fresh__final">
+      <h2>The second pair of the day.</h2>
+      <p>Stock your bag, drawer, and travel kit with 30 sealed pairs delivered every month.</p>
+      <a href="{{ cta_url }}" class="msd-fresh__cta">{{ cta_label | escape }}</a>
+    </div>
+  {%- endif -%}
+</section>
+
+{% schema %}
+{
+  "name": "MSD: Fresh underwear box",
+  "tag": "section",
+  "class": "section-msd-fresh-underwear-box",
+  "settings": [
+    {
+      "type": "select",
+      "id": "display_mode",
+      "label": "Display mode",
+      "default": "full",
+      "options": [
+        { "value": "full", "label": "Full landing page" },
+        { "value": "feature", "label": "Homepage feature" }
+      ]
+    },
+    {
+      "type": "product",
+      "id": "product",
+      "label": "Product image source"
+    },
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow",
+      "default": "Monthly disposable underwear refresh box"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "The second pair of the day."
+    },
+    {
+      "type": "textarea",
+      "id": "subheading",
+      "label": "Subheading",
+      "default": "A monthly box of disposable underwear for the midday reset: sealed, EO sterilized, biodegradable, and ready whenever your day changes."
+    },
+    {
+      "type": "text",
+      "id": "cta_label",
+      "label": "CTA label",
+      "default": "Subscribe Now - $49/Month"
+    },
+    {
+      "type": "url",
+      "id": "cta_link",
+      "label": "CTA link"
+    }
+  ],
+  "presets": [
+    {
+      "name": "MSD: Fresh underwear box"
+    }
+  ]
+}
+{% endschema %}

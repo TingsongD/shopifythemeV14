@@ -211,6 +211,13 @@
         "arrows": true,
         "bullets": true
       }
+    },
+    "faq_accordion": {
+      "type": "faq-accordion",
+      "settings": {
+        "heading": "Frequently Asked Questions",
+        "output_schema": true
+      }
     }
   },
   "order": [
@@ -218,6 +225,7 @@
     "16343107307257fa4f",
     "1634128129c7f7073c",
     "163430726099b71d81",
+    "faq_accordion",
     "related-products"
   ]
 }
