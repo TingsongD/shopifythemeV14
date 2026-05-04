@@ -19,3 +19,4 @@ n8n-workflow-*.json
 # Scratch / local
 tmp/
 .playwright-mcp/
+update_design/

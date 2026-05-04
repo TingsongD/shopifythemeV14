@@ -691,6 +691,7 @@
             {%- endif -%}
             {% include 'product-page-get-buttons' with product_form_id: product_form_id %}
             {% render 'product-trust-badges' %}
+            {% render 'product-aov-prompt', current_variant: current_variant, centered: centered %}
             {%- when 'free_shipping' -%}
             {%- if settings.cart_show_free_shipping -%}
                 <div class="product-page-info__free-shipping mb-40" {{ block.shopify_attributes }}>

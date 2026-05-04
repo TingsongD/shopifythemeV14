@@ -14,17 +14,17 @@
       "settings": {
         "image": "shopify://shop_images/polka-dot-print-round-neck-casual-dress-43393189413184.png",
         "mobile_image": "shopify://shop_images/polka-dot-print-round-neck-casual-dress-43393189413184_b5800336-8f89-40a5-84fd-b7519fa2faff.png",
-        "eyebrow": "New Season Edit",
-        "heading": "Dressed to own it.",
-        "body": "Curated pieces for women who move with intention. New arrivals, every Friday.",
-        "primary_label": "Shop now",
+        "eyebrow": "New season edit for grown-up wardrobes",
+        "heading": "Polished without trying too hard.",
+        "body": "Curated pieces for women balancing workdays, travel, dinners, and weekends across the U.S. New arrivals, every Friday.",
+        "primary_label": "Shop new arrivals",
         "primary_link": "shopify://collections/new-in",
         "secondary_label": "Shop customer favorites",
         "secondary_link": "shopify://collections/picked-for-you",
         "stat_1_value": "3.2 million+",
         "stat_1_label": "Happy customers",
-        "stat_2_value": "Loved by",
-        "stat_2_label": "MsDressly customers",
+        "stat_2_value": "U.S.",
+        "stat_2_label": "Customer focus",
         "stat_3_value": "45-day",
         "stat_3_label": "Returns",
         "background_color": "#f7f5f2",
@@ -1157,31 +1157,31 @@
           "settings": {
             "label": "Shipping",
             "title": "Free over $80",
-            "text": "Priority shipping is unlocked once your order crosses the $80 threshold."
+            "text": "Priority shipping unlocks at $80 for easier first orders in the U.S."
           }
         },
         "returns": {
           "type": "point",
           "settings": {
             "label": "Returns",
-            "title": "45-day returns",
-            "text": "Eligible items are backed by a longer at-home try-on window."
+            "title": "Try it at home",
+            "text": "Eligible items are backed by a 45-day return window, so new customers can order with less hesitation."
           }
         },
         "quality": {
           "type": "point",
           "settings": {
             "label": "Quality",
-            "title": "Polished details",
-            "text": "Curated silhouettes, practical sizing notes, and secure checkout support confident orders."
+            "title": "Made for real plans",
+            "text": "Polished silhouettes and practical styling notes fit workdays, travel days, and dinner plans."
           }
         },
         "subscription": {
           "type": "point",
           "settings": {
-            "label": "Subscribe",
-            "title": "Save on essentials",
-            "text": "Start the $49/month refresh box when you want monthly backup pairs handled."
+            "label": "Essentials",
+            "title": "Refresh made easy",
+            "text": "The $49/month refresh box keeps backup pairs handled for travel, work bags, and long days."
           }
         }
       },
@@ -1194,9 +1194,9 @@
       "settings": {
         "container": "boxed",
         "tone": "compact",
-        "eyebrow": "Built for confident checkout",
-        "heading": "Premium style, clear value.",
-        "body": "<p>Enjoy $80 free shipping progress, 45-day returns, secure checkout, and the $49/month refresh box designed to keep your wardrobe ready.</p>",
+        "eyebrow": "First-order confidence",
+        "heading": "Premium style for everyday American life.",
+        "body": "<p>Designed for women who want polished pieces without department-store overthinking: $80 free shipping progress, 45-day returns, secure checkout, and practical styling cues before the first order.</p>",
         "primary_label": "Shop customer favorites",
         "primary_link": "shopify://collections/picked-for-you",
         "secondary_label": "Explore new arrivals",

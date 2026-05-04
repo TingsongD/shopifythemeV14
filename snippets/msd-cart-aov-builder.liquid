@@ -4,8 +4,12 @@ Renders a lightweight cart order-builder prompt for AOV lift.
 @example
 {% render 'msd-cart-aov-builder', compact: true %}
 {% enddoc %}
-{%- assign cart_aov_goal = 9500 -%}
-{%- assign cart_aov_remaining = cart_aov_goal | minus: cart.total_price | at_least: 0 -%}
+{%- liquid
+  assign cart_aov_goal = 9500
+  assign cart_aov_remaining = cart_aov_goal | minus: cart.total_price | at_least: 0
+  assign cart_aov_progress_quotient = cart_aov_goal | times: 1.0 | divided_by: 100
+  assign cart_aov_progress = cart.total_price | divided_by: cart_aov_progress_quotient | at_most: 100
+-%}
 <div class="msd-cart-aov{% if compact %} msd-cart-aov--compact{% endif %}">
   <style>
     .msd-cart-aov{border:1px solid #0a0a0a;border-radius:0;background:#ffffff;padding:14px 16px;color:#0a0a0a}
@@ -13,6 +17,9 @@ Renders a lightweight cart order-builder prompt for AOV lift.
     .msd-cart-aov__eyebrow{margin:0 0 5px;font-size:10px;line-height:1.3;text-transform:uppercase;letter-spacing:.14em;font-weight:700;color:#5a31f4}
     .msd-cart-aov__title{margin:0 0 6px;font-size:16px;line-height:1.3;font-weight:700;color:#0a0a0a}
     .msd-cart-aov__text{margin:0;color:#6f6a64;font-size:13px;line-height:1.5}
+    .msd-cart-aov__meter{position:relative;overflow:hidden;height:7px;margin:10px 0 0;background:#eee8e0}
+    .msd-cart-aov__meter-fill{display:block;height:100%;width:var(--msd-aov-progress);background:#5a31f4}
+    .msd-cart-aov__meta{display:flex;justify-content:space-between;gap:10px;margin-top:7px;color:#6f6a64;font-size:11px;line-height:1.3}
     .msd-cart-aov__actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:10px}
     .msd-cart-aov__link{font-size:12px;font-weight:700;text-decoration:underline;text-underline-offset:4px;color:#0a0a0a;text-transform:uppercase;letter-spacing:.08em}
   </style>
@@ -25,6 +32,13 @@ Renders a lightweight cart order-builder prompt for AOV lift.
     <p class="msd-cart-aov__title">{{ 'cart.general.aov_builder_complete_title' | t }}</p>
     <p class="msd-cart-aov__text">{{ 'cart.general.aov_builder_complete_text' | t }}</p>
   {%- endif -%}
+  <div class="msd-cart-aov__meter" aria-hidden="true">
+    <span class="msd-cart-aov__meter-fill" style="--msd-aov-progress: {{ cart_aov_progress }}%;"></span>
+  </div>
+  <div class="msd-cart-aov__meta">
+    <span>{{ cart.total_price | money }} now</span>
+    <span>$95 target</span>
+  </div>
   <div class="msd-cart-aov__actions">
     <a href="{{ routes.root_url }}collections/picked-for-you" class="msd-cart-aov__link">{{ 'cart.general.aov_builder_primary' | t }}</a>
     <a href="{{ routes.root_url }}collections/cardigans-sweaters" class="msd-cart-aov__link">{{ 'cart.general.aov_builder_secondary' | t }}</a>

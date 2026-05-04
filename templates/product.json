@@ -358,7 +358,7 @@
           "settings": {
             "label": "Fit",
             "title": "Fit confidence first",
-            "text": "Clear silhouettes, practical sizing, and styling notes help you order without second-guessing."
+            "text": "Clear silhouettes, practical sizing, and styling notes help you choose pieces that fit real U.S. routines."
           }
         },
         "value": {
@@ -374,7 +374,7 @@
           "settings": {
             "label": "Trust",
             "title": "Low-risk first order",
-            "text": "Secure checkout and 45-day returns on eligible items make trying a new style simpler."
+            "text": "Secure checkout and 45-day returns on eligible items make trying a new brand simpler."
           }
         }
       },
@@ -388,7 +388,7 @@
         "tone": "compact",
         "eyebrow": "First-order confidence",
         "heading": "What makes the first order easier.",
-        "body": "<p>New customers usually want the same three answers before checkout: will it fit my life, is the value clear, and can I return it if it is not right?</p>",
+        "body": "<p>New customers usually want the same three answers before checkout: will it fit my life, does it feel elevated enough, and can I return it if it is not right?</p>",
         "primary_label": "Shop customer favorites",
         "primary_link": "shopify://collections/picked-for-you",
         "secondary_label": "Explore new arrivals",
