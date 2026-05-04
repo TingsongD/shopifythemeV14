@@ -694,9 +694,11 @@
             {% render 'product-aov-prompt', current_variant: current_variant, centered: centered %}
             {%- when 'free_shipping' -%}
             {%- if settings.cart_show_free_shipping -%}
+                {% comment %}
                 <div class="product-page-info__free-shipping mb-40" {{ block.shopify_attributes }}>
                     {% render 'free-shipping' with mobile_centered: true centered: centered %}
                 </div>
+                {% endcomment %}
                 <div id="product-reward-banner-wrapper">
                   {% render 'reward-banner' %}
                 </div>
