@@ -9,214 +9,6 @@
  */
 {
   "sections": {
-    "af984214-713c-4cea-9b87-dcd09aa3a842": {
-      "type": "home-builder",
-      "blocks": {
-        "93ef4eb6-f2da-40cc-bd6d-5d8c7a4f607b": {
-          "type": "slick_slider",
-          "disabled": true,
-          "settings": {
-            "height": "auto",
-            "min_height": 0,
-            "size_of_column": "12",
-            "arrows": false,
-            "bullets": false,
-            "speed": 2
-          }
-        },
-        "c03081d9-3818-479f-81b4-40cc5b462ed7": {
-          "type": "slick_slide",
-          "disabled": true,
-          "settings": {
-            "url": "",
-            "image": "shopify://shop_images/BFCM_2023_PRE_SALE_2.png",
-            "image_size": 1200,
-            "image_mobile_size": 550,
-            "image_position_x": 50,
-            "color_image_mask": "",
-            "image_mask_opacity": 0.5,
-            "text_line_1": "Text line #1",
-            "text_line_2": "Text line #2",
-            "text_line_3": "Text line #3",
-            "style": "1",
-            "button_1": "Button #1 text",
-            "button_1_url": "",
-            "color_button_type_1": "default",
-            "button_2": "Button #2 text",
-            "button_2_url": "",
-            "color_button_type_2": "default",
-            "custom_html": "",
-            "video_external_url": "",
-            "video_mp4_url": "",
-            "video_autoplay": true,
-            "video_controls": false,
-            "type": "clean",
-            "content_position": "center",
-            "content_align": "center",
-            "add_container": false,
-            "content_width": 100,
-            "text_width": 0,
-            "animation_text": "none",
-            "color_text_1": "",
-            "color_text_2": "",
-            "color_text_3": "",
-            "color_text_bg": "",
-            "color_curtain_bg": "",
-            "customization_class": ""
-          }
-        },
-        "cfa99743-04e4-417d-ae26-b8e5869db3c4": {
-          "type": "slick_slide",
-          "settings": {
-            "url": "",
-            "image": "shopify://shop_images/1_2.png",
-            "image_size": 1200,
-            "image_mobile_size": 550,
-            "image_position_x": 50,
-            "color_image_mask": "",
-            "image_mask_opacity": 0.5,
-            "text_line_1": "Text line #1",
-            "text_line_2": "Text line #2",
-            "text_line_3": "Text line #3",
-            "style": "1",
-            "button_1": "Button #1 text",
-            "button_1_url": "",
-            "color_button_type_1": "default",
-            "button_2": "Button #2 text",
-            "button_2_url": "",
-            "color_button_type_2": "default",
-            "custom_html": "",
-            "video_external_url": "",
-            "video_mp4_url": "",
-            "video_autoplay": true,
-            "video_controls": false,
-            "type": "clean",
-            "content_position": "center",
-            "content_align": "center",
-            "add_container": false,
-            "content_width": 100,
-            "text_width": 0,
-            "animation_text": "none",
-            "color_text_1": "",
-            "color_text_2": "",
-            "color_text_3": "",
-            "color_text_bg": "",
-            "color_curtain_bg": "",
-            "customization_class": ""
-          }
-        },
-        "d6c45b41-dbf7-4db3-a292-7180b770d6ff": {
-          "type": "slick_slide",
-          "disabled": true,
-          "settings": {
-            "url": "",
-            "image": "shopify://shop_images/2_1_d1cfa390-ea20-4eb6-8960-d9585b08cea2.png",
-            "image_size": 1200,
-            "image_mobile_size": 550,
-            "image_position_x": 50,
-            "color_image_mask": "",
-            "image_mask_opacity": 0.5,
-            "text_line_1": "Text line #1",
-            "text_line_2": "Text line #2",
-            "text_line_3": "Text line #3",
-            "style": "1",
-            "button_1": "Button #1 text",
-            "button_1_url": "",
-            "color_button_type_1": "default",
-            "button_2": "Button #2 text",
-            "button_2_url": "",
-            "color_button_type_2": "default",
-            "custom_html": "",
-            "video_external_url": "",
-            "video_mp4_url": "",
-            "video_autoplay": true,
-            "video_controls": false,
-            "type": "clean",
-            "content_position": "center",
-            "content_align": "center",
-            "add_container": false,
-            "content_width": 100,
-            "text_width": 0,
-            "animation_text": "none",
-            "color_text_1": "",
-            "color_text_2": "",
-            "color_text_3": "",
-            "color_text_bg": "",
-            "color_curtain_bg": "",
-            "customization_class": ""
-          }
-        }
-      },
-      "block_order": [
-        "93ef4eb6-f2da-40cc-bd6d-5d8c7a4f607b",
-        "c03081d9-3818-479f-81b4-40cc5b462ed7",
-        "cfa99743-04e4-417d-ae26-b8e5869db3c4",
-        "d6c45b41-dbf7-4db3-a292-7180b770d6ff"
-      ],
-      "settings": {
-        "title": "",
-        "container": "fullwidth",
-        "size_of_columns": "1",
-        "size_of_columns_mobile": "1",
-        "margins_for_columns": "none",
-        "align_of_columns": "top_center",
-        "disable_column_paddings": true,
-        "precedence": "",
-        "customization_class": ""
-      }
-    },
-    "73c80781-cd2d-4761-9943-a386ad927e09": {
-      "type": "information-line",
-      "blocks": {
-        "template--19256285397312__73c80781-cd2d-4761-9943-a386ad927e09-1685517029f13fca32-0": {
-          "type": "content",
-          "disabled": true,
-          "settings": {
-            "icon": "theme-116",
-            "title": "Free Shipping",
-            "paragraph": "on orders over $60",
-            "url": ""
-          }
-        },
-        "template--19256285397312__73c80781-cd2d-4761-9943-a386ad927e09-1685517029f13fca32-1": {
-          "type": "content",
-          "settings": {
-            "icon": "theme-089",
-            "title": "FREE Returns",
-            "paragraph": "on orders over $40",
-            "url": ""
-          }
-        },
-        "template--19256285397312__73c80781-cd2d-4761-9943-a386ad927e09-1685517029f13fca32-2": {
-          "type": "content",
-          "settings": {
-            "icon": "theme-129",
-            "title": "FREE Shipping",
-            "paragraph": "on orders over $60",
-            "url": ""
-          }
-        }
-      },
-      "block_order": [
-        "template--19256285397312__73c80781-cd2d-4761-9943-a386ad927e09-1685517029f13fca32-0",
-        "template--19256285397312__73c80781-cd2d-4761-9943-a386ad927e09-1685517029f13fca32-1",
-        "template--19256285397312__73c80781-cd2d-4761-9943-a386ad927e09-1685517029f13fca32-2"
-      ],
-      "disabled": true,
-      "custom_css": [
-        ".row {display: flex; flex-wrap: nowrap;}",
-        ".row > * {flex: 1;}",
-        ".row > * + * {margin-left: 0px;}",
-        ".element {margin-top: 0px; margin-right: 0px; text-align: center; margin-bottom: 0px; margin-left: 0px; padding-top: 0px; padding-bottom: 0px;}",
-        " /* Styles for mobile devices */@media (max-width: 767px) {.row {flex-wrap: wrap; } .row > * {flex-basis: 50%; }}",
-        ".pt-10,.py-10 {padding-top: 2px !important; padding-bottom: 2px !important;}"
-      ],
-      "settings": {
-        "title": "",
-        "type": "1",
-        "style": "5"
-      }
-    },
     "main": {
       "type": "main-product",
       "blocks": {
@@ -247,15 +39,18 @@
         },
         "5a6109f3-d35a-4f38-8da0-143bf0234539": {
           "type": "countdown",
-          "settings": {}
+          "settings": {},
+          "disabled": true
         },
         "b85ba278-399a-4ad1-859d-7823852521f0": {
           "type": "stock_countdown",
-          "settings": {}
+          "settings": {},
+          "disabled": true
         },
         "34e1aa61-b1fa-4394-9a83-79cb871f8b1c": {
           "type": "delivery_countdown",
-          "settings": {}
+          "settings": {},
+          "disabled": true
         },
         "f7689ce9-d953-4a78-b2ca-74088d888a7f": {
           "type": "border",
@@ -263,15 +58,14 @@
         },
         "dcb960c0-aac1-469d-a4fd-e416a4a6ed4f": {
           "type": "icon_with_text",
-          "disabled": true,
           "settings": {
             "style": "inline",
             "icon_svg_1": "theme-127",
-            "text_1": "<p>Secure checkout. Customer support is available for order questions.</p>",
+            "text_1": "<p>Secure checkout with customer support for order questions.</p>",
             "icon_svg_2": "theme-142",
-            "text_2": "<p>Free shipping on orders over $80. Orders are processed in 1-3 business days.</p>",
+            "text_2": "<p>Free Priority Shipping on orders over $80.</p>",
             "icon_svg_3": "theme-144",
-            "text_3": "<p>45-day returns apply to eligible items under the store return policy.</p>",
+            "text_3": "<p>45-day returns on eligible items under the store policy.</p>",
             "icon_svg_4": "",
             "text_4": "",
             "icon_svg_5": "",
@@ -334,6 +128,12 @@
             "content": "",
             "page_content": "care-instructions"
           }
+        },
+        "msd_first_order_note": {
+          "type": "text",
+          "settings": {
+            "content": "<p><strong>First time here?</strong> Choose the size and color that fit your plans. Your order is backed by secure checkout, free Priority Shipping over $80, and 45-day returns on eligible items.</p>"
+          }
         }
       },
       "block_order": [
@@ -342,6 +142,7 @@
         "judge_me_reviews_preview_badge_P7HzrE",
         "a5bd3c3b-9ef1-4cde-a923-54a7efc01c14",
         "d5e4b255-784c-4754-9cbe-eddd84c93af2",
+        "msd_first_order_note",
         "redeemly_rewarded_credits_pdp_M7QPfX",
         "5a6109f3-d35a-4f38-8da0-143bf0234539",
         "b85ba278-399a-4ad1-859d-7823852521f0",
@@ -548,12 +349,60 @@
         "arrows": true,
         "bullets": true
       }
+    },
+    "pdp_value_props": {
+      "type": "msd-icp-value-props",
+      "blocks": {
+        "fit": {
+          "type": "point",
+          "settings": {
+            "label": "Fit",
+            "title": "Fit confidence first",
+            "text": "Clear silhouettes, practical sizing, and styling notes help you order without second-guessing."
+          }
+        },
+        "value": {
+          "type": "point",
+          "settings": {
+            "label": "Value",
+            "title": "Elevated without overpaying",
+            "text": "Boutique-inspired pieces with free Priority Shipping on orders over $80."
+          }
+        },
+        "trust": {
+          "type": "point",
+          "settings": {
+            "label": "Trust",
+            "title": "Low-risk first order",
+            "text": "Secure checkout and 45-day returns on eligible items make trying a new style simpler."
+          }
+        }
+      },
+      "block_order": [
+        "fit",
+        "value",
+        "trust"
+      ],
+      "settings": {
+        "container": "boxed",
+        "tone": "compact",
+        "eyebrow": "First-order confidence",
+        "heading": "What makes the first order easier.",
+        "body": "<p>New customers usually want the same three answers before checkout: will it fit my life, is the value clear, and can I return it if it is not right?</p>",
+        "primary_label": "Shop customer favorites",
+        "primary_link": "shopify://collections/picked-for-you",
+        "secondary_label": "Explore new arrivals",
+        "secondary_link": "shopify://collections/new-in",
+        "bg_color": "#fbfaf7",
+        "text_color": "#18201d",
+        "muted_color": "#5d6863",
+        "accent_color": "#8a3f33"
+      }
     }
   },
   "order": [
-    "af984214-713c-4cea-9b87-dcd09aa3a842",
-    "73c80781-cd2d-4761-9943-a386ad927e09",
     "main",
+    "pdp_value_props",
     "sorting_collections_GB7Fz3",
     "faq_accordion",
     "1764439152f4487fb8",

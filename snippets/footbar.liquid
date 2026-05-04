@@ -132,7 +132,7 @@
                             {%- endif -%}
                             {%- if settings.product_footbar_show_button_add_to_cart -%}
                                 <div class="footbar-product__button-add-to-cart">
-                                    <button type="button" class="btn btn--status btn--animated btn--footbar" name="add" data-js-trigger="add-to-cart" data-js-button-add-to-cart-clone="footbar" data-js-product-button-add-to-cart{% unless current_variant.available %} disabled="disabled" data-button-status="sold-out"{% elsif variant_pre_order %} data-button-status="pre-order"{% else %}{% if enable_select_variant_button %} data-button-status="select"{% endif %}{% endunless %}>
+                                    <button type="button" class="btn btn--status btn--animated btn--footbar" name="add" data-js-trigger="add-to-cart" data-js-button-add-to-cart-clone="footbar" data-js-product-button-add-to-cart{% unless current_variant.available %} disabled="disabled" data-button-status="sold-out"{% elsif variant_pre_order %} data-button-status="pre-order"{% else %}{% if enable_select_variant_button %} disabled="disabled" data-button-status="select"{% endif %}{% endunless %}>
                                         <div id="container-stars">
                                             <div id="stars"></div>
                                         </div>

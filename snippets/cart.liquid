@@ -209,6 +209,9 @@
                                             <h5 class="mb-3">{{ 'cart.general.subtotal' | t }}</h5>
                                             <h3 class="mb-0">{{ cart.total_price | money }}</h3>
                                         </div>
+                                        <div class="mb-15">
+                                            {% render 'msd-cart-aov-builder' %}
+                                        </div>
                                         <p>{{ 'cart.general.shipping_at_checkout' | t }}</p>
                                         <button type="submit" class="btn btn--size-large btn--full btn--status btn--animated" name="checkout">
                                             <span class="d-flex flex-center">
@@ -229,7 +232,7 @@
                                                         </g>
                                                     </svg>
                                                 </i>
-                                                <span class="btn__text">CHECKOUT NOW 👉</span>
+                                                <span class="btn__text">{{ 'cart.general.checkout' | t }}</span>
                                             </span>
                                         </button>
                                         

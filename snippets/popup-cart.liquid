@@ -98,6 +98,9 @@
                                     {% render 'free-shipping' %}
                                 </div>
                             {%- endif -%}
+                            <div class="popup-cart__aov-builder my-15">
+                                {% render 'msd-cart-aov-builder', compact: true %}
+                            </div>
 
                     {%- if settings.cart_popup_type == 'center' -%}
                         </div>

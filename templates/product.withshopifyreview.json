@@ -37,10 +37,17 @@
             "content": "<p>Text content of Tab goes here!</p><p>You can make text <strong>bold</strong>, <em>italic</em> or add <a href=\"/blogs/news\" title=\"News\">link</a> using rich text editor.</p><p></p>",
             "page_content": ""
           }
+        },
+        "msd_first_order_note": {
+          "type": "text",
+          "settings": {
+            "content": "<p><strong>First time here?</strong> Choose the size and color that fit your plans. Your order is backed by secure checkout, free Priority Shipping over $80, and 45-day returns on eligible items.</p>"
+          }
         }
       },
       "block_order": [
         "b0febcf2-a38c-4ae7-a929-10af2ad0e5f4",
+        "msd_first_order_note",
         "959240db-9a88-436b-8c09-b6c9e0ebb7a8",
         "eef0c541-9d04-4de6-9d1e-377c3d515488"
       ],
@@ -53,149 +60,6 @@
         "show_tab_reviews": true,
         "scrolling_to_opened_tab": false,
         "tabs_type": "tabs"
-      }
-    },
-    "16343107307257fa4f": {
-      "type": "spacer",
-      "disabled": true,
-      "settings": {
-        "margin_top": 0,
-        "margin_bottom": 60,
-        "margin_top_mobile": 15,
-        "margin_bottom_mobile": 15,
-        "container": "boxed",
-        "show_separator": true,
-        "title": ""
-      }
-    },
-    "1634128129c7f7073c": {
-      "type": "home-builder",
-      "blocks": {
-        "7cec1383-4d32-4930-87ce-4fe8b3ed1e36": {
-          "type": "promobox",
-          "settings": {
-            "url": "",
-            "image_size": 1450,
-            "image_mobile_size": 550,
-            "image_position_x": 50,
-            "color_image_mask": "",
-            "image_mask_opacity": 0.5,
-            "text_line_1": "Text line #1",
-            "text_line_2": "Text line #2",
-            "text_line_3": "Text line #3",
-            "style": "1",
-            "button_1": "Button #1 text",
-            "button_1_url": "",
-            "color_button_type_1": "default",
-            "button_2": "Button #2 text",
-            "button_2_url": "",
-            "color_button_type_2": "default",
-            "list_1": "",
-            "custom_html": "",
-            "video_external_url": "",
-            "video_mp4_url": "",
-            "video_autoplay": true,
-            "video_controls": false,
-            "type": "clean",
-            "content_position": "center",
-            "content_align": "center",
-            "add_container": false,
-            "content_width": 100,
-            "text_width": 0,
-            "height": "auto",
-            "min_height": 0,
-            "size_of_column": "auto",
-            "visible": "desktop_mobile",
-            "parallax": "disable",
-            "animation_to": "none",
-            "animation_from": "none",
-            "animation_opacity": "none",
-            "animation_text": "none",
-            "color_text_1": "",
-            "color_text_2": "",
-            "color_text_3": "",
-            "color_text_bg": "",
-            "color_curtain_bg": "",
-            "customization_class": ""
-          }
-        },
-        "e0da6f6c-8b2a-4023-92ab-91c1d9545e4f": {
-          "type": "promobox",
-          "settings": {
-            "url": "",
-            "image_size": 1450,
-            "image_mobile_size": 550,
-            "image_position_x": 50,
-            "color_image_mask": "rgba(0,0,0,0)",
-            "image_mask_opacity": 0.5,
-            "text_line_1": "",
-            "text_line_2": "FAST, CLEAN, AND FLEXIBLE",
-            "text_line_3": "Shella is the fastest, featured, fresh, dynamically developing, best converting Shopify theme. Try it now! The first theme according to 15 Best Themes for Your Shopify eCommerce Business",
-            "style": "8",
-            "button_1": "",
-            "button_1_url": "shopify://pages/look-book-br-autumn-winter-2018",
-            "color_button_type_1": "default",
-            "button_2": "",
-            "button_2_url": "",
-            "color_button_type_2": "default",
-            "list_1": "",
-            "custom_html": "",
-            "video_external_url": "",
-            "video_mp4_url": "",
-            "video_autoplay": true,
-            "video_controls": false,
-            "type": "text",
-            "content_position": "center_right",
-            "content_align": "left",
-            "add_container": false,
-            "content_width": 78,
-            "text_width": 0,
-            "height": "auto",
-            "min_height": 0,
-            "size_of_column": "auto",
-            "visible": "desktop_mobile",
-            "parallax": "disable",
-            "animation_to": "none",
-            "animation_from": "none",
-            "animation_opacity": "none",
-            "animation_text": "none",
-            "color_text_1": "",
-            "color_text_2": "",
-            "color_text_3": "",
-            "color_text_bg": "",
-            "color_curtain_bg": "",
-            "customization_class": ""
-          }
-        }
-      },
-      "block_order": [
-        "7cec1383-4d32-4930-87ce-4fe8b3ed1e36",
-        "e0da6f6c-8b2a-4023-92ab-91c1d9545e4f"
-      ],
-      "disabled": true,
-      "settings": {
-        "title": "",
-        "container": "boxed",
-        "size_of_columns": "2",
-        "size_of_columns_mobile": "2",
-        "margins_for_columns": "preset_4",
-        "align_of_columns": "center",
-        "disable_column_paddings": true,
-        "precedence": "",
-        "customization_class": ""
-      }
-    },
-    "163430726099b71d81": {
-      "type": "spacer",
-      "disabled": true,
-      "settings": {
-        "margin_top": 30,
-        "margin_bottom": 0,
-        "margin_top_mobile": 5,
-        "margin_bottom_mobile": 5,
-        "container": "boxed",
-        "show_separator": false,
-        "title": ""
       }
     },
     "related-products": {
@@ -260,13 +124,60 @@
         "heading": "Frequently Asked Questions",
         "output_schema": true
       }
+    },
+    "pdp_value_props": {
+      "type": "msd-icp-value-props",
+      "blocks": {
+        "fit": {
+          "type": "point",
+          "settings": {
+            "label": "Fit",
+            "title": "Fit confidence first",
+            "text": "Clear silhouettes, practical sizing, and styling notes help you order without second-guessing."
+          }
+        },
+        "value": {
+          "type": "point",
+          "settings": {
+            "label": "Value",
+            "title": "Elevated without overpaying",
+            "text": "Boutique-inspired pieces with free Priority Shipping on orders over $80."
+          }
+        },
+        "trust": {
+          "type": "point",
+          "settings": {
+            "label": "Trust",
+            "title": "Low-risk first order",
+            "text": "Secure checkout and 45-day returns on eligible items make trying a new style simpler."
+          }
+        }
+      },
+      "block_order": [
+        "fit",
+        "value",
+        "trust"
+      ],
+      "settings": {
+        "container": "boxed",
+        "tone": "compact",
+        "eyebrow": "First-order confidence",
+        "heading": "What makes the first order easier.",
+        "body": "<p>New customers usually want the same three answers before checkout: will it fit my life, is the value clear, and can I return it if it is not right?</p>",
+        "primary_label": "Shop customer favorites",
+        "primary_link": "shopify://collections/picked-for-you",
+        "secondary_label": "Explore new arrivals",
+        "secondary_link": "shopify://collections/new-in",
+        "bg_color": "#fbfaf7",
+        "text_color": "#18201d",
+        "muted_color": "#5d6863",
+        "accent_color": "#8a3f33"
+      }
     }
   },
   "order": [
     "main",
-    "16343107307257fa4f",
-    "1634128129c7f7073c",
-    "163430726099b71d81",
+    "pdp_value_props",
     "related-products",
     "60eadd57-59a2-4d66-b662-0696fc78110f",
     "774ca01e-f5a7-43da-aefc-02545683b837",

@@ -10,6 +10,12 @@
     "loading": "Loading..."
   },
   "general": {
+    "404": {
+      "title_large": "404",
+      "title": "Page Not Found",
+      "subtext_html": "We looked everywhere for this page.Are you sure the website URL is correct? Get in touch with the site owner.",
+      "button": "GO BACK"
+    },
     "accessibility": {
       "skip_to_content": "Skip to content",
       "close": "Close",
@@ -35,12 +41,6 @@
     "meta": {
       "tags": "Tagged \"{{ tags }}\"",
       "page": "Page {{ page }}"
-    },
-    "404": {
-      "title_large": "404",
-      "title": "Page Not Found",
-      "subtext_html": "We looked everywhere for this page.Are you sure the website URL is correct? Get in touch with the site owner.",
-      "button": "GO BACK"
     },
     "social": {
       "names": {
@@ -115,14 +115,14 @@
     "popups": {
       "cart": {
         "limit_is_exceeded": "Maximum product quantity in cart items {{ limit }} added.",
-        "item_added": "{{ title }} was added to your shopping cart.",
-        "title": "MY CART",
+        "item_added": "{{ title }} was added to your bag.",
+        "title": "MY BAG",
         "count": "({{ count }})",
         "subtotal": "SUBTOTAL",
-        "taxes_and_shipping_information": "FREE shipping on orders over $80. 45-day returns.",
-        "button_to_checkout": "CHECKOUT NOW",
-        "button_to_cart": "VIEW CART",
-        "empty": "Your shopping cart is empty.",
+        "taxes_and_shipping_information": "FREE Priority Shipping on orders over $80. 45-day returns.",
+        "button_to_checkout": "SECURE CHECKOUT",
+        "button_to_cart": "VIEW BAG",
+        "empty": "Your bag is empty.",
         "checkbox_html": "I agree with the <a href=\"/\">Terms and Conditions</a>. Tristique senectus et netus et malesuada. Nunc scelerisque viverra mauris in."
       },
       "wishlist": {
@@ -180,7 +180,7 @@
         "authorized": {
           "title": "WELCOME {{ name }}",
           "account": "MY ACCOUNT",
-          "checkout": "CHECKOUT NOW",
+          "checkout": "SECURE CHECKOUT",
           "log_out": "Log out"
         },
         "newsletter": {
@@ -267,17 +267,17 @@
   },
   "cart": {
     "general": {
-      "title": "Shopping Cart",
-      "sidebar_title": "CART TOTAL",
-      "notes_title": "Special Instructions For Seller",
-      "notes_paragraph": "Add special instructions for your order...",
+      "title": "Your Bag",
+      "sidebar_title": "BAG TOTAL",
+      "notes_title": "Order Notes",
+      "notes_paragraph": "Add fit, delivery, or gift notes for your order...",
       "subtotal": "SUBTOTAL",
-      "shipping_at_checkout": "FREE shipping on orders over $80. Standard shipping rates are shown at checkout. 45-day returns.",
+      "shipping_at_checkout": "FREE Priority Shipping on orders over $80. Standard shipping rates are shown at checkout. 45-day returns.",
       "update": "UPDATE CART",
-      "checkout": "CHECKOUT NOW",
-      "empty_title": "Shopping Cart is Empty",
-      "empty_paragraph": "Your shopping cart is empty.",
-      "empty_button": "CONTINUE SHOPPING",
+      "checkout": "SECURE CHECKOUT",
+      "empty_title": "Your Bag is Empty",
+      "empty_paragraph": "Start with customer favorites chosen for polished, everyday wear.",
+      "empty_button": "SHOP CUSTOMER FAVORITES",
       "cookies_required": "Enable cookies to use the shopping cart",
       "continue_shopping": "CONTINUE SHOPPING",
       "savings": "YOU'RE SAVING",
@@ -292,8 +292,15 @@
       "shipping_calculator_data_info": "There is one shipping rate available for {{ data }}.",
       "shipping_calculator_success_text": "Rates start at",
       "shipping_calculator_do_not_ship_text": "We do not ship to this destination.",
-      "free_shipping_html": "Add {{ value }} more to get FREE Priority Shipping",
-      "free_shipping_complete": "You have achieved FREE Priority Shipping. Add one more style to build your look."
+      "free_shipping_html": "Add {{ value }} more for FREE Priority Shipping",
+      "free_shipping_complete": "FREE Priority Shipping unlocked. Add one more style if it completes the outfit.",
+      "aov_builder_eyebrow": "Build a better order",
+      "aov_builder_title_html": "{{ value }} away from the $95 sweet spot",
+      "aov_builder_text": "Add one versatile layer, top, or dress to build a more complete $95 order.",
+      "aov_builder_complete_title": "You are in the $95+ order zone",
+      "aov_builder_complete_text": "You have free Priority Shipping and a fuller outfit. Keep checkout simple or add one outfit finisher while you are here.",
+      "aov_builder_primary": "Shop customer favorites",
+      "aov_builder_secondary": "Add a soft layer"
     },
     "label": {
       "product": "PRODUCT",
@@ -408,12 +415,12 @@
       "password_title": "PASSWORD",
       "password_placeholder": "Enter your password",
       "forgot_password": "Forgot Your Password?",
-      "sign_in": "LOGIN",
+      "sign_in": "SIGN IN",
       "cancel": "RETURN TO STORE",
       "guest_title": "Continue as a guest",
       "guest_continue": "Continue",
       "sign_up_title": "Sign Up",
-      "create_account": "SIGN UP NOW!"
+      "create_account": "CREATE ACCOUNT"
     },
     "orders": {
       "tab": "HISTORY",
@@ -500,7 +507,7 @@
   },
   "layout": {
     "cart": {
-      "title": "Cart",
+      "title": "Bag",
       "quantity_and_price_separator": "x",
       "items_count": {
         "one": "item",
@@ -512,13 +519,13 @@
       "logged_in_as_html": "Logged in as {{ first_name }}",
       "log_out": "Log out",
       "log_in": "Log in",
-      "create_account": "SING UP NOW"
+      "create_account": "SIGN UP NOW"
     },
     "breadcrumbs": {
       "home": "Home"
     },
     "header": {
-      "cart_count": "MY CART ({{ count }})",
+      "cart_count": "MY BAG ({{ count }})",
       "register": "Register",
       "login": "Sign in",
       "sign_out": "Sign Out",
@@ -554,10 +561,10 @@
   },
   "products": {
     "product": {
-      "complementary_products_title": "Complete the Look",
+      "complementary_products_title": "Add one more style to complete the look",
       "related_products_title": "Related products",
-      "recommended_products_title": "4 out of 5 customers who bought this also bought",
-      "quick_buy": "Quick Buy",
+      "recommended_products_title": "Styles that make a $95+ order easier",
+      "quick_buy": "Quick Add",
       "regular_price": "Regular price",
       "price_sale_separator": " from",
       "price_sale_details_html": "You Save: {{ price }} ({{ procent }}%)",
@@ -571,9 +578,9 @@
       "notes_label": "Notes",
       "notes_placeholder": "Write here your notes for the order",
       "share": "Share:",
-      "payments": "Checkout securely with",
+      "payments": "Secure checkout with",
       "remove": "Remove",
-      "default_variant_title": "Default variant",
+      "default_variant_title": "Choose size / color",
       "sku": "SKU",
       "barcode": "BARCODE",
       "availability": "AVAILABILITY",
@@ -584,8 +591,8 @@
       "unavailable": "Unavailable",
       "type": "PRODUCT TYPE",
       "vendor": "VENDOR",
-      "stock_countdown_html": "Hurry! Only {{ quantity }} Left in Stock!",
-      "delivery_countdown_html": "*All color variants are IN STOCK unless marked BACKORDER. 🚚 Delivery Guarantee for IN STOCK items: Order in the next {{ counter }} to get it by {{ delivery }} or a complimentary $15 gift card will be emailed to you for late delivery.",
+      "stock_countdown_html": "Only {{ quantity }} left in this style.",
+      "delivery_countdown_html": "Order in the next {{ counter }} for estimated delivery by {{ delivery }} on in-stock items.",
       "visitors_html": "Real time {{ counter }} visitor right now",
       "reviews": {
         "loading": "Reviews loading..."
@@ -596,12 +603,12 @@
       "delivery_return": "DELIVERY & RETURN",
       "message": "MESSAGE",
       "add_to_cart": {
-        "title": "ADD TO CART",
+        "title": "ADD TO BAG",
         "added": "Added",
         "sold_out": "Sold Out",
-        "pre_order": "ADD TO CART",
-        "select_options": "Select Options",
-        "select_options_mobile": "Select Opt"
+        "pre_order": "ADD TO BAG",
+        "select_options": "Choose Size & Color",
+        "select_options_mobile": "Choose"
       },
       "add_to_widhlist": {
         "title": "Add To Wishlist",
@@ -620,7 +627,7 @@
         "hot": "Hot",
         "out_stock": "Out stock",
         "in_stock": "In stock",
-        "pre_order": "ADD TO CART"
+        "pre_order": "ADD TO BAG"
       },
       "countdown": {
         "years": "YRS",
@@ -758,7 +765,7 @@
         "duties_and_taxes_options": {
           "ddp_title": "Complete Purchase 👉"
         },
-        "shipping_method_title": "FREE shipping on orders over $80. Standard shipping rates are shown at checkout. 45-day returns."
+        "shipping_method_title": "FREE Priority Shipping on orders over $80. Standard shipping rates are shown at checkout. 45-day returns."
       },
       "order_payment_collection": {
         "pay_now": "PAY NOW"

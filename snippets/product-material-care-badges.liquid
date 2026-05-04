@@ -1,0 +1,97 @@
+{% doc %}
+Renders near-price material and care prompts from product FAQ/metafield content.
+@param {product} product - Product object.
+@param {boolean} [centered] - Center content on centered product layouts.
+@example
+{% render 'product-material-care-badges', product: product, centered: centered %}
+{% enddoc %}
+{%- liquid
+  assign material_summary = blank
+  assign care_summary = blank
+  assign faq_data = product.metafields.ai_seo.faqs.value
+  assign faq_items = faq_data.faqs
+
+  if faq_items == blank
+    assign faq_items = faq_data
+  endif
+
+  assign material_metafield = product.metafields.custom.materials | default: product.metafields.custom.material | default: product.metafields.custom.fabric | default: product.metafields.custom.composition
+  assign care_metafield = product.metafields.custom.care | default: product.metafields.custom.care_instructions | default: product.metafields.custom.wash_care
+
+  if material_metafield != blank
+    assign material_summary = material_metafield.value | default: material_metafield | strip_html | strip
+  endif
+
+  if care_metafield != blank
+    assign care_summary = care_metafield.value | default: care_metafield | strip_html | strip
+  endif
+
+  if faq_items != blank
+    for faq in faq_items
+      assign question = faq.question | downcase | strip
+      assign answer = faq.answer | strip_html | strip
+
+      if material_summary == blank
+        if question contains 'material'
+          assign material_summary = answer
+        elsif question contains 'fabric'
+          assign material_summary = answer
+        elsif question contains 'composition'
+          assign material_summary = answer
+        endif
+      endif
+
+      if care_summary == blank
+        if question contains 'care'
+          assign care_summary = answer
+        elsif question contains 'wash'
+          assign care_summary = answer
+        elsif question contains 'launder'
+          assign care_summary = answer
+        endif
+      endif
+
+      if material_summary != blank and care_summary != blank
+        break
+      endif
+    endfor
+  endif
+
+  assign should_render = false
+  if material_summary != blank or care_summary != blank
+    assign should_render = true
+  elsif faq_items != blank
+    assign should_render = true
+  endif
+-%}
+
+{%- if should_render -%}
+  <div class="msd-material-care{% if centered %} msd-material-care--center{% endif %}" data-msd-material-care>
+    <style>
+      .msd-material-care{margin-top:12px;display:flex;flex-wrap:wrap;gap:8px;color:#18201d}
+      .msd-material-care--center{justify-content:center}
+      .msd-material-care__badge{display:inline-flex;align-items:center;max-width:100%;padding:7px 10px;border:1px solid rgba(24,32,29,.14);border-radius:8px;background:#fbfaf7;font-size:12px;line-height:1.35;font-weight:600}
+      .msd-material-care__label{color:#8a3f33;margin-right:5px;text-transform:uppercase;letter-spacing:0;font-size:10px}
+    </style>
+    <span class="msd-material-care__badge">
+      <span class="msd-material-care__label">Fabric</span>
+      <span>
+        {%- if material_summary != blank -%}
+          {{ material_summary | truncate: 90 }}
+        {%- else -%}
+          Details in FAQ
+        {%- endif -%}
+      </span>
+    </span>
+    <span class="msd-material-care__badge">
+      <span class="msd-material-care__label">Care</span>
+      <span>
+        {%- if care_summary != blank -%}
+          {{ care_summary | truncate: 90 }}
+        {%- else -%}
+          Instructions in FAQ
+        {%- endif -%}
+      </span>
+    </span>
+  </div>
+{%- endif -%}

@@ -442,6 +442,7 @@
             {%- when 'price' -%}
             <div class="product-page-info__price text-center{% unless centered %} text-md-left{% endunless %} mb-25" {{ block.shopify_attributes }}>
                 {% include 'product-get-price' %}
+                {% render 'product-material-care-badges', product: product, centered: centered %}
             </div>
             {%- if settings.product_info_show_sale_details -%}
                 <p class="product-page-info__price-sale-details mt-5 mt-md-10 text-center{% unless centered %} text-md-left{% endunless %}{% unless compare_at_price > price %} d-none-important{% endunless %}" data-js-product-price-sale-details>
