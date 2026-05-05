@@ -3,7 +3,9 @@
 {%- endif -%}
 <script>
     (function() {
-        window.log = console.log;
+        window.log = ({{ settings.enable_debug_mode | default: false }} || window.location.search.indexOf('debug=true') > -1) && window.console && console.log
+            ? console.log.bind(console)
+            : function() {};
 
         document.documentElement.className = document.documentElement.className.replace('no-js', 'js');
 

@@ -124,7 +124,7 @@
                                 </div>
                                 <div class="d-flex flex-column flex-lg-row align-items-center mt-20 w-100">
                                     <a href="#" class="{% if settings.cart_popup_type == 'side' %}mr-lg-auto{% else %}mr-md-auto{% endif %}" data-js-popup-close="">
-                                        <div class="btn-link">CONTINUE SHOPPING</div>
+                                        <div class="btn-link">{{ 'cart.general.continue_shopping' | t }}</div>
                                     </a>
                                     <a href="{{ routes.cart_url }}" class="mt-15 mt-lg-0 {% if settings.cart_popup_type == 'side' %}ml-lg-auto{% else %}ml-md-auto{% endif %}">
                                         <div class="btn-link">{{ 'general.popups.cart.button_to_cart' | t }}</div>

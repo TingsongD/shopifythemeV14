@@ -40,8 +40,16 @@
 {%- if settings.wishlist_type == 'disable' -%}
     {%- assign show_button_add_to_wishlist = false -%}
 {%- endif -%}
-{%- if settings.reviews_type == 'disable' -%}
+{%- assign show_judgeme_reviews = false -%}
+{%- if product.metafields.judgeme.badge != blank -%}
+    {%- assign show_judgeme_reviews = true -%}
+{%- endif -%}
+{%- if settings.reviews_type == 'disable' and show_judgeme_reviews == false -%}
     {%- assign show_reviews = false -%}
+{%- endif -%}
+{%- assign enable_return_to_results_link = false -%}
+{%- if request.page_type == 'collection' or request.page_type == 'search' -%}
+    {%- assign enable_return_to_results_link = true -%}
 {%- endif -%}
 {%- if settings.product_collection_set_first_image_by_variant and current_variant.featured_image -%}
     {%- assign current_image = current_variant.featured_image -%}
@@ -63,7 +71,7 @@
     <div class="product-collection__wrapper mb-30 mb-lg-{{ product_margin_bottom }}">
         <div class="d-flex flex-column">
             <div class="product-collection__image product-image product-image--hover-{{ settings.product_hover_animation_type }} position-relative w-100 js-product-images-navigation js-product-images-hovered-end{% if settings.product_replace_images_hover %} js-product-images-hover{% endif %}"{% if settings.product_replace_images_hover and hover_image != blank %} data-js-product-image-hover="{{ img_hover_url }}" data-js-product-image-hover-id="{{ hover_image.id }}"{% endif %}>
-                {% render 'product-get-images' with url: url image: current_image image_size: image_size title: title %}
+                {% render 'product-get-images' with url: url image: current_image image_size: image_size title: title enable_return_to_results_link: enable_return_to_results_link %}
                 {%- if show_label_in_stock or show_label_pre_order or show_label_out_stock or show_label_sale or show_label_new or show_label_hot -%}
                     {%- assign label_present = true -%}
                 {%- else -%}
@@ -71,7 +79,7 @@
                 {%- endif -%}
                 {%- if label_present or show_button_quick_view -%}
                     <div class="product-image__overlay-top position-absolute d-flex flex-wrap top-0 left-0 w-100 px-10 pt-10">
-                        <a href="{{ url }}" class="absolute-stretch cursor-default" aria-label="{{ title | escape }}"></a>
+                        <a href="{{ url }}" class="absolute-stretch cursor-default" aria-label="{{ title | escape }}"{% if enable_return_to_results_link %} data-msd-return-link{% endif %}></a>
                         {%- if label_present -%}
                             <div class="product-image__overlay-top-left product-collection__labels position-relative d-flex flex-column align-items-start mb-10">
                                 {%- if show_label_hot -%}
@@ -103,7 +111,7 @@
                 {%- endif -%}
                 {%- if show_countdown or show_images_navigation -%}
                     <div class="product-image__overlay-bottom position-absolute d-flex justify-content-center justify-content-lg-start align-items-end bottom-0 left-0 w-100 px-10 pb-10">
-                        <a href="{{ url }}" class="absolute-stretch cursor-default" aria-label="{{ title | escape }}"></a>
+                        <a href="{{ url }}" class="absolute-stretch cursor-default" aria-label="{{ title | escape }}"{% if enable_return_to_results_link %} data-msd-return-link{% endif %}></a>
                         {%- if show_countdown -%}
                             <div class="product-image__overlay-bottom-left product-collection__countdown position-relative mt-10">
                                 {% render 'product-get-countdown' with countdown_date: countdown_date centered: centered %}
@@ -143,7 +151,7 @@
                 {%- if show_title -%}
                     <div class="product-collection__title mb-{% if product_collection_content_offsets == 1 %}3{% else %}9{% endif %}">
                         <h4 class="m-0">
-                            <a href="{{ url }}">{{ title }}</a>
+                            <a href="{{ url }}"{% if enable_return_to_results_link %} data-msd-return-link{% endif %}>{{ title }}</a>
                         </h4>
                     </div>
                 {%- endif -%}
@@ -257,7 +265,11 @@
                 </div>
                 {%- if show_reviews -%}
                     <div class="product-collection__reviews">
-                        {%- if settings.reviews_type == 'default' -%}
+                        {%- if show_judgeme_reviews -%}
+                            <div class="jdgm-widget jdgm-preview-badge" data-id="{{ product.id }}">
+                                {{ product.metafields.judgeme.badge }}
+                            </div>
+                        {%- elsif settings.reviews_type == 'default' -%}
                             {% render 'product-get-review' with product: product hide_counter: hide_reviews_counter hide_mobile_counter: hide_reviews_mobile_counter %}
                         {%- elsif settings.reviews_type == 'growave' and settings.app_growave_enable == true -%}
                             {% capture the_snippet_review_avg %}{% render 'ssw-widget-avg-rate-listing', product: product %}{% endcapture %}
@@ -283,7 +295,11 @@
                     {%- endif -%}
                     {%- if show_reviews -%}
                         <div class="product-collection__list-v2-reviews">
-                            {%- if settings.reviews_type == 'default' -%}
+                            {%- if show_judgeme_reviews -%}
+                                <div class="jdgm-widget jdgm-preview-badge" data-id="{{ product.id }}">
+                                    {{ product.metafields.judgeme.badge }}
+                                </div>
+                            {%- elsif settings.reviews_type == 'default' -%}
                                 {% render 'product-get-review' with product: product hide_counter: false hide_mobile_counter: hide_reviews_mobile_counter %}
                             {%- elsif settings.reviews_type == 'growave' and settings.app_growave_enable == true -%}
                                 {% capture the_snippet_review_avg %}{% render 'ssw-widget-avg-rate-listing', product: product %}{% endcapture %}

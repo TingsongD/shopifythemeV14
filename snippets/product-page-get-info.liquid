@@ -7,10 +7,71 @@
 {%- endunless -%}
 {% capture variants_select_html %}
     <div class="product-page-info__variants mb-15 d-none">
-        {% include 'product-get-variants' with product: product current_variant: current_variant show_custom_options: settings.product_show_custom_options, product_form_id: product_form_id %}
+        {% include 'product-get-variants' with product: product current_variant: current_variant show_custom_options: settings.product_show_custom_options, product_form_id: product_form_id, force_variant_preselected: true %}
     </div>
 {% endcapture %}
 <div class="product-page-info{% if centered %} product-page-info--max-width mx-auto{% endif %}">
+    {%- unless is_quick_view -%}
+        <div class="product-page-info__back-to-results d-none mb-15 text-center{% unless centered %} text-md-left{% endunless %}">
+            <a href="#" class="btn-link" data-msd-back-to-results>{{ 'products.product.back_to_results' | t }}</a>
+        </div>
+        <script>
+            (function() {
+                var storageKey = 'msd.returnToResults';
+                var maxAge = 24 * 60 * 60 * 1000;
+
+                function getStoredReturnUrl() {
+                    var stored = null;
+
+                    try {
+                        stored = JSON.parse(window.sessionStorage.getItem(storageKey));
+                    } catch (error) {
+                        stored = null;
+                    }
+
+                    if (!stored || !stored.url || Date.now() - stored.savedAt > maxAge) {
+                        return null;
+                    }
+
+                    try {
+                        var returnUrl = new URL(stored.url, window.location.origin);
+
+                        if (returnUrl.origin !== window.location.origin) {
+                            return null;
+                        }
+
+                        if (returnUrl.pathname.indexOf('/collections/') !== 0 && returnUrl.pathname.indexOf('/search') !== 0) {
+                            return null;
+                        }
+
+                        return returnUrl.pathname + returnUrl.search + returnUrl.hash;
+                    } catch (error) {
+                        return null;
+                    }
+                }
+
+                function renderBackToResultsLink() {
+                    var returnUrl = getStoredReturnUrl();
+
+                    if (!returnUrl) return;
+
+                    document.querySelectorAll('[data-msd-back-to-results]').forEach(function(link) {
+                        link.setAttribute('href', returnUrl);
+
+                        if (link.parentElement) {
+                            link.parentElement.classList.remove('d-none');
+                        }
+                    });
+                }
+
+                if (document.readyState === 'loading') {
+                    document.addEventListener('DOMContentLoaded', renderBackToResultsLink);
+                } else {
+                    renderBackToResultsLink();
+                }
+            })();
+        </script>
+    {%- endunless -%}
     {%- if settings.product_info_show_label_hot or settings.product_info_show_label_new or settings.product_info_show_label_sale or settings.product_info_show_label_in_stock or settings.product_info_show_label_pre_order or settings.product_info_show_label_out_stock -%}
         <div class="product-page-info__labels d-flex justify-content-center{% unless centered %} justify-content-md-start{% endunless %}">
             {%- if settings.product_info_show_label_hot -%}

@@ -68,6 +68,13 @@
 
       // Show user notification if available
       this.showUserNotification(message, 'error');
+      this.emitMonitoringEvent('ajax_error', {
+        context: context,
+        status: status,
+        statusCode: statusCode,
+        message: message,
+        error: error
+      });
 
       // Return error details for chaining
       return {
@@ -101,6 +108,12 @@
 
       // Show user notification
       this.showUserNotification(message, 'error');
+      this.emitMonitoringEvent('fetch_error', {
+        context: context,
+        statusCode: statusCode,
+        message: message,
+        error: error ? error.message : null
+      });
 
       // Return error details
       return {
@@ -134,6 +147,11 @@
       }
 
       this.showUserNotification(message, 'error');
+      this.emitMonitoringEvent('cart_error', {
+        context: context,
+        message: message,
+        response: responseData
+      });
 
       return {
         context: context,
@@ -275,6 +293,45 @@
     markAsHandled: function(settings) {
       settings.hasErrorHandler = true;
       return settings;
+    },
+
+    /**
+     * Emit lightweight monitoring events without binding the theme to a vendor SDK.
+     * @param {string} name - Event name
+     * @param {Object} detail - Event detail
+     * @returns {Object} Event detail
+     */
+    emitMonitoringEvent: function(name, detail) {
+      detail = detail || {};
+      detail.name = name;
+      detail.source = 'theme';
+      detail.timestamp = new Date().toISOString();
+
+      if (window.dataLayer && Array.isArray(window.dataLayer)) {
+        window.dataLayer.push({
+          event: 'theme_ux_monitor',
+          theme_event: name,
+          theme_event_detail: detail
+        });
+      }
+
+      try {
+        window.dispatchEvent(new CustomEvent('theme:ux-monitor', {
+          detail: detail
+        }));
+      } catch (error) {
+        if (document.createEvent) {
+          var event = document.createEvent('CustomEvent');
+          event.initCustomEvent('theme:ux-monitor', false, false, detail);
+          window.dispatchEvent(event);
+        }
+      }
+
+      if (window.ThemeDebug && ThemeDebug.enabled) {
+        ThemeDebug.warn('UX monitor event:', detail);
+      }
+
+      return detail;
     }
   };
 
@@ -282,5 +339,40 @@
   if (Object.freeze) {
     Object.freeze(window.ThemeErrorHandler);
   }
+
+  function normalizeError(error) {
+    if (!error) {
+      return null;
+    }
+
+    return {
+      message: error.message || String(error),
+      stack: error.stack || null
+    };
+  }
+
+  window.addEventListener('error', function(event) {
+    if (!window.ThemeErrorHandler || !window.ThemeErrorHandler.emitMonitoringEvent) {
+      return;
+    }
+
+    window.ThemeErrorHandler.emitMonitoringEvent('browser_error', {
+      message: event.message,
+      sourceUrl: event.filename,
+      line: event.lineno,
+      column: event.colno,
+      error: normalizeError(event.error)
+    });
+  });
+
+  window.addEventListener('unhandledrejection', function(event) {
+    if (!window.ThemeErrorHandler || !window.ThemeErrorHandler.emitMonitoringEvent) {
+      return;
+    }
+
+    window.ThemeErrorHandler.emitMonitoringEvent('unhandled_rejection', {
+      error: normalizeError(event.reason)
+    });
+  });
 
 })();

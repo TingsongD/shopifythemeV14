@@ -371,7 +371,7 @@
         "default_view_grid_md": "4",
         "default_view_grid_sm": "3",
         "default_view_grid_xs": "2",
-        "current_filters_visibility": "mobile",
+        "current_filters_visibility": "desktop_n_mobile",
         "uppercase_filter_title": true,
         "show_filter_border": true
       }

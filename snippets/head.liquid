@@ -20,6 +20,8 @@
 {%- assign robots_content = 'index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1' -%}
 {%- if request.page_type == 'search' -%}
     {%- assign robots_content = 'noindex, follow' -%}
+{%- elsif current_tags -%}
+    {%- assign robots_content = 'noindex, follow' -%}
 {%- elsif request.page_type == 'cart' or request.page_type == '404' or request.page_type contains 'customers/' or template == 'page' and page_title_downcase contains 'include' -%}
     {%- assign robots_content = 'noindex, nofollow' -%}
 {%- endif -%}
@@ -45,9 +47,17 @@
             &ndash; {{ shop.name }}
         {%- endunless -%}
     </title>
-    {%- if page_description -%}
-<meta name="description" content="{{ page_description | escape }}">
+    {%- assign meta_description = page_description -%}
+    {%- if meta_description == blank and request.page_type == 'product' and product.description != blank -%}
+        {%- assign meta_description = product.description | strip_html | strip -%}
+    {%- elsif meta_description == blank and request.page_type == 'collection' and collection.description != blank -%}
+        {%- assign meta_description = collection.description | strip_html | strip -%}
+    {%- elsif meta_description == blank and request.page_type == 'article' -%}
+        {%- assign meta_description = article.excerpt_or_content | strip_html | strip -%}
+    {%- elsif meta_description == blank -%}
+        {%- assign meta_description = shop.description | default: shop.name -%}
     {%- endif -%}
+<meta name="description" content="{{ meta_description | strip_html | strip | truncate: 320 | escape }}">
 {%- endif -%}
 {% render 'head-get-social-meta-tags' %}
 <link rel="preconnect" href="https://cdn.shopify.com" crossorigin="">

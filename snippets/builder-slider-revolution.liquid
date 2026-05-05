@@ -44,7 +44,7 @@
                         {%- elsif block.settings.video_external_url != blank -%}
                             {%- if block.settings.video_external_url.type == 'youtube' -%}
                                 {% assign video_data = 'data-ytid="' | append: block.settings.video_external_url.id | append: '"' %}
-                                {% assign video_attr = 'data-videoattributes="version=3&enablejsapi=1&html5=1&hd=1&wmode=opaque&showinfo=0&rel=0&origin=http://' | append: shop.domain | append: ';"' %}
+                                {% assign video_attr = 'data-videoattributes="version=3&enablejsapi=1&html5=1&hd=1&wmode=opaque&showinfo=0&rel=0&origin=https://' | append: shop.domain | append: ';"' %}
                                 {% assign img_src = 'https://img.youtube.com/vi/' | append: block.settings.video_external_url.id | append: '/maxresdefault.jpg' %}
                                 <img src="{{ img_src }}"
                                      alt="Ocean"

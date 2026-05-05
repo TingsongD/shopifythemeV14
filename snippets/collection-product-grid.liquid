@@ -44,7 +44,7 @@
             </div>
             <div id="CollectionHeadingTop"></div>
         {%- endif -%}
-        <div class="pt-10 pt-lg-{{ offset_collection_page_content_margin_top_d }} overflow-hidden">
+        <div class="collection-results-shell pt-10 pt-lg-{{ offset_collection_page_content_margin_top_d }} overflow-hidden">
             <div class="{% if section.settings.container == 'fullwidth' %}container-fluid{% else %}container{% endif %}">
                 <div class="row mb-40 mb-lg-{{ offset_collection_page_pagination_margin_bottom_d }}">
                     {%- if settings.collection_show_sidebar != 'hide' -%}
@@ -123,7 +123,7 @@
                                             </div>
                                         {%- endif -%}
                                 {%- endcapture -%}
-                                <div class="collection-control mb-25 mb-lg-{{ offset_collection_page_products_margin_top_d }}">
+                                <div class="collection-control collection-control--sticky mb-25 mb-lg-{{ offset_collection_page_products_margin_top_d }}">
                                     <div class="row">
                                         {%- if settings.collection_show_sidebar != 'hide' and settings.collection_sidebar_position == 'dropdown' -%}
                                             {%- assign desktop_need_button = true -%}
@@ -447,6 +447,49 @@
         document.querySelector('.collections__sidebar--top').classList.remove('invisible');
     </script>
 {%- endif -%}
+<script>
+    (function() {
+        if (window.msdReturnToResultsInit) return;
+
+        window.msdReturnToResultsInit = true;
+
+        var storageKey = 'msd.returnToResults';
+
+        function getCurrentResultsUrl() {
+            return window.location.pathname + window.location.search + window.location.hash;
+        }
+
+        function storeReturnUrl(event) {
+            var target = event.target;
+
+            if (!target || !target.closest) return;
+
+            var link = target.closest('[data-msd-return-link]');
+
+            if (!link || !link.href) return;
+
+            try {
+                var destination = new URL(link.href, window.location.origin);
+
+                if (destination.origin !== window.location.origin || destination.pathname.indexOf('/products/') === -1) {
+                    return;
+                }
+
+                window.sessionStorage.setItem(storageKey, JSON.stringify({
+                    url: getCurrentResultsUrl(),
+                    title: document.title,
+                    savedAt: Date.now()
+                }));
+            } catch (error) {
+                if (window.ThemeDebug && ThemeDebug.enabled) {
+                    ThemeDebug.warn('Unable to store return-to-results URL:', error);
+                }
+            }
+        }
+
+        document.addEventListener('click', storeReturnUrl);
+    })();
+</script>
 {%- if section.settings.view_grid_visibility != 'hide' -%}
     <script>
         class ProductsView {

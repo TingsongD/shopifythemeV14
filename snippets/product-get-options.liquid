@@ -43,7 +43,7 @@
                         {%- endif -%}
                     </label>
                     {%- assign clear_name = option.name | handleize -%}
-                    {%- if product.selected_variant.id == blank and settings.product_variant_auto_select != 'enable' -%}
+                    {%- if product.selected_variant.id == blank and settings.product_variant_auto_select != 'enable' and options_type != 2 -%}
                         {%- assign disable_auto_select = false -%}
                         {%- if settings.product_variant_auto_select == 'disable' -%}
                             {%- assign disable_auto_select = true -%}

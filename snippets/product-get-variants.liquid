@@ -1,3 +1,5 @@
+{%- assign force_variant_preselected = force_variant_preselected | default: false -%}
+{%- if force_variant_preselected != true -%}
 {%- if settings.product_variant_auto_select != 'enable' or product_variant_auto_select_enable == true -%}
     {% unless product.selected_variant %}
         {%- assign enable_select_options_button = true -%}
@@ -5,6 +7,7 @@
     {%- if product.variants.size == 1 and product.variants.first.title contains 'Default Title' -%}
 		{%- assign enable_select_options_button = false -%}
 	{%- endif -%}
+{%- endif -%}
 {%- endif -%}
 {%- capture default_title -%}{{ 'products.product.default_variant_title' | t }}{%- endcapture -%}
 {%- if show_custom_options == true -%}
