@@ -1,0 +1,195 @@
+# Optimized robots.txt for {{ shop.domain }}
+# Last updated: {{ 'now' | date: "%B %Y" }}
+# Policy: keep public shopping/search content crawlable, protect private flows, allow AI search, opt out of separable AI training crawlers.
+
+User-agent: *
+Disallow: /admin
+Disallow: /cart
+Disallow: /carts
+Disallow: /orders
+Disallow: /checkout
+Disallow: /*/checkouts
+Disallow: /*/orders
+Disallow: /account
+Disallow: /a/downloads/-/*
+Disallow: /*?pr_prod_strat=
+Disallow: /*?pr_rec_id=
+Disallow: /*?*pr_rec_pid=
+Disallow: /*?*pr_ref_pid=
+Disallow: /*?*pr_seq=
+Disallow: /*?*sort_by=*
+Disallow: /*&sort_by=*
+Disallow: /*?*preview_theme_id*
+Disallow: /*?*preview_script_id*
+Disallow: /*&preview_theme_id*
+Disallow: /*&preview_script_id*
+Disallow: /apple-app-site-association
+Disallow: /blogs/*+*
+Disallow: /blogs/*%2B*
+Disallow: /blogs/*%2b*
+Disallow: /*/blogs/*+*
+Disallow: /*/blogs/*%2B*
+Disallow: /*/blogs/*%2b*
+Allow: /policies/
+Allow: /search
+
+# Mainstream search and shopping crawlers.
+User-agent: Googlebot
+Allow: /
+Disallow: /admin
+Disallow: /cart
+Disallow: /carts
+Disallow: /orders
+Disallow: /checkout
+Disallow: /*/checkouts
+Disallow: /*/orders
+Disallow: /account
+Disallow: /a/downloads/-/*
+Disallow: /*?*sort_by=*
+Disallow: /*&sort_by=*
+
+User-agent: Storebot-Google
+Allow: /
+Disallow: /admin
+Disallow: /cart
+Disallow: /carts
+Disallow: /orders
+Disallow: /checkout
+Disallow: /*/checkouts
+Disallow: /*/orders
+Disallow: /account
+
+# AI search and user-triggered retrieval. These are allowed for answer engines and citation discovery.
+User-agent: OAI-SearchBot
+Allow: /
+Disallow: /admin
+Disallow: /cart
+Disallow: /carts
+Disallow: /orders
+Disallow: /checkout
+Disallow: /*/checkouts
+Disallow: /*/orders
+Disallow: /account
+
+User-agent: ChatGPT-User
+Allow: /
+Disallow: /admin
+Disallow: /cart
+Disallow: /carts
+Disallow: /orders
+Disallow: /checkout
+Disallow: /*/checkouts
+Disallow: /*/orders
+Disallow: /account
+
+User-agent: PerplexityBot
+Allow: /
+Disallow: /admin
+Disallow: /cart
+Disallow: /carts
+Disallow: /orders
+Disallow: /checkout
+Disallow: /*/checkouts
+Disallow: /*/orders
+Disallow: /account
+
+User-agent: Claude-SearchBot
+Allow: /
+Disallow: /admin
+Disallow: /cart
+Disallow: /carts
+Disallow: /orders
+Disallow: /checkout
+Disallow: /*/checkouts
+Disallow: /*/orders
+Disallow: /account
+
+User-agent: Claude-User
+Allow: /
+Disallow: /admin
+Disallow: /cart
+Disallow: /carts
+Disallow: /orders
+Disallow: /checkout
+Disallow: /*/checkouts
+Disallow: /*/orders
+Disallow: /account
+
+# Separable training/control tokens are opted out by default.
+User-agent: GPTBot
+Disallow: /
+
+User-agent: Google-Extended
+Disallow: /
+
+User-agent: CCBot
+Disallow: /
+
+User-agent: ClaudeBot
+Disallow: /
+
+User-agent: anthropic-ai
+Disallow: /
+
+# Keep ad quality checks available while protecting checkout/account flows.
+User-agent: AdsBot-Google
+Allow: /
+Disallow: /checkout
+Disallow: /cart
+Disallow: /carts
+Disallow: /orders
+Disallow: /*/checkouts
+Disallow: /*/orders
+Disallow: /account
+Disallow: /*?*sort_by=*
+Disallow: /*&sort_by=*
+
+User-agent: Nutch
+Disallow: /
+
+User-agent: AhrefsBot
+Crawl-delay: 10
+Disallow: /admin
+Disallow: /cart
+Disallow: /carts
+Disallow: /orders
+Disallow: /checkout
+Disallow: /*/checkouts
+Disallow: /*/orders
+Disallow: /account
+Disallow: /a/downloads/-/*
+Disallow: /*?*sort_by=*
+Disallow: /*&sort_by=*
+Disallow: /*?*preview_theme_id*
+Disallow: /*?*preview_script_id*
+Disallow: /apple-app-site-association
+Disallow: /policies/
+Disallow: /search
+
+User-agent: AhrefsSiteAudit
+Crawl-delay: 10
+Disallow: /admin
+Disallow: /cart
+Disallow: /carts
+Disallow: /orders
+Disallow: /checkout
+Disallow: /*/checkouts
+Disallow: /*/orders
+Disallow: /account
+Disallow: /a/downloads/-/*
+Disallow: /*?*sort_by=*
+Disallow: /*&sort_by=*
+Disallow: /*?*preview_theme_id*
+Disallow: /*?*preview_script_id*
+Disallow: /apple-app-site-association
+Disallow: /policies/
+Disallow: /search
+
+User-agent: MJ12bot
+Crawl-delay: 10
+
+User-agent: Pinterest
+Crawl-delay: 1
+
+Sitemap: https://www.msdressly.com/sitemap.xml
+Sitemap: https://www.msdressly.com/apps/ugc-video/sitemap.xml

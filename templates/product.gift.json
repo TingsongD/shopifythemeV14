@@ -1,0 +1,259 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "main-product",
+      "blocks": {
+        "5675053d-3467-4746-963e-4514477aad42": {
+          "type": "title",
+          "settings": {}
+        },
+        "d250ceb2-23c9-4926-be00-8fcb455e62e9": {
+          "type": "reviews",
+          "settings": {}
+        },
+        "a5bd3c3b-9ef1-4cde-a923-54a7efc01c14": {
+          "type": "details",
+          "settings": {}
+        },
+        "d5e4b255-784c-4754-9cbe-eddd84c93af2": {
+          "type": "price",
+          "settings": {}
+        },
+        "5a6109f3-d35a-4f38-8da0-143bf0234539": {
+          "type": "countdown",
+          "disabled": true,
+          "settings": {}
+        },
+        "b85ba278-399a-4ad1-859d-7823852521f0": {
+          "type": "stock_countdown",
+          "disabled": true,
+          "settings": {}
+        },
+        "3c0386b9-ffa8-4bf2-8e13-0b90634f90ad": {
+          "type": "visitors",
+          "disabled": true,
+          "settings": {}
+        },
+        "f7689ce9-d953-4a78-b2ca-74088d888a7f": {
+          "type": "border",
+          "settings": {}
+        },
+        "dcb960c0-aac1-469d-a4fd-e416a4a6ed4f": {
+          "type": "icon_with_text",
+          "settings": {
+            "style": "inline",
+            "icon_svg_1": "theme-127",
+            "text_1": "<p>Secure checkout with customer support for order questions.</p>",
+            "icon_svg_2": "theme-142",
+            "text_2": "<p>Free Priority Shipping on orders over $80.</p>",
+            "icon_svg_3": "theme-144",
+            "text_3": "<p>45-day returns on eligible items. Secure checkout and support are available if you need help.</p>",
+            "icon_svg_4": "",
+            "text_4": "",
+            "icon_svg_5": "",
+            "text_5": "",
+            "icon_svg_6": "",
+            "text_6": ""
+          }
+        },
+        "2293f673-2bca-4a7b-a16c-accf31a2783b": {
+          "type": "border",
+          "settings": {}
+        },
+        "6d2130b9-35eb-4ec7-9832-b3555f913259": {
+          "type": "options",
+          "settings": {}
+        },
+        "548e2413-180e-4825-aba6-4f46e5ef4317": {
+          "type": "popups",
+          "disabled": true,
+          "settings": {}
+        },
+        "19e793a1-0938-4da0-bdb0-8d605683b2c2": {
+          "type": "description",
+          "settings": {
+            "title": "",
+            "content": ""
+          }
+        },
+        "261885ab-1671-4ab7-aafc-3bae58123846": {
+          "type": "notes",
+          "disabled": true,
+          "settings": {}
+        },
+        "b033f3a3-2862-435c-8579-29bede720233": {
+          "type": "buttons_quantity",
+          "settings": {}
+        },
+        "72d08ef7-bfb9-4c2a-b18a-951575e7ce50": {
+          "type": "complementary_products",
+          "disabled": true,
+          "settings": {}
+        },
+        "07c447a5-98d7-4315-9048-ac172d3673dc": {
+          "type": "free_shipping",
+          "disabled": true,
+          "settings": {}
+        },
+        "d318ee16-4ffe-4001-8845-ecbed8fa0d1b": {
+          "type": "pickup_availability",
+          "disabled": true,
+          "settings": {}
+        },
+        "e63a4691-7127-45d6-a8d8-191fe152dad6": {
+          "type": "payments",
+          "settings": {}
+        },
+        "fe7b0507-5483-4956-ab0f-ea3a90f57b1f": {
+          "type": "social_share_buttons",
+          "settings": {}
+        },
+        "b0febcf2-a38c-4ae7-a929-10af2ad0e5f4": {
+          "type": "tab_custom",
+          "disabled": true,
+          "settings": {
+            "title": "ADDITIONAL",
+            "content": "",
+            "page_content": ""
+          }
+        },
+        "959240db-9a88-436b-8c09-b6c9e0ebb7a8": {
+          "type": "tab_custom",
+          "disabled": true,
+          "settings": {
+            "title": "CUSTOM TAB",
+            "content": "",
+            "page_content": ""
+          }
+        },
+        "msd_first_order_note": {
+          "type": "text",
+          "settings": {
+            "content": "<p>Your order is backed by secure checkout, free Priority Shipping over $80, 45-day returns on eligible items, and support if you need help.</p>",
+            "small_text": true
+          }
+        }
+      },
+      "block_order": [
+        "5675053d-3467-4746-963e-4514477aad42",
+        "d250ceb2-23c9-4926-be00-8fcb455e62e9",
+        "a5bd3c3b-9ef1-4cde-a923-54a7efc01c14",
+        "d5e4b255-784c-4754-9cbe-eddd84c93af2",
+        "msd_first_order_note",
+        "5a6109f3-d35a-4f38-8da0-143bf0234539",
+        "b85ba278-399a-4ad1-859d-7823852521f0",
+        "3c0386b9-ffa8-4bf2-8e13-0b90634f90ad",
+        "f7689ce9-d953-4a78-b2ca-74088d888a7f",
+        "dcb960c0-aac1-469d-a4fd-e416a4a6ed4f",
+        "2293f673-2bca-4a7b-a16c-accf31a2783b",
+        "6d2130b9-35eb-4ec7-9832-b3555f913259",
+        "548e2413-180e-4825-aba6-4f46e5ef4317",
+        "19e793a1-0938-4da0-bdb0-8d605683b2c2",
+        "261885ab-1671-4ab7-aafc-3bae58123846",
+        "b033f3a3-2862-435c-8579-29bede720233",
+        "72d08ef7-bfb9-4c2a-b18a-951575e7ce50",
+        "07c447a5-98d7-4315-9048-ac172d3673dc",
+        "d318ee16-4ffe-4001-8845-ecbed8fa0d1b",
+        "e63a4691-7127-45d6-a8d8-191fe152dad6",
+        "fe7b0507-5483-4956-ab0f-ea3a90f57b1f",
+        "b0febcf2-a38c-4ae7-a929-10af2ad0e5f4",
+        "959240db-9a88-436b-8c09-b6c9e0ebb7a8"
+      ],
+      "settings": {
+        "gallery_size": "6",
+        "sidebar": "off",
+        "enable_sticky_sidebar": false,
+        "show_tabs": false,
+        "show_tab_description": true,
+        "show_tab_reviews": true,
+        "scrolling_to_opened_tab": false,
+        "tabs_type": "sheet"
+      }
+    },
+    "related-products": {
+      "type": "carousel-related-products",
+      "settings": {
+        "show_section": true,
+        "type": "related",
+        "size_of_columns": "4",
+        "max_count": 6,
+        "autoplay": true,
+        "speed": 5,
+        "infinite": true,
+        "arrows": true,
+        "bullets": true
+      }
+    },
+    "faq_accordion": {
+      "type": "faq-accordion",
+      "settings": {
+        "heading": "Frequently Asked Questions",
+        "output_schema": true
+      }
+    },
+    "pdp_value_props": {
+      "type": "msd-icp-value-props",
+      "blocks": {
+        "fit": {
+          "type": "point",
+          "settings": {
+            "label": "Fit",
+            "title": "Fit confidence first",
+            "text": "Clear silhouettes, practical sizing, and styling notes help you order without second-guessing."
+          }
+        },
+        "value": {
+          "type": "point",
+          "settings": {
+            "label": "Value",
+            "title": "Elevated without overpaying",
+            "text": "Boutique-inspired pieces with free Priority Shipping on orders over $80."
+          }
+        },
+        "trust": {
+          "type": "point",
+          "settings": {
+            "label": "Trust",
+            "title": "Low-risk first order",
+            "text": "Secure checkout, free shipping over $80, and 45-day returns on eligible items make trying a new style simpler."
+          }
+        }
+      },
+      "block_order": [
+        "fit",
+        "value",
+        "trust"
+      ],
+      "settings": {
+        "container": "boxed",
+        "tone": "compact",
+        "eyebrow": "First-order confidence",
+        "heading": "What makes the first order easier.",
+        "body": "<p>New customers usually want the same three answers before checkout: will it fit my life, is the value clear, and can I return it if it is not right?</p>",
+        "primary_label": "Shop customer favorites",
+        "primary_link": "shopify://collections/picked-for-you",
+        "secondary_label": "Explore new arrivals",
+        "secondary_link": "shopify://collections/new-in",
+        "bg_color": "#fbfaf7",
+        "text_color": "#18201d",
+        "muted_color": "#5d6863",
+        "accent_color": "#8a3f33"
+      }
+    }
+  },
+  "order": [
+    "main",
+    "pdp_value_props",
+    "faq_accordion",
+    "related-products"
+  ]
+}

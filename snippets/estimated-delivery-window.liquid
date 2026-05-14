@@ -1,0 +1,19 @@
+{% doc %}
+@param {number} [min_days] - Earliest delivery offset in days.
+@param {number} [max_days] - Latest delivery offset in days.
+@param {string} [date_format] - Liquid date format used for the output dates.
+@example
+{% render 'estimated-delivery-window', min_days: 6, max_days: 10 %}
+{% enddoc %}
+{%- liquid
+  assign min_delivery_days = min_days | default: 6
+  assign max_delivery_days = max_days | default: 10
+  assign delivery_date_format = date_format | default: '%b %-d'
+  assign day_in_seconds = 86400
+  assign now_seconds = 'now' | date: '%s' | plus: 0
+  assign earliest_delivery_seconds = min_delivery_days | times: day_in_seconds | plus: now_seconds
+  assign latest_delivery_seconds = max_delivery_days | times: day_in_seconds | plus: now_seconds
+  assign earliest_delivery = earliest_delivery_seconds | date: delivery_date_format
+  assign latest_delivery = latest_delivery_seconds | date: delivery_date_format
+-%}
+{{- earliest_delivery }} - {{ latest_delivery -}}

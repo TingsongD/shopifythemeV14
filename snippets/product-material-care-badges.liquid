@@ -1,0 +1,139 @@
+{% doc %}
+Renders near-price material and care prompts from product FAQ/metafield content.
+@param {product} product - Product object.
+@param {boolean} [centered] - Center content on centered product layouts.
+@param {boolean} [compact] - Render shorter collection-card badges.
+@example
+{% render 'product-material-care-badges', product: product, centered: centered %}
+{% enddoc %}
+{%- liquid
+  assign material_summary = blank
+  assign care_summary = blank
+  assign faq_data = product.metafields.ai_seo.faqs.value
+  assign faq_items = faq_data.faqs
+
+  if faq_items == blank
+    assign faq_items = faq_data
+  endif
+
+  assign material_metafield = product.metafields.custom.materials | default: product.metafields.custom.material | default: product.metafields.custom.fabric | default: product.metafields.custom.composition
+  assign care_metafield = product.metafields.custom.care | default: product.metafields.custom.care_instructions | default: product.metafields.custom.wash_care
+
+  if material_metafield != blank
+    assign material_summary = material_metafield.value | default: material_metafield | strip_html | strip
+  endif
+
+  if care_metafield != blank
+    assign care_summary = care_metafield.value | default: care_metafield | strip_html | strip
+  endif
+
+  if faq_items != blank
+    for faq in faq_items
+      assign question = faq.question | downcase | strip
+      assign answer = faq.answer | strip_html | strip
+
+      if material_summary == blank
+        if question contains 'material'
+          assign material_summary = answer
+        elsif question contains 'fabric'
+          assign material_summary = answer
+        elsif question contains 'composition'
+          assign material_summary = answer
+        endif
+      endif
+
+      if care_summary == blank
+        if question contains 'care'
+          assign care_summary = answer
+        elsif question contains 'wash'
+          assign care_summary = answer
+        elsif question contains 'launder'
+          assign care_summary = answer
+        endif
+      endif
+
+      if material_summary != blank and care_summary != blank
+        break
+      endif
+    endfor
+  endif
+
+  assign product_copy_source = product.title | append: ' ' | append: product.description | strip_html | downcase
+  assign searchable_copy = product_copy_source | replace: '.', ' ' | replace: ',', ' ' | replace: '/', ' ' | replace: '-', ' ' | replace: '&', ' ' | replace: '(', ' ' | replace: ')', ' ' | replace: ':', ' ' | replace: ';', ' ' | replace: '\n', ' '
+  assign searchable_copy = ' ' | append: searchable_copy | append: ' '
+
+  if material_summary == blank and searchable_copy != blank
+    assign explicit_material_terms = 'cotton|linen|silk|wool|cashmere|viscose|rayon|polyester|denim|chiffon|lace|crochet|knit|sherpa|chenille|tweed|leather|faux leather|satin|velvet|modal|nylon|spandex|elastane|acrylic|lyocell|tencel|fleece|terry|french terry|corduroy|suede' | split: '|'
+
+    for material_term in explicit_material_terms
+      assign material_lookup = ' ' | append: material_term | append: ' '
+
+      if searchable_copy contains material_lookup
+        assign material_summary = material_term | capitalize
+        break
+      endif
+    endfor
+  endif
+
+  assign material_summary_normalized = material_summary | downcase | strip
+  if material_summary_normalized contains 'pending verification'
+    assign material_summary = blank
+  endif
+
+  if care_summary == blank and searchable_copy != blank
+    assign explicit_care_terms = 'machine wash cold|machine wash|hand wash|dry clean|line dry|lay flat|tumble dry low|cold wash|wash cold' | split: '|'
+
+    for care_term in explicit_care_terms
+      assign care_lookup = ' ' | append: care_term | append: ' '
+
+      if searchable_copy contains care_lookup
+        assign care_summary = care_term | capitalize
+        break
+      endif
+    endfor
+  endif
+
+  assign should_render = false
+  if material_summary != blank or care_summary != blank
+    assign should_render = true
+  endif
+-%}
+
+{%- if should_render -%}
+  <div class="msd-material-care{% if centered %} msd-material-care--center{% endif %}{% if compact %} msd-material-care--compact{% endif %}" data-msd-material-care>
+    <style>
+      .msd-material-care{margin-top:7px;display:flex;flex-wrap:wrap;gap:5px;color:#0a0a0a}
+      .msd-material-care--center{justify-content:center}
+      .msd-material-care__badge{display:inline-flex;align-items:center;max-width:100%;padding:3px 7px 3px 3px;border:1px solid rgba(90,49,244,.18);border-radius:999px;background:#f7f4ff;color:#221f2f;font-size:10px;line-height:1.2;font-weight:650;box-shadow:inset 0 0 0 1px rgba(255,255,255,.65)}
+      .msd-material-care__label{display:inline-flex;align-items:center;margin-right:5px;padding:2px 5px;border-radius:999px;background:#5a31f4;color:#ffffff;text-transform:uppercase;letter-spacing:.06em;font-size:8px;line-height:1;font-weight:800}
+      .msd-material-care__text{min-width:0}
+      .msd-material-care--compact{margin-top:5px;gap:4px}
+      .msd-material-care--compact .msd-material-care__badge{padding:2px 6px 2px 2px;font-size:9px;line-height:1.15}
+      .msd-material-care--compact .msd-material-care__label{margin-right:4px;padding:2px 4px;font-size:7px}
+    </style>
+    {%- if material_summary != blank -%}
+      <span class="msd-material-care__badge">
+        <span class="msd-material-care__label">Fabric</span>
+        <span class="msd-material-care__text">
+          {%- if compact -%}
+            {{ material_summary | truncate: 42 }}
+          {%- else -%}
+            {{ material_summary | truncate: 58 }}
+          {%- endif -%}
+        </span>
+      </span>
+    {%- endif -%}
+    {%- if care_summary != blank -%}
+      <span class="msd-material-care__badge">
+        <span class="msd-material-care__label">Care</span>
+        <span class="msd-material-care__text">
+          {%- if compact -%}
+            {{ care_summary | truncate: 42 }}
+          {%- else -%}
+            {{ care_summary | truncate: 58 }}
+          {%- endif -%}
+        </span>
+      </span>
+    {%- endif -%}
+  </div>
+{%- endif -%}

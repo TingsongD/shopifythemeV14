@@ -1,0 +1,248 @@
+{% comment %}
+  UTM Variant Handler - Product-Specific Version
+
+  Dynamically displays variant-specific badges and banners based on:
+  1. Product ID (extracted from page)
+  2. utm_variant parameter (from URL)
+
+  Features:
+  - Reads product ID from Shopify product object
+  - Reads utm_variant from URL query string
+  - Creates composite key: productId-utmVariant
+  - Fetches mapping from assets/variant-badges.json
+  - Updates badge text and banner images (when available)
+  - Gracefully degrades if elements don't exist
+  - Zero impact on pages without utm_variant parameter
+  - Supports unlimited product-specific variants
+
+  Usage:
+  {% render 'utm-variant-handler' %}
+
+  JSON Structure (variant-badges.json):
+  {
+    "8818762023232-premium": {
+      "badgeText": "Short Jean Pink",
+      "bannerImage": "",
+      "productId": "8818762023232",
+      "utmVariant": "premium"
+    },
+    "8818762023232-general": {
+      "badgeText": "Reviews Returns",
+      "bannerImage": "",
+      "productId": "8818762023232",
+      "utmVariant": "general"
+    }
+  }
+{% endcomment %}
+
+{%- comment -%}Output product ID to JavaScript{%- endcomment -%}
+{%- if product -%}
+<script id="shopify-product-data" type="application/json">
+{
+  "productId": "{{ product.id }}",
+  "handle": "{{ product.handle }}"
+}
+</script>
+{%- endif -%}
+
+<script>
+(function() {
+  'use strict';
+
+  // Safe debug logging - only logs when ThemeDebug exists and is enabled
+  var debugLog = (window.ThemeDebug && ThemeDebug.enabled)
+      ? function() { console.log.apply(console, ['[UTM Variant]'].concat(Array.prototype.slice.call(arguments))); }
+      : function() {};
+  var debugWarn = (window.ThemeDebug && ThemeDebug.enabled)
+      ? function() { console.warn.apply(console, ['[UTM Variant]'].concat(Array.prototype.slice.call(arguments))); }
+      : function() {};
+
+  // Wait for DOM to be fully loaded
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initUTMVariantHandler);
+  } else {
+    initUTMVariantHandler();
+  }
+
+  function initUTMVariantHandler() {
+    // 1. Extract utm_variant parameter from URL
+    const params = new URLSearchParams(window.location.search);
+    const utmVariant = params.get('utm_variant');
+
+    // Exit early if no utm_variant parameter
+    if (!utmVariant) {
+      debugLog(' No utm_variant parameter found');
+      return;
+    }
+
+    // 2. Get product ID from the page
+    const productData = getProductData();
+    if (!productData || !productData.productId) {
+      debugWarn(' Could not extract product ID from page');
+      return;
+    }
+
+    // 3. Create composite key: productId-utmVariant
+    const compositeKey = productData.productId + '-' + utmVariant;
+    debugLog(' Looking for composite key:', compositeKey);
+
+    // 4. Load variant mappings from JSON file
+    fetch('{{ "variant-badges.json" | asset_url }}')
+      .then(function(response) {
+        if (!response.ok) {
+          throw new Error('Failed to load variant-badges.json');
+        }
+        return response.json();
+      })
+      .then(function(variantMappings) {
+        debugLog(' Loaded mappings, total entries:', Object.keys(variantMappings).length);
+
+        // 5. Get variant configuration using composite key
+        const variantConfig = variantMappings[compositeKey];
+
+        if (!variantConfig) {
+          debugWarn(' No configuration found for key:', compositeKey);
+          debugWarn(' Available keys sample:', Object.keys(variantMappings).slice(0, 5));
+          return;
+        }
+
+        debugLog(' Found config:', variantConfig);
+
+        // 6. Update badge text
+        if (variantConfig.badgeText) {
+          updateBadgeText(variantConfig.badgeText);
+        }
+
+        // 7. Update banner image (if provided)
+        if (variantConfig.bannerImage) {
+          updateBannerImage(variantConfig.bannerImage, variantConfig.badgeText);
+        }
+
+        // 8. Send analytics event (if Google Analytics / GTM is available)
+        sendAnalyticsEvent(compositeKey, utmVariant, variantConfig);
+
+      })
+      .catch(function(error) {
+        console.error('[UTM Variant] Error loading variant configuration:', error);
+      });
+  }
+
+  /**
+   * Extract product data from the page
+   */
+  function getProductData() {
+    // Method 1: Try reading from our injected JSON script
+    const productDataEl = document.getElementById('shopify-product-data');
+    if (productDataEl) {
+      try {
+        return JSON.parse(productDataEl.textContent);
+      } catch(e) {
+        debugWarn(' Failed to parse product data JSON');
+      }
+    }
+
+    // Method 2: Try reading from Shopify's product JSON (commonly available)
+    if (window.ShopifyAnalytics && window.ShopifyAnalytics.meta && window.ShopifyAnalytics.meta.product) {
+      return {
+        productId: String(window.ShopifyAnalytics.meta.product.id),
+        handle: window.ShopifyAnalytics.meta.product.handle
+      };
+    }
+
+    // Method 3: Try meta tags
+    const metaProduct = document.querySelector('meta[property="product:product_link"]');
+    if (metaProduct) {
+      const productUrl = metaProduct.getAttribute('content');
+      const match = productUrl.match(/\/products\/([^?]+)/);
+      if (match) {
+        // We have handle, but need to get ID from single-product element
+        const productEl = document.querySelector('single-product');
+        if (productEl && productEl.hasAttribute('data-product-id')) {
+          return {
+            productId: productEl.getAttribute('data-product-id'),
+            handle: match[1]
+          };
+        }
+      }
+    }
+
+    // Method 4: Try single-product element directly
+    const singleProductEl = document.querySelector('single-product');
+    if (singleProductEl) {
+      const productId = singleProductEl.getAttribute('data-product-id') ||
+                       singleProductEl.getAttribute('data-js-product-id');
+      if (productId) {
+        return { productId: String(productId) };
+      }
+    }
+
+    debugWarn(' Could not find product ID using any method');
+    return null;
+  }
+
+  /**
+   * Update badge text elements
+   */
+  function updateBadgeText(badgeText) {
+    // Primary badge element
+    const badgeEl = document.querySelector('.utm-variant-badge');
+    if (badgeEl) {
+      badgeEl.textContent = badgeText;
+      badgeEl.style.display = 'block';
+      debugLog(' Updated badge element:', badgeText);
+    }
+
+    // Secondary: product subtitle (fallback)
+    const subtitleEl = document.querySelector('.product-subtitle');
+    if (subtitleEl) {
+      subtitleEl.textContent = badgeText;
+      debugLog(' Updated subtitle element');
+    }
+
+    // If no elements found, log warning
+    if (!badgeEl && !subtitleEl) {
+      debugWarn(' No badge or subtitle elements found to update');
+    }
+  }
+
+  /**
+   * Update banner image
+   */
+  function updateBannerImage(bannerUrl, altText) {
+    const bannerEl = document.querySelector('.utm-variant-banner__img');
+
+    if (bannerEl) {
+      bannerEl.src = bannerUrl;
+      bannerEl.alt = altText || 'Variant Banner';
+      bannerEl.style.display = 'block';
+      debugLog(' Updated banner image');
+    } else {
+      debugWarn(' No banner image element found (.utm-variant-banner__img)');
+    }
+  }
+
+  /**
+   * Send analytics event
+   */
+  function sendAnalyticsEvent(compositeKey, utmVariant, config) {
+    // Google Analytics 4 / GTM
+    if (window.dataLayer) {
+      window.dataLayer.push({
+        event: 'utm_variant_view',
+        utm_variant_composite_key: compositeKey,
+        utm_variant: utmVariant,
+        variant_badge_text: config.badgeText || '',
+        variant_has_banner: !!config.bannerImage,
+        product_id: config.productId || ''
+      });
+      debugLog(' Sent analytics event');
+    }
+
+    // Google Analytics Universal (legacy)
+    if (window.ga) {
+      window.ga('send', 'event', 'UTM Variant', 'View', compositeKey);
+    }
+  }
+
+})();
+</script>

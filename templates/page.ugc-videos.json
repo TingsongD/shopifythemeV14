@@ -1,0 +1,48 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "main-page",
+      "disabled": true,
+      "settings": {
+        "show_title": true,
+        "show_content": true
+      }
+    },
+    "1764555531bbb226d5": {
+      "type": "apps",
+      "blocks": {
+        "video_page_index_watch_video_tzyWDB": {
+          "type": "shopify://apps/video-page-index/blocks/watch-video/019a99ec-09f6-7a06-9304-ad85b727e887",
+          "settings": {
+            "video": "5-stunning-looks-proving-style-has-no-age-2-3m-views-fashion-inspiration-for-women-40",
+            "show_transcript": true
+          }
+        }
+      },
+      "block_order": [
+        "video_page_index_watch_video_tzyWDB"
+      ],
+      "settings": {
+        "container": "fullwidth",
+        "margin_top": 60,
+        "margin_bottom": 0,
+        "margin_top_mobile": 0,
+        "margin_bottom_mobile": 0,
+        "show_separator": false
+      }
+    }
+  },
+  "order": [
+    "main",
+    "1764555531bbb226d5"
+  ]
+}

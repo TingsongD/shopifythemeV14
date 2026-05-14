@@ -1,0 +1,90 @@
+{% doc %}
+@param {string} [context] - Surface where the note is rendered: product, cart, or popup-cart.
+@param {boolean} [compact] - Reduces spacing for compact cart surfaces.
+@param {boolean} [centered] - Centers the note content.
+@param {variant} [current_variant] - Current product variant, used for in-stock delivery messaging.
+@example
+{% render 'conversion-confidence-note', context: 'product' %}
+{% enddoc %}
+{%- liquid
+  assign note_context = context | default: 'product' | handleize
+  assign note_classes = 'conversion-confidence-note conversion-confidence-note--' | append: note_context
+  assign note_variant = current_variant | default: product.selected_or_first_available_variant
+
+  if compact
+    assign note_classes = note_classes | append: ' conversion-confidence-note--compact'
+  endif
+
+  if centered
+    assign note_classes = note_classes | append: ' conversion-confidence-note--centered'
+  endif
+-%}
+
+<style>
+  .conversion-confidence-note {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    width: 100%;
+    margin: 12px 0 0;
+    padding: 11px 12px;
+    border: 1px solid #d6eee9;
+    background: #effaf8;
+    color: #0a0a0a;
+    font-size: 13px;
+    font-weight: 700;
+    line-height: 1.4;
+  }
+
+  .conversion-confidence-note--compact {
+    margin-top: 10px;
+    padding: 9px 10px;
+    font-size: 12px;
+  }
+
+  .conversion-confidence-note--centered {
+    justify-content: center;
+    text-align: center;
+  }
+
+  .conversion-confidence-note__icon {
+    display: inline-flex;
+    flex: 0 0 22px;
+    width: 22px;
+    height: 22px;
+    color: #0a0a0a;
+  }
+
+  .conversion-confidence-note__icon svg {
+    width: 100%;
+    height: 100%;
+  }
+
+  .conversion-confidence-note__text {
+    min-width: 0;
+  }
+
+  .conversion-confidence-note__link {
+    color: inherit;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+
+  .product-trust-badges .conversion-confidence-note {
+    margin-top: 14px;
+  }
+</style>
+
+<div class="{{ note_classes }}" role="note">
+  <span class="conversion-confidence-note__icon" aria-hidden="true">{% render 'icon-theme-221' %}</span>
+  <span class="conversion-confidence-note__text">
+    {%- if note_context == 'cart' or note_context == 'popup-cart' -%}
+      Secure checkout. Estimated delivery: {% render 'estimated-delivery-window', min_days: 6, max_days: 10 %}. Free shipping over $80. 45-day returns on eligible items. Store credit stacks with discount codes. Need sizing help?
+      <a class="conversion-confidence-note__link" href="{{ routes.root_url }}pages/size-guide-for-msdressly">View the size guide</a>.
+    {%- elsif note_variant.available -%}
+      Secure checkout. Estimated delivery: {% render 'estimated-delivery-window', min_days: 6, max_days: 10 %}. Free shipping over $80. 45-day returns on eligible items.
+    {%- else -%}
+      Secure checkout. Delivery timing appears when this item is back in stock. Free shipping over $80. 45-day returns on eligible items.
+    {%- endif -%}
+  </span>
+</div>

@@ -1,0 +1,31 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+/*
+ * Fresh Underwear Box landing page. Assign to an Online Store page with handle "fresh-underwear-box".
+ */
+{
+  "sections": {
+    "fresh_underwear_box": {
+      "type": "msd-fresh-underwear-box",
+      "settings": {
+        "display_mode": "full",
+        "product": "disposable-underwear-box",
+        "eyebrow": "Monthly fresh-pair backup box",
+        "heading": "Fresh backup, packed before you need it.",
+        "subheading": "30 individually sealed disposable underwear pairs every month for work bags, gym days, travel kits, and long days away from home.",
+        "cta_label": "Start the $49 monthly box",
+        "cta_link": "/products/disposable-underwear-box"
+      }
+    }
+  },
+  "order": [
+    "fresh_underwear_box"
+  ]
+}

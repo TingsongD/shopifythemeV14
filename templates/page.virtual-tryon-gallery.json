@@ -1,0 +1,32 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "main-page",
+      "settings": {
+        "show_title": true,
+        "show_content": true
+      }
+    },
+    "custom_liquid_JaQGCJ": {
+      "type": "custom-liquid",
+      "name": "Custom Liquid",
+      "settings": {
+        "use_container": false,
+        "custom_liquid": "<section class=\"voting-gallery-snippet\" id=\"voting-gallery-main\">\n  <style>\n    .voting-gallery-snippet{padding:40px 20px;background:#fff;text-align:center}\n    .voting-gallery-container{max-width:900px;margin:0 auto}\n    .voting-gallery-container h1{margin:0 0 10px;font-size:32px;line-height:1.2;color:#18201d}\n    .voting-gallery-container p{margin:0 auto 22px;max-width:620px;color:#5d6863;line-height:1.6}\n    .voting-gallery-actions{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}\n    .voting-gallery-actions a{display:inline-flex;align-items:center;justify-content:center;min-height:44px;padding:0 18px;border-radius:4px;text-decoration:none;font-weight:700}\n    .voting-gallery-actions a:first-child{background:#18201d;color:#fff}\n    .voting-gallery-actions a:last-child{border:1px solid rgba(24,32,29,.18);color:#18201d}\n  </style>\n  <div class=\"voting-gallery-container\">\n    <h1>Community Looks</h1>\n    <p>The virtual try-on gallery is being refreshed. In the meantime, shop customer favorites and new arrivals selected for polished everyday outfits.</p>\n    <div class=\"voting-gallery-actions\">\n      <a href=\"/collections/picked-for-you\">Shop customer favorites</a>\n      <a href=\"/collections/new-in\">Explore new arrivals</a>\n    </div>\n  </div>\n</section>"
+      }
+    }
+  },
+  "order": [
+    "main",
+    "custom_liquid_JaQGCJ"
+  ]
+}

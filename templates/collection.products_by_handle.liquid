@@ -1,0 +1,27 @@
+{% layout none %}
+
+{%- assign handles_query = '' -%}
+{%- assign path_segment = request.path | split: '/products_by_handle/' -%}
+{%- if path_segment.size > 1 -%}
+  {%- assign handles_query = path_segment.last -%}
+{%- endif -%}
+
+{%- assign handles_query = handles_query
+  | replace: '%2B', '+'
+  | replace: '%3D', '='
+  | replace: '%20', ' '
+  | replace: '%26', '&'
+  | replace: '&#38;', '&' -%}
+{%- assign params = handles_query | split: '+' -%}
+
+{%- assign is_first = true -%}
+[
+{%- for param in params -%}
+    {%- assign handle = param | url_decode -%}
+    {%- assign product = all_products[handle] -%}
+    {%- if product != blank -%}
+        {% unless is_first %},{% endunless %}{{ product | json }}
+        {%- assign is_first = false -%}
+    {%- endif -%}
+{%- endfor -%}
+]

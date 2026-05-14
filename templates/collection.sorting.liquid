@@ -1,0 +1,24 @@
+{% layout none %}
+{% include 'global-variables' %}
+{%- assign query_string = request.query_string | default: '' -%}
+{%- if query_string != blank -%}
+  {%- assign query_params = query_string | split: '&' -%}
+  {%- for query_param in query_params -%}
+    {%- assign key_value = query_param | split: '=' -%}
+    {%- assign key = key_value[0] -%}
+    {%- assign value = key_value[1] | default: '' | url_decode -%}
+    {%- if key == 'count_limit' and value != blank -%}
+      {%- assign count_limit = value -%}
+    {%- elsif key == 'grid_classes' and value != blank -%}
+      {%- assign grid_classes = value -%}
+    {%- endif -%}
+  {%- endfor -%}
+{%- endif -%}
+{%- unless count_limit -%}
+    {%- assign count_limit = 8 -%}
+{%- endunless -%}
+{%- for product in collections[collection.handle].products limit: count_limit -%}
+    <div class="{{ grid_classes }}">
+        {% include 'product-collection' with url_without_collection: true product_margin_bottom: offset_collection_page_product_margin_bottom_d %}
+    </div>
+{%- endfor -%}

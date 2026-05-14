@@ -1,0 +1,26 @@
+{%- assign icon_name = name | default: icon | remove_first: 'icon-' -%}
+
+{%- case icon_name -%}
+    {%- when 'theme-009' -%}
+        {%- render 'icon-theme-009' -%}
+    {%- when 'theme-108' -%}
+        {%- render 'icon-theme-108' -%}
+    {%- when 'theme-109' -%}
+        {%- render 'icon-theme-109' -%}
+    {%- when 'theme-116' -%}
+        {%- render 'icon-theme-116' -%}
+    {%- when 'theme-125' -%}
+        {%- render 'icon-theme-125' -%}
+    {%- when 'theme-127' -%}
+        {%- render 'icon-theme-127' -%}
+    {%- when 'theme-148' -%}
+        {%- render 'icon-theme-148' -%}
+    {%- when 'theme-153' -%}
+        {%- render 'icon-theme-153' -%}
+    {%- when 'theme-154' -%}
+        {%- render 'icon-theme-154' -%}
+    {%- when 'theme-197' -%}
+        {%- render 'icon-theme-197' -%}
+    {%- when 'theme-234' -%}
+        {%- render 'icon-theme-234' -%}
+{%- endcase -%}

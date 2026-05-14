@@ -1,0 +1,66 @@
+{% doc %}
+Renders product decision signals near the buy box.
+@param {product} product - Product object.
+@param {variant} [current_variant] - Current product variant, used for delivery availability.
+@param {boolean} [centered] - Center content on centered product layouts.
+@param {boolean} [show_fit_summary] - Show quick-view fit option names.
+@param {boolean} [show_size_guide_link] - Show the size guide popup trigger.
+@example
+{% render 'product-buybox-assurance', product: product, centered: centered, show_fit_summary: true %}
+{% enddoc %}
+{%- assign should_show_fit = show_fit_summary | default: false -%}
+{%- assign should_show_size_guide = show_size_guide_link | default: false -%}
+{%- assign assurance_variant = current_variant | default: product.selected_or_first_available_variant -%}
+{%- assign displayed_option_count = 0 -%}
+{%- capture option_names -%}
+  {%- if product != blank and product.has_only_default_variant != true -%}
+    {%- for option in product.options_with_values -%}
+      {%- assign option_name = option.name | strip -%}
+      {%- assign option_name_downcase = option_name | downcase -%}
+      {%- unless option_name == blank or option_name_downcase == 'title' -%}
+        {%- if displayed_option_count > 0 -%}, {%- endif -%}
+        {{ option_name }}
+        {%- assign displayed_option_count = displayed_option_count | plus: 1 -%}
+      {%- endunless -%}
+    {%- endfor -%}
+  {%- endif -%}
+{%- endcapture -%}
+{%- assign option_names = option_names | strip -%}
+{%- assign render_fit_row = false -%}
+{%- if should_show_fit and option_names != blank -%}
+  {%- assign render_fit_row = true -%}
+{%- endif -%}
+
+<div class="msd-buybox-assurance{% if centered %} msd-buybox-assurance--center{% endif %}" data-msd-buybox-assurance>
+  <style>
+    .msd-buybox-assurance{margin-top:12px;display:grid;gap:7px;color:#0a0a0a;font-size:12px;line-height:1.4}
+    .msd-buybox-assurance--center{justify-items:center;text-align:center}
+    .msd-buybox-assurance__row{display:flex;align-items:center;gap:8px;max-width:100%;padding:8px 10px;border:1px solid rgba(10,10,10,.12);background:#fff}
+    .msd-buybox-assurance__label{flex:0 0 auto;color:#5a31f4;text-transform:uppercase;letter-spacing:.12em;font-size:10px;font-weight:700}
+    .msd-buybox-assurance__text{min-width:0;font-weight:600}
+    .msd-buybox-assurance__link{display:inline;margin-left:8px;padding:0;border:0;background:none;color:inherit;text-decoration:underline;text-underline-offset:3px;cursor:pointer;font:inherit;font-weight:700}
+  </style>
+  <div class="msd-buybox-assurance__row">
+    <span class="msd-buybox-assurance__label">Delivery</span>
+    <span class="msd-buybox-assurance__text">
+      {%- if assurance_variant.available -%}
+        Estimated delivery: {% render 'estimated-delivery-window', min_days: 6, max_days: 10 %}
+      {%- else -%}
+        Delivery timing appears when this item is back in stock.
+      {%- endif -%}
+    </span>
+  </div>
+  {%- if render_fit_row or should_show_size_guide -%}
+    <div class="msd-buybox-assurance__row">
+      <span class="msd-buybox-assurance__label">Fit</span>
+      <span class="msd-buybox-assurance__text">
+        {%- if render_fit_row -%}
+          Options: {{ option_names }}
+        {%- endif -%}
+        {%- if should_show_size_guide -%}
+          <button type="button" class="msd-buybox-assurance__link js-popup-button" data-js-popup-button="size-guide">{{ 'products.product.size_guide' | t }}</button>
+        {%- endif -%}
+      </span>
+    </div>
+  {%- endif -%}
+</div>

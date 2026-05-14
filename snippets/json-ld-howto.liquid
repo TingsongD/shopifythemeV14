@@ -1,0 +1,97 @@
+{% doc %}
+Outputs HowTo JSON-LD for the MsDressly dress and set size measurement guide article.
+@param {object} article - The current blog article.
+@example
+{% render 'json-ld-howto', article: article %}
+{% enddoc %}
+{%- assign target_article_handle = 'how-to-measure-your-size-for-dresses-and-sets' -%}
+{%- assign current_article_handle = article.handle | split: '/' | last -%}
+{%- if current_article_handle == target_article_handle -%}
+  {%- assign howto_url = canonical_url -%}
+  {%- if howto_url == blank -%}
+    {%- assign howto_url = shop.url | append: article.url -%}
+  {%- endif -%}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "HowTo",
+  "name": "How to Measure Your Size for Dresses and Sets",
+  "description": "A practical measuring guide for choosing dresses, sets, blazers, cardigans, and layers with more confidence.",
+  "totalTime": "PT10M",
+  "supply": [
+    {
+      "@type": "HowToSupply",
+      "name": "Flexible tape measure"
+    },
+    {
+      "@type": "HowToSupply",
+      "name": "Notebook or phone notes"
+    }
+  ],
+  "tool": [
+    {
+      "@type": "HowToTool",
+      "name": "Mirror"
+    }
+  ],
+  "step": [
+    {
+      "@type": "HowToStep",
+      "position": 1,
+      "name": "Get ready to measure",
+      "url": {{ howto_url | append: '#step-1' | json }},
+      "text": "Get a flexible tape measure, mirror, and a place to record numbers."
+    },
+    {
+      "@type": "HowToStep",
+      "position": 2,
+      "name": "Measure bust",
+      "url": {{ howto_url | append: '#step-2' | json }},
+      "text": "Measure bust at the fullest point."
+    },
+    {
+      "@type": "HowToStep",
+      "position": 3,
+      "name": "Measure natural waist",
+      "url": {{ howto_url | append: '#step-3' | json }},
+      "text": "Measure natural waist."
+    },
+    {
+      "@type": "HowToStep",
+      "position": 4,
+      "name": "Measure hips",
+      "url": {{ howto_url | append: '#step-4' | json }},
+      "text": "Measure hips at the fullest point."
+    },
+    {
+      "@type": "HowToStep",
+      "position": 5,
+      "name": "Measure shoulder width",
+      "url": {{ howto_url | append: '#step-5' | json }},
+      "text": "Measure shoulder width for structured tops and blazers."
+    },
+    {
+      "@type": "HowToStep",
+      "position": 6,
+      "name": "Measure sleeve length",
+      "url": {{ howto_url | append: '#step-6' | json }},
+      "text": "Measure sleeve length for long-sleeve layers."
+    },
+    {
+      "@type": "HowToStep",
+      "position": 7,
+      "name": "Measure dress length",
+      "url": {{ howto_url | append: '#step-7' | json }},
+      "text": "Measure dress length from shoulder to preferred hem."
+    },
+    {
+      "@type": "HowToStep",
+      "position": 8,
+      "name": "Compare with the product size guide",
+      "url": {{ howto_url | append: '#step-8' | json }},
+      "text": "Compare with each product size guide and choose the larger size if between sizes."
+    }
+  ]
+}
+</script>
+{%- endif -%}

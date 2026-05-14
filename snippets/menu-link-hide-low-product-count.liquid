@@ -1,0 +1,20 @@
+{% doc %}
+Outputs true when a menu link targets a collection with fewer than the minimum product count.
+@param {link} link - Menu link object.
+@param {number} [min_products] - Minimum collection product count required to render.
+@example
+{% render 'menu-link-hide-low-product-count', link: link, min_products: 24 %}
+{% enddoc %}
+{%- liquid
+  assign minimum_products = min_products | default: 24 | plus: 0
+  assign hide_link = false
+
+  if link.type == 'collection_link'
+    assign collection_product_count = link.object.all_products_count | default: link.object.products_count | plus: 0
+
+    if collection_product_count < minimum_products
+      assign hide_link = true
+    endif
+  endif
+-%}
+{{- hide_link -}}

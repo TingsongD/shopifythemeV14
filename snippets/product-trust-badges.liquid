@@ -1,0 +1,4 @@
+{%- liquid
+  assign trust_badges_variant = current_variant | default: product.selected_or_first_available_variant
+-%}
+{% render 'conversion-confidence-note', context: 'product', current_variant: trust_badges_variant %}

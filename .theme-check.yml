@@ -1,0 +1,8 @@
+DeprecatedTag:
+  enabled: false
+
+UnusedAssign:
+  enabled: false
+
+RemoteAsset:
+  enabled: false

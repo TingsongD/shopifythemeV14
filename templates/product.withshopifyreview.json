@@ -1,0 +1,188 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "main-product",
+      "blocks": {
+        "b0febcf2-a38c-4ae7-a929-10af2ad0e5f4": {
+          "type": "tab_custom",
+          "disabled": true,
+          "settings": {
+            "title": "Model in picture",
+            "content": "",
+            "page_content": ""
+          }
+        },
+        "959240db-9a88-436b-8c09-b6c9e0ebb7a8": {
+          "type": "tab_custom",
+          "settings": {
+            "title": "Care Instructions",
+            "content": "",
+            "page_content": "care-instructions"
+          }
+        },
+        "eef0c541-9d04-4de6-9d1e-377c3d515488": {
+          "type": "tab_custom",
+          "disabled": true,
+          "settings": {
+            "title": "Shipping Q&A",
+            "content": "<p>Text content of Tab goes here!</p><p>You can make text <strong>bold</strong>, <em>italic</em> or add <a href=\"/blogs/news\" title=\"News\">link</a> using rich text editor.</p><p></p>",
+            "page_content": ""
+          }
+        },
+        "msd_first_order_note": {
+          "type": "text",
+          "settings": {
+            "content": "<p>Your order is backed by secure checkout, free Priority Shipping over $80, 45-day returns on eligible items, and support if you need help.</p>",
+            "small_text": true
+          }
+        }
+      },
+      "block_order": [
+        "b0febcf2-a38c-4ae7-a929-10af2ad0e5f4",
+        "msd_first_order_note",
+        "959240db-9a88-436b-8c09-b6c9e0ebb7a8",
+        "eef0c541-9d04-4de6-9d1e-377c3d515488"
+      ],
+      "settings": {
+        "gallery_size": "6",
+        "sidebar": "off",
+        "enable_sticky_sidebar": true,
+        "show_tabs": true,
+        "show_tab_description": true,
+        "show_tab_reviews": true,
+        "scrolling_to_opened_tab": false,
+        "tabs_type": "tabs"
+      }
+    },
+    "related-products": {
+      "type": "carousel-related-products",
+      "settings": {
+        "show_section": true,
+        "type": "recommendations",
+        "size_of_columns": "4",
+        "max_count": 50,
+        "autoplay": false,
+        "speed": 5,
+        "infinite": true,
+        "arrows": true,
+        "bullets": true
+      }
+    },
+    "60eadd57-59a2-4d66-b662-0696fc78110f": {
+      "type": "carousel-products",
+      "blocks": {
+        "26dc3c6d-56e7-46b8-ae78-38f294ce3930": {
+          "type": "collection",
+          "settings": {
+            "title": "On Sale:",
+            "collection": "picked-for-you"
+          }
+        }
+      },
+      "block_order": [
+        "26dc3c6d-56e7-46b8-ae78-38f294ce3930"
+      ],
+      "settings": {
+        "show_title": true,
+        "container": "boxed",
+        "size_of_columns": "4",
+        "max_count": 50,
+        "autoplay": false,
+        "speed": 5,
+        "infinite": true,
+        "arrows": true,
+        "bullets": true
+      }
+    },
+    "774ca01e-f5a7-43da-aefc-02545683b837": {
+      "type": "spacer",
+      "settings": {
+        "margin_top": 0,
+        "margin_bottom": 30,
+        "margin_top_mobile": 0,
+        "margin_bottom_mobile": 0,
+        "container": "boxed",
+        "show_separator": false,
+        "title": ""
+      }
+    },
+    "16787603932c374f70": {
+      "type": "apps",
+      "settings": {}
+    },
+    "faq_accordion": {
+      "type": "faq-accordion",
+      "settings": {
+        "heading": "Frequently Asked Questions",
+        "output_schema": true
+      }
+    },
+    "pdp_value_props": {
+      "type": "msd-icp-value-props",
+      "blocks": {
+        "fit": {
+          "type": "point",
+          "settings": {
+            "label": "Fit",
+            "title": "Fit confidence first",
+            "text": "Clear silhouettes, practical sizing, and styling notes help you order without second-guessing."
+          }
+        },
+        "value": {
+          "type": "point",
+          "settings": {
+            "label": "Value",
+            "title": "Elevated without overpaying",
+            "text": "Boutique-inspired pieces with free Priority Shipping on orders over $80."
+          }
+        },
+        "trust": {
+          "type": "point",
+          "settings": {
+            "label": "Trust",
+            "title": "Low-risk first order",
+            "text": "Secure checkout, free shipping over $80, and 45-day returns on eligible items make trying a new style simpler."
+          }
+        }
+      },
+      "block_order": [
+        "fit",
+        "value",
+        "trust"
+      ],
+      "settings": {
+        "container": "boxed",
+        "tone": "compact",
+        "eyebrow": "First-order confidence",
+        "heading": "What makes the first order easier.",
+        "body": "<p>New customers usually want the same three answers before checkout: will it fit my life, is the value clear, and can I return it if it is not right?</p>",
+        "primary_label": "Shop customer favorites",
+        "primary_link": "shopify://collections/picked-for-you",
+        "secondary_label": "Explore new arrivals",
+        "secondary_link": "shopify://collections/new-in",
+        "bg_color": "#fbfaf7",
+        "text_color": "#18201d",
+        "muted_color": "#5d6863",
+        "accent_color": "#8a3f33"
+      }
+    }
+  },
+  "order": [
+    "main",
+    "pdp_value_props",
+    "related-products",
+    "60eadd57-59a2-4d66-b662-0696fc78110f",
+    "774ca01e-f5a7-43da-aefc-02545683b837",
+    "faq_accordion",
+    "16787603932c374f70"
+  ]
+}

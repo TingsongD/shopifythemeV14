@@ -1,0 +1,129 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+/*
+ * Disposable Underwear Box product template. Assign to product handle "disposable-underwear-box".
+ */
+{
+  "sections": {
+    "main": {
+      "type": "main-product",
+      "blocks": {
+        "title": {
+          "type": "title",
+          "settings": {}
+        },
+        "price": {
+          "type": "price",
+          "settings": {}
+        },
+        "intro": {
+          "type": "text",
+          "settings": {
+            "content": "<p><strong>A clean backup for long days.</strong> Keep individually sealed pairs in your work bag, travel kit, gym bag, or drawer so a fresh reset is always within reach.</p>"
+          }
+        },
+        "options": {
+          "type": "options",
+          "settings": {}
+        },
+        "buttons": {
+          "type": "buttons_quantity",
+          "settings": {}
+        },
+        "description": {
+          "type": "description",
+          "settings": {
+            "title": "What arrives",
+            "content": "<p>A monthly disposable underwear refresh box with 30 individually sealed pairs for travel, long days, gym bags, backup drawers, and monthly restocking, with free shipping.</p>"
+          }
+        },
+        "payments": {
+          "type": "payments",
+          "settings": {}
+        }
+      },
+      "block_order": [
+        "title",
+        "price",
+        "intro",
+        "options",
+        "buttons",
+        "description",
+        "payments"
+      ],
+      "settings": {
+        "gallery_size": "6",
+        "sidebar": "off",
+        "enable_sticky_sidebar": true,
+        "show_tabs": true,
+        "show_tab_description": true,
+        "show_tab_reviews": true,
+        "scrolling_to_opened_tab": false,
+        "tabs_type": "tabs",
+        "enable_floating_video": false,
+        "video_pool_json": "",
+        "floating_video_hide_on_mobile": false
+      }
+    },
+    "subscription_benefits": {
+      "type": "msd-subscription-benefits",
+      "blocks": {
+        "monthly": {
+          "type": "benefit",
+          "settings": {
+            "title": "Monthly refresh supply",
+            "text": "30 sealed pairs arrive on a clear monthly cadence."
+          }
+        },
+        "clear_terms": {
+          "type": "benefit",
+          "settings": {
+            "title": "Clear delivery choice",
+            "text": "Select the available selling plan before adding the box to your bag."
+          }
+        },
+        "portable": {
+          "type": "benefit",
+          "settings": {
+            "title": "Backup where you need it",
+            "text": "Keep sealed pairs in a bag, drawer, locker, bathroom cabinet, or suitcase."
+          }
+        }
+      },
+      "block_order": [
+        "monthly",
+        "clear_terms",
+        "portable"
+      ],
+      "settings": {
+        "container": "boxed",
+        "heading": "Built for women who plan ahead",
+        "body": "<p>A simple monthly refresh supply for travel, workdays, workouts, warm weather, and the backup moments that are easier when you are prepared.</p>",
+        "primary_label": "See the full refresh-box details",
+        "primary_link": "/pages/fresh-underwear-box",
+        "secondary_label": "",
+        "secondary_link": "",
+        "show_policy_link": true
+      }
+    },
+    "faq_accordion": {
+      "type": "faq-accordion",
+      "settings": {
+        "heading": "Frequently Asked Questions",
+        "output_schema": true
+      }
+    }
+  },
+  "order": [
+    "main",
+    "subscription_benefits",
+    "faq_accordion"
+  ]
+}

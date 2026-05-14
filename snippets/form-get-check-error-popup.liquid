@@ -1,0 +1,20 @@
+{%- if form.errors -%}
+    {%- assign res_error_fields = null -%}
+    <div class="d-none js-subscription-confirmation-error" role="alert" aria-live="assertive">
+        <ul class="m-0">
+            {%- for field in form.errors -%}
+                {%- if forloop.first != true -%}
+                    {%- assign res_error_fields = res_error_fields | append: '|' -%}
+                {%- endif -%}
+                {%- assign res_error_fields = res_error_fields | append: field -%}
+                <li>
+                    {%- if field == 'form' -%}
+                        {{ form.errors.messages[field] }}
+                    {%- else -%}
+                        {{ form.errors.translated_fields[field] }} - {{ form.errors.messages[field] }}
+                    {%- endif -%}
+                </li>
+            {%- endfor -%}
+        </ul>
+    </div>
+{%- endif -%}

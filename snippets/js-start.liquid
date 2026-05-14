@@ -1,0 +1,56 @@
+<script>
+    window.msdresslyRequireProductPageAssets = window.msdresslyRequireProductPageAssets || function() {
+        if (window.msdresslyProductPageAssetsRequested || !window.theme || !theme.AssetsLoader) return;
+
+        window.msdresslyProductPageAssetsRequested = true;
+
+        theme.AssetsLoader.onPageLoaded(function() {
+            theme.AssetsLoader.require('styles', 'plugin_slick');
+            theme.AssetsLoader.require('scripts', 'product_page');
+        });
+    };
+
+    {%- comment -%}
+      Core theme bundles are loaded once from layout/theme.liquid with defer.
+      Do not request them through AssetsLoader here, or cart/product handlers can bind twice.
+    {%- endcomment -%}
+    {%- if template.name == 'product'-%}
+        {%- comment -%}
+          Always load Slick on product pages. Some layouts invoke the slider even
+          when there is a single media item, which can throw "slick is not a function"
+          if the script was skipped.
+        {%- endcomment -%}
+        window.msdresslyRequireProductPageAssets();
+    {%- endif -%}
+    {%- if settings.show_multiple_currencies -%}
+        theme.AssetsLoader.require('scripts', 'currency_rates');
+        theme.AssetsLoader.require('scripts', 'currency');
+    {%- endif -%}
+    {%- if template.name == 'collection' or template.name == 'search'-%}
+        theme.AssetsLoader.onUserAction(function() {
+            theme.AssetsLoader.require('scripts', 'collections');
+        });
+    {%- endif -%}
+    {%- if settings.tooltips_enable -%}
+        theme.AssetsLoader.onUserAction(function() {
+            theme.AssetsLoader.require('scripts', 'tooltip');
+        });
+    {%- endif -%}
+    {%- if template == 'cart' -%}
+        theme.AssetsLoader.require('scripts', 'handlebars');
+        theme.AssetsLoader.require('scripts', 'countries');
+    {%- endif -%}
+    {%- if template.directory == 'customers' or template == 'addresses' -%}
+        {%- assign need_shopify_common_js = true -%}
+    
+    {%- elsif template == 'cart' and settings.shipping_calculator != 'Disabled' -%}
+        {%- assign need_shopify_common_js = true -%}
+    
+    {%- endif -%}
+    {%- if need_shopify_common_js -%}
+        theme.AssetsLoader.require('scripts', 'shopify_common');
+    {%- endif -%}
+    {%- if settings.dev_enable_custom_js == true -%}
+        theme.AssetsLoader.require('scripts', 'custom');
+    {%- endif -%}
+</script>

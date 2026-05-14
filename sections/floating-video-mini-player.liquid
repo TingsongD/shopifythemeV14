@@ -1,0 +1,599 @@
+{%- assign source_host = section.settings.video_host | default: 'youtube' | downcase -%}
+{%- assign source_id = section.settings.video_id | strip -%}
+{%- assign source_poster = section.settings.poster -%}
+{%- assign source_aspect_ratio = section.settings.aspect_ratio | strip -%}
+{%- assign meta_host = '' -%}
+{%- assign meta_id = '' -%}
+{%- assign meta_poster = '' -%}
+{%- assign meta_aspect_ratio = '' -%}
+{%- assign meta_title = '' -%}
+
+{%- if section.settings.use_resource_metafields -%}
+  {%- if collection and collection.metafields.custom.floating_video_id != blank -%}
+    {%- assign meta_host = collection.metafields.custom.floating_video_host | default: meta_host -%}
+    {%- assign meta_id = collection.metafields.custom.floating_video_id | default: meta_id -%}
+    {%- assign meta_poster = collection.metafields.custom.floating_video_poster | default: meta_poster -%}
+    {%- assign meta_aspect_ratio = collection.metafields.custom.floating_video_aspect_ratio | default: meta_aspect_ratio -%}
+    {%- assign meta_title = collection.title -%}
+  {%- elsif article and article.metafields.custom.floating_video_id != blank -%}
+    {%- assign meta_host = article.metafields.custom.floating_video_host | default: meta_host -%}
+    {%- assign meta_id = article.metafields.custom.floating_video_id | default: meta_id -%}
+    {%- assign meta_poster = article.metafields.custom.floating_video_poster | default: meta_poster -%}
+    {%- assign meta_aspect_ratio = article.metafields.custom.floating_video_aspect_ratio | default: meta_aspect_ratio -%}
+    {%- assign meta_title = article.title -%}
+  {%- elsif page and page.metafields.custom.floating_video_id != blank -%}
+    {%- assign meta_host = page.metafields.custom.floating_video_host | default: meta_host -%}
+    {%- assign meta_id = page.metafields.custom.floating_video_id | default: meta_id -%}
+    {%- assign meta_poster = page.metafields.custom.floating_video_poster | default: meta_poster -%}
+    {%- assign meta_aspect_ratio = page.metafields.custom.floating_video_aspect_ratio | default: meta_aspect_ratio -%}
+    {%- assign meta_title = page.title -%}
+  {%- endif -%}
+{%- endif -%}
+
+{%- assign final_host = meta_host | default: source_host -%}
+{%- assign final_id = meta_id | default: source_id -%}
+{%- assign final_poster = meta_poster | default: source_poster -%}
+{%- assign final_aspect_ratio = meta_aspect_ratio | default: source_aspect_ratio -%}
+{%- assign final_title = meta_title | default: section.settings.fallback_title | default: page_title -%}
+
+{%- assign final_poster_url = '' -%}
+{%- if final_poster != blank -%}
+  {%- capture poster_string %}{{ final_poster }}{% endcapture %}
+  {%- if poster_string contains '//' or poster_string contains 'cdn.shopify.com' -%}
+    {%- assign final_poster_url = poster_string -%}
+  {%- else -%}
+    {%- assign final_poster_url = final_poster | image_url: width: 600 -%}
+  {%- endif -%}
+{%- endif -%}
+{%- assign final_type = 'external_video' -%}
+{%- if final_host == 'mp4' -%}
+  {%- assign final_type = 'video' -%}
+{%- endif -%}
+
+{%- assign sources_json = '' -%}
+
+{%- comment -%} Metafield pool feature disabled - Liquid doesn't support parse_json filter. JSON parsing must be handled in JavaScript. {%- endcomment -%}
+{%- assign pool_raw = '' -%}
+{%- if section.settings.use_metafield_pool -%}
+  {%- if collection and collection.metafields.custom.floating_video_pool != blank -%}
+    {%- assign pool_raw = collection.metafields.custom.floating_video_pool -%}
+  {%- elsif article and article.metafields.custom.floating_video_pool != blank -%}
+    {%- assign pool_raw = article.metafields.custom.floating_video_pool -%}
+  {%- elsif page and page.metafields.custom.floating_video_pool != blank -%}
+    {%- assign pool_raw = page.metafields.custom.floating_video_pool -%}
+  {%- endif -%}
+  {%- comment -%} pool_raw will be passed to JavaScript for parsing {%- endcomment -%}
+{%- endif -%}
+
+{%- if sources_json == blank and section.blocks.size > 0 -%}
+  {%- for block in section.blocks -%}
+    {%- if block.type == 'video_source' -%}
+      {%- assign block_host = block.settings.video_host | default: 'youtube' | downcase -%}
+      {%- assign block_id = block.settings.video_id | strip -%}
+      {%- assign block_poster = block.settings.poster -%}
+      {%- assign block_aspect_ratio = block.settings.aspect_ratio | strip -%}
+      {%- assign block_poster_url = '' -%}
+      {%- if block_poster != blank -%}
+        {%- capture poster_string %}{{ block_poster }}{% endcapture %}
+        {%- if poster_string contains '//' or poster_string contains 'cdn.shopify.com' -%}
+          {%- assign block_poster_url = poster_string -%}
+        {%- else -%}
+          {%- assign block_poster_url = block_poster | image_url: width: 600 -%}
+        {%- endif -%}
+      {%- endif -%}
+      {%- if block_id != blank -%}
+        {%- assign block_type = 'external_video' -%}
+        {%- if block_host == 'mp4' -%}{%- assign block_type = 'video' -%}{%- endif -%}
+        {%- capture source_obj -%}{"type":{{ block_type | json }},"host":{{ block_host | json }},"src":{{ block_id | json }},"poster":{{ block_poster_url | json }},"aspect_ratio":{{ block_aspect_ratio | json }}}{%- endcapture -%}
+        {%- if sources_json != blank -%}{%- assign sources_json = sources_json | append: ',' -%}{%- endif -%}
+        {%- assign sources_json = sources_json | append: source_obj -%}
+      {%- endif -%}
+    {%- endif -%}
+  {%- endfor -%}
+{%- endif -%}
+
+{%- if sources_json == blank and final_id != blank -%}
+  {%- capture source_obj -%}{"type":{{ final_type | json }},"host":{{ final_host | json }},"src":{{ final_id | json }},"poster":{{ final_poster_url | json }},"aspect_ratio":{{ final_aspect_ratio | json }}}{%- endcapture -%}
+  {%- assign sources_json = source_obj -%}
+{%- endif -%}
+
+{%- if sources_json != blank -%}
+  {%- assign has_sources = true -%}
+{%- else -%}
+  {%- assign has_sources = false -%}
+{%- endif -%}
+
+{%- if section.settings.enable and has_sources -%}
+  {%- assign audio_script_text = '' -%}
+  {%- if request.page_type == 'product' and product.metafields.custom.audio_sales_pitch_text != blank -%}
+    {%- assign audio_script_text = product.metafields.custom.audio_sales_pitch_text -%}
+  {%- endif -%}
+  <div class="product-floating-video d-none{% if section.settings.hide_on_mobile %} product-floating-video--hide-mobile{% endif %}" data-floating-video-container="{{ section.id }}">
+    <button type="button" class="product-floating-video__close" aria-label="Close floating video" data-floating-video-close>&times;</button>
+    <button type="button" class="product-floating-video__mute" aria-label="Toggle sound" data-floating-video-mute>Unmute</button>
+    <div class="product-floating-video__inner" data-floating-video-slot></div>
+  </div>
+  <style>
+    .product-floating-video{position:fixed;top:50%;left:16px;width:320px;max-width:calc(100vw - 30px);max-height:70vh;z-index:9999;border-radius:12px;overflow:hidden;background:#000;box-shadow:0 20px 40px rgba(0,0,0,0.35);transition:opacity .2s ease,transform .2s ease;opacity:0;transform:translateY(calc(-50% + 12px));pointer-events:none}
+    .product-floating-video--visible{opacity:1;transform:translateY(-50%);pointer-events:auto}
+    .product-floating-video--portrait{width:240px;max-width:min(260px,40vw);max-height:80vh}
+    .product-floating-video--portrait .product-floating-video__inner{aspect-ratio:9/16}
+    .product-floating-video video,.product-floating-video iframe{width:100%;height:100%;display:block;border:0;background:#000}
+    .product-floating-video__inner{position:relative;aspect-ratio:16/9;background:#000}
+    .product-floating-video__close{position:absolute;top:6px;right:8px;width:32px;height:32px;border:0;border-radius:50%;background:rgba(0,0,0,0.6);color:#fff;cursor:pointer;font-size:20px;line-height:1;z-index:2;display:flex;align-items:center;justify-content:center;transition:background .2s ease,opacity .2s ease}
+    .product-floating-video__close:hover{background:rgba(0,0,0,0.75)}
+    .product-floating-video__mute{position:absolute;bottom:8px;left:8px;height:32px;min-width:70px;padding:0 12px;border:0;border-radius:16px;background:rgba(0,0,0,0.6);color:#fff;font-size:12px;line-height:1;cursor:pointer;z-index:2;display:flex;align-items:center;justify-content:center;transition:background .2s ease,opacity .2s ease}
+    .product-floating-video__mute:hover{background:rgba(0,0,0,0.75)}
+    .product-floating-video.d-none{display:none!important}
+    @media (max-width:767px){
+      .product-floating-video{width:260px;left:10px;top:50%;max-height:65vh;transform:translateY(calc(-50% + 12px))}
+      .product-floating-video--visible{transform:translateY(-50%)}
+      .product-floating-video--portrait{width:200px;max-width:70vw;max-height:75vh}
+      .product-floating-video--hide-mobile{display:none!important}
+    }
+  </style>
+  <script type="application/json" id="FloatingVideoData-{{ section.id }}">
+    {
+      "type": {{ final_type | json }},
+      "host": {{ final_host | json }},
+      "src": {{ final_id | json }},
+      "poster": {{ final_poster_url | json }},
+      "aspect_ratio": {{ final_aspect_ratio | json }},
+      "title": {{ final_title | json }},
+      {%- assign audio_pitch_url = '' -%}
+      {%- if request.page_type == 'product' and product.metafields.custom.audio_sales_pitch != blank -%}
+        {%- assign audio_pitch_url = product.metafields.custom.audio_sales_pitch.value.url -%}
+      {%- endif -%}
+      "audio_src": {{ audio_pitch_url | json }},
+      "audio_script_text": {{ audio_script_text | json }},
+      "anchor_selector": {{ section.settings.anchor_selector | json }},
+      "hide_on_mobile": {{ section.settings.hide_on_mobile | json }},
+      "sources": [{{ sources_json }}],
+      "pool_raw": {{ pool_raw | json }}
+    }
+  </script>
+  <script>
+  (function() {
+    var dataEl = document.getElementById('FloatingVideoData-{{ section.id }}');
+    if (!dataEl) return;
+    var data;
+    try { data = JSON.parse(dataEl.textContent); } catch (e) { return; }
+    if (!data) return;
+    if (window.Shopify && Shopify.designMode) return;
+
+    var sources = Array.isArray(data.sources) ? data.sources.filter(function(item) {
+      return item && item.src;
+    }) : [];
+    
+    // Parse pool_raw JSON if available
+    if (data.pool_raw && typeof data.pool_raw === 'string') {
+      try {
+        var poolParsed = JSON.parse(data.pool_raw);
+        if (Array.isArray(poolParsed) && poolParsed.length > 0) {
+          poolParsed.forEach(function(entry) {
+            if (entry && (entry.id || entry.video_id || entry.src)) {
+              var poolHost = (entry.host || entry.video_host || 'youtube').toLowerCase();
+              var poolId = entry.id || entry.video_id || entry.src;
+              var poolPoster = entry.poster || entry.video_poster || '';
+              var poolAspectRatio = entry.aspect_ratio || entry.aspectRatio || entry.ratio || '';
+              var poolType = (poolHost === 'mp4') ? 'video' : 'external_video';
+              
+              // Convert poster URL if needed
+              var poolPosterUrl = poolPoster;
+              if (poolPoster && !poolPoster.includes('//') && !poolPoster.includes('cdn.shopify.com')) {
+                // This would need to be handled server-side, but for now pass as-is
+                poolPosterUrl = poolPoster;
+              }
+              
+              sources.push({
+                type: poolType,
+                host: poolHost,
+                src: poolId,
+                poster: poolPosterUrl,
+                aspect_ratio: poolAspectRatio,
+                is_pool: true
+              });
+            }
+          });
+        }
+      } catch (e) {
+        console.warn('Failed to parse video pool JSON:', e);
+      }
+    }
+    
+    if (!sources.length && data.src) {
+      sources.push({
+        type: data.type,
+        host: data.host,
+        src: data.src,
+        poster: data.poster,
+        aspect_ratio: data.aspect_ratio,
+        is_pool: false
+      });
+    }
+    if (!sources.length) return;
+    var chosen = sources[Math.floor(Math.random() * sources.length)];
+    data = Object.assign({}, data, chosen);
+
+    var container = document.querySelector('[data-floating-video-container="{{ section.id }}"]');
+    var slot = container && container.querySelector('[data-floating-video-slot]');
+    var closeBtn = container && container.querySelector('[data-floating-video-close]');
+    var muteBtn = container && container.querySelector('[data-floating-video-mute]');
+    if (!container || !slot) return;
+
+    var anchor = null;
+    if (data.anchor_selector) {
+      anchor = document.querySelector(data.anchor_selector);
+    }
+    if (!anchor) {
+      anchor = document.querySelector('[data-floating-video-anchor]') || document.querySelector('[data-js-product-gallery]') || document.querySelector('main');
+    }
+    if (!anchor) {
+      anchor = document.body;
+    }
+
+    var mql = window.matchMedia('(max-width: 767px)');
+    var hideOnMobile = !!data.hide_on_mobile;
+    var dismissed = false;
+    var observer;
+    var userScrolled = false;
+    var currentIframe = null;
+    var currentVideo = null;
+    var isMuted = true;
+    var posterOrientation = null;
+    var audioPlayer = null;
+
+    if (data.poster) {
+      var posterImg = new Image();
+      posterImg.onload = function() {
+        if (this.height > this.width) {
+          posterOrientation = 'portrait';
+          container.classList.add('product-floating-video--portrait');
+          slot.style.aspectRatio = 0.5625;
+        } else {
+          posterOrientation = 'landscape';
+        }
+      };
+      posterImg.src = data.poster;
+    }
+
+    if (data.audio_src && !data.is_pool) {
+      audioPlayer = new Audio(data.audio_src);
+      audioPlayer.loop = true;
+    }
+
+    function updateMuteLabel() {
+      if (!muteBtn) return;
+      muteBtn.textContent = isMuted ? 'Unmute' : 'Mute';
+    }
+
+    function clearPlayer() {
+      slot.innerHTML = '';
+      currentIframe = null;
+      currentVideo = null;
+      if (audioPlayer) {
+        audioPlayer.pause();
+        audioPlayer.currentTime = 0;
+      }
+    }
+
+    function buildPlayer() {
+      if (slot.childElementCount) return;
+      var ratio = parseFloat(data.aspect_ratio);
+      if (!ratio || isNaN(ratio)) {
+        ratio = 1.777;
+      }
+      if (posterOrientation === 'portrait') {
+        ratio = 9 / 16;
+      }
+      if (data.type === 'external_video' && (posterOrientation === 'portrait' || ratio < 1.1)) {
+        ratio = 9 / 16;
+      }
+      var isPortrait = ratio < 0.9 || posterOrientation === 'portrait';
+      if (isPortrait) {
+        container.classList.add('product-floating-video--portrait');
+      } else {
+        container.classList.remove('product-floating-video--portrait');
+      }
+      slot.style.aspectRatio = ratio;
+      if (data.poster) {
+        slot.style.backgroundImage = 'url(' + data.poster + ')';
+        slot.style.backgroundSize = 'cover';
+        slot.style.backgroundPosition = 'center';
+      }
+      if (data.type === 'video' || data.host === 'mp4') {
+        var video = document.createElement('video');
+        video.src = data.src;
+        video.muted = true;
+        video.playsInline = true;
+        video.autoplay = true;
+        video.loop = true;
+        video.controls = false;
+        video.preload = 'metadata';
+        if (data.poster) {
+          video.poster = data.poster;
+        }
+        // Auto-detect aspect ratio for MP4s if no override is provided
+        video.addEventListener('loadedmetadata', function() {
+          if (!data.aspect_ratio && this.videoWidth && this.videoHeight) {
+            var vRatio = this.videoWidth / this.videoHeight;
+            slot.style.aspectRatio = vRatio;
+            if (vRatio < 0.9) {
+              container.classList.add('product-floating-video--portrait');
+            } else {
+              container.classList.remove('product-floating-video--portrait');
+            }
+          }
+        });
+        slot.appendChild(video);
+        currentVideo = video;
+        isMuted = true;
+      } else {
+        var iframe = document.createElement('iframe');
+        var host = (data.host || 'youtube').toLowerCase();
+        var iframeSrc;
+        if (host === 'vimeo') {
+          iframeSrc = 'https://player.vimeo.com/video/' + data.src + '?autoplay=1&loop=1&muted=1&title=0&byline=0&controls=0';
+        } else {
+          iframeSrc = 'https://www.youtube.com/embed/' + data.src + '?autoplay=1&loop=1&mute=1&playlist=' + data.src + '&controls=0&modestbranding=1&showinfo=0&rel=0&playsinline=1&enablejsapi=1';
+        }
+        iframe.src = iframeSrc;
+        iframe.allow = 'autoplay; encrypted-media; picture-in-picture';
+        iframe.loading = 'lazy';
+        slot.appendChild(iframe);
+        currentIframe = iframe;
+        isMuted = true;
+      }
+      updateMuteLabel();
+    }
+
+    function setMuteState(muted) {
+      isMuted = muted;
+      if (currentVideo) {
+        currentVideo.muted = muted;
+        if (!muted) {
+          currentVideo.play().catch(function(){});
+        }
+      }
+      if (currentIframe && currentIframe.contentWindow) {
+        var cmd = muted ? 'mute' : 'unMute';
+        try {
+          currentIframe.contentWindow.postMessage(JSON.stringify({ event: 'command', func: cmd, args: [] }), '*');
+          if (!muted) {
+            currentIframe.contentWindow.postMessage(JSON.stringify({ event: 'command', func: 'playVideo', args: [] }), '*');
+          }
+        } catch (e) {}
+      }
+      
+      if (audioPlayer) {
+        if (muted) {
+          audioPlayer.pause();
+        } else {
+          // Sync audio start with video (approximate)
+          // audioPlayer.currentTime = 0; // Removed to allow resume
+          audioPlayer.play().catch(function(e) { console.error('Audio pitch play failed:', e); });
+        }
+      }
+      
+      updateMuteLabel();
+    }
+
+    function pausePlayer() {
+      var media = slot.firstElementChild;
+      if (media) {
+        if (media.tagName === 'VIDEO') {
+          media.pause();
+        } else if (media.tagName === 'IFRAME') {
+          media.removeAttribute('src');
+        }
+      }
+      clearPlayer();
+    }
+
+    function showPlayer() {
+      if (dismissed) return;
+      if (hideOnMobile && mql.matches) {
+        hidePlayer();
+        return;
+      }
+      buildPlayer();
+      container.classList.remove('d-none');
+
+      // For MP4s, only show when playback actually starts to avoid black screen 
+      if (currentVideo && currentVideo.tagName === 'VIDEO') {
+        currentVideo.addEventListener('playing', function() {
+           container.classList.add('product-floating-video--visible');
+        }, { once: true });
+        // Fallback intentionally removed as per user request
+      } else {
+         // Iframe/others show immediately
+         requestAnimationFrame(function() {
+          container.classList.add('product-floating-video--visible');
+        });
+      }
+    }
+
+    function hidePlayer(permanent) {
+      container.classList.remove('product-floating-video--visible');
+      if (permanent) {
+        dismissed = true;
+      }
+      pausePlayer();
+      if (permanent) {
+        container.classList.add('d-none');
+      }
+    }
+
+    observer = new IntersectionObserver(function(entries) {
+      entries.forEach(function(entry) {
+        if (entry.isIntersecting) {
+          if (!userScrolled) {
+            hidePlayer();
+          }
+        } else {
+          showPlayer();
+        }
+      });
+    }, { threshold: 0.35 });
+
+    if (anchor) {
+      observer.observe(anchor);
+    } else if (container) {
+      observer.observe(container);
+    }
+
+    function handleFirstScroll() {
+      userScrolled = true;
+      showPlayer();
+      window.removeEventListener('scroll', handleFirstScroll);
+    }
+
+    window.addEventListener('scroll', handleFirstScroll, { passive: true });
+
+    if (closeBtn) {
+      closeBtn.addEventListener('click', function() {
+        hidePlayer(true);
+        if (observer) {
+          observer.disconnect();
+        }
+      });
+    }
+
+    if (muteBtn) {
+      muteBtn.addEventListener('click', function() {
+        setMuteState(!isMuted);
+      });
+    }
+
+    if (hideOnMobile) {
+      mql.addEventListener('change', function() {
+        if (mql.matches) {
+          hidePlayer();
+        }
+      });
+    }
+  })();
+  </script>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "Floating video player",
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "enable",
+      "label": "Enable floating video",
+      "default": false
+    },
+    {
+      "type": "checkbox",
+      "id": "hide_on_mobile",
+      "label": "Hide floating video on mobile",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "anchor_selector",
+      "label": "Anchor selector to watch",
+      "info": "CSS selector; video appears when this element leaves the viewport. Falls back to [data-floating-video-anchor], product gallery, or <main>.",
+      "default": "[data-floating-video-anchor], .collection-grid-section, .article-body, main"
+    },
+    {
+      "type": "checkbox",
+      "id": "use_resource_metafields",
+      "label": "Use single page/collection/article metafields when available",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "use_metafield_pool",
+      "label": "Use metafield video pool (random)",
+      "default": false
+    },
+    {
+      "type": "select",
+      "id": "video_host",
+      "label": "Video host (fallback / single)",
+      "default": "youtube",
+      "options": [
+        { "value": "youtube", "label": "YouTube" },
+        { "value": "vimeo", "label": "Vimeo" },
+        { "value": "mp4", "label": "MP4 file URL" }
+      ]
+    },
+    {
+      "type": "text",
+      "id": "video_id",
+      "label": "Video ID or URL (fallback / single)",
+      "info": "YouTube/Vimeo ID (not full URL) or MP4 URL when host is MP4."
+    },
+    {
+      "type": "image_picker",
+      "id": "poster",
+      "label": "Poster image (optional, fallback / single)"
+    },
+    {
+      "type": "text",
+      "id": "aspect_ratio",
+      "label": "Aspect ratio override (fallback / single)",
+      "info": "Example: 1.777 for 16:9, 0.5625 for 9:16. Leave empty to auto-detect."
+    },
+    {
+      "type": "text",
+      "id": "fallback_title",
+      "label": "Fallback title",
+      "info": "Used for tracking/aria if no resource title is available."
+    },
+    {
+      "type": "paragraph",
+      "content": "Optional single-source metafields (namespace: custom): floating_video_host, floating_video_id, floating_video_poster, floating_video_aspect_ratio."
+    },
+    {
+      "type": "paragraph",
+      "content": "Optional pool metafield (namespace: custom): floating_video_pool (JSON array of objects with host,id/poster/aspect_ratio)."
+    }
+  ],
+  "blocks": [
+    {
+      "type": "video_source",
+      "name": "Video source",
+      "settings": [
+        {
+          "type": "select",
+          "id": "video_host",
+          "label": "Video host",
+          "default": "youtube",
+          "options": [
+            { "value": "youtube", "label": "YouTube" },
+            { "value": "vimeo", "label": "Vimeo" },
+            { "value": "mp4", "label": "MP4 file URL" }
+          ]
+        },
+        {
+          "type": "text",
+          "id": "video_id",
+          "label": "Video ID or URL",
+          "info": "YouTube/Vimeo ID (not full URL) or MP4 URL when host is MP4."
+        },
+        {
+          "type": "image_picker",
+          "id": "poster",
+          "label": "Poster image (optional)"
+        },
+        {
+          "type": "text",
+          "id": "aspect_ratio",
+          "label": "Aspect ratio override",
+          "info": "Example: 1.777 for 16:9, 0.5625 for 9:16. Leave empty to auto-detect."
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Floating video mini-player"
+    }
+  ]
+}
+{% endschema %}

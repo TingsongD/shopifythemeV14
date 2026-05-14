@@ -1,0 +1,50 @@
+{% doc %}
+Renders a product-page order-builder prompt for AOV lift.
+@param {variant} current_variant - The selected variant used to calculate the order-building message.
+@param {boolean} [centered] - Center-align content on mobile and centered product layouts.
+@example
+{% render 'product-aov-prompt', current_variant: current_variant, centered: centered %}
+{% enddoc %}
+{%- liquid
+  assign aov_goal = 9500
+  assign free_shipping_goal = settings.cart_free_shipping_value | default: 8000 | plus: 0
+  assign variant_price = current_variant.price | default: product.price | default: 0
+  assign aov_remaining = aov_goal | minus: variant_price | at_least: 0
+  assign shipping_remaining = free_shipping_goal | minus: variant_price | at_least: 0
+  assign aov_progress_quotient = aov_goal | times: 1.0 | divided_by: 100
+  assign aov_progress = variant_price | divided_by: aov_progress_quotient | at_most: 100
+-%}
+
+<div class="product-aov-prompt{% if centered %} product-aov-prompt--centered{% endif %}" data-product-aov-prompt>
+  <style>
+    .product-aov-prompt{border:1px solid #ded8d1;background:#fffaf4;padding:12px 14px;margin:0 0 16px;color:#0a0a0a}
+    .product-aov-prompt--centered{text-align:center}
+    .product-aov-prompt__eyebrow{margin:0 0 4px;font-size:10px;line-height:1.3;text-transform:uppercase;letter-spacing:.12em;font-weight:700;color:#5a31f4}
+    .product-aov-prompt__text{margin:0;color:#4f4943;font-size:13px;line-height:1.45}
+    .product-aov-prompt__meter{position:relative;overflow:hidden;height:6px;margin-top:9px;background:#eee8e0}
+    .product-aov-prompt__meter-fill{display:block;height:100%;width:var(--product-aov-progress);background:#5a31f4}
+    .product-aov-prompt__meta{display:flex;justify-content:space-between;gap:10px;margin-top:6px;color:#6f6a64;font-size:11px;line-height:1.3}
+    .product-aov-prompt__links{display:flex;gap:12px;flex-wrap:wrap;margin-top:8px}
+    .product-aov-prompt--centered .product-aov-prompt__links{justify-content:center}
+    .product-aov-prompt__link{font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;text-decoration:underline;text-underline-offset:4px;color:#0a0a0a}
+  </style>
+  <p class="product-aov-prompt__eyebrow">Complete the order</p>
+  {%- if shipping_remaining > 0 -%}
+    <p class="product-aov-prompt__text">Add {{ shipping_remaining | money }} more to unlock free shipping at $80.</p>
+  {%- elsif aov_remaining > 0 -%}
+    <p class="product-aov-prompt__text">Free shipping is unlocked. Add {{ aov_remaining | money }} more to build toward a $95-$100 outfit-ready order.</p>
+  {%- else -%}
+    <p class="product-aov-prompt__text">This item puts the order in the $95-$100 sweet spot for free shipping and outfit-ready styling.</p>
+  {%- endif -%}
+  <div class="product-aov-prompt__meter" aria-hidden="true">
+    <span class="product-aov-prompt__meter-fill" style="--product-aov-progress: {{ aov_progress }}%;"></span>
+  </div>
+  <div class="product-aov-prompt__meta">
+    <span>{{ variant_price | money }} item</span>
+    <span>$95 target</span>
+  </div>
+  <div class="product-aov-prompt__links">
+    <a href="{{ routes.root_url }}collections/picked-for-you" class="product-aov-prompt__link">Shop favorites</a>
+    <a href="{{ routes.root_url }}collections/cardigans-sweaters" class="product-aov-prompt__link">Add a layer</a>
+  </div>
+</div>

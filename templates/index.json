@@ -1,0 +1,1238 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "88140d03-ae09-46a4-aea0-a933fa487cd4": {
+      "type": "msd-luxury-hero",
+      "settings": {
+        "image": "shopify://shop_images/polka-dot-print-round-neck-casual-dress-43393189413184.png",
+        "mobile_image": "shopify://shop_images/polka-dot-print-round-neck-casual-dress-43393189413184_b5800336-8f89-40a5-84fd-b7519fa2faff.png",
+        "eyebrow": "New season edit for grown-up wardrobes",
+        "heading": "Polished without trying too hard.",
+        "body": "Curated pieces for women balancing workdays, travel, dinners, and weekends across the U.S. New arrivals, every Friday.",
+        "primary_label": "Shop new arrivals",
+        "primary_link": "shopify://collections/new-in",
+        "secondary_label": "Shop customer favorites",
+        "secondary_link": "shopify://collections/picked-for-you",
+        "stat_1_value": "New weekly",
+        "stat_1_label": "Curated arrivals",
+        "stat_2_value": "Fit-first",
+        "stat_2_label": "Size guidance",
+        "stat_3_value": "45-day",
+        "stat_3_label": "Returns",
+        "background_color": "#f7f5f2",
+        "text_color": "#0a0a0a",
+        "muted_color": "#6f6a64"
+      }
+    },
+    "fresh_underwear_box": {
+      "type": "msd-fresh-underwear-box",
+      "settings": {
+        "display_mode": "feature",
+        "product": "disposable-underwear-box",
+        "eyebrow": "Monthly fresh-pair backup box",
+        "heading": "Fresh backup, packed before you need it.",
+        "subheading": "30 individually sealed disposable underwear pairs every month for work bags, gym days, travel kits, and long days away from home.",
+        "cta_label": "Start the $49 monthly box",
+        "cta_link": "/products/disposable-underwear-box"
+      }
+    },
+    "552f8dfe-f3b6-4e55-8753-3da9a77c6611": {
+      "type": "sorting-collections",
+      "blocks": {
+        "f31babba-a1b4-437f-b186-f54a81031e73": {
+          "type": "collection",
+          "settings": {
+            "title": "Customer Favorites",
+            "collection": "picked-for-you"
+          }
+        }
+      },
+      "block_order": [
+        "f31babba-a1b4-437f-b186-f54a81031e73"
+      ],
+      "custom_css": [
+        "@media (min-width: 1280px) {sorting-collections .container {max-width: none; padding-left: 0; padding-right: 0; }}"
+      ],
+      "settings": {
+        "size_of_columns": "6",
+        "max_count": 12,
+        "show_btn_more_products": true
+      }
+    },
+    "4aa75084-79ab-48e0-84f5-fa47f5082b5e": {
+      "type": "spacer",
+      "settings": {
+        "margin_top": 40,
+        "margin_bottom": 0,
+        "margin_top_mobile": 10,
+        "margin_bottom_mobile": 0,
+        "container": "boxed",
+        "show_separator": false,
+        "title": ""
+      }
+    },
+    "c8ff5934-698a-4018-82a8-854d42a73e94": {
+      "type": "home-builder",
+      "blocks": {
+        "c02920cb-f277-4e32-b5f7-11944defff16": {
+          "type": "promobox",
+          "settings": {
+            "url": "shopify://collections/coats-jackets",
+            "image": "shopify://shop_images/loose-solid-button-hooded-woolen-coat-43386249576768.png",
+            "image_size": 1400,
+            "image_mobile": "shopify://shop_images/loose-solid-button-hooded-woolen-coat-43386249576768_de7b3cde-a12f-44a4-b211-c493b8513e2e.png",
+            "image_mobile_size": 900,
+            "image_position_x": 50,
+            "color_image_mask": "#ffffff",
+            "image_mask_opacity": 0.2,
+            "text_line_1": "Layer with intention",
+            "text_line_2": "Soft coats and polished jackets for workdays, travel days, and dinner plans.",
+            "text_line_3": "",
+            "style": "1",
+            "button_1": "Shop Coats & Jackets",
+            "button_1_url": "shopify://collections/coats-jackets",
+            "color_button_type_1": "secondary",
+            "button_2": "",
+            "button_2_url": "shopify://collections/coats-jackets",
+            "color_button_type_2": "default",
+            "list_1": "",
+            "custom_html": "",
+            "video_external_url": "",
+            "video_mp4_url": "",
+            "video_autoplay": true,
+            "video_controls": false,
+            "type": "type-1",
+            "content_position": "center_left",
+            "content_align": "left",
+            "add_container": true,
+            "content_width": 56,
+            "text_width": 0,
+            "height": "auto",
+            "min_height": 0,
+            "size_of_column": "auto",
+            "visible": "desktop_mobile",
+            "parallax": "disable",
+            "animation_to": "none",
+            "animation_from": "none",
+            "animation_opacity": "none",
+            "animation_text": "none",
+            "color_text_1": "#18201d",
+            "color_text_2": "#5d6863",
+            "color_text_3": "",
+            "color_text_bg": "",
+            "color_curtain_bg": "",
+            "customization_class": ""
+          }
+        }
+      },
+      "block_order": [
+        "c02920cb-f277-4e32-b5f7-11944defff16"
+      ],
+      "settings": {
+        "title": "",
+        "container": "fullwidth",
+        "size_of_columns": "1",
+        "size_of_columns_mobile": "1",
+        "margins_for_columns": "preset_3",
+        "align_of_columns": "top_center",
+        "disable_column_paddings": false,
+        "precedence": "",
+        "customization_class": ""
+      }
+    },
+    "0b1081f1-7b56-4bae-9071-315bc0a59d5c": {
+      "type": "sorting-collections",
+      "blocks": {
+        "729f9fe8-0116-4d7d-97db-286c39e6bb49": {
+          "type": "collection",
+          "settings": {
+            "title": "Coats & Jackets",
+            "collection": "coats-jackets"
+          }
+        }
+      },
+      "block_order": [
+        "729f9fe8-0116-4d7d-97db-286c39e6bb49"
+      ],
+      "custom_css": [
+        "@media (min-width: 1280px) {sorting-collections .container {max-width: none; padding-left: 0; padding-right: 0; }}"
+      ],
+      "settings": {
+        "size_of_columns": "6",
+        "max_count": 12,
+        "show_btn_more_products": true
+      }
+    },
+    "1586283399218": {
+      "type": "spacer",
+      "settings": {
+        "margin_top": 40,
+        "margin_bottom": 0,
+        "margin_top_mobile": 10,
+        "margin_bottom_mobile": 0,
+        "container": "boxed",
+        "show_separator": false,
+        "title": ""
+      }
+    },
+    "1586279708879": {
+      "type": "home-builder",
+      "blocks": {
+        "1586279874234": {
+          "type": "promobox",
+          "settings": {
+            "url": "shopify://collections/formal-dresses",
+            "image": "shopify://shop_images/Leopard-Print-Vintage-Round-Neck-Long-Sleeve-Dress_-58725688_fba1aa90-013a-4476-ad97-e67d65b4f4c4.png",
+            "image_size": 1400,
+            "image_mobile": "shopify://shop_images/Leopard-Print-Vintage-Round-Neck-Long-Sleeve-Dress_-58725688_32c92170-6faf-4db3-b218-90562d6fb0ba.png",
+            "image_mobile_size": 900,
+            "image_position_x": 50,
+            "color_image_mask": "#ffffff",
+            "image_mask_opacity": 0.2,
+            "text_line_1": "Occasion dresses with polish",
+            "text_line_2": "Easy-to-style silhouettes for weddings, dinners, and the plans worth dressing for.",
+            "text_line_3": "",
+            "style": "1",
+            "button_1": "Shop Dresses",
+            "button_1_url": "shopify://collections/dresses",
+            "color_button_type_1": "secondary",
+            "button_2": "",
+            "button_2_url": "shopify://collections/dresses",
+            "color_button_type_2": "default",
+            "list_1": "",
+            "custom_html": "",
+            "video_external_url": "",
+            "video_mp4_url": "",
+            "video_autoplay": true,
+            "video_controls": false,
+            "type": "type-1",
+            "content_position": "center_left",
+            "content_align": "left",
+            "add_container": true,
+            "content_width": 56,
+            "text_width": 0,
+            "height": "auto",
+            "min_height": 0,
+            "size_of_column": "auto",
+            "visible": "desktop_mobile",
+            "parallax": "disable",
+            "animation_to": "none",
+            "animation_from": "none",
+            "animation_opacity": "none",
+            "animation_text": "none",
+            "color_text_1": "#18201d",
+            "color_text_2": "#5d6863",
+            "color_text_3": "",
+            "color_text_bg": "",
+            "color_curtain_bg": "",
+            "customization_class": ""
+          }
+        }
+      },
+      "block_order": [
+        "1586279874234"
+      ],
+      "settings": {
+        "title": "",
+        "container": "fullwidth",
+        "size_of_columns": "1",
+        "size_of_columns_mobile": "1",
+        "margins_for_columns": "preset_3",
+        "align_of_columns": "top_center",
+        "disable_column_paddings": false,
+        "precedence": "",
+        "customization_class": ""
+      }
+    },
+    "8bc639e6-8e86-4cab-9c9a-ba696421ec8e": {
+      "type": "sorting-collections",
+      "blocks": {
+        "202bf472-8629-4b30-9e46-56afd25737f7": {
+          "type": "collection",
+          "settings": {
+            "title": "Casual Dresses",
+            "collection": "casual-dresses"
+          }
+        },
+        "aa240d0a-28fb-4711-94cc-2b9f5824903e": {
+          "type": "collection",
+          "settings": {
+            "title": "Formal Dresses",
+            "collection": "formal-dresses"
+          }
+        }
+      },
+      "block_order": [
+        "202bf472-8629-4b30-9e46-56afd25737f7",
+        "aa240d0a-28fb-4711-94cc-2b9f5824903e"
+      ],
+      "custom_css": [
+        "@media (min-width: 1280px) {sorting-collections .container {max-width: none; padding-left: 0; padding-right: 0; }}"
+      ],
+      "settings": {
+        "size_of_columns": "6",
+        "max_count": 12,
+        "show_btn_more_products": true
+      }
+    },
+    "1586282852274": {
+      "type": "spacer",
+      "settings": {
+        "margin_top": 40,
+        "margin_bottom": 0,
+        "margin_top_mobile": 10,
+        "margin_bottom_mobile": 0,
+        "container": "boxed",
+        "show_separator": false,
+        "title": ""
+      }
+    },
+    "4214e2f0-4f78-4055-a135-7b7d91821429": {
+      "type": "home-builder",
+      "blocks": {
+        "5f683658-038f-499f-ab10-43413dc650f9": {
+          "type": "promobox",
+          "settings": {
+            "url": "shopify://collections/cardigans-sweaters",
+            "image": "shopify://shop_images/v-neck-long-sleeve-ribbed-pullover-knitted-peplum-sweater-43375928803648_773b428f-ac7e-42c4-ab17-e74e00d1a5ce.png",
+            "image_size": 1400,
+            "image_mobile": "shopify://shop_images/v-neck-long-sleeve-ribbed-pullover-knitted-peplum-sweater-43375928803648_5f12e19e-2d93-473e-82f0-45dd58d00cd1.png",
+            "image_mobile_size": 900,
+            "image_position_x": 50,
+            "color_image_mask": "#ffffff",
+            "image_mask_opacity": 0.2,
+            "text_line_1": "Soft layers, clean lines",
+            "text_line_2": "Cardigans and sweaters that add comfort without losing the pulled-together finish.",
+            "text_line_3": "",
+            "style": "1",
+            "button_1": "Shop Sweaters",
+            "button_1_url": "shopify://collections/cardigans-sweaters",
+            "color_button_type_1": "secondary",
+            "button_2": "",
+            "button_2_url": "shopify://collections/cardigans-sweaters",
+            "color_button_type_2": "default",
+            "list_1": "",
+            "custom_html": "",
+            "video_external_url": "",
+            "video_mp4_url": "",
+            "video_autoplay": true,
+            "video_controls": false,
+            "type": "type-1",
+            "content_position": "center_left",
+            "content_align": "left",
+            "add_container": true,
+            "content_width": 56,
+            "text_width": 0,
+            "height": "auto",
+            "min_height": 0,
+            "size_of_column": "auto",
+            "visible": "desktop_mobile",
+            "parallax": "disable",
+            "animation_to": "none",
+            "animation_from": "none",
+            "animation_opacity": "none",
+            "animation_text": "none",
+            "color_text_1": "#18201d",
+            "color_text_2": "#5d6863",
+            "color_text_3": "",
+            "color_text_bg": "",
+            "color_curtain_bg": "",
+            "customization_class": ""
+          }
+        }
+      },
+      "block_order": [
+        "5f683658-038f-499f-ab10-43413dc650f9"
+      ],
+      "settings": {
+        "title": "",
+        "container": "fullwidth",
+        "size_of_columns": "1",
+        "size_of_columns_mobile": "1",
+        "margins_for_columns": "preset_3",
+        "align_of_columns": "top_center",
+        "disable_column_paddings": false,
+        "precedence": "",
+        "customization_class": ""
+      }
+    },
+    "03820055-6bc0-4eb5-a833-d557bf0c4ab2": {
+      "type": "sorting-collections",
+      "blocks": {
+        "8ff32550-1cee-4053-b0cc-cb8c206e60e1": {
+          "type": "collection",
+          "settings": {
+            "title": "Cardigans & Sweaters",
+            "collection": "cardigans-sweaters"
+          }
+        }
+      },
+      "block_order": [
+        "8ff32550-1cee-4053-b0cc-cb8c206e60e1"
+      ],
+      "custom_css": [
+        "@media (min-width: 1280px) {sorting-collections .container {max-width: none; padding-left: 0; padding-right: 0; }}"
+      ],
+      "settings": {
+        "size_of_columns": "6",
+        "max_count": 12,
+        "show_btn_more_products": true
+      }
+    },
+    "1586283266986": {
+      "type": "spacer",
+      "settings": {
+        "margin_top": 40,
+        "margin_bottom": 0,
+        "margin_top_mobile": 10,
+        "margin_bottom_mobile": 0,
+        "container": "boxed",
+        "show_separator": false,
+        "title": ""
+      }
+    },
+    "4bb3f089-28a0-4ec7-bb01-76c367bd9149": {
+      "type": "home-builder",
+      "blocks": {
+        "6c7fde3c-3942-427d-a25d-b697bcb88df6": {
+          "type": "promobox",
+          "settings": {
+            "url": "shopify://collections/t-shirts",
+            "image": "shopify://shop_images/Elegant-Sequin-Top_-236768842_9eeef50f-8c5e-43c8-8b05-547a1c516dc6.png",
+            "image_size": 1400,
+            "image_mobile": "shopify://shop_images/Elegant-Sequin-Top_-236768842_a63432dc-563f-4135-9fdc-91b0150d38ee.png",
+            "image_mobile_size": 900,
+            "image_position_x": 50,
+            "color_image_mask": "#ffffff",
+            "image_mask_opacity": 0.2,
+            "text_line_1": "Tops that finish the outfit",
+            "text_line_2": "Refined knits, tees, and statement tops made to work with what you already own.",
+            "text_line_3": "",
+            "style": "1",
+            "button_1": "Shop Tops",
+            "button_1_url": "shopify://collections/t-shirts",
+            "color_button_type_1": "secondary",
+            "button_2": "",
+            "button_2_url": "shopify://collections/t-shirts",
+            "color_button_type_2": "default",
+            "list_1": "",
+            "custom_html": "",
+            "video_external_url": "",
+            "video_mp4_url": "",
+            "video_autoplay": true,
+            "video_controls": false,
+            "type": "type-1",
+            "content_position": "center_left",
+            "content_align": "left",
+            "add_container": true,
+            "content_width": 56,
+            "text_width": 0,
+            "height": "auto",
+            "min_height": 0,
+            "size_of_column": "auto",
+            "visible": "desktop_mobile",
+            "parallax": "disable",
+            "animation_to": "none",
+            "animation_from": "none",
+            "animation_opacity": "none",
+            "animation_text": "none",
+            "color_text_1": "#18201d",
+            "color_text_2": "#5d6863",
+            "color_text_3": "",
+            "color_text_bg": "",
+            "color_curtain_bg": "",
+            "customization_class": ""
+          }
+        }
+      },
+      "block_order": [
+        "6c7fde3c-3942-427d-a25d-b697bcb88df6"
+      ],
+      "settings": {
+        "title": "",
+        "container": "fullwidth",
+        "size_of_columns": "1",
+        "size_of_columns_mobile": "1",
+        "margins_for_columns": "preset_3",
+        "align_of_columns": "top_center",
+        "disable_column_paddings": false,
+        "precedence": "",
+        "customization_class": ""
+      }
+    },
+    "554742d8-9abb-45fc-b166-402424eeb8c1": {
+      "type": "sorting-collections",
+      "blocks": {
+        "73fbfc49-0276-426e-a2cd-f27fa04d3173": {
+          "type": "collection",
+          "settings": {
+            "title": "Elevated Tops",
+            "collection": "tops-blouses"
+          }
+        }
+      },
+      "block_order": [
+        "73fbfc49-0276-426e-a2cd-f27fa04d3173"
+      ],
+      "custom_css": [
+        "@media (min-width: 1280px) {sorting-collections .container {max-width: none; padding-left: 0; padding-right: 0; }}"
+      ],
+      "settings": {
+        "size_of_columns": "6",
+        "max_count": 18,
+        "show_btn_more_products": true
+      }
+    },
+    "1586283959656": {
+      "type": "spacer",
+      "settings": {
+        "margin_top": 40,
+        "margin_bottom": 0,
+        "margin_top_mobile": 10,
+        "margin_bottom_mobile": 0,
+        "container": "boxed",
+        "show_separator": false,
+        "title": ""
+      }
+    },
+    "d21ef781-d971-445f-bf4c-630e8db1d215": {
+      "type": "home-builder",
+      "blocks": {
+        "1df2bd98-5674-407e-ab91-277a82acdb28": {
+          "type": "promobox",
+          "settings": {
+            "url": "shopify://collections/jumpsuits-rompers-1",
+            "image": "shopify://shop_images/versatile-v-neck-solid-color-jumpsuit-with-convenient-pockets-41119671091520_c281858b-a3ae-4204-98a0-0444b7640770.png",
+            "image_size": 1400,
+            "image_mobile": "shopify://shop_images/versatile-v-neck-solid-color-jumpsuit-with-convenient-pockets-41119671091520_05dcb576-2706-4678-b9e7-06d06cc13b6c.png",
+            "image_mobile_size": 900,
+            "image_position_x": 50,
+            "color_image_mask": "#ffffff",
+            "image_mask_opacity": 0.2,
+            "text_line_1": "One-piece ease",
+            "text_line_2": "Jumpsuits and rompers for days when you want a full outfit in one decision.",
+            "text_line_3": "",
+            "style": "1",
+            "button_1": "Shop Jumpsuits",
+            "button_1_url": "shopify://collections/jumpsuits-rompers-1",
+            "color_button_type_1": "secondary",
+            "button_2": "",
+            "button_2_url": "shopify://collections/jumpsuits-rompers-1",
+            "color_button_type_2": "default",
+            "list_1": "",
+            "custom_html": "",
+            "video_external_url": "",
+            "video_mp4_url": "",
+            "video_autoplay": true,
+            "video_controls": false,
+            "type": "type-1",
+            "content_position": "center_left",
+            "content_align": "left",
+            "add_container": true,
+            "content_width": 56,
+            "text_width": 0,
+            "height": "auto",
+            "min_height": 0,
+            "size_of_column": "auto",
+            "visible": "desktop_mobile",
+            "parallax": "disable",
+            "animation_to": "none",
+            "animation_from": "none",
+            "animation_opacity": "none",
+            "animation_text": "none",
+            "color_text_1": "#18201d",
+            "color_text_2": "#5d6863",
+            "color_text_3": "",
+            "color_text_bg": "",
+            "color_curtain_bg": "",
+            "customization_class": ""
+          }
+        }
+      },
+      "block_order": [
+        "1df2bd98-5674-407e-ab91-277a82acdb28"
+      ],
+      "settings": {
+        "title": "",
+        "container": "fullwidth",
+        "size_of_columns": "1",
+        "size_of_columns_mobile": "1",
+        "margins_for_columns": "preset_3",
+        "align_of_columns": "top_center",
+        "disable_column_paddings": false,
+        "precedence": "",
+        "customization_class": ""
+      }
+    },
+    "52c8f404-e853-48e9-acb8-74d72bdd3afb": {
+      "type": "sorting-collections",
+      "blocks": {
+        "73b56396-dab9-4449-bb0c-f19bf420356a": {
+          "type": "collection",
+          "settings": {
+            "title": "Jumpsuits & Rompers",
+            "collection": "jumpsuits-rompers-1"
+          }
+        }
+      },
+      "block_order": [
+        "73b56396-dab9-4449-bb0c-f19bf420356a"
+      ],
+      "custom_css": [
+        "@media (min-width: 1280px) {sorting-collections .container {max-width: none; padding-left: 0; padding-right: 0; }}"
+      ],
+      "settings": {
+        "size_of_columns": "6",
+        "max_count": 12,
+        "show_btn_more_products": true
+      }
+    },
+    "1586282646707": {
+      "type": "spacer",
+      "settings": {
+        "margin_top": 40,
+        "margin_bottom": 0,
+        "margin_top_mobile": 10,
+        "margin_bottom_mobile": 0,
+        "container": "boxed",
+        "show_separator": false,
+        "title": ""
+      }
+    },
+    "1586282860739": {
+      "type": "home-builder",
+      "blocks": {
+        "1586282889393": {
+          "type": "promobox",
+          "settings": {
+            "url": "shopify://collections/dresses",
+            "image": "shopify://shop_images/Dresses_Square.png",
+            "image_size": 900,
+            "image_mobile": "shopify://shop_images/Dresses_Square.png",
+            "image_mobile_size": 900,
+            "image_position_x": 50,
+            "color_image_mask": "#000000",
+            "image_mask_opacity": 0.2,
+            "text_line_1": "Dresses that do more",
+            "text_line_2": "Work dinners, weekends, and events",
+            "text_line_3": "Polished silhouettes with room to move.",
+            "style": "5",
+            "button_1": "Shop Dresses",
+            "button_1_url": "shopify://collections/dresses",
+            "color_button_type_1": "secondary",
+            "button_2": "",
+            "button_2_url": "",
+            "color_button_type_2": "default-transparent",
+            "list_1": "",
+            "custom_html": "",
+            "video_external_url": "",
+            "video_mp4_url": "",
+            "video_autoplay": true,
+            "video_controls": false,
+            "type": "type-1-3",
+            "content_position": "center",
+            "content_align": "center",
+            "add_container": false,
+            "content_width": 100,
+            "text_width": 0,
+            "height": "auto",
+            "min_height": 0,
+            "size_of_column": "auto",
+            "visible": "desktop_mobile",
+            "parallax": "disable",
+            "animation_to": "none",
+            "animation_from": "none",
+            "animation_opacity": "none",
+            "animation_text": "none",
+            "color_text_1": "",
+            "color_text_2": "",
+            "color_text_3": "",
+            "color_text_bg": "",
+            "color_curtain_bg": "",
+            "customization_class": ""
+          }
+        },
+        "1586282892935": {
+          "type": "promobox",
+          "settings": {
+            "url": "shopify://collections/cardigans-sweaters",
+            "image": "shopify://shop_images/Sweaters_Square.png",
+            "image_size": 900,
+            "image_mobile": "shopify://shop_images/Sweaters_Square.png",
+            "image_mobile_size": 900,
+            "image_position_x": 50,
+            "color_image_mask": "#000000",
+            "image_mask_opacity": 0.5,
+            "text_line_1": "Soft layers, clean lines",
+            "text_line_2": "Comfort you can leave the house in",
+            "text_line_3": "Sweaters and cardigans that finish the outfit.",
+            "style": "5",
+            "button_1": "Shop Sweaters",
+            "button_1_url": "shopify://collections/cardigans-sweaters",
+            "color_button_type_1": "secondary",
+            "button_2": "",
+            "button_2_url": "",
+            "color_button_type_2": "default-transparent",
+            "list_1": "",
+            "custom_html": "",
+            "video_external_url": "",
+            "video_mp4_url": "",
+            "video_autoplay": true,
+            "video_controls": false,
+            "type": "type-1-3",
+            "content_position": "center",
+            "content_align": "center",
+            "add_container": false,
+            "content_width": 100,
+            "text_width": 0,
+            "height": "auto",
+            "min_height": 0,
+            "size_of_column": "auto",
+            "visible": "desktop_mobile",
+            "parallax": "disable",
+            "animation_to": "none",
+            "animation_from": "none",
+            "animation_opacity": "none",
+            "animation_text": "none",
+            "color_text_1": "",
+            "color_text_2": "",
+            "color_text_3": "",
+            "color_text_bg": "",
+            "color_curtain_bg": "",
+            "customization_class": ""
+          }
+        }
+      },
+      "block_order": [
+        "1586282889393",
+        "1586282892935"
+      ],
+      "settings": {
+        "title": "",
+        "container": "fullwidth",
+        "size_of_columns": "2",
+        "size_of_columns_mobile": "1",
+        "margins_for_columns": "preset_1",
+        "align_of_columns": "top_center",
+        "disable_column_paddings": false,
+        "precedence": "",
+        "customization_class": ""
+      }
+    },
+    "1586284059940": {
+      "type": "home-builder",
+      "blocks": {
+        "1586284065628": {
+          "type": "instagram",
+          "settings": {
+            "show_post_details": true,
+            "limit": 12,
+            "size_of_images": "6",
+            "inner_disable_paddings": true,
+            "fixed_height": 100,
+            "disable_lazyload": false,
+            "size_of_column": "auto"
+          }
+        },
+        "1586284075152": {
+          "type": "instagram_block",
+          "settings": {
+            "image": "shopify://shop_images/313040710_422423233417811_901973299163190427_n.jpg",
+            "image_size": 195,
+            "format_pjpg": true,
+            "disable_lazyload": false,
+            "url": "https://www.instagram.com/p/BnQ-ZctHuBf/",
+            "likes": "1324",
+            "comments": "125"
+          }
+        },
+        "1586284077419": {
+          "type": "instagram_block",
+          "settings": {
+            "image": "shopify://shop_images/313004672_1469566793520820_1206242352845968069_n.jpg",
+            "image_size": 195,
+            "format_pjpg": true,
+            "disable_lazyload": false,
+            "url": "https://www.instagram.com/p/BnQ-RAfHTFy/",
+            "likes": "415",
+            "comments": "72"
+          }
+        },
+        "1586284080852": {
+          "type": "instagram_block",
+          "settings": {
+            "image": "shopify://shop_images/312776466_200399215691376_2019501820472118048_n.jpg",
+            "image_size": 195,
+            "format_pjpg": true,
+            "disable_lazyload": false,
+            "url": "https://www.instagram.com/p/BnQ-S3MnoDv/",
+            "likes": "1435",
+            "comments": "108"
+          }
+        },
+        "1586284083626": {
+          "type": "instagram_block",
+          "settings": {
+            "image": "shopify://shop_images/312900150_3432748403673185_8082405063029375224_n_528443f7-c08c-4d08-88d5-360a05e2bc80.jpg",
+            "image_size": 195,
+            "format_pjpg": true,
+            "disable_lazyload": false,
+            "url": "https://www.instagram.com/p/BnQ-U5AHJY2/",
+            "likes": "1825",
+            "comments": "68"
+          }
+        },
+        "1586284086290": {
+          "type": "instagram_block",
+          "settings": {
+            "image": "shopify://shop_images/312905746_703055300679090_5949062951838096196_n.jpg",
+            "image_size": 195,
+            "format_pjpg": true,
+            "disable_lazyload": false,
+            "url": "https://www.instagram.com/p/BnQ-O77nsrY/",
+            "likes": "461",
+            "comments": "78"
+          }
+        },
+        "1586284088787": {
+          "type": "instagram_block",
+          "settings": {
+            "image": "shopify://shop_images/313373570_174127501941486_6090775274182931361_n.jpg",
+            "image_size": 195,
+            "format_pjpg": true,
+            "disable_lazyload": false,
+            "url": "https://www.instagram.com/p/BnQ-W7IHoyd/",
+            "likes": "1758",
+            "comments": "141"
+          }
+        },
+        "1586366161062": {
+          "type": "instagram_block",
+          "settings": {
+            "image": "shopify://shop_images/313014287_444943394409619_6752734220567653297_n.jpg",
+            "image_size": 195,
+            "format_pjpg": true,
+            "disable_lazyload": false,
+            "url": "https://www.instagram.com/p/BnQ-MvwnvvP/",
+            "likes": "4542",
+            "comments": "316"
+          }
+        },
+        "1586366163574": {
+          "type": "instagram_block",
+          "settings": {
+            "image": "shopify://shop_images/312937448_620239233115178_8727665574241638523_n.jpg",
+            "image_size": 195,
+            "format_pjpg": true,
+            "disable_lazyload": false,
+            "url": "https://www.instagram.com/p/BnQ-K8OnLcL/",
+            "likes": "537",
+            "comments": "102"
+          }
+        },
+        "1586366165951": {
+          "type": "instagram_block",
+          "settings": {
+            "image": "shopify://shop_images/313185480_661025228972402_2621887374029103623_n.jpg",
+            "image_size": 195,
+            "format_pjpg": true,
+            "disable_lazyload": false,
+            "url": "https://www.instagram.com/p/BnQ-JLIH4zd/",
+            "likes": "279",
+            "comments": "15"
+          }
+        },
+        "1586366171436": {
+          "type": "instagram_block",
+          "settings": {
+            "image": "shopify://shop_images/312767632_122168634002763_2998693765236612741_n.jpg",
+            "image_size": 195,
+            "format_pjpg": true,
+            "disable_lazyload": false,
+            "url": "https://www.instagram.com/p/BnQ-HD3HSJc/",
+            "likes": "783",
+            "comments": "45"
+          }
+        },
+        "1586366174420": {
+          "type": "instagram_block",
+          "settings": {
+            "image": "shopify://shop_images/312991782_1284415548988019_1441762211600235849_n.jpg",
+            "image_size": 195,
+            "format_pjpg": true,
+            "disable_lazyload": false,
+            "url": "https://www.instagram.com/p/BnQ-FOInhR4/",
+            "likes": "397",
+            "comments": "34"
+          }
+        },
+        "1586366177575": {
+          "type": "instagram_block",
+          "settings": {
+            "image": "shopify://shop_images/312664341_847778722886026_7021068594580745691_n.jpg",
+            "image_size": 195,
+            "format_pjpg": true,
+            "disable_lazyload": false,
+            "url": "https://www.instagram.com/p/BnQ-CcMHkKj/",
+            "likes": "334",
+            "comments": "18"
+          }
+        }
+      },
+      "block_order": [
+        "1586284065628",
+        "1586284075152",
+        "1586284077419",
+        "1586284080852",
+        "1586284083626",
+        "1586284086290",
+        "1586284088787",
+        "1586366161062",
+        "1586366163574",
+        "1586366165951",
+        "1586366171436",
+        "1586366174420",
+        "1586366177575"
+      ],
+      "settings": {
+        "title": "<p>Be the star of the show <a href=\"https://urlgeni.us/instagram/msdresslyig\" target=\"_blank\" title=\"MsDressly Instagram\">@msdressly</a></p>",
+        "container": "boxed",
+        "size_of_columns": "1",
+        "size_of_columns_mobile": "1",
+        "margins_for_columns": "none",
+        "align_of_columns": "top_center",
+        "disable_column_paddings": false,
+        "precedence": "",
+        "customization_class": ""
+      }
+    },
+    "1586567788223": {
+      "type": "spacer",
+      "settings": {
+        "margin_top": 40,
+        "margin_bottom": 0,
+        "margin_top_mobile": 10,
+        "margin_bottom_mobile": 0,
+        "container": "boxed",
+        "show_separator": false,
+        "title": ""
+      }
+    },
+    "floating_video_home": {
+      "type": "floating-video-mini-player",
+      "blocks": {
+        "video_source_zmjFeA": {
+          "type": "video_source",
+          "settings": {
+            "video_host": "mp4",
+            "video_id": "https://cdn.shopify.com/videos/c/o/v/2ed6e7c6e33446b2b0889a32717caecf.mp4",
+            "aspect_ratio": ""
+          }
+        },
+        "video_source_qMPWpU": {
+          "type": "video_source",
+          "settings": {
+            "video_host": "mp4",
+            "video_id": "https://cdn.shopify.com/videos/c/o/v/9c2386e8391840d3be7ed27f865c6e8b.mp4",
+            "aspect_ratio": ""
+          }
+        },
+        "video_source_pBmfFx": {
+          "type": "video_source",
+          "settings": {
+            "video_host": "mp4",
+            "video_id": "https://cdn.shopify.com/videos/c/o/v/d1b5b14e2e1841aea47625bd2ace711e.mp4",
+            "aspect_ratio": ""
+          }
+        },
+        "video_source_hdWhtT": {
+          "type": "video_source",
+          "settings": {
+            "video_host": "mp4",
+            "video_id": "https://cdn.shopify.com/videos/c/o/v/3964a6a348724d27a5fb1c5afa90690a.mp4",
+            "aspect_ratio": ""
+          }
+        },
+        "video_source_JBTycz": {
+          "type": "video_source",
+          "settings": {
+            "video_host": "mp4",
+            "video_id": "https://cdn.shopify.com/videos/c/o/v/078f68d80d5e4e9ba62f5296a026d5f6.mp4",
+            "aspect_ratio": ""
+          }
+        },
+        "video_source_hxVPzG": {
+          "type": "video_source",
+          "settings": {
+            "video_host": "mp4",
+            "video_id": "https://cdn.shopify.com/videos/c/o/v/13ab2a04b0184430b26c2241eace3166.mp4",
+            "aspect_ratio": ""
+          }
+        },
+        "video_source_mAGhAG": {
+          "type": "video_source",
+          "settings": {
+            "video_host": "mp4",
+            "video_id": "https://cdn.shopify.com/videos/c/o/v/ae0748dfa83c4303b209c94791d92c67.mp4",
+            "aspect_ratio": ""
+          }
+        },
+        "video_source_PG87bV": {
+          "type": "video_source",
+          "settings": {
+            "video_host": "mp4",
+            "video_id": "https://cdn.shopify.com/videos/c/o/v/7247d9c54a26419fb8ea1b326382490b.mp4",
+            "aspect_ratio": ""
+          }
+        },
+        "video_source_iJUiAE": {
+          "type": "video_source",
+          "settings": {
+            "video_host": "mp4",
+            "video_id": "https://cdn.shopify.com/videos/c/o/v/f7809d3892c34deda5bc4cc5f670f884.mp4",
+            "aspect_ratio": ""
+          }
+        },
+        "video_source_nyx4f7": {
+          "type": "video_source",
+          "settings": {
+            "video_host": "mp4",
+            "video_id": "https://cdn.shopify.com/videos/c/o/v/1aa02225cdf24f5c981ef2f4ff7dd6e4.mp4",
+            "aspect_ratio": ""
+          }
+        },
+        "video_source_jn7TYU": {
+          "type": "video_source",
+          "settings": {
+            "video_host": "mp4",
+            "video_id": "https://cdn.shopify.com/videos/c/o/v/b23c04304c134cb29f2080423b0eab5c.mp4",
+            "aspect_ratio": ""
+          }
+        },
+        "video_source_ciifQW": {
+          "type": "video_source",
+          "settings": {
+            "video_host": "mp4",
+            "video_id": "https://cdn.shopify.com/videos/c/o/v/28e65f99faeb4a74abad7c55c3ffc72a.mp4",
+            "aspect_ratio": ""
+          }
+        },
+        "video_source_N79UXr": {
+          "type": "video_source",
+          "settings": {
+            "video_host": "mp4",
+            "video_id": "https://cdn.shopify.com/videos/c/o/v/3a588fda04a64969b59234461655cd99.mp4",
+            "aspect_ratio": ""
+          }
+        },
+        "video_source_wgzWjj": {
+          "type": "video_source",
+          "settings": {
+            "video_host": "mp4",
+            "video_id": "https://cdn.shopify.com/videos/c/o/v/e39e6f0e18f4458c90ee720280fff171.mp4",
+            "aspect_ratio": ""
+          }
+        },
+        "video_source_NCzXBm": {
+          "type": "video_source",
+          "settings": {
+            "video_host": "mp4",
+            "video_id": "https://cdn.shopify.com/videos/c/o/v/6c64be16823d4bbea2e52087af1d5c33.mp4",
+            "aspect_ratio": ""
+          }
+        },
+        "video_source_UEkpgA": {
+          "type": "video_source",
+          "settings": {
+            "video_host": "mp4",
+            "video_id": "https://cdn.shopify.com/videos/c/o/v/dc4e993612a34623b9b313143400b1e1.mp4",
+            "aspect_ratio": ""
+          }
+        },
+        "video_source_Nt4AaE": {
+          "type": "video_source",
+          "settings": {
+            "video_host": "mp4",
+            "video_id": "https://cdn.shopify.com/videos/c/o/v/1c71d5df613f4d09a01cdcc8a113bfdc.mp4",
+            "aspect_ratio": ""
+          }
+        },
+        "video_source_wy4Mxn": {
+          "type": "video_source",
+          "settings": {
+            "video_host": "mp4",
+            "video_id": "https://cdn.shopify.com/videos/c/o/v/a7f6e38ec1014266b44d6fe2e362e5ee.mp4",
+            "aspect_ratio": ""
+          }
+        },
+        "video_source_8HhHbn": {
+          "type": "video_source",
+          "settings": {
+            "video_host": "mp4",
+            "video_id": "https://cdn.shopify.com/videos/c/o/v/b2735f0e6b2b4951af23a131d2a7498b.mp4",
+            "aspect_ratio": ""
+          }
+        },
+        "video_source_DE479b": {
+          "type": "video_source",
+          "settings": {
+            "video_host": "mp4",
+            "video_id": "https://cdn.shopify.com/videos/c/o/v/fd92a0a6798e4aaf9a99a7ea25216439.mp4",
+            "aspect_ratio": ""
+          }
+        }
+      },
+      "block_order": [
+        "video_source_zmjFeA",
+        "video_source_qMPWpU",
+        "video_source_pBmfFx",
+        "video_source_hdWhtT",
+        "video_source_JBTycz",
+        "video_source_hxVPzG",
+        "video_source_mAGhAG",
+        "video_source_PG87bV",
+        "video_source_iJUiAE",
+        "video_source_nyx4f7",
+        "video_source_jn7TYU",
+        "video_source_ciifQW",
+        "video_source_N79UXr",
+        "video_source_wgzWjj",
+        "video_source_NCzXBm",
+        "video_source_UEkpgA",
+        "video_source_Nt4AaE",
+        "video_source_wy4Mxn",
+        "video_source_8HhHbn",
+        "video_source_DE479b"
+      ],
+      "settings": {
+        "enable": true,
+        "hide_on_mobile": false,
+        "anchor_selector": "#shopify-section-header, header",
+        "use_resource_metafields": true,
+        "use_metafield_pool": false,
+        "video_host": "youtube",
+        "video_id": "",
+        "aspect_ratio": "",
+        "fallback_title": ""
+      }
+    },
+    "1766268565ad97d0a2": {
+      "type": "apps",
+      "blocks": {
+        "recommended_product_salesup_autoketing_recommended_jF9etH": {
+          "type": "shopify://apps/recommended-product-salesup/blocks/autoketing-recommended/28c5212f-728d-4d10-a8b6-81dc32610afb",
+          "settings": {}
+        },
+        "klaviyo_reviews_featured_reviews_carousel_nLg8kG": {
+          "type": "shopify://apps/klaviyo-reviews/blocks/featured-reviews-carousel/db20e365-d984-4ac4-9655-e1588d951ca9",
+          "settings": {}
+        }
+      },
+      "block_order": [
+        "recommended_product_salesup_autoketing_recommended_jF9etH",
+        "klaviyo_reviews_featured_reviews_carousel_nLg8kG"
+      ],
+      "settings": {
+        "container": "fullwidth",
+        "margin_top": 60,
+        "margin_bottom": 0,
+        "margin_top_mobile": 0,
+        "margin_bottom_mobile": 0,
+        "show_separator": false
+      }
+    },
+    "home_value_props": {
+      "type": "msd-icp-value-props",
+      "blocks": {
+        "shipping": {
+          "type": "point",
+          "settings": {
+            "label": "Shipping",
+            "title": "Free over $80",
+            "text": "Priority shipping unlocks at $80 for easier first orders in the U.S."
+          }
+        },
+        "returns": {
+          "type": "point",
+          "settings": {
+            "label": "Returns",
+            "title": "Try it at home",
+            "text": "45-day returns on eligible items help new customers order with less hesitation."
+          }
+        },
+        "quality": {
+          "type": "point",
+          "settings": {
+            "label": "Quality",
+            "title": "Made for real plans",
+            "text": "Polished silhouettes and practical styling notes fit workdays, travel days, and dinner plans."
+          }
+        },
+        "subscription": {
+          "type": "point",
+          "settings": {
+            "label": "Essentials",
+            "title": "Refresh made easy",
+            "text": "The $49/month refresh box keeps backup pairs handled for travel, work bags, and long days."
+          }
+        }
+      },
+      "block_order": [
+        "shipping",
+        "returns",
+        "quality",
+        "subscription"
+      ],
+      "settings": {
+        "container": "boxed",
+        "tone": "compact",
+        "eyebrow": "First-order confidence",
+        "heading": "Premium style for everyday American life.",
+        "body": "<p>Designed for women who want polished pieces without department-store overthinking: $80 free shipping progress, 45-day returns on eligible items, secure checkout, and practical styling cues before the first order.</p>",
+        "primary_label": "Shop customer favorites",
+        "primary_link": "shopify://collections/picked-for-you",
+        "secondary_label": "Explore new arrivals",
+        "secondary_link": "shopify://collections/new-in",
+        "bg_color": "#ffffff",
+        "text_color": "#0a0a0a",
+        "muted_color": "#6f6a64",
+        "accent_color": "#5a31f4"
+      }
+    }
+  },
+  "order": [
+    "88140d03-ae09-46a4-aea0-a933fa487cd4",
+    "home_value_props",
+    "fresh_underwear_box",
+    "552f8dfe-f3b6-4e55-8753-3da9a77c6611",
+    "4aa75084-79ab-48e0-84f5-fa47f5082b5e",
+    "c8ff5934-698a-4018-82a8-854d42a73e94",
+    "0b1081f1-7b56-4bae-9071-315bc0a59d5c",
+    "1586283399218",
+    "1586279708879",
+    "8bc639e6-8e86-4cab-9c9a-ba696421ec8e",
+    "1586282852274",
+    "4214e2f0-4f78-4055-a135-7b7d91821429",
+    "03820055-6bc0-4eb5-a833-d557bf0c4ab2",
+    "1586283266986",
+    "4bb3f089-28a0-4ec7-bb01-76c367bd9149",
+    "554742d8-9abb-45fc-b166-402424eeb8c1",
+    "1586283959656",
+    "d21ef781-d971-445f-bf4c-630e8db1d215",
+    "52c8f404-e853-48e9-acb8-74d72bdd3afb",
+    "1586282646707",
+    "1586282860739",
+    "1586284059940",
+    "1586567788223",
+    "floating_video_home",
+    "1766268565ad97d0a2"
+  ]
+}

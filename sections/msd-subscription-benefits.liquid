@@ -1,0 +1,140 @@
+<div id="MSDSubscriptionBenefits-{{ section.id }}" class="msd-subscription-benefits">
+  <style>
+    #MSDSubscriptionBenefits-{{ section.id }} .msd-subscription-benefits__inner{padding:52px 0}
+    #MSDSubscriptionBenefits-{{ section.id }} .msd-subscription-benefits__grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1px}
+    #MSDSubscriptionBenefits-{{ section.id }} .msd-subscription-benefits__item{border:1px solid rgba(10,10,10,.12);border-radius:0;padding:20px;background:#fff}
+    #MSDSubscriptionBenefits-{{ section.id }} .msd-subscription-benefits__item-title{font-family:'Bebas Neue',Helvetica,sans-serif;font-size:24px;line-height:1;text-transform:uppercase;font-weight:400;margin-bottom:8px;color:#0a0a0a}
+    #MSDSubscriptionBenefits-{{ section.id }} .msd-subscription-benefits__actions{display:flex;gap:12px;flex-wrap:wrap;align-items:center}
+    @media (max-width:767px){
+      #MSDSubscriptionBenefits-{{ section.id }} .msd-subscription-benefits__grid{grid-template-columns:1fr}
+      #MSDSubscriptionBenefits-{{ section.id }} .msd-subscription-benefits__inner{padding:28px 0}
+    }
+  </style>
+  <div{% render 'layout-get-container-class' %}>
+    <div class="msd-subscription-benefits__inner">
+      {%- if section.settings.heading != blank -%}
+        <h2 class="h3 mb-10">{{ section.settings.heading | escape }}</h2>
+      {%- endif -%}
+      {%- if section.settings.body != blank -%}
+        <div class="rte mb-25">{{ section.settings.body }}</div>
+      {%- endif -%}
+
+      {%- if section.blocks.size > 0 -%}
+        <div class="msd-subscription-benefits__grid mb-25">
+          {%- for block in section.blocks -%}
+            <div class="msd-subscription-benefits__item" {{ block.shopify_attributes }}>
+              {%- if block.settings.title != blank -%}
+                <p class="msd-subscription-benefits__item-title">{{ block.settings.title | escape }}</p>
+              {%- endif -%}
+              {%- if block.settings.text != blank -%}
+                <p class="mb-0">{{ block.settings.text | escape }}</p>
+              {%- endif -%}
+            </div>
+          {%- endfor -%}
+        </div>
+      {%- endif -%}
+
+      <div class="msd-subscription-benefits__actions">
+        {%- if section.settings.primary_label != blank and section.settings.primary_link != blank -%}
+          {%- assign primary_link_first_char = section.settings.primary_link | slice: 0 -%}
+          {%- if primary_link_first_char == '/' -%}
+            <a href="{{ routes.root_url }}{% if routes.root_url != '/' %}/{% endif %}{{ section.settings.primary_link | remove_first: '/' }}" class="btn btn--default btn--size-middle">{{ section.settings.primary_label | escape }}</a>
+          {%- else -%}
+            <a href="{{ section.settings.primary_link }}" class="btn btn--default btn--size-middle">{{ section.settings.primary_label | escape }}</a>
+          {%- endif -%}
+        {%- endif -%}
+        {%- if section.settings.secondary_label != blank and section.settings.secondary_link != blank -%}
+          {%- assign secondary_link_first_char = section.settings.secondary_link | slice: 0 -%}
+          {%- if secondary_link_first_char == '/' -%}
+            <a href="{{ routes.root_url }}{% if routes.root_url != '/' %}/{% endif %}{{ section.settings.secondary_link | remove_first: '/' }}" class="btn btn--text">{{ section.settings.secondary_label | escape }}</a>
+          {%- else -%}
+            <a href="{{ section.settings.secondary_link }}" class="btn btn--text">{{ section.settings.secondary_label | escape }}</a>
+          {%- endif -%}
+        {%- endif -%}
+        {%- if section.settings.show_policy_link and shop.subscription_policy != blank -%}
+          <a href="{{ shop.subscription_policy.url }}" class="btn btn--text">Subscription policy</a>
+        {%- endif -%}
+      </div>
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "MSD: Subscribe",
+  "tag": "section",
+  "class": "section-msd-subscription-benefits",
+  "settings": [
+    {
+      "type": "select",
+      "id": "container",
+      "label": "Content width",
+      "default": "boxed",
+      "options": [
+        { "value": "boxed", "label": "Boxed" },
+        { "value": "fullwidth", "label": "Fullwidth" }
+      ]
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Subscribe to monthly essentials"
+    },
+    {
+      "type": "richtext",
+      "id": "body",
+      "label": "Body",
+      "default": "<p>Make recurring delivery clear before checkout: price, cadence, renewal terms, and where customers can manage their plan.</p>"
+    },
+    {
+      "type": "text",
+      "id": "primary_label",
+      "label": "Primary button label",
+      "default": "Shop subscriptions"
+    },
+    {
+      "type": "url",
+      "id": "primary_link",
+      "label": "Primary button link"
+    },
+    {
+      "type": "text",
+      "id": "secondary_label",
+      "label": "Secondary button label",
+      "default": "Learn more"
+    },
+    {
+      "type": "url",
+      "id": "secondary_link",
+      "label": "Secondary button link"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_policy_link",
+      "label": "Show subscription policy link",
+      "default": true
+    }
+  ],
+  "blocks": [
+    {
+      "type": "benefit",
+      "name": "Benefit",
+      "settings": [
+        { "type": "text", "id": "title", "label": "Title", "default": "Set your cadence" },
+        { "type": "textarea", "id": "text", "label": "Text", "default": "Let customers choose the delivery interval that matches product usage." }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "MSD: Subscription benefits",
+      "blocks": [
+        { "type": "benefit", "settings": { "title": "Replenish on schedule", "text": "Position recurring products around a clear delivery cadence." } },
+        { "type": "benefit", "settings": { "title": "Keep terms clear", "text": "Show recurring price, cadence, and policy links near the add-to-cart button." } },
+        { "type": "benefit", "settings": { "title": "Keep the plan useful", "text": "Explain what arrives, how often it ships, and how the customer can manage future deliveries." } }
+      ]
+    }
+  ]
+}
+{% endschema %}
